@@ -1,7 +1,7 @@
-interface AuthLayoutProps {
+interface LayoutProps {
   children: React.ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return <div className="min-h-screen">{children}</div>
 }
