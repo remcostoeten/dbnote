@@ -15,17 +15,37 @@ export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
     {
       title: "Posts",
-      href: "/dashboard",
+      href: "/producitvity-tools",
       icon: "post",
     },
     {
+      title: "Data",
+      href: "/producitvity-tools/data",
+      icon: "billing",
+    },
+    {
+      title: "Work log",
+      href: "/producitvity-tools/users",
+      icon: "billing",
+    },
+    {
+      title: "Expenses",
+      href: "/producitvity-tools/expenses",
+      icon: "billing",
+    },
+    {
+      title: "Uitzet",
+      href: "/producitvity-tools/uitzet",
+      icon: "billing",
+    },
+    {
       title: "Billing",
-      href: "/dashboard/billing",
+      href: "/producitvity-tools/billing",
       icon: "billing",
     },
     {
       title: "Settings",
-      href: "/dashboard/settings",
+      href: "/producitvity-tools/settings",
       icon: "settings",
     },
   ],

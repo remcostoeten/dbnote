@@ -197,7 +197,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="mx-auto w-3/6 mt-4 max-w-3xl">
+      <div className="max-w-3xl">
         <div className="grid items-start gap-8">
           {showFilters && (
             <div className="flex flex-col gap-2 px-2">

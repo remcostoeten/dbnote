@@ -41,7 +41,10 @@
     ".next/types/**/*.ts",
     ".contentlayer/generated",
     "lib/firebase.js",
-    "app/dashboard-two/page.jsx"
+    "app/dashboard-two/page.jsx",
+    "app/productivity-tools/data/page.jsx",
+    "lib/auth.txtx",
+    "app/productivity-tools/layout.jsx"
   ],
   "exclude": [
     "node_modules"

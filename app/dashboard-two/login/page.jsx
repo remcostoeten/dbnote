@@ -77,20 +77,6 @@ export default function L() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
-
-          <Label className="sr-only" htmlFor="password">
-            Password
-          </Label>
-          <Input
-            id="password"
-            placeholder="Password"
-            type="password"
-            autoCapitalize="none"
-            autoComplete="current-password"
-            autoCorrect="off"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
         </div>
         <button onClick={handleClick} disabled={isLoading}>
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}

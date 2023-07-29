@@ -1,6 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Example CSS for the skeleton component */
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeleton-data-item {
+  height: 50px;
+  width: 100%;
+  background-color: #f0f0f0; /* light gray background */
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+/* Adjust the height, width, and other styles as needed for your design */
 
 @layer base {
   :root {
