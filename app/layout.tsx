@@ -89,7 +89,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <div className="page-wrapper">
+            <div className="page-wrapper__inner">{children}</div>
+          </div>
           <Analytics />
           <Toaster />
           <TailwindIndicator />
