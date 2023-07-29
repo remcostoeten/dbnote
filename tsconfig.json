@@ -42,9 +42,10 @@
     ".contentlayer/generated",
     "lib/firebase.js",
     "app/dashboard-two/page.jsx",
-    "app/productivity-tools/data/page.jsx",
+    "app/productivity-tools/data/page.tsx",
     "lib/auth.txtx",
-    "app/productivity-tools/layoutt.tsx"
+    "app/productivity-tools/layoutt.tsx",
+    "app/productivity-tools/page.jsx"
   ],
   "exclude": [
     "node_modules"

@@ -30,7 +30,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-Select
 export default function Dashboard() {
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
@@ -41,6 +40,7 @@ export default function Dashboard() {
   const [hiddenCategories, setHiddenCategories] = useState([])
   const username = auth.currentUser
   const user = auth.currentUser
+
   const fetchNotes = async () => {
     const notesCollection = collection(db, "notes")
     const snapshot = await getDocs(notesCollection)
@@ -61,7 +61,7 @@ export default function Dashboard() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchNotes(user)
+        fetchNotes()
       }
       setLoading(false)
     })
@@ -71,6 +71,10 @@ export default function Dashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!user) {
+      return
+    }
+
     try {
       const newNote = {
         title,
@@ -104,7 +108,7 @@ export default function Dashboard() {
   const handleRemove = async (id) => {
     try {
       await deleteDoc(doc(db, "notes", id))
-      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id))
+      setNotes((prevNotes) => prevNotes.filter((note) => note.userId !== id))
 
       toast({
         title: "Note removed successfully.",
@@ -127,12 +131,12 @@ export default function Dashboard() {
 
   const handleEdit = async (note) => {
     try {
-      await updateDoc(doc(db, "notes", note.id), {
+      await updateDoc(doc(db, "notes", note.userId), {
         title: note.title,
         content: note.content,
       })
 
-      toggleEditMode(note.id)
+      toggleEditMode(note.userId)
 
       toast({
         title: "Note updated successfully.",
@@ -191,11 +195,11 @@ export default function Dashboard() {
           <div className="pb-2 ">
             {notes.map((note) => (
               <div
-                key={note.id}
+                key={note.userId}
                 className="divide-y divide-border rounded-md border"
               >
                 <div className="flex  py-4 px-8 content-center flex-col gap-2">
-                  {editModeMap[note.id] ? (
+                  {editModeMap[note.userId] ? (
                     <>
                       <Input
                         type="text"
@@ -203,7 +207,7 @@ export default function Dashboard() {
                         onChange={(e) =>
                           setNotes((prevNotes) =>
                             prevNotes.map((prevNote) =>
-                              prevNote.id === note.id
+                              prevNote.userId === note.userId
                                 ? { ...prevNote, title: e.target.value }
                                 : prevNote
                             )
@@ -215,7 +219,7 @@ export default function Dashboard() {
                         onChange={(e) =>
                           setNotes((prevNotes) =>
                             prevNotes.map((prevNote) =>
-                              prevNote.id === note.id
+                              prevNote.userId === note.userId
                                 ? { ...prevNote, content: e.target.value }
                                 : prevNote
                             )
@@ -237,7 +241,7 @@ export default function Dashboard() {
                           Save
                         </Button>
                         <Button
-                          onClick={() => toggleEditMode(note.id)}
+                          onClick={() => toggleEditMode(note.userId)}
                           className={cn(
                             buttonVariants({
                               variant: "primary",
@@ -261,9 +265,11 @@ export default function Dashboard() {
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>
-                      <span onClick={() => handleRemove(note.id)}>Delete</span>
+                      <span onClick={() => handleRemove(note.userId)}>
+                        Delete
+                      </span>
                       <Button
-                        onClick={() => toggleEditMode(note.id)}
+                        onClick={() => toggleEditMode(note.userId)}
                         className={cn(
                           buttonVariants({
                             variant: "primary",
@@ -308,7 +314,7 @@ export default function Dashboard() {
           </div>
         </form>{" "}
         {notes.map((note) => (
-          <label key={note.id} className="flex items-center gap-2">
+          <label key={note.userId} className="flex items-center gap-2">
             <input type="checkbox" value={note.title} />
             {note.title}
           </label>

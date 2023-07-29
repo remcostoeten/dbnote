@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import router from "next/navigation"
+import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
   collection,
@@ -15,14 +16,19 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore"
+import { Message } from "react-hook-form"
 
 import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
 
 export default function Dashboard() {
   const [title, setTitle] = useState("")
@@ -31,13 +37,7 @@ export default function Dashboard() {
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(true)
   const [editModeMap, setEditModeMap] = useState({})
-  const [hiddenCategories, setHiddenCategories] = useState([])
-  const [showFilters, setShowFilters] = useState(true) // Toggle to show/hide filters
-  const handleFilter = () => {
-    setShowFilters((prevShowFilters) => !prevShowFilters)
-  }
-  const username = auth.currentUser
-  const user = auth.currentUser
+
   const fetchmessages = async () => {
     const messagesCollection = collection(db, "messages")
     const snapshot = await getDocs(messagesCollection)
@@ -45,14 +45,22 @@ export default function Dashboard() {
     setMessages(messages)
   }
 
+  const user = auth.currentUser
+
   useEffect(() => {
     fetchmessages()
   }, [])
 
+  const categories = [
+    { id: "1", name: "Pleio" },
+    { id: "2", name: "Softhouse" },
+    { id: "3", name: "Prive" },
+  ]
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchmessages(user)
+        fetchmessages()
       }
       setLoading(false)
     })
@@ -60,48 +68,13 @@ export default function Dashboard() {
     return () => unsubscribe()
   }, [])
 
-  // const fetchmessages = async (user) => {
-  //   if (user && user.uid) {
-  //     try {
-  //       let messagesQuery = query(
-  //         collection(db, "messages"),
-  //         where("userId", "==", user.uid),
-  //         orderBy("createdAt", "desc")
-  //       )
+  const handleSubmit = async () => {
+    if (!user) {
+      return
+    }
 
-  //       const visibleCategories = categories
-  //         .filter((category) => !hiddenCategories.includes(category.name))
-  //         .map((category) => category.name)
-
-  //       if (visibleCategories.length > 0) {
-  //         messagesQuery = query(
-  //           collection(db, "messages"),
-  //           where("userId", "==", user.uid),
-  //           where("category", "in", visibleCategories),
-  //           orderBy("createdAt", "desc")
-  //         )
-  //       }
-
-  //       const snapshot = await getDocs(messagesQuery)
-  //       const fetchedmessages = snapshot.docs.map((doc) => {
-  //         const data = doc.data()
-  //         return {
-  //           id: doc.id,
-  //           ...data,
-  //           createdAt: data.createdAt ? new Date(data.createdAt) : null,
-  //         }
-  //       })
-  //       setMessages(fetchedmessages)
-  //     } catch (error) {
-  //       console.log("Error fetching messages:", error)
-  //     }
-  //   }
-  // }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
     try {
-      const newmessage = {
+      const newMessage = {
         title,
         userId: user.uid,
         content,
@@ -109,9 +82,9 @@ export default function Dashboard() {
         createdAt: serverTimestamp(),
       }
 
-      await addDoc(collection(db, "messages"), newmessage)
+      await addDoc(collection(db, "messages"), newMessage)
 
-      setMessages((prevmessages) => [newmessage, ...prevmessages])
+      setMessages((prevMessage) => [newMessage, ...prevMessage])
 
       setCategory("")
       setTitle("")
@@ -133,8 +106,8 @@ export default function Dashboard() {
   const handleRemove = async (id) => {
     try {
       await deleteDoc(doc(db, "messages", id))
-      setMessages((prevmessages) =>
-        prevmessages.filter((message) => message.id !== id)
+      setMessages((prevMessages) =>
+        prevMessages.filter((message) => message.userId !== id)
       )
 
       toast({
@@ -158,12 +131,12 @@ export default function Dashboard() {
 
   const handleEdit = async (message) => {
     try {
-      await updateDoc(doc(db, "messages", message.id), {
+      await updateDoc(doc(db, "messages", message.userId), {
         title: message.title,
         content: message.content,
       })
 
-      toggleEditMode(message.id)
+      toggleEditMode(message.userId)
 
       toast({
         title: "message updated successfully.",
@@ -177,91 +150,66 @@ export default function Dashboard() {
     }
   }
 
-  const handleCategoryToggle = (e) => {
-    const categoryName = e.target.value
-    setHiddenCategories((prevHiddenCategories) => {
-      if (prevHiddenCategories.includes(categoryName)) {
-        return prevHiddenCategories.filter(
-          (category) => category !== categoryName
-        )
-      } else {
-        return [...prevHiddenCategories, categoryName]
-      }
-    })
-    fetchmessages(user)
-  }
-
-  const DataSkeleton = () => {
-    return (
-      <div className="skeleton-container">
-        <div className="skeleton-data-item"></div>
-        <div className="skeleton-data-item"></div>
-        <div className="skeleton-data-item"></div>
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-          {showFilters && (
-            <div className="flex flex-col gap-2 px-2">
-              <div className="grid gap-1">
-                <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
-                <p className="text-lg text-muted-foreground">
-                  Create and manage posts.
-                </p>
-              </div>
-              <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
-                <Input
-                  type="text"
-                  placeholder="Title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-
-                <Textarea
-                  placeholder="message content"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-                <Button
-                  className={cn(
-                    buttonVariants({
-                      variant: "primary",
-                      color: "primary",
-                      size: "md",
-                    })
-                  )}
-                  onClick={handleSubmit}
-                  type="submit"
-                >
-                  New post
-                </Button>
-              </form>
+          <div className="flex flex-col gap-2 px-2">
+            <div className="grid gap-1">
+              <h1 className="font-heading text-3xl md:text-4xl">messages</h1>
+              <p className="text-lg text-muted-foreground">
+                Create and manage messages.
+              </p>
             </div>
-          )}
-          <div>
+            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+              <Input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <Select onValueChange={setCategory} defaultValue={category}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a verified email to display" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Textarea
+                placeholder="message content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <Button onClick={handleSubmit} className="inline-flex w-fit">
+                New message
+              </Button>
+            </form>
+          </div>
+
+          <div className="pb-2 ">
             {messages.map((message) => (
               <div
-                key={message.id}
+                key={message.userId}
                 className="divide-y divide-border rounded-md border"
               >
-                {" "}
-                <span onClick={() => handleRemove(message.id)}>Delete</span>
-                <div className="flex items-center justify-between p-4 content-center">
-                  {editModeMap[message.id] ? (
+                <div className="flex  py-4 px-8 content-center flex-col gap-2">
+                  {editModeMap[message.userId] ? (
                     <>
                       <Input
                         type="text"
                         value={message.title}
                         onChange={(e) =>
-                          setMessages((prevmessages) =>
-                            prevmessages.map((prevmessage) =>
-                              prevmessage.id === message.id
-                                ? { ...prevmessage, title: e.target.value }
-                                : prevmessage
+                          setMessages((prevMessages) =>
+                            prevMessages.map((prevMessage) =>
+                              prevMessage.userId === message.userId
+                                ? { ...prevMessage, title: e.target.value }
+                                : prevMessage
                             )
                           )
                         }
@@ -269,39 +217,43 @@ export default function Dashboard() {
                       <Textarea
                         value={message.content}
                         onChange={(e) =>
-                          setMessages((prevmessages) =>
-                            prevmessages.map((prevmessage) =>
-                              prevmessage.id === message.id
-                                ? { ...prevmessage, content: e.target.value }
-                                : prevmessage
+                          setMessages((prevMessages) =>
+                            prevMessages.map((prevMessage) =>
+                              prevMessage.userId === message.userId
+                                ? { ...prevMessage, content: e.target.value }
+                                : prevMessage
                             )
                           )
                         }
                       />
-                      <Button
-                        onClick={() => handleEdit(message)}
-                        className={cn(
-                          buttonVariants({
-                            variant: "primary",
-                            color: "success",
-                            size: "sm",
-                          })
-                        )}
-                      >
-                        Save
-                      </Button>
-                      <Button
-                        onClick={() => toggleEditMode(message.id)}
-                        className={cn(
-                          buttonVariants({
-                            variant: "primary",
-                            color: "danger",
-                            size: "sm",
-                          })
-                        )}
-                      >
-                        Cancel
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={() => handleEdit(message)}
+                          className={cn(
+                            buttonVariants({
+                              variant: "primary",
+                              color: "success",
+                              size: "sm",
+                              width: "w-fit",
+                            })
+                          )}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          onClick={() => toggleEditMode(message.userId)}
+                          className={cn(
+                            buttonVariants({
+                              variant: "primary",
+                              color: "danger",
+                              size: "sm",
+                              width: "w-fit",
+                            })
+                          )}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
                     </>
                   ) : (
                     <>
@@ -313,11 +265,11 @@ export default function Dashboard() {
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>
-                      <span onClick={() => handleRemove(message.id)}>
+                      <span onClick={() => handleRemove(message.userId)}>
                         Delete
                       </span>
                       <Button
-                        onClick={() => toggleEditMode(message.id)}
+                        onClick={() => toggleEditMode(message.userId)}
                         className={cn(
                           buttonVariants({
                             variant: "primary",
@@ -339,41 +291,14 @@ export default function Dashboard() {
           <div className="grid w-full gap-10 mx-auto m-w-[1280px]">
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center space-x-10">
-                <Link
-                  href="/dashboard-two"
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                >
-                  <>
-                    <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                    Back
-                  </>
-                </Link>
                 <p className="text-sm text-muted-foreground">dddd </p>
               </div>
-              <Button
-                className={cn(
-                  buttonVariants({
-                    variant: "primary",
-                    color: "primary",
-                    size: "md",
-                  })
-                )}
-                onClick={handleFilter} // Add the handleFilter function to the onClick event
-                type="button" // Change the type to "button" to prevent form submission
-              >
-                Filter
-              </Button>
+              <Button type="button">Filter</Button>
               <Button
                 type="submit"
-                className={cn(
-                  buttonVariants({
-                    variant: "primary",
-                    color: "success",
-                    size: "md",
-                  })
-                )}
+                className={buttonVariants({ variant: "ghost" })}
               >
-                <span>Save</span>
+                Save
               </Button>
             </div>
             <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
@@ -389,13 +314,8 @@ export default function Dashboard() {
           </div>
         </form>{" "}
         {messages.map((message) => (
-          <label key={message.id} className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              value={message.title}
-              onChange={handleCategoryToggle}
-              checked={!hiddenCategories.includes(message.title)}
-            />
+          <label key={message.userId} className="flex items-center gap-2">
+            <input type="checkbox" value={message.title} />
             {message.title}
           </label>
         ))}
