@@ -44,7 +44,7 @@
     "app/dashboard-two/page.jsx",
     "app/productivity-tools/data/page.jsx",
     "lib/auth.txtx",
-    "app/productivity-tools/layout.jsx"
+    "app/productivity-tools/layoutt.tsx"
   ],
   "exclude": [
     "node_modules"

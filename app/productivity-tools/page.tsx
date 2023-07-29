@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import router from "next/navigation"
+import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
   collection,
@@ -20,10 +21,16 @@ import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
+Select
 export default function Dashboard() {
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
@@ -32,10 +39,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [editModeMap, setEditModeMap] = useState({})
   const [hiddenCategories, setHiddenCategories] = useState([])
-  const [showFilters, setShowFilters] = useState(true) // Toggle to show/hide filters
-  const handleFilter = () => {
-    setShowFilters((prevShowFilters) => !prevShowFilters)
-  }
   const username = auth.currentUser
   const user = auth.currentUser
   const fetchNotes = async () => {
@@ -65,44 +68,6 @@ export default function Dashboard() {
 
     return () => unsubscribe()
   }, [])
-
-  // const fetchNotes = async (user) => {
-  //   if (user && user.uid) {
-  //     try {
-  //       let notesQuery = query(
-  //         collection(db, "notes"),
-  //         where("userId", "==", user.uid),
-  //         orderBy("createdAt", "desc")
-  //       )
-
-  //       const visibleCategories = categories
-  //         .filter((category) => !hiddenCategories.includes(category.name))
-  //         .map((category) => category.name)
-
-  //       if (visibleCategories.length > 0) {
-  //         notesQuery = query(
-  //           collection(db, "notes"),
-  //           where("userId", "==", user.uid),
-  //           where("category", "in", visibleCategories),
-  //           orderBy("createdAt", "desc")
-  //         )
-  //       }
-
-  //       const snapshot = await getDocs(notesQuery)
-  //       const fetchedNotes = snapshot.docs.map((doc) => {
-  //         const data = doc.data()
-  //         return {
-  //           id: doc.id,
-  //           ...data,
-  //           createdAt: data.createdAt ? new Date(data.createdAt) : null,
-  //         }
-  //       })
-  //       setNotes(fetchedNotes)
-  //     } catch (error) {
-  //       console.log("Error fetching notes:", error)
-  //     }
-  //   }
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -181,89 +146,55 @@ export default function Dashboard() {
     }
   }
 
-  const handleCategoryToggle = (e) => {
-    const categoryName = e.target.value
-    setHiddenCategories((prevHiddenCategories) => {
-      if (prevHiddenCategories.includes(categoryName)) {
-        return prevHiddenCategories.filter(
-          (category) => category !== categoryName
-        )
-      } else {
-        return [...prevHiddenCategories, categoryName]
-      }
-    })
-    fetchNotes(user)
-  }
-
-  const DataSkeleton = () => {
-    return (
-      <div className="skeleton-container">
-        <div className="skeleton-data-item"></div>
-        <div className="skeleton-data-item"></div>
-        <div className="skeleton-data-item"></div>
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-          {showFilters && (
-            <div className="flex flex-col gap-2 px-2">
-              <div className="grid gap-1">
-                <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
-                <p className="text-lg text-muted-foreground">
-                  Create and manage posts.
-                </p>
-              </div>
-              <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
-                <Input
-                  type="text"
-                  placeholder="Title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-                {categories.map((category) => (
-                  <label key={category.id} className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value={category.name}
-                      onChange={handleCategoryToggle}
-                      checked={!hiddenCategories.includes(category.name)}
-                    />
-                    {category.name}
-                  </label>
-                ))}
-
-                <Textarea
-                  placeholder="Note content"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
-                <Button
-                  className={cn(
-                    buttonVariants({
-                      variant: "primary",
-                      color: "primary",
-                      size: "md",
-                    })
-                  )}
-                  onClick={handleSubmit}
-                  type="submit"
-                >
-                  New post
-                </Button>
-              </form>
+          <div className="flex flex-col gap-2 px-2">
+            <div className="grid gap-1">
+              <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
+              <p className="text-lg text-muted-foreground">
+                Create and manage posts.
+              </p>
             </div>
-          )}
-          <div>
+            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+              <Input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <Select onValueChange={setCategory} defaultValue={category}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a verified email to display" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Textarea
+                placeholder="Note content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <Button onClick={handleSubmit} className="inline-flex w-fit">
+                New post
+              </Button>
+            </form>
+          </div>
+
+          <div className="pb-2 ">
             {notes.map((note) => (
               <div
                 key={note.id}
                 className="divide-y divide-border rounded-md border"
               >
-                <div className="flex items-center justify-between p-4 content-center">
+                <div className="flex  py-4 px-8 content-center flex-col gap-2">
                   {editModeMap[note.id] ? (
                     <>
                       <Input
@@ -291,30 +222,34 @@ export default function Dashboard() {
                           )
                         }
                       />
-                      <Button
-                        onClick={() => handleEdit(note)}
-                        className={cn(
-                          buttonVariants({
-                            variant: "primary",
-                            color: "success",
-                            size: "sm",
-                          })
-                        )}
-                      >
-                        Save
-                      </Button>
-                      <Button
-                        onClick={() => toggleEditMode(note.id)}
-                        className={cn(
-                          buttonVariants({
-                            variant: "primary",
-                            color: "danger",
-                            size: "sm",
-                          })
-                        )}
-                      >
-                        Cancel
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={() => handleEdit(note)}
+                          className={cn(
+                            buttonVariants({
+                              variant: "primary",
+                              color: "success",
+                              size: "sm",
+                              width: "w-fit",
+                            })
+                          )}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          onClick={() => toggleEditMode(note.id)}
+                          className={cn(
+                            buttonVariants({
+                              variant: "primary",
+                              color: "danger",
+                              size: "sm",
+                              width: "w-fit",
+                            })
+                          )}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
                     </>
                   ) : (
                     <>
@@ -350,41 +285,14 @@ export default function Dashboard() {
           <div className="grid w-full gap-10 mx-auto m-w-[1280px]">
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center space-x-10">
-                <Link
-                  href="/dashboard-two"
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                >
-                  <>
-                    <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                    Back
-                  </>
-                </Link>
                 <p className="text-sm text-muted-foreground">dddd </p>
               </div>
-              <Button
-                className={cn(
-                  buttonVariants({
-                    variant: "primary",
-                    color: "primary",
-                    size: "md",
-                  })
-                )}
-                onClick={handleFilter} // Add the handleFilter function to the onClick event
-                type="button" // Change the type to "button" to prevent form submission
-              >
-                Filter
-              </Button>
+              <Button type="button">Filter</Button>
               <Button
                 type="submit"
-                className={cn(
-                  buttonVariants({
-                    variant: "primary",
-                    color: "success",
-                    size: "md",
-                  })
-                )}
+                className={buttonVariants({ variant: "ghost" })}
               >
-                <span>Save</span>
+                Save
               </Button>
             </div>
             <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
@@ -401,12 +309,7 @@ export default function Dashboard() {
         </form>{" "}
         {notes.map((note) => (
           <label key={note.id} className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              value={note.title}
-              onChange={handleCategoryToggle}
-              checked={!hiddenCategories.includes(note.title)}
-            />
+            <input type="checkbox" value={note.title} />
             {note.title}
           </label>
         ))}

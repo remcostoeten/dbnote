@@ -1,14 +1,19 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
+
 import "@/styles/globals.css"
+import { AuthProvider } from "@/AuthContext"
+import { GoogleAuthProvider } from "firebase/auth"
+
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { GoogleAuthProvider } from 'firebase/auth';
-import{ AuthProvider} from '@/AuthContext';
+
+import Greeting from "./../components/Greeting"
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",

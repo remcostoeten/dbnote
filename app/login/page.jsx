@@ -27,28 +27,22 @@ export default function LoginPage() {
   const [isGitHubLoading, setIsGitHubLoading] = useState(false)
   const searchParams = useSearchParams()
   const router = useRouter()
-  const auth = getAuth()
 
   const handleClick = async (e) => {
     e.preventDefault()
 
     setIsLoading(true)
 
-    // Set persistence to Local (default setting)
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        // Once persistence is set, sign in the user
         return signInWithEmailAndPassword(auth, email, password)
       })
       .then((userCredential) => {
-        // User successfully logged in
         toast({
           title: "Login successful.",
           description: "You have successfully signed in.",
         })
-        setTimeout(() => {
-          router.push("/productivity-tools")
-        }, 500)
+        router.push("/productivity-tools")
 
         const user = userCredential.user
         console.log(`User ${user.email} logged in.`)
