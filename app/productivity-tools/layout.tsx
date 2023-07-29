@@ -7,7 +7,6 @@ import Greeting from "@/components/Greeting"
 import { MainNav } from "@/components/main-nav"
 import { DashboardNav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
-import { UserAccountNav } from "@/components/user-account-nav"
 
 interface AuthLayoutProps {
   children: React.ReactNode
