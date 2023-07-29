@@ -1,8 +1,7 @@
 "use client"
-
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import router from "next/navigation"
+import { Input } from "@/components/ui/input"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
@@ -16,19 +15,20 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore"
-import { Message } from "react-hook-form"
-
 import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
+
+function generateRandomPassword(length) {
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  let password = ""
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length)
+    password += charset[randomIndex]
+  }
+  return password
+}
 
 export default function Dashboard() {
   const [title, setTitle] = useState("")
@@ -37,7 +37,9 @@ export default function Dashboard() {
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(true)
   const [editModeMap, setEditModeMap] = useState({})
-
+  const password = process.env.NEXT_PUBLIC_PASSWORD
+  const [enteredPassword, setEnteredPassword] = useState("")
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false)
   const fetchmessages = async () => {
     const messagesCollection = collection(db, "messages")
     const snapshot = await getDocs(messagesCollection)
@@ -150,9 +152,23 @@ export default function Dashboard() {
     }
   }
 
+  const handlePasswordSubmit = () => {
+    if (enteredPassword === password) {
+      setIsPasswordCorrect(true)
+      toast({
+        title: "Correct password.",
+      })
+    } else {
+      toast({
+        title: "Wrong password.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
-    <>
-      <div className="max-w-3xl">
+    <div className="max-w-3xl">
+      {enteredPassword === password ? (
         <div className="grid items-start gap-8">
           <div className="flex flex-col gap-2 px-2">
             <div className="grid gap-1">
@@ -161,7 +177,7 @@ export default function Dashboard() {
                 Create and manage messages.
               </p>
             </div>
-            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
               <Input
                 type="text"
                 placeholder="Title"
@@ -180,7 +196,6 @@ export default function Dashboard() {
                   ))}
                 </SelectContent>
               </Select>
-
               <Textarea
                 placeholder="message content"
                 value={content}
@@ -198,7 +213,7 @@ export default function Dashboard() {
                 key={message.userId}
                 className="divide-y divide-border rounded-md border"
               >
-                <div className="flex  py-4 px-8 content-center flex-col gap-2">
+                <div className="flex  flex-col content-center gap-2 px-8 py-4">
                   {editModeMap[message.userId] ? (
                     <>
                       <Input
@@ -257,7 +272,7 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <a className="font-semibold hover:underline flex flex-col">
+                      <a className="flex flex-col font-semibold hover:underline">
                         {message.title}
                         <small>{message.category}</small>
                       </a>
@@ -287,39 +302,17 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
-        <form>
-          <div className="grid w-full gap-10 mx-auto m-w-[1280px]">
-            <div className="flex w-full items-center justify-between">
-              <div className="flex items-center space-x-10">
-                <p className="text-sm text-muted-foreground">dddd </p>
-              </div>
-              <Button type="button">Filter</Button>
-              <Button
-                type="submit"
-                className={buttonVariants({ variant: "ghost" })}
-              >
-                Save
-              </Button>
-            </div>
-            <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
-              <div id="editor" className="min-h-[500px]" />
-              <p className="text-sm text-gray-500">
-                Use{" "}
-                <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-                  Tab
-                </kbd>{" "}
-                to open the command menu.
-              </p>
-            </div>
-          </div>
-        </form>{" "}
-        {messages.map((message) => (
-          <label key={message.userId} className="flex items-center gap-2">
-            <input type="checkbox" value={message.title} />
-            {message.title}
-          </label>
-        ))}
-      </div>
-    </>
+      ) : (
+        <div>
+          <Input
+            type="password"
+            placeholder="Enter the password"
+            value={enteredPassword}
+            onChange={(e) => setEnteredPassword(e.target.value)}
+          />
+          <Button onClick={handlePasswordSubmit}>Submit</Button>
+        </div>
+      )}
+    </div>
   )
 }
