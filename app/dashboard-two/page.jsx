@@ -38,6 +38,16 @@ export default function Dashboard() {
   }
   const username = auth.currentUser
   const user = auth.currentUser
+  const fetchNotes = async () => {
+    const notesCollection = collection(db, "notes")
+    const snapshot = await getDocs(notesCollection)
+    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setNotes(notes)
+  }
+
+  useEffect(() => {
+    fetchNotes()
+  }, [])
 
   const categories = [
     { id: "1", name: "Pleio" },
@@ -49,8 +59,6 @@ export default function Dashboard() {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         fetchNotes(user)
-      } else {
-        router.push("/login")
       }
       setLoading(false)
     })
@@ -58,43 +66,43 @@ export default function Dashboard() {
     return () => unsubscribe()
   }, [])
 
-  const fetchNotes = async (user) => {
-    if (user && user.uid) {
-      try {
-        let notesQuery = query(
-          collection(db, "notes"),
-          where("userId", "==", user.uid),
-          orderBy("createdAt", "desc")
-        )
+  // const fetchNotes = async (user) => {
+  //   if (user && user.uid) {
+  //     try {
+  //       let notesQuery = query(
+  //         collection(db, "notes"),
+  //         where("userId", "==", user.uid),
+  //         orderBy("createdAt", "desc")
+  //       )
 
-        const visibleCategories = categories
-          .filter((category) => !hiddenCategories.includes(category.name))
-          .map((category) => category.name)
+  //       const visibleCategories = categories
+  //         .filter((category) => !hiddenCategories.includes(category.name))
+  //         .map((category) => category.name)
 
-        if (visibleCategories.length > 0) {
-          notesQuery = query(
-            collection(db, "notes"),
-            where("userId", "==", user.uid),
-            where("category", "in", visibleCategories),
-            orderBy("createdAt", "desc")
-          )
-        }
+  //       if (visibleCategories.length > 0) {
+  //         notesQuery = query(
+  //           collection(db, "notes"),
+  //           where("userId", "==", user.uid),
+  //           where("category", "in", visibleCategories),
+  //           orderBy("createdAt", "desc")
+  //         )
+  //       }
 
-        const snapshot = await getDocs(notesQuery)
-        const fetchedNotes = snapshot.docs.map((doc) => {
-          const data = doc.data()
-          return {
-            id: doc.id,
-            ...data,
-            createdAt: data.createdAt ? new Date(data.createdAt) : null,
-          }
-        })
-        setNotes(fetchedNotes)
-      } catch (error) {
-        console.log("Error fetching notes:", error)
-      }
-    }
-  }
+  //       const snapshot = await getDocs(notesQuery)
+  //       const fetchedNotes = snapshot.docs.map((doc) => {
+  //         const data = doc.data()
+  //         return {
+  //           id: doc.id,
+  //           ...data,
+  //           createdAt: data.createdAt ? new Date(data.createdAt) : null,
+  //         }
+  //       })
+  //       setNotes(fetchedNotes)
+  //     } catch (error) {
+  //       console.log("Error fetching notes:", error)
+  //     }
+  //   }
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -217,6 +225,7 @@ export default function Dashboard() {
                     {category.name}
                   </label>
                 ))}
+
                 <Textarea
                   placeholder="Note content"
                   value={content}
@@ -379,7 +388,18 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-        </form>
+        </form>{" "}
+        {notes.map((note) => (
+          <label key={note.id} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              value={note.title}
+              onChange={handleCategoryToggle}
+              checked={!hiddenCategories.includes(note.title)}
+            />
+            {note.title}
+          </label>
+        ))}
       </div>
     </>
   )

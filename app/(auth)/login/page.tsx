@@ -1,54 +1,53 @@
-'use client'
-import { Metadata } from "next";
-import Link from "next/link";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { cn } from "@/lib/utils"; 
-import { buttonVariants } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
-import LogoIconOnly from "@/components/LogoIconOnly";
-import { useState } from "react";
-import { toast } from "@/components/ui/use-toast";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
-import React from "react";
+"use client"
 
-export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
-};
+import React, { useState } from "react"
+import { Metadata } from "next"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { Label } from "@radix-ui/react-label"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { toast } from "@/components/ui/use-toast"
+import LogoIconOnly from "@/components/LogoIconOnly"
+import { Icons } from "@/components/icons"
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false);
-  const searchParams = useSearchParams();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
+  const searchParams = useSearchParams()
 
   async function onSubmit(data: FormData) {
-
-    const auth = getAuth();
+    const auth = getAuth()
 
     const handleClick = async (e) => {
-      e.preventDefault();
+      e.preventDefault()
 
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
+        const user = userCredential.user
         toast({
           title: "Login successful.",
           description: "You have successfully signed in.",
-        });
-        console.log(`User ${user.email} logged in.`);
+        })
+        console.log(`User ${user.email} logged in.`)
       } catch (error) {
-        console.error(error);
+        console.error(error)
         toast({
           title: "Something went wrong.",
           description: "Your sign in request failed. Please try again.",
           variant: "destructive",
-        });
+        })
       }
-    };
+    }
 
     return (
       <div className="container flex h-screen w-screen flex-col items-center justify-center">
@@ -134,8 +133,8 @@ export default function LoginPage() {
             type="button"
             className={cn(buttonVariants({ variant: "outline" }))}
             onClick={() => {
-              setIsGitHubLoading(true);
-              signIn("github");
+              setIsGitHubLoading(true)
+              signIn("github")
             }}
             disabled={isLoading || isGitHubLoading}
           >
@@ -156,6 +155,6 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
-    );
+    )
   }
 }

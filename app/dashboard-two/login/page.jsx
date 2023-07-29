@@ -17,13 +17,10 @@ import { toast } from "@/components/ui/use-toast"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
 
-Link
-
 export default function L() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-
   const user = auth.currentUser
 
   const handleClick = async (e) => {
