@@ -1,9 +1,10 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
-import "@/styles/globals.css"
+import "@/styles/globals.scss"
 import { AuthProvider } from "@/AuthContext"
 import { GoogleAuthProvider } from "firebase/auth"
+import { CursorProvider } from "@/lib/CursorContext"
 
 import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn } from "@/lib/utils"
