@@ -3,48 +3,12 @@
 @import "./theme.scss";
 @import "./loading.scss";
 @import "./error.scss";
+@import "./utils/animations.scss";
+@import "./components/skeleton.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Example CSS for the skeleton component */
-.skeleton-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.spinner-wrapper {
-  width: 100vw;
-  display: flex;
-
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-}
-
-.spinner {
-  width: 4em;
-  height: 4em;
-  border: 0.5em solid rgba(0, 0, 0, 0.1);
-  border-left-color: #7983ff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.skeleton-data-item {
-  height: 50px;
-  width: 100%;
-  background-color: #f0f0f0; /* light gray background */
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-/* Adjust the height, width, and other styles as needed for your design */
 
 @layer base {
   :root {

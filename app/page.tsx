@@ -55,11 +55,13 @@ export default async function IndexPage() {
           >
             Showcasing various UI's and features i've built.
           </h1>
+
           <p className="mmax-w-[48rem] w-full leading-normal text-muted-foreground sm:text-xl sm:leading-8">
             I&apos;m a <span className="dutch">dutch</span> front-end developer
-            with a graphic design degree. Passionate about building beautifull
+            with a graphic design degree. Passionate about building beautiful
             applications. And lately features which help me be more productive.
           </p>
+
           <div
             className="absolute h-[20vh] w-[50vw]"
             hidecircel="true"
