@@ -1,4 +1,5 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { getAuth } from "firebase/auth"
@@ -37,6 +38,16 @@ export default function Greeting() {
       }
     }
 
+    const handleUserUpdated = () => {
+      checkLoggedInStatus()
+    }
+
+    document.addEventListener("userUpdated", handleUserUpdated)
+
+    return () => {
+      document.removeEventListener("userUpdated", handleUserUpdated)
+    }
+
     checkLoggedInStatus()
   }, [])
 
@@ -46,7 +57,6 @@ export default function Greeting() {
     }
     return email
   }
-
   return (
     <div className="text-left">
       {isLoggedIn ? (
