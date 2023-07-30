@@ -8,10 +8,11 @@ import { Label } from "@radix-ui/react-label"
 import {
   browserLocalPersistence,
   getAuth,
+  GoogleAuthProvider,
   setPersistence,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth"
-
 import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -19,14 +20,49 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
+import Google from "@/components/Google"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [isGitHubLoading, setIsGitHubLoading] = useState(false)
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const searchParams = useSearchParams()
   const router = useRouter()
+
+  const signInWithGoogle = () => {
+    const auth = getAuth()
+    const provider = new GoogleAuthProvider()
+
+    setIsGoogleLoading(true) // Set loading state while the sign-in process is ongoing
+
+    signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        // Google sign-in successful
+        const user = userCredential.user
+        console.log(`User ${user.displayName} logged in with Google.`)
+
+        toast({
+          title: "Google login successful.",
+          description: `Welcome, ${user.displayName}!`,
+        })
+
+        router.push("/productivity-tools")
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the Google sign-in process
+        console.error(error)
+
+        toast({
+          title: "Google login failed.",
+          description: "Failed to sign in with Google. Please try again.",
+          variant: "destructive",
+        })
+      })
+      .finally(() => {
+        setIsGoogleLoading(false) // Reset loading state
+      })
+  }
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -62,7 +98,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="container flex h-screen w-screen flex-col items-center justify-center">
+      <div className="container flex h-screen flex-col items-center justify-center">
         <Link
           href="/"
           className={cn(
@@ -144,19 +180,17 @@ export default function LoginPage() {
           <button
             type="button"
             className={cn(buttonVariants({ variant: "outline" }))}
-            onClick={() => {
-              setIsGitHubLoading(true)
-              signIn("github")
-            }}
-            disabled={isLoading || isGitHubLoading}
+            onClick={signInWithGoogle}
+            disabled={isLoading || isGoogleLoading}
           >
-            {isGitHubLoading ? (
+            {isGoogleLoading ? (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
-              <Icons.gitHub className="mr-2 h-4 w-4" />
+              <Google className="mr-2 h-4 w-4" />
             )}{" "}
-            Github
+            Google
           </button>
+
           <p className="px-8 text-center text-sm text-muted-foreground">
             <Link
               href="/register"

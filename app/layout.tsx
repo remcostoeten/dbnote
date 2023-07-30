@@ -14,6 +14,9 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import Greeting from "./../components/Greeting"
+import { MainNav } from "@/components/main-nav"
+import { marketingConfig } from "@/config/marketing"
+import Link from "next/link"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -90,7 +93,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="page-wrapper">
-            <div className="page-wrapper__inner">{children}</div>
+            <div className="page-wrapper__inner">
+              <>
+                <header className="container z-40 ">
+                  <div className="flex h-20 items-center justify-between py-6">
+                    <MainNav items={marketingConfig.mainNav} />
+                  </div>
+                </header>
+                {children}
+              </>
+            </div>
           </div>
           <Analytics />
           <Toaster />

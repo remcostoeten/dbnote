@@ -14,6 +14,11 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
+      title: "Account",
+      href: "/productivity-tools/account",
+      icon: "post",
+    },
+    {
       title: "Posts",
       href: "/productivity-tools",
       icon: "post",

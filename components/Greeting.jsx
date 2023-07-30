@@ -1,15 +1,15 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { getAuth } from "firebase/auth"
-
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
 
 export default function Greeting() {
   const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState("")
 
   const signOut = async () => {
     const auth = getAuth()
@@ -29,9 +29,11 @@ export default function Greeting() {
       if (user) {
         setUserEmail(stripDomainFromEmail(user.email) || "User")
         setIsLoggedIn(true)
+        setUsername(user.displayName || "User")
       } else {
         setUserEmail("")
         setIsLoggedIn(false)
+        setUsername("User")
       }
     }
 
@@ -49,9 +51,9 @@ export default function Greeting() {
     <div className="text-left">
       {isLoggedIn ? (
         <>
-          <div className="px-2 gap-2 border-b border-1  pb-2 mb-2 flex space-between">
-            <h2 className="text-2xl flex flex-1 font-semibold tracking-tight">
-              Hello, {userEmail}!
+          <div className="border-1 space-between mb-4 flex flex items-center  gap-2 border-b px-2 pb-4">
+            <h2 className="flex flex-1 text-2xl font-semibold tracking-tight">
+              Hello, {username}!
             </h2>
             <Button
               className={cn(

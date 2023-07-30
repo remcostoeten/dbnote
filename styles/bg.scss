@@ -109,20 +109,20 @@ body {
       z-index: -2;
       opacity: 0.1;
       animation: growHeight 10s 1s infinite,
-        bg-scrolling-reverse-two 30s 1s infinite;
+        bg-scrolling-reverse-two 10s 1s infinite;
     }
     &::after {
       content: "";
       width: 100vw;
       height: 0;
-      background: linear-gradient(transparent, rgba(5, 233, 16, 0.438));
+      background: linear-gradient(transparent, rgba(180, 5, 233, 0.438));
       position: absolute;
       mix-blend-mode: color-dodge;
       bottom: 0;
       z-index: -2;
       opacity: 0.1;
       animation: growHeight 10s 1s ease-in-out infinite,
-        bg-scrolling-reverse-two 30s 1s infinite;
+        bg-scrolling-reverse-two 10s 1s infinite;
     }
   }
   @keyframes growHeight {

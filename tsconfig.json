@@ -45,7 +45,9 @@
     "app/productivity-tools/data/page.tsx",
     "lib/auth.txtx",
     "app/productivity-tools/layoutt.tsx",
-    "app/productivity-tools/page.jsx"
+    "app/productivity-tools/page.jsx",
+    "app/mark/layoutjsx",
+    "components/Google.js"
   ],
   "exclude": [
     "node_modules"

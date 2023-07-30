@@ -1,4 +1,4 @@
-export default function Loader() {
+export default function LoaderSpinner() {
   return (
     <div className="grid h-screen w-screen place-items-center bg-[#0d0d0d]">
       <div className="loadcon">
