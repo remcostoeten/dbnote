@@ -1,7 +1,9 @@
 "use client"
+
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { getAuth, updateProfile } from "firebase/auth"
+
 import { toast } from "@/components/ui/use-toast"
 import ChangeUsername from "@/components/account/ChangeUsername"
 

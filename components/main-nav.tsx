@@ -2,15 +2,17 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { getAuth } from "firebase/auth"
 import { useSelectedLayoutSegment } from "next/navigation"
+import { getAuth } from "firebase/auth"
+
 import { MainNavItem } from "types"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { MobileNav } from "@/components/mobile-nav"
+
 import LogoIconOnly from "./LogoIconOnly"
-import { toast } from "@/components/ui/use-toast"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -59,23 +61,25 @@ export function MainNav({ items, children }: MainNavProps) {
         </span>
       </Link>
       {items?.length ? (
-        <nav className="hidden w-full gap-6 md:flex">
-          {items?.map((item, index) => (
-            <Link
-              key={index}
-              href={item.disabled ? "#" : item.href}
-              className={cn(
-                "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                item.href.startsWith(`/${segment}`)
-                  ? "text-foreground"
-                  : "text-foreground/60",
-                item.disabled && "cursor-not-allowed opacity-80"
-              )}
-            >
-              {item.title}
-            </Link>
-          ))}
-          <span className="flex-end flex w-full items-center justify-end">
+        <>
+          <nav className="hidden  gap-6 md:flex">
+            {items?.map((item, index) => (
+              <Link
+                key={index}
+                href={item.disabled ? "#" : item.href}
+                className={cn(
+                  "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                  item.href.startsWith(`/${segment}`)
+                    ? "text-foreground"
+                    : "text-foreground/60",
+                  item.disabled && "cursor-not-allowed opacity-80"
+                )}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+          <span className="flex-end flex-1 flex w-max items-center justify-end">
             {isLoggedIn ? (
               <button className="cursor-pointer" onClick={signOut}>
                 Logout
@@ -86,7 +90,7 @@ export function MainNav({ items, children }: MainNavProps) {
               </Link>
             )}
           </span>
-        </nav>
+        </>
       ) : null}
       <button
         className="flex items-center space-x-2 md:hidden"

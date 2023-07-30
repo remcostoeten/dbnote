@@ -246,10 +246,10 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <a className="font-semibold hover:underline flex flex-col">
+                      <span className="font-semibold hover:underline flex flex-col">
                         {vape.naam}
-                      </a>
-                      <p>{vape.desc}</p>{" "}
+                        <p>{vape.desc}</p>{" "}
+                      </span>
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>

@@ -308,11 +308,11 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <a className="font-semibold hover:underline flex flex-col">
+                      <span className="font-semibold hover:underline flex flex-col">
                         {note.title}
                         <small>{note.category}</small>
-                      </a>
-                      <p>{note.content}</p>{" "}
+                        <p>{note.content}</p>{" "}
+                      </span>
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>

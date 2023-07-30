@@ -30,6 +30,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
+import PostIntro from "./../../components/ui-dashboard/PostIntro"
+
 export default function Dashboard() {
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
@@ -155,12 +157,7 @@ export default function Dashboard() {
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
           <div className="flex flex-col gap-2 px-2">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
-              <p className="text-lg text-muted-foreground">
-                Create and manage posts.
-              </p>
-            </div>
+            <PostIntro title="Posts" text="Create and manage posts." />
             <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
               <Input
                 type="text"
@@ -257,11 +254,11 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <a className="font-semibold hover:underline flex flex-col">
+                      <span className="font-semibold hover:underline flex flex-col">
                         {note.title}
                         <small>{note.category}</small>
-                      </a>
-                      <p>{note.content}</p>{" "}
+                        <p>{note.content}</p>{" "}
+                      </span>
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>
@@ -293,7 +290,6 @@ export default function Dashboard() {
               <div className="flex items-center space-x-10">
                 <p className="text-sm text-muted-foreground">dddd </p>
               </div>
-              <Button type="button">Filter</Button>
               <Button
                 type="submit"
                 className={buttonVariants({ variant: "ghost" })}
@@ -301,18 +297,8 @@ export default function Dashboard() {
                 Save
               </Button>
             </div>
-            <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
-              <div id="editor" className="min-h-[500px]" />
-              <p className="text-sm text-gray-500">
-                Use{" "}
-                <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-                  Tab
-                </kbd>{" "}
-                to open the command menu.
-              </p>
-            </div>
           </div>
-        </form>{" "}
+        </form>
         {notes.map((note) => (
           <label key={note.userId} className="flex items-center gap-2">
             <input type="checkbox" value={note.title} />
