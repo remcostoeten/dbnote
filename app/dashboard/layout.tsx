@@ -4,7 +4,7 @@ import { AuthProvider } from "@/AuthContext"
 import { dashboardConfig } from "@/config/dashboard"
 import { auth } from "@/lib/firebase"
 import Greeting from "@/components/Greeting"
-import { MainNav } from "@/components/main-nav"
+import { MainNav } from "@/components/header/navigation-items"
 import { DashboardNav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -17,7 +17,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 
   return (
     <AuthProvider>
-      <div className="flex min-h-screen flex-col space-y-6">
+      <div className="flex min-h-screen flex-col space-y-6 mt-4 mb-4">
         <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
           <aside className="hidden w-[200px] flex-col md:flex">
             <DashboardNav items={dashboardConfig.sidebarNav} />

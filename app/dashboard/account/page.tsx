@@ -37,16 +37,12 @@ export default function UpdateNamePage() {
     <div className="flex min-h-screen flex-col ">
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-          <div className="flex flex-col gap-2 px-2">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">
-                <ChangeUsername
-                  buttontext="Update"
-                  title="Update Name"
-                  label="Name"
-                />
-              </h1>
-            </div>
+          <div className="grid gap-1">
+            <ChangeUsername
+              buttontext="Update"
+              title="Update Name"
+              label="Name"
+            />
           </div>
         </div>
       </div>

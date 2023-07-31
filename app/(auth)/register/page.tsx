@@ -36,7 +36,7 @@ export default function RegisterPage() {
     })
 
     console.log(result)
-    return router.push("/productivity-tools")
+    return router.push("/dashboard/")
   }
 
   return (

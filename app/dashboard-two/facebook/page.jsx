@@ -176,7 +176,6 @@ export default function Dashboard() {
     <>
       <div className="mx-auto w-3/6 mt-4 max-w-3xl">
         <div className="grid items-start gap-8">
-          <div className="flex flex-col gap-2 px-2">
             <div className="grid gap-1">
               <h1 className="font-heading text-3xl md:text-4xl">Facebook</h1>
               <p className="text-lg text-muted-foreground">Friendlist D.</p>
@@ -209,7 +208,7 @@ export default function Dashboard() {
                 New post
               </Button>
             </form>
-          </div>
+         
           <div>
             {facebook.map((note) => (
               <div

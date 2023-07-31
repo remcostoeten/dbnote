@@ -1,70 +1,60 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { getAuth } from "firebase/auth"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
+'use client';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 export default function Greeting() {
-  const [userEmail, setUserEmail] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [username, setUsername] = useState("")
+  const [userEmail, setUserEmail] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
   const signOut = async () => {
-    const auth = getAuth()
-    await auth.signOut()
-    setUserEmail("User")
-    setIsLoggedIn(false)
+    const auth = getAuth();
+    await auth.signOut();
+    setUserEmail("User");
+    setIsLoggedIn(false);
     toast({
-      title: "bye bye" + userEmail,
-    })
-  }
+      title: "Goodbye " + userEmail,
+    });
+  };
 
   useEffect(() => {
-    async function checkLoggedInStatus() {
-      const auth = getAuth()
-      const user = auth.currentUser
-
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserEmail(stripDomainFromEmail(user.email) || "User")
-        setIsLoggedIn(true)
-        setUsername(user.displayName || "User")
+        setUserEmail(stripDomainFromEmail(user.email) || "User");
+        setIsLoggedIn(true);
+        setUsername(user.displayName || "User");
       } else {
-        setUserEmail("")
-        setIsLoggedIn(false)
-        setUsername("User")
+        setUserEmail("");
+        setIsLoggedIn(false);
+        setUsername("User");
       }
-    }
+    });
 
-    const handleUserUpdated = () => {
-      checkLoggedInStatus()
-    }
-
-    document.addEventListener("userUpdated", handleUserUpdated)
-
-    return () => {
-      document.removeEventListener("userUpdated", handleUserUpdated)
-    }
-
-    checkLoggedInStatus()
-  }, [])
+    return () => unsubscribe();
+  }, []);
 
   function stripDomainFromEmail(email) {
     if (email && email.includes("@")) {
-      return email.split("@")[0]
+      return email.split("@")[0];
     }
-    return email
+    return email;
   }
+
   return (
     <div className="text-left">
       {isLoggedIn ? (
         <>
-          <div className="border-1 space-between mb-4 flex flex items-center  gap-2 border-b px-2 pb-4">
-            <h2 className="flex flex-1 text-2xl font-semibold tracking-tight">
+          <div className="border-1  pb-4 mb-3.5 space-betwee flex flex items-center  gap-2 border-b mb-4">
+   
+          <h1 className="flex flex-1 text-2xl font-semibold tracking-tight">
+
               Hello, {username}!
-            </h2>
+            </h1>
             <Button
               className={cn(
                 buttonVariants({
@@ -99,5 +89,5 @@ export default function Greeting() {
         </div>
       )}
     </div>
-  )
+  );
 }

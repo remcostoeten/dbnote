@@ -78,35 +78,19 @@
 }
 
 body {
-  overflow-x: hidden;
-  &::after {
-    content: "";
-    width: 200vw;
-    height: 240vh;
-    background: radial-gradient(rgba(7, 13, 27, 0.173) 33%, transparent);
-    animation: bodyLinear 10s infinite;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
+  &::after{
+	content: "";
+	width: 500vw;
+	height: 200vh;
+	background: linear-gradient(313deg, rgba(255, 255, 255, 0) 0%, rgb(3, 7, 17) 24%);
+	animation: bodyLinear 10s infinite;
+	border-radius: 50%;
+	position: absolute;
+	bottom: -410px;
+	right: -910px;
+	z-index: -1
   }
-  &::before {
-    content: "";
-    width: 200vw;
-    height: 240vh;
-    background: linear-gradient(
-      200deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgb(7, 13, 27) 75%
-    );
-    animation: bodyLinear 10s infinite;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
+
   @keyframes gradient {
     0% {
       background-position: 0% 50%;

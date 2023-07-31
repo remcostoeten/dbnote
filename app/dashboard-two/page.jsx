@@ -200,28 +200,24 @@ export default function Dashboard() {
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
           {showFilters && (
-            <div className="flex flex-col gap-2 px-2">
-              <div className="grid gap-1">
-                <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
-                <p className="text-lg text-muted-foreground">
-                  Create and manage posts.
-                </p>
-              </div>
-              <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <><div className="grid gap-1">
+              <h1 className="font-heading text-3xl md:text-4xl">Posts</h1>
+              <p className="text-lg text-muted-foreground">
+                Create and manage posts.
+              </p>
+            </div><form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
                 <Input
                   type="text"
                   placeholder="Title"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+                  onChange={(e) => setTitle(e.target.value)} />
                 {categories.map((category) => (
                   <label key={category.id} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       value={category.name}
                       onChange={handleCategoryToggle}
-                      checked={!hiddenCategories.includes(category.name)}
-                    />
+                      checked={!hiddenCategories.includes(category.name)} />
                     {category.name}
                   </label>
                 ))}
@@ -229,8 +225,7 @@ export default function Dashboard() {
                 <Textarea
                   placeholder="Note content"
                   value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
+                  onChange={(e) => setContent(e.target.value)} />
                 <Button
                   className={cn(
                     buttonVariants({
@@ -244,8 +239,8 @@ export default function Dashboard() {
                 >
                   New post
                 </Button>
-              </form>
-            </div>
+              </form></>
+
           )}
           <div>
             {notes.map((note) => (

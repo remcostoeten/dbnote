@@ -14,7 +14,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import Greeting from "./../components/Greeting"
-import { MainNav } from "@/components/main-nav"
+import { MainNav } from "@/components/header/navigation-items"
 import { marketingConfig } from "@/config/marketing"
 import Link from "next/link"
 

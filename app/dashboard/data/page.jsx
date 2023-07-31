@@ -1,8 +1,7 @@
 "use client"
-
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import router from "next/navigation"
+import { Input } from "@/components/ui/input"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
@@ -16,42 +15,42 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore"
-
 import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
 
-import PostIntro from "./../../components/ui-dashboard/PostIntro"
+function generateRandomPassword(length) {
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  let password = ""
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length)
+    password += charset[randomIndex]
+  }
+  return password
+}
 
 export default function Dashboard() {
   const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
   const [content, setContent] = useState("")
-  const [notes, setNotes] = useState([])
+  const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(true)
   const [editModeMap, setEditModeMap] = useState({})
-  const [hiddenCategories, setHiddenCategories] = useState([])
-  const username = auth.currentUser
-  const user = auth.currentUser
-
-  const fetchNotes = async () => {
-    const notesCollection = collection(db, "notes")
-    const snapshot = await getDocs(notesCollection)
-    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    setNotes(notes)
+  const password = process.env.NEXT_PUBLIC_PASSWORD
+  const [enteredPassword, setEnteredPassword] = useState("")
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false)
+  const fetchmessages = async () => {
+    const messagesCollection = collection(db, "messages")
+    const snapshot = await getDocs(messagesCollection)
+    const messages = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setMessages(messages)
   }
 
+  const user = auth.currentUser
+
   useEffect(() => {
-    fetchNotes()
+    fetchmessages()
   }, [])
 
   const categories = [
@@ -63,7 +62,7 @@ export default function Dashboard() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchNotes()
+        fetchmessages()
       }
       setLoading(false)
     })
@@ -71,14 +70,13 @@ export default function Dashboard() {
     return () => unsubscribe()
   }, [])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
     if (!user) {
       return
     }
 
     try {
-      const newNote = {
+      const newMessage = {
         title,
         userId: user.uid,
         content,
@@ -86,15 +84,15 @@ export default function Dashboard() {
         createdAt: serverTimestamp(),
       }
 
-      await addDoc(collection(db, "notes"), newNote)
+      await addDoc(collection(db, "messages"), newMessage)
 
-      setNotes((prevNotes) => [newNote, ...prevNotes])
+      setMessages((prevMessage) => [newMessage, ...prevMessage])
 
       setCategory("")
       setTitle("")
       setContent("")
       toast({
-        title: "Note created successfully.",
+        title: "message created successfully.",
         description: `In the category ${category} with title ${title}`,
       })
     } catch (error) {
@@ -109,15 +107,17 @@ export default function Dashboard() {
 
   const handleRemove = async (id) => {
     try {
-      await deleteDoc(doc(db, "notes", id))
-      setNotes((prevNotes) => prevNotes.filter((note) => note.userId !== id))
+      await deleteDoc(doc(db, "messages", id))
+      setMessages((prevMessages) =>
+        prevMessages.filter((message) => message.userId !== id)
+      )
 
       toast({
-        title: "Note removed successfully.",
+        title: "message removed successfully.",
       })
     } catch (error) {
       toast({
-        title: "Couldn't remove note.",
+        title: "Couldn't remove message.",
         variant: "destructive",
       })
       console.error(error)
@@ -131,34 +131,52 @@ export default function Dashboard() {
     }))
   }
 
-  const handleEdit = async (note) => {
+  const handleEdit = async (message) => {
     try {
-      await updateDoc(doc(db, "notes", note.userId), {
-        title: note.title,
-        content: note.content,
+      await updateDoc(doc(db, "messages", message.userId), {
+        title: message.title,
+        content: message.content,
       })
 
-      toggleEditMode(note.userId)
+      toggleEditMode(message.userId)
 
       toast({
-        title: "Note updated successfully.",
+        title: "message updated successfully.",
       })
     } catch (error) {
       toast({
-        title: "Couldn't update note.",
+        title: "Couldn't update message.",
         variant: "destructive",
       })
       console.error(error)
     }
   }
 
+  const handlePasswordSubmit = () => {
+    if (enteredPassword === password) {
+      setIsPasswordCorrect(true)
+      toast({
+        title: "Correct password.",
+      })
+    } else {
+      toast({
+        title: "Wrong password.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
-    <>
-      <div className="max-w-3xl">
+    <div className="max-w-3xl">
+      {enteredPassword === password ? (
         <div className="grid items-start gap-8">
-          <div className="flex flex-col gap-2 px-2">
-            <PostIntro title="Posts" text="Create and manage posts." />
-            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <div className="grid gap-1">
+              <h1 className="font-heading text-3xl md:text-4xl">messages</h1>
+              <p className="text-lg text-muted-foreground">
+                Create and manage messages.
+              </p>
+            </div>
+            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
               <Input
                 type="text"
                 placeholder="Title"
@@ -177,55 +195,54 @@ export default function Dashboard() {
                   ))}
                 </SelectContent>
               </Select>
-
               <Textarea
-                placeholder="Note content"
+                placeholder="message content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
               <Button onClick={handleSubmit} className="inline-flex w-fit">
-                New post
+                New message
               </Button>
             </form>
-          </div>
+   
 
           <div className="pb-2 ">
-            {notes.map((note) => (
+            {messages.map((message) => (
               <div
-                key={note.userId}
+                key={message.userId}
                 className="divide-y divide-border rounded-md border"
               >
-                <div className="flex  py-4 px-8 content-center flex-col gap-2">
-                  {editModeMap[note.userId] ? (
+                <div className="flex  flex-col content-center gap-2 px-8 py-4">
+                  {editModeMap[message.userId] ? (
                     <>
                       <Input
                         type="text"
-                        value={note.title}
+                        value={message.title}
                         onChange={(e) =>
-                          setNotes((prevNotes) =>
-                            prevNotes.map((prevNote) =>
-                              prevNote.userId === note.userId
-                                ? { ...prevNote, title: e.target.value }
-                                : prevNote
+                          setMessages((prevMessages) =>
+                            prevMessages.map((prevMessage) =>
+                              prevMessage.userId === message.userId
+                                ? { ...prevMessage, title: e.target.value }
+                                : prevMessage
                             )
                           )
                         }
                       />
                       <Textarea
-                        value={note.content}
+                        value={message.content}
                         onChange={(e) =>
-                          setNotes((prevNotes) =>
-                            prevNotes.map((prevNote) =>
-                              prevNote.userId === note.userId
-                                ? { ...prevNote, content: e.target.value }
-                                : prevNote
+                          setMessages((prevMessages) =>
+                            prevMessages.map((prevMessage) =>
+                              prevMessage.userId === message.userId
+                                ? { ...prevMessage, content: e.target.value }
+                                : prevMessage
                             )
                           )
                         }
                       />
                       <div className="flex gap-2">
                         <Button
-                          onClick={() => handleEdit(note)}
+                          onClick={() => handleEdit(message)}
                           className={cn(
                             buttonVariants({
                               variant: "primary",
@@ -238,7 +255,7 @@ export default function Dashboard() {
                           Save
                         </Button>
                         <Button
-                          onClick={() => toggleEditMode(note.userId)}
+                          onClick={() => toggleEditMode(message.userId)}
                           className={cn(
                             buttonVariants({
                               variant: "primary",
@@ -254,19 +271,19 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <span className="font-semibold hover:underline flex flex-col">
-                        {note.title}
-                        <small>{note.category}</small>
-                        <p>{note.content}</p>{" "}
-                      </span>
+                      <a className="flex flex-col font-semibold hover:underline">
+                        {message.title}
+                        <small>{message.category}</small>
+                      </a>
+                      <p>{message.content}</p>{" "}
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>
-                      <span onClick={() => handleRemove(note.userId)}>
+                      <span onClick={() => handleRemove(message.userId)}>
                         Delete
                       </span>
                       <Button
-                        onClick={() => toggleEditMode(note.userId)}
+                        onClick={() => toggleEditMode(message.userId)}
                         className={cn(
                           buttonVariants({
                             variant: "primary",
@@ -284,28 +301,17 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
-        <form>
-          <div className="grid w-full gap-10 mx-auto m-w-[1280px]">
-            <div className="flex w-full items-center justify-between">
-              <div className="flex items-center space-x-10">
-                <p className="text-sm text-muted-foreground">dddd </p>
-              </div>
-              <Button
-                type="submit"
-                className={buttonVariants({ variant: "ghost" })}
-              >
-                Save
-              </Button>
-            </div>
-          </div>
-        </form>
-        {notes.map((note) => (
-          <label key={note.userId} className="flex items-center gap-2">
-            <input type="checkbox" value={note.title} />
-            {note.title}
-          </label>
-        ))}
-      </div>
-    </>
+      ) : (
+        <div>
+          <Input
+            type="password"
+            placeholder="Enter the password"
+            value={enteredPassword}
+            onChange={(e) => setEnteredPassword(e.target.value)}
+          />
+          <Button onClick={handlePasswordSubmit}>Submit</Button>
+        </div>
+      )}
+    </div>
   )
 }

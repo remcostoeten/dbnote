@@ -28,28 +28,37 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
+import Drawer from "@/components/Drawer"
+import { Icons } from "@/components/icons"
+
+import PostIntro from "./../../components/ui-dashboard/PostIntro"
+import { MyDrawer } from './../../components/Drawer';
 
 export default function Dashboard() {
-  const [desc, setDesc] = useState("")
-  const [merk, setMerk] = useState("")
-  const [naam, setNaam] = useState("")
-  const [vapes, setVapes] = useState([])
+  const [title, setTitle] = useState("")
+  const [category, setCategory] = useState("")
+  const [content, setContent] = useState("")
+  const [notes, setNotes] = useState([])
   const [loading, setLoading] = useState(true)
   const [editModeMap, setEditModeMap] = useState({})
-  const [hiddenCategories, setHiddenCategories] = useState([])
-  const username = auth.currentUser
   const user = auth.currentUser
 
   const fetchNotes = async () => {
-    const vapesCollection = collection(db, "vapes")
-    const snapshot = await getDocs(vapesCollection)
-    const vapes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    setVapes(vapes)
+    const notesCollection = collection(db, "notes")
+    const snapshot = await getDocs(notesCollection)
+    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setNotes(notes)
   }
 
   useEffect(() => {
     fetchNotes()
   }, [])
+
+  const categories = [
+    { id: "1", name: "Pleio" },
+    { id: "2", name: "Softhouse" },
+    { id: "3", name: "Prive" },
+  ]
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -70,25 +79,27 @@ export default function Dashboard() {
 
     try {
       const newNote = {
-        naam,
+        title,
         userId: user.uid,
-        desc,
+        content,
+        category,
         createdAt: serverTimestamp(),
       }
 
-      await addDoc(collection(db, "vapes"), newNote)
+      await addDoc(collection(db, "notes"), newNote)
 
-      setVapes((prevNotes) => [newNote, ...prevNotes])
+      setNotes((prevNotes) => [newNote, ...prevNotes])
 
-      setNaam("")
-      setMerk("")
-      setDesc("")
+      setCategory("")
+      setTitle("")
+      setContent("")
       toast({
-        naam: "Vape created successfully.",
+        title: "Note created successfully.",
+        description: `In the category ${category} with title ${title}`,
       })
     } catch (error) {
       toast({
-        naam: "Something went wrong.",
+        title: "Something went wrong.",
         description: `Your sign-in request failed. Please try again. ${error}`,
         variant: "destructive",
       })
@@ -98,15 +109,15 @@ export default function Dashboard() {
 
   const handleRemove = async (id) => {
     try {
-      await deleteDoc(doc(db, "vapes", id))
-      setVapes((prevNotes) => prevNotes.filter((vape) => vape.userId !== id))
+      await deleteDoc(doc(db, "notes", id))
+      setNotes((prevNotes) => prevNotes.filter((note) => note.userId !== id))
 
       toast({
-        naam: "Note removed successfully.",
+        title: "Note removed successfully.",
       })
     } catch (error) {
       toast({
-        naam: "Couldn't remove vape.",
+        title: "Couldn't remove note.",
         variant: "destructive",
       })
       console.error(error)
@@ -120,21 +131,21 @@ export default function Dashboard() {
     }))
   }
 
-  const handleEdit = async (vape) => {
+  const handleEdit = async (note) => {
     try {
-      await updateDoc(doc(db, "vapes", vape.userId), {
-        naam: vape.naam,
-        desc: vape.desc,
+      await updateDoc(doc(db, "notes", note.userId), {
+        title: note.title,
+        content: note.content,
       })
 
-      toggleEditMode(vape.userId)
+      toggleEditMode(note.userId)
 
       toast({
-        naam: "Note updated successfully.",
+        title: "Note updated successfully.",
       })
     } catch (error) {
       toast({
-        naam: "Couldn't update vape.",
+        title: "Couldn't update note.",
         variant: "destructive",
       })
       console.error(error)
@@ -145,71 +156,68 @@ export default function Dashboard() {
     <>
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-          <div className="flex flex-col gap-2 px-2">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">Vapes</h1>
-              <p className="text-lg text-muted-foreground">Beste vapes </p>
-            </div>
+            <PostIntro title="Posts" text="Create and manage posts." />
             <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
               <Input
                 type="text"
-                placeholder="Naam"
-                value={naam}
-                onChange={(e) => setNaam(e.target.value)}
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
-              <Input
-                type="text"
-                placeholder="Merk"
-                value={merk}
-                onChange={(e) => setMerk(e.target.value)}
-              />
-              <Input
-                type="text"
-                placeholder="Beschrijving"
-                value={desc}
-                onChange={(e) => setNaam(e.target.value)}
-              />
+              <Select onValueChange={setCategory} defaultValue={category}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a verified email to display" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem value={category.name}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
               <Textarea
-                placeholder="Note desc"
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
+                placeholder="Note content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               />
               <Button onClick={handleSubmit} className="inline-flex w-fit">
                 New post
               </Button>
+              <MyDrawer />
             </form>
-          </div>
+        
 
           <div className="pb-2 ">
-            {vapes.map((vape) => (
+            {notes.map((note) => (
               <div
-                key={vape.userId}
+                key={note.userId}
                 className="divide-y divide-border rounded-md border"
               >
-                <div className="flex  py-4 px-8 desc-center  gap-2">
-                  {editModeMap[vape.userId] ? (
+                <div className="flex  py-4 px-8 content-center flex-col gap-2">
+                  {editModeMap[note.userId] ? (
                     <>
                       <Input
                         type="text"
-                        value={vape.naam}
+                        value={note.title}
                         onChange={(e) =>
-                          setVapes((prevNotes) =>
+                          setNotes((prevNotes) =>
                             prevNotes.map((prevNote) =>
-                              prevNote.userId === vape.userId
-                                ? { ...prevNote, naam: e.target.value }
+                              prevNote.userId === note.userId
+                                ? { ...prevNote, title: e.target.value }
                                 : prevNote
                             )
                           )
                         }
                       />
                       <Textarea
-                        value={vape.desc}
+                        value={note.content}
                         onChange={(e) =>
-                          setVapes((prevNotes) =>
+                          setNotes((prevNotes) =>
                             prevNotes.map((prevNote) =>
-                              prevNote.userId === vape.userId
-                                ? { ...prevNote, desc: e.target.value }
+                              prevNote.userId === note.userId
+                                ? { ...prevNote, content: e.target.value }
                                 : prevNote
                             )
                           )
@@ -217,7 +225,7 @@ export default function Dashboard() {
                       />
                       <div className="flex gap-2">
                         <Button
-                          onClick={() => handleEdit(vape)}
+                          onClick={() => handleEdit(note)}
                           className={cn(
                             buttonVariants({
                               variant: "primary",
@@ -230,7 +238,7 @@ export default function Dashboard() {
                           Save
                         </Button>
                         <Button
-                          onClick={() => toggleEditMode(vape.userId)}
+                          onClick={() => toggleEditMode(note.userId)}
                           className={cn(
                             buttonVariants({
                               variant: "primary",
@@ -247,17 +255,18 @@ export default function Dashboard() {
                   ) : (
                     <>
                       <span className="font-semibold hover:underline flex flex-col">
-                        {vape.naam}
-                        <p>{vape.desc}</p>{" "}
+                        {note.title}
+                        <small>{note.category}</small>
+                        <p>{note.content}</p>{" "}
                       </span>
                       <div>
                         <p className="text-sm text-muted-foreground"></p>{" "}
                       </div>
-                      <span onClick={() => handleRemove(vape.userId)}>
+                      <span onClick={() => handleRemove(note.userId)}>
                         Delete
                       </span>
                       <Button
-                        onClick={() => toggleEditMode(vape.userId)}
+                        onClick={() => toggleEditMode(note.userId)}
                         className={cn(
                           buttonVariants({
                             variant: "primary",
@@ -281,7 +290,6 @@ export default function Dashboard() {
               <div className="flex items-center space-x-10">
                 <p className="text-sm text-muted-foreground">dddd </p>
               </div>
-              <Button type="button">Filter</Button>
               <Button
                 type="submit"
                 className={buttonVariants({ variant: "ghost" })}
@@ -289,22 +297,12 @@ export default function Dashboard() {
                 Save
               </Button>
             </div>
-            <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
-              <div id="editor" className="min-h-[500px]" />
-              <p className="text-sm text-gray-500">
-                Use{" "}
-                <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-                  Tab
-                </kbd>{" "}
-                to open the command menu.
-              </p>
-            </div>
           </div>
-        </form>{" "}
-        {vapes.map((vape) => (
-          <label key={vape.userId} className="flex items-center gap-2">
-            <input type="checkbox" value={vape.naam} />
-            {vape.naam}
+        </form>
+        {notes.map((note) => (
+          <label key={note.userId} className="flex items-center gap-2">
+            <input type="checkbox" value={note.title} />
+            {note.title}
           </label>
         ))}
       </div>

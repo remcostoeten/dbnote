@@ -15,27 +15,27 @@ export const dashboardConfig: DashboardConfig = {
   sidebarNav: [
     {
       title: "Account",
-      href: "/productivity-tools/account",
+      href: "/dashboard/account",
       icon: "post",
     },
     {
       title: "Posts",
-      href: "/productivity-tools",
+      href: "/dashboard",
       icon: "post",
     },
     {
       title: "Data",
-      href: "/productivity-tools/data",
+      href: "/dashboard/data",
       icon: "billing",
     },
     {
       title: "Work log",
-      href: "/productivity-tools/users",
+      href: "/dashboard/users",
       icon: "billing",
     },
     {
       title: "Expenses",
-      href: "/productivity-tools/expenses",
+      href: "/dashboard/expenses",
       icon: "billing",
     },
     {
