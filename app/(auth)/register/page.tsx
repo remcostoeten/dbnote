@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Auth } from "firebase/auth"
 import { ClassValue } from "clsx"
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
-import { firebase, signUp } from "@/lib/firebase"
+import { signUp } from "@/lib/firebase"
 export default function RegisterPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")

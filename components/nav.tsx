@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"; // Import the useState and useEffect hooks
+import { getAuth } from "firebase/auth"; // Import the getAuth function from Firebase
 
 import { SidebarNavItem } from "types"
 import { cn } from "@/lib/utils"
@@ -14,12 +16,38 @@ interface DashboardNavProps {
 export function DashboardNav({ items }: DashboardNavProps) {
   const path = usePathname()
 
+  // State variables to hold the user's profile picture and username
+  const [userProfilePicture, setUserProfilePicture] = useState(null);
+  const [username, setUsername] = useState("");
+
+  // Fetch the user's profile picture and name when the component mounts
+  useEffect(() => {
+    const auth = getAuth();
+    if (auth.currentUser) {
+      setUserProfilePicture(auth.currentUser.photoURL as any);
+      setUsername(auth.currentUser.displayName || "");
+    }
+  }, []);
+
   if (!items?.length) {
     return null
   }
 
   return (
     <nav className="grid items-start gap-2">
+      <div className="flex items-center gap-4 font-semibold font-2xl mb-4">
+        {userProfilePicture && (
+          <img
+            src={userProfilePicture}
+            alt="Profile Picture"
+            className="w-12 h-12 rounded-full object-cover"
+          />
+        )}
+
+        {username && (
+          <span className="text-xl font-medium">{username}</span>
+        )}
+      </div>
       {items.map((item, index) => {
         const Icon = Icons[item.icon || "arrowRight"]
         return (

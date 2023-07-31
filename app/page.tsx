@@ -44,14 +44,11 @@ export default async function IndexPage() {
             href="/login"
             className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium"
             target="_blank"
-            hidecircel="true"
-            showhand="true"
           >
             Login for more features
           </Link>
           <h1
             className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
-            cursorincreasesize="true"
           >
             Showcasing various UI's and features i've built.
           </h1>
@@ -64,8 +61,6 @@ export default async function IndexPage() {
 
           <div
             className="absolute h-[20vh] w-[50vw]"
-            hidecircel="true"
-            showhand="true"
           ></div>
 
           <div className="z-10 space-x-4">
@@ -90,7 +85,6 @@ export default async function IndexPage() {
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2
             className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
-            hidecursor="true"
           >
             Features
           </h2>

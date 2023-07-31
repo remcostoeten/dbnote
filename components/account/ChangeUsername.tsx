@@ -6,20 +6,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
+import { string } from "prop-types";
+
+interface ChangeUsernameProps {
+  buttontext: string;
+  title: string;
+  label: string;
+}
+
 
 export default function ChangeUsername({ buttontext, title, label }) {
-  // State variables to hold the user's name and selected avatar image
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState<File | null>(null);
   const [userProfilePicture, setUserProfilePicture] = useState(null); // State to hold the user's profile picture
   const auth = getAuth();
   const storage = getStorage();
 
   useEffect(() => {
-    // Fetch the user's profile picture and name when the component mounts
     if (auth.currentUser) {
-      setUserProfilePicture(auth.currentUser.photoURL);
-      setName(auth.currentUser.displayName || "");
+      setUserProfilePicture(auth.currentUser?.photoURL as any);
+      setName(auth.currentUser?.displayName || "");
     }
   }, [auth.currentUser]);
 
@@ -49,7 +55,7 @@ export default function ChangeUsername({ buttontext, title, label }) {
       const updatedUser = getAuth().currentUser;
       if (updatedUser) {
         setName(updatedUser.displayName || "");
-        setUserProfilePicture(updatedUser.photoURL || null);
+        setUserProfilePicture(updatedUser.photoURL as any);
       }
       document.dispatchEvent(new CustomEvent("userUpdated"));
     }
@@ -78,7 +84,13 @@ export default function ChangeUsername({ buttontext, title, label }) {
             name="avatar"
             type="file"
             accept="image/*"
-            onChange={(e) => setAvatar(e.target.files[0])} // Save the selected file to the state
+            onChange={(e) => {
+              if (e.target.files && e.target.files.length > 0) {
+                setAvatar(e.target.files[0])
+              } else {
+                setAvatar(null);
+              }
+            }}
           />
           <Button
             type="submit"
@@ -86,14 +98,6 @@ export default function ChangeUsername({ buttontext, title, label }) {
           >
             {buttontext}
           </Button>
-          {/* Display the user's profile picture */}
-          {userProfilePicture && (
-            <img
-              src={userProfilePicture}
-              alt="Profile Picture"
-              className="w-24 h-24 rounded-full object-cover"
-            />
-          )}
         </form>
       </div>
     </>

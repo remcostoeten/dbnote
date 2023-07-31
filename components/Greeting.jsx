@@ -49,9 +49,9 @@ export default function Greeting() {
     <div className="text-left">
       {isLoggedIn ? (
         <>
-          <div className="border-1  pb-4 mb-3.5 space-betwee flex flex items-center  gap-2 border-b mb-4">
-   
-          <h1 className="flex flex-1 text-2xl font-semibold tracking-tight">
+          <div className="border-1  pb-4 space-between flex items-center  gap-2 border-b mb-4">
+
+            <h1 className="flex flex-1 text-2xl font-semibold tracking-tight">
 
               Hello, {username}!
             </h1>

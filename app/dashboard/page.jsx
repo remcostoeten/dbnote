@@ -16,7 +16,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore"
-
+Drawer
 import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -30,7 +30,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import Drawer from "@/components/Drawer"
 import { Icons } from "@/components/icons"
-
+import { handleEdit, toggleEditMode, handleRemove } from "../../lib/createPosts"
 import PostIntro from "./../../components/ui-dashboard/PostIntro"
 import { MyDrawer } from './../../components/Drawer';
 
@@ -107,87 +107,74 @@ export default function Dashboard() {
     }
   }
 
-  const handleRemove = async (id) => {
-    try {
-      await deleteDoc(doc(db, "notes", id))
-      setNotes((prevNotes) => prevNotes.filter((note) => note.userId !== id))
+  const form = (
+    <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <Select onValueChange={setCategory} defaultValue={category}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a verified email to display" />
+        </SelectTrigger>
+        <SelectContent>
+          {categories.map((category) => (
+            <SelectItem value={category.name}>
+              {category.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-      toast({
-        title: "Note removed successfully.",
-      })
-    } catch (error) {
-      toast({
-        title: "Couldn't remove note.",
-        variant: "destructive",
-      })
-      console.error(error)
-    }
-  }
-
-  const toggleEditMode = (id) => {
-    setEditModeMap((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }))
-  }
-
-  const handleEdit = async (note) => {
-    try {
-      await updateDoc(doc(db, "notes", note.userId), {
-        title: note.title,
-        content: note.content,
-      })
-
-      toggleEditMode(note.userId)
-
-      toast({
-        title: "Note updated successfully.",
-      })
-    } catch (error) {
-      toast({
-        title: "Couldn't update note.",
-        variant: "destructive",
-      })
-      console.error(error)
-    }
-  }
+      <Textarea
+        placeholder="Note content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <Button onClick={handleSubmit} className="inline-flex w-fit">
+        New post
+      </Button>
+    </form>
+  )
 
   return (
     <>
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-            <PostIntro title="Posts" text="Create and manage posts." />
-            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <Select onValueChange={setCategory} defaultValue={category}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a verified email to display" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem value={category.name}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          <PostIntro title="Posts" text="Create and manage posts." />
+          <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Select onValueChange={setCategory} defaultValue={category}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a verified email to display" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem value={category.name}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-              <Textarea
-                placeholder="Note content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              <Button onClick={handleSubmit} className="inline-flex w-fit">
-                New post
-              </Button>
-              <MyDrawer />
-            </form>
-        
+            <Textarea
+              placeholder="Note content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <Button onClick={handleSubmit} className="inline-flex w-fit">
+              New post
+            </Button>
+            <MyDrawer content={form} />
+          </form>
+
 
           <div className="pb-2 ">
             {notes.map((note) => (

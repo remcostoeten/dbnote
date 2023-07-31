@@ -77,8 +77,9 @@
   }
 }
 
-body {
-  &::after{
+body{
+
+&::after {
 	content: "";
 	width: 500vw;
 	height: 200vh;
@@ -86,10 +87,10 @@ body {
 	animation: bodyLinear 10s infinite;
 	border-radius: 50%;
 	position: absolute;
-	bottom: -410px;
-	right: -910px;
-	z-index: -1
-  }
+	bottom: -233px;
+	right: -1133px;
+	z-index: -1;
+}
 
   @keyframes gradient {
     0% {

@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Drawer } from "vaul";
+import { useState } from "react"
+import { Drawer } from "vaul"
 
-export function MyDrawer() {
-  const [open, setOpen] = useState(false);
+export function MyDrawer({ content }) {
+  const [open, setOpen] = useState(false)
 
   return (
     <Drawer.Root dismissible={false} open={open}>
@@ -17,6 +17,7 @@ export function MyDrawer() {
           <div className="p-4 bg-white rounded-t-[10px] flex-1">
             <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
             <div className="max-w-md mx-auto">
+              {content}
               <Drawer.Title className="font-medium mb-4">
                 Unstyled drawer for React.
               </Drawer.Title>
@@ -64,9 +65,9 @@ export function MyDrawer() {
                   fill="none"
                   height="16"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   width="16"
                   aria-hidden="true"
@@ -87,9 +88,9 @@ export function MyDrawer() {
                   fill="none"
                   height="16"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                   width="16"
                   aria-hidden="true"
@@ -105,5 +106,5 @@ export function MyDrawer() {
         </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
-  );
+  )
 }

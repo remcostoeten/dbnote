@@ -2,16 +2,17 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
+import { getAuth } from "firebase/auth";
+
 import { MainNavItem } from "types";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { toast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
-import { FirebaseApp } from "firebase/app";
+
 import LogoIconOnly from "../LogoIconOnly";
-import { getAuth } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { motion } from "framer-motion";
 interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;
@@ -22,13 +23,11 @@ export function MainNav({ items, children }: MainNavProps) {
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(null); // State to hold the user's profile picture
+  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(null);
 
   const signOut = async () => {
-    // ... (existing signOut code)
   };
 
-  // Function to fetch the user's profile picture
   const fetchUserProfilePicture = async () => {
     if (auth.currentUser) {
       const photoURL = auth.currentUser.photoURL;
@@ -37,7 +36,6 @@ export function MainNav({ items, children }: MainNavProps) {
   };
 
   useEffect(() => {
-    // Fetch the user's profile picture when the component mounts
     fetchUserProfilePicture();
   }, []);
 
@@ -58,23 +56,15 @@ export function MainNav({ items, children }: MainNavProps) {
 
   return (
     <div className="flex w-full gap-6 md:gap-10">
-      <span className="hidden items-center space-x-2 md:flex">
+      <Link href="/" className="hidden items-center space-x-2 md:flex">
         <LogoIconOnly />
-        <motion.span initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="hidden font-bold sm:inline-block">
+        <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
-        </motion.span>
-      </span>
+        </span>
+      </Link>
       {items?.length ? (
         <>
-          <motion.nav
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="hidden  gap-6 md:flex"
-          >
+          <nav className="hidden  gap-6 md:flex">
             {items?.map((item, index) => (
               <Link
                 key={index}
@@ -90,15 +80,10 @@ export function MainNav({ items, children }: MainNavProps) {
                 {item.title}
               </Link>
             ))}
-          </motion.nav>
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex-end flex-1 flex w-max items-center justify-end"
-          >
+          </nav>
+          <span className="flex-end flex-1 flex w-max items-center justify-end">
             {userProfilePicture && (
-              <motion.img
+              <img
                 src={userProfilePicture}
                 alt="Profile Picture"
                 className="w-10 h-10 rounded-full object-cover"
@@ -106,37 +91,30 @@ export function MainNav({ items, children }: MainNavProps) {
             )}
 
             {isLoggedIn ? (
-              <motion.button
-                className="cursor-pointer"
-                onClick={signOut}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <button className="cursor-pointer" onClick={signOut}>
                 Logout
-              </motion.button>
+              </button>
             ) : (
               <Link href="https://github.com/remcostoeten" target="_blank">
-                <motion.a
-                  className="cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Github
-                </motion.a>
+                Github
               </Link>
             )}
-          </motion.span>
+          </span>
         </>
       ) : null}
       <button
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
-        {/* Rest of the code */}
+        {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
+        <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (
         <MobileNav items={items}>{children}</MobileNav>
       )}
     </div>
   );
+}
+function stripDomainFromEmail(email: string | null): React.SetStateAction<string> {
+  throw new Error("Function not implemented.");
 }
