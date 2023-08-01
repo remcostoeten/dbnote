@@ -70,7 +70,7 @@ export default function Greeting() {
       ) : (
         <div className="flex justify-between">
           <h2 className="text-2xl font-semibold tracking-tight">
-            You're not authenticated!
+            You`re not authenticated!
           </h2>
           <Link
             className={cn(
