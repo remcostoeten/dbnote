@@ -26,18 +26,9 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import PostIntro from "../../components/ui-dashboard/PostIntro"; // corrected import path
-import { MyDrawer } from "../../components/Drawer"; // corrected import path
-import { Icons } from "@/components/icons";
-
-interface Note {
-  id: string;
-  title: string;
-  userId: string;
-  content: string;
-  category: string;
-  createdAt: any; // You might want to use the correct type for serverTimestamp()
-}
+import PostIntro from "../../components/ui-dashboard/PostIntro";
+import { MyDrawer } from "../../components/Drawer";
+import { Note } from "@/lib/types";
 
 export default function Dashboard() {
   const [title, setTitle] = useState<string>("");
@@ -54,7 +45,7 @@ export default function Dashboard() {
     const notesData = snapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
-    })) as Note[]; // Added type assertion
+    })) as Note[];
     setNotes(notesData);
   };
 
@@ -159,8 +150,6 @@ export default function Dashboard() {
     }
   };
 
-
-
   const form = (
     <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
       <Input
@@ -187,10 +176,10 @@ export default function Dashboard() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <Button onClick={(e) => { e.preventDefault(); handleSubmit(e); }} className="inline-flex w-fit">
+      <Button onClick={(e) => { e.preventDefault(); handleSubmit(e as any); }} className="inline-flex w-fit">
         New post
       </Button>
-    </form>
+    </form >
   )
 
   return (
@@ -223,7 +212,7 @@ export default function Dashboard() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-            <Button onClick={handleSubmit} className="inline-flex w-fit">
+            <Button onClick={(e) => { e.preventDefault(); handleSubmit(e as any); }} className="inline-flex w-fit">
               New post
             </Button>
             <MyDrawer content={form} />
@@ -269,8 +258,6 @@ export default function Dashboard() {
                           onClick={() => handleEdit(note)}
                           className={cn(
                             buttonVariants({
-                              variant: "primary",
-                              color: "success",
                               size: "sm",
                               width: "w-fit",
                             })
@@ -282,9 +269,6 @@ export default function Dashboard() {
                           onClick={() => toggleEditMode(note.userId)}
                           className={cn(
                             buttonVariants({
-                              variant: "primary",
-                              color: "danger",
-                              size: "sm",
                               width: "w-fit",
                             })
                           )}
@@ -310,8 +294,6 @@ export default function Dashboard() {
                         onClick={() => toggleEditMode(note.userId)}
                         className={cn(
                           buttonVariants({
-                            variant: "primary",
-                            color: "info",
                             size: "sm",
                           })
                         )}

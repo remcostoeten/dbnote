@@ -62,40 +62,6 @@ export default function Dashboard() {
     return () => unsubscribe()
   }, [])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!user) {
-      return
-    }
-
-    try {
-      const newNote = {
-        naam,
-        userId: user.uid,
-        desc,
-        createdAt: serverTimestamp(),
-      }
-
-      await addDoc(collection(db, "vapes"), newNote)
-
-      setVapes((prevNotes) => [newNote, ...prevNotes])
-
-      setNaam("")
-      setMerk("")
-      setDesc("")
-      toast({
-        naam: "Vape created successfully.",
-      })
-    } catch (error) {
-      toast({
-        naam: "Something went wrong.",
-        description: `Your sign-in request failed. Please try again. ${error}`,
-        variant: "destructive",
-      })
-      console.error(error)
-    }
-  }
-
   const handleRemove = async (id) => {
     try {
       await deleteDoc(doc(db, "vapes", id))
@@ -145,40 +111,40 @@ export default function Dashboard() {
     <>
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">Vapes</h1>
-              <p className="text-lg text-muted-foreground">Beste vapes </p>
-            </div>
-            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Naam"
-                value={naam}
-                onChange={(e) => setNaam(e.target.value)}
-              />
-              <Input
-                type="text"
-                placeholder="Merk"
-                value={merk}
-                onChange={(e) => setMerk(e.target.value)}
-              />
-              <Input
-                type="text"
-                placeholder="Beschrijving"
-                value={desc}
-                onChange={(e) => setNaam(e.target.value)}
-              />
+          <div className="grid gap-1">
+            <h1 className="font-heading text-3xl md:text-4xl">Vapes</h1>
+            <p className="text-lg text-muted-foreground">Beste vapes </p>
+          </div>
+          <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Naam"
+              value={naam}
+              onChange={(e) => setNaam(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Merk"
+              value={merk}
+              onChange={(e) => setMerk(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Beschrijving"
+              value={desc}
+              onChange={(e) => setNaam(e.target.value)}
+            />
 
-              <Textarea
-                placeholder="Note desc"
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-              />
-              <Button onClick={handleSubmit} className="inline-flex w-fit">
-                New post
-              </Button>
-            </form>
-      
+            <Textarea
+              placeholder="Note desc"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
+            <Button onClick={handleSubmit} className="inline-flex w-fit">
+              New post
+            </Button>
+          </form>
+
 
           <div className="pb-2 ">
             {vapes.map((vape) => (
