@@ -25,6 +25,9 @@ export default function LoginPage() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      if (user) {
+        router.push("/dashboard/my-account");
+      }
     });
 
     return () => unsubscribe();
@@ -32,7 +35,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard/my-account"); 
+      router.push("/dashboard/my-account");
     }
   }, [user]);
 
@@ -101,10 +104,8 @@ export default function LoginPage() {
   return (
     <>
       {user ? (
-        // User is logged in, redirect to "My Account" or other appropriate page
         router.push("/dashboard/my-account")
       ) : (
-        // User is not logged in, show the login page
         <div className="container flex h-screen flex-col items-center justify-center">
           <Link
             href="/"
@@ -130,7 +131,7 @@ export default function LoginPage() {
                 Enter your email and password to sign in to your account
               </p>
             </div>
-  
+
             <form>
               <div className="grid gap-2">
                 <div className="grid gap-1">
@@ -147,7 +148,7 @@ export default function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
-  
+
                   <Label className="sr-only" htmlFor="password">
                     Password
                   </Label>
@@ -206,7 +207,7 @@ export default function LoginPage() {
                 </>
               )}
             </button>
-  
+
             <p className="px-8 text-center text-sm text-muted-foreground">
               <Link
                 href="/register"
@@ -219,5 +220,5 @@ export default function LoginPage() {
         </div>
       )}
     </>
-  )}
-              
+  )
+}

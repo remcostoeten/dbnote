@@ -1,9 +1,8 @@
 "use client"
-
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import router from "next/navigation"
-import { Select, SelectValue } from "@radix-ui/react-select"
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import router from "next/navigation";
+import { Select, SelectValue } from "@radix-ui/react-select";
 import {
   addDoc,
   collection,
@@ -15,63 +14,59 @@ import {
   serverTimestamp,
   updateDoc,
   where,
-} from "firebase/firestore"
-Drawer
-import { auth, db } from "@/lib/firebase"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+} from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import Drawer from "@/components/Drawer"
-import { Icons } from "@/components/icons"
-import { handleEdit, toggleEditMode, handleRemove } from "../../lib/createPosts"
-import PostIntro from "./../../components/ui-dashboard/PostIntro"
-import { MyDrawer } from './../../components/Drawer';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { Icons } from "@/components/icons";
 
-export default function Dashboard() {
-  const [title, setTitle] = useState("")
-  const [category, setCategory] = useState("")
-  const [content, setContent] = useState("")
-  const [notes, setNotes] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [editModeMap, setEditModeMap] = useState({})
-  const user = auth.currentUser
+import PostIntro from "./../../components/ui-dashboard/PostIntro";
+import { MyDrawer } from "./../../components/Drawer";
+import { updateProfile, getAuth } from "firebase/auth";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { Drawer } from "vaul";
 
-  const fetchNotes = async () => {
-    const notesCollection = collection(db, "notes")
-    const snapshot = await getDocs(notesCollection)
-    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    setNotes(notes)
-  }
+interface Note {
+  userId: string;
+  title: string;
+  category: string;
+  content: string;
+}
+
+export default function Dashboard(): JSX.Element {
+  const [title, setTitle] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({});
+  const user = auth.currentUser;
+
+  const fetchNotes = async (): Promise<void> => {
+    const notesCollection = collection(db, "notes");
+    const snapshot = await getDocs(notesCollection);
+    const notesData: Note[] = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      userId: doc.id,
+    }));
+    setNotes(notesData);
+  };
+
+  const avatar = null;
 
   useEffect(() => {
-    fetchNotes()
-  }, [])
+    fetchNotes();
+  }, []);
 
-  const categories = [
-    { id: "1", name: "Pleio" },
-    { id: "2", name: "Softhouse" },
-    { id: "3", name: "Prive" },
-  ]
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        fetchNotes()
-      }
-      setLoading(false)
-    })
-
-    return () => unsubscribe()
-  }, [])
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     e.preventDefault()
     if (!user) {
       return
@@ -107,6 +102,53 @@ export default function Dashboard() {
     }
   }
 
+  const categories = [
+    { id: "1", name: "Pleio" },
+    { id: "2", name: "Softhouse" },
+    { id: "3", name: "Prive" },
+  ];
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchNotes();
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  const handleForm = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (auth.currentUser) {
+      if (avatar) {
+        const avatarRef = ref(storage, `avatars/${auth.currentUser.uid}`);
+        await uploadBytes(avatarRef, avatar);
+        const downloadURL = await getDownloadURL(avatarRef);
+
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: downloadURL,
+        });
+      } else {
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+      }
+
+      toast({
+        title: "Profile updated!",
+      });
+
+      const updatedUser = getAuth().currentUser;
+      if (updatedUser) {
+        setName(updatedUser.displayName || "");
+        setUserProfilePicture(updatedUser.photoURL as any);
+      }
+      document.dispatchEvent(new CustomEvent("userUpdated"));
+    }
+  };
+
   const form = (
     <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
       <Input
@@ -137,7 +179,7 @@ export default function Dashboard() {
         New post
       </Button>
     </form>
-  )
+  );
 
   return (
     <>
@@ -175,8 +217,7 @@ export default function Dashboard() {
             <MyDrawer content={form} />
           </form>
 
-
-          <div className="pb-2 ">
+          <div className="pb-2">
             {notes.map((note) => (
               <div
                 key={note.userId}
@@ -294,5 +335,5 @@ export default function Dashboard() {
         ))}
       </div>
     </>
-  )
+  );
 }
