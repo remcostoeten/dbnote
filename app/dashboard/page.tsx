@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import router from "next/navigation"
-import { Select, SelectValue } from "@radix-ui/react-select"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Select, SelectValue } from "@radix-ui/react-select";
 import {
   addDoc,
   collection,
@@ -15,97 +15,111 @@ import {
   serverTimestamp,
   updateDoc,
   where,
-} from "firebase/firestore"
-Drawer
-import { auth, db } from "@/lib/firebase"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+} from "firebase/firestore";
+import { auth, db } from "@/lib/firebase";
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import Drawer from "@/components/Drawer"
-import { Icons } from "@/components/icons"
-import { handleEdit, toggleEditMode, handleRemove } from "../../lib/createPosts"
-import PostIntro from "./../../components/ui-dashboard/PostIntro"
-import { MyDrawer } from './../../components/Drawer';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { Icons } from "@/components/icons";
+import PostIntro from "../../components/ui-dashboard/PostIntro";
+import { MyDrawer } from '../../components/Drawer';
+
+interface Category {
+  id: string;
+  name: string;
+}
+
+interface Note {
+  id: string;
+  title: string;
+  userId: string;
+  content: string;
+  category: string;
+  createdAt: firebase.firestore.Timestamp;
+}
 
 export default function Dashboard() {
-  const [title, setTitle] = useState("")
-  const [category, setCategory] = useState("")
-  const [content, setContent] = useState("")
-  const [notes, setNotes] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [editModeMap, setEditModeMap] = useState({})
-  const user = auth.currentUser
+  const [title, setTitle] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({});
+  const user = auth.currentUser;
+  const router = useRouter();
 
   const fetchNotes = async () => {
-    const notesCollection = collection(db, "notes")
-    const snapshot = await getDocs(notesCollection)
-    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    setNotes(notes)
-  }
+    const notesCollection = collection(db, "notes");
+    const snapshot = await getDocs(notesCollection);
+    const notes = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    setNotes(notes);
+  };
 
   useEffect(() => {
-    fetchNotes()
-  }, [])
+    fetchNotes();
+  }, []);
 
-  const categories = [
+  const categories: Category[] = [
     { id: "1", name: "Pleio" },
     { id: "2", name: "Softhouse" },
     { id: "3", name: "Prive" },
-  ]
+  ];
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchNotes()
+        fetchNotes();
       }
-      setLoading(false)
-    })
+      setLoading(false);
+    });
 
-    return () => unsubscribe()
-  }, [])
+    return () => unsubscribe();
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!user) {
-      return
+      return;
     }
 
     try {
-      const newNote = {
+      const newNote: Note = {
         title,
         userId: user.uid,
         content,
         category,
         createdAt: serverTimestamp(),
-      }
+        id: "", // This will be filled with the auto-generated document ID
+      };
 
-      await addDoc(collection(db, "notes"), newNote)
+      const docRef = await addDoc(collection(db, "notes"), newNote);
+      newNote.id = docRef.id;
 
-      setNotes((prevNotes) => [newNote, ...prevNotes])
+      setNotes((prevNotes) => [newNote, ...prevNotes]);
 
-      setCategory("")
-      setTitle("")
-      setContent("")
+      setCategory("");
+      setTitle("");
+      setContent("");
       toast({
         title: "Note created successfully.",
         description: `In the category ${category} with title ${title}`,
-      })
+      });
     } catch (error) {
       toast({
         title: "Something went wrong.",
         description: `Your sign-in request failed. Please try again. ${error}`,
         variant: "destructive",
-      })
-      console.error(error)
+      });
+      console.error(error);
     }
-  }
+  };
 
   const form = (
     <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
@@ -115,13 +129,13 @@ export default function Dashboard() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <Select onValueChange={setCategory} defaultValue={category}>
+      <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
           <SelectValue placeholder="Select a verified email to display" />
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
-            <SelectItem value={category.name}>
+            <SelectItem key={category.id} value={category.name}>
               {category.name}
             </SelectItem>
           ))}
@@ -137,7 +151,19 @@ export default function Dashboard() {
         New post
       </Button>
     </form>
-  )
+  );
+
+  function handleEdit(note: Note): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function toggleEditMode(userId: string): void {
+    throw new Error("Function not implemented.");
+  }
+
+  function handleRemove(userId: string): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -151,13 +177,13 @@ export default function Dashboard() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <Select onValueChange={setCategory} defaultValue={category}>
+            <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>
                 <SelectValue placeholder="Select a verified email to display" />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((category) => (
-                  <SelectItem value={category.name}>
+                  <SelectItem key={category.id} value={category.name}>
                     {category.name}
                   </SelectItem>
                 ))}
@@ -175,11 +201,10 @@ export default function Dashboard() {
             <MyDrawer content={form} />
           </form>
 
-
           <div className="pb-2 ">
             {notes.map((note) => (
               <div
-                key={note.userId}
+                key={note.id}
                 className="divide-y divide-border rounded-md border"
               >
                 <div className="flex  py-4 px-8 content-center flex-col gap-2">
@@ -287,12 +312,12 @@ export default function Dashboard() {
           </div>
         </form>
         {notes.map((note) => (
-          <label key={note.userId} className="flex items-center gap-2">
+          <label key={note.id} className="flex items-center gap-2">
             <input type="checkbox" value={note.title} />
             {note.title}
           </label>
         ))}
       </div>
     </>
-  )
+  );
 }

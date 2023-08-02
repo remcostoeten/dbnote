@@ -13,6 +13,7 @@ import { MobileNav } from "@/components/mobile-nav";
 
 import LogoIconOnly from "../LogoIconOnly";
 import { auth } from "@/lib/firebase";
+
 interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;

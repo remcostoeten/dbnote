@@ -48,7 +48,7 @@
     "app/productivity-tools/page.jsx",
     "app/mark/layoutjsx",
     "components/Google.js",
-    "app/dashboard/page.jsx"
+    "app/dashboard/page.tsx"
   ],
   "exclude": [
     "node_modules"
