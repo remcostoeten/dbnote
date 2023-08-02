@@ -82,7 +82,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 {item.title}
               </Link>
             ))}
-            <NavigationMenuDemo />
+            <NavigationMenuDemo href={""} title={""} />
 
           </nav>
           <span className="flex-end flex-1 flex w-max items-center justify-end">
