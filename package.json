@@ -1,10 +1,10 @@
 {
-  "name": "taxonomy",
-  "version": "0.2.0",
+  "name": "remcostoeten.com",
+  "version": "0.2.5",
   "private": true,
   "author": {
-    "name": "shadcn",
-    "url": "https://twitter.com/shadcn"
+    "name": "remcostoetenn",
+    "url": "https://remcostoeten.com"
   },
   "scripts": {
     "dev": "concurrently \"contentlayer dev\" \"next dev\"",
