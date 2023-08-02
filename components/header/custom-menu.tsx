@@ -3,7 +3,13 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
 import { CaretDownIcon } from '@radix-ui/react-icons';
 
-const NavigationMenuDemo = () => {
+interface ListItemProps {
+    href: string;
+    title: string;
+    className?: string; // Add className to the interface
+}
+
+const NavigationMenuDemo: React.FC<ListItemProps> = ({ href, title }) => {
     return (
         <NavigationMenu.Root className="relative z-[1] flex w-screen">
             <NavigationMenu.List className="center shadow-blackA7 m-0 flex list-none rounded-[6px]  p-1 shadow-[0_2px_10px]">
@@ -105,22 +111,24 @@ const NavigationMenuDemo = () => {
     );
 };
 
-const ListItem = React.forwardRef(({ className, children, title, ...props }, forwardedRef) => (
-    <li>
-        <NavigationMenu.Link asChild>
-            <a
-                className={classNames(
-                    'focus:shadow-[0_0_0_2px] focus:shadow-violet7 hover:bg-mauve3 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors',
-                    className
-                )}
-                {...props}
-                ref={forwardedRef}
-            >
-                <div className="text-violet12 mb-[5px] font-medium leading-[1.2]">{title}</div>
-                <p className="text-mauve11 leading-[1.4]">{children}</p>
-            </a>
-        </NavigationMenu.Link>
-    </li>
-));
+const ListItem = React.forwardRef<HTMLLIElement, React.PropsWithChildren<ListItemProps>>(
+    ({ className, children, title, ...props }, forwardedRef) => (
+        <li>
+            <NavigationMenu.Link asChild>
+                <a
+                    className={classNames(
+                        'focus:shadow-[0_0_0_2px] focus:shadow-violet7 hover:bg-mauve3 block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors',
+                        className
+                    )}
+                    {...props}
+                    ref={forwardedRef as React.Ref<HTMLAnchorElement>}
+                >
+                    <div className="text-violet12 mb-[5px] font-medium leading-[1.2]">{title}</div>
+                    <p className="text-mauve11 leading-[1.4]">{children}</p>
+                </a>
+            </NavigationMenu.Link>
+        </li>
+    )
+);
 
 export default NavigationMenuDemo;
