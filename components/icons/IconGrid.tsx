@@ -1,6 +1,10 @@
 import JiraIcon from "@/components/icons/jira";
 
-export default function IconGrid({ svg }: { svg: JSX.Element }) {
+interface IconGridProps {
+    svg?: JSX.Element
+}
+
+export default function IconGrid({ svg }: { svg?: JSX.Element }) {
     return (
         <section
             id="features"

@@ -27,6 +27,7 @@ import {
 } from "lucide-react"
 
 export type Icon = LucideIcon
+
 export const Icons = {
   logo: Command,
   close: X,
@@ -69,3 +70,5 @@ export const Icons = {
   twitter: Twitter,
   check: Check,
 }
+
+export { }
