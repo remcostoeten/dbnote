@@ -1,4 +1,3 @@
-import JiraIcon from "@/components/icons/jira";
 
 interface IconGridProps {
     svg?: JSX.Element
