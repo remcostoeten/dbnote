@@ -13,6 +13,7 @@ import { MobileNav } from "@/components/mobile-nav";
 
 import LogoIconOnly from "../LogoIconOnly";
 import { auth } from "@/lib/firebase";
+import NavigationMenuDemo from "./custom-menu";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -81,6 +82,8 @@ export function MainNav({ items, children }: MainNavProps) {
                 {item.title}
               </Link>
             ))}
+            <NavigationMenuDemo />
+
           </nav>
           <span className="flex-end flex-1 flex w-max items-center justify-end">
             {userProfilePicture && (

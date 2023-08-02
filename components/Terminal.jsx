@@ -23,13 +23,7 @@ export default function Terminal({ title, computer, paragraph }) {
     setFilteredText(newText)
   }, [character])
 
-  const handleInputFocus = () => {
-    setInputFocused(true)
-  }
 
-  const handleInputBlur = () => {
-    setInputFocused(false)
-  }
   return (
     <>
       <CursorProvider>

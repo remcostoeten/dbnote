@@ -1,10 +1,10 @@
 {
-  "name": "taxonomy",
-  "version": "0.2.0",
+  "name": "remcostoeten.com",
+  "version": "0.2.5",
   "private": true,
   "author": {
-    "name": "shadcn",
-    "url": "https://twitter.com/shadcn"
+    "name": "remcostoetenn",
+    "url": "https://remcostoeten.com"
   },
   "scripts": {
     "dev": "concurrently \"contentlayer dev\" \"next dev\"",
@@ -67,6 +67,7 @@
     "@vercel/analytics": "^1.0.0",
     "@vercel/og": "^0.0.21",
     "class-variance-authority": "^0.4.0",
+    "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "cmdk": "^0.1.22",
     "concurrently": "^8.0.1",

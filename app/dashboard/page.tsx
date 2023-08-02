@@ -24,67 +24,54 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
-import { Icons } from "@/components/icons";
-import PostIntro from "../../components/ui-dashboard/PostIntro";
-import { MyDrawer } from '../../components/Drawer';
-
-interface Category {
-  id: string;
-  name: string;
-}
-
-interface Note {
-  id: string;
-  title: string;
-  userId: string;
-  content: string;
-  category: string;
-  createdAt: firebase.firestore.Timestamp;
-}
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
+import Drawer from "@/components/Drawer"
+import { Icons } from "@/components/icons"
+import { handleEdit, toggleEditMode, handleRemove } from "../../lib/createPosts"
+import PostIntro from "./../../components/ui-dashboard/PostIntro"
+import { MyDrawer } from './../../components/Drawer';
 
 export default function Dashboard() {
-  const [title, setTitle] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const [notes, setNotes] = useState<Note[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({});
-  const user = auth.currentUser;
-  const router = useRouter();
+  const [title, setTitle] = useState("")
+  const [category, setCategory] = useState("")
+  const [content, setContent] = useState("")
+  const [notes, setNotes] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [editModeMap, setEditModeMap] = useState({})
+  const user = auth.currentUser
 
   const fetchNotes = async () => {
-    const notesCollection = collection(db, "notes");
-    const snapshot = await getDocs(notesCollection);
-    const notes = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    setNotes(notes);
-  };
+    const notesCollection = collection(db, "notes")
+    const snapshot = await getDocs(notesCollection)
+    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    setNotes(notes)
+  }
 
   useEffect(() => {
-    fetchNotes();
-  }, []);
+    fetchNotes()
+  }, [])
 
-  const categories: Category[] = [
+  const categories = [
     { id: "1", name: "Pleio" },
     { id: "2", name: "Softhouse" },
     { id: "3", name: "Prive" },
-  ];
+  ]
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchNotes();
+        fetchNotes()
       }
-      setLoading(false);
-    });
+      setLoading(false)
+    })
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     if (!user) {
       return;
     }
@@ -119,7 +106,7 @@ export default function Dashboard() {
       });
       console.error(error);
     }
-  };
+  }
 
   const form = (
     <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
@@ -151,19 +138,7 @@ export default function Dashboard() {
         New post
       </Button>
     </form>
-  );
-
-  function handleEdit(note: Note): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function toggleEditMode(userId: string): void {
-    throw new Error("Function not implemented.");
-  }
-
-  function handleRemove(userId: string): void {
-    throw new Error("Function not implemented.");
-  }
+  )
 
   return (
     <>
@@ -200,6 +175,7 @@ export default function Dashboard() {
             </Button>
             <MyDrawer content={form} />
           </form>
+
 
           <div className="pb-2 ">
             {notes.map((note) => (

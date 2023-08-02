@@ -3,13 +3,9 @@
 import React, { useEffect, useState } from "react"
 import { CopyIcon, TrashIcon } from "@radix-ui/react-icons"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Terminal from "@/components/terminal"
 
-export default function MyComponent() {
+export default function Extract() {
   const [text, setText] = useState("")
   const [character, setCharacter] = useState("")
   const [numUrlsToCopy, setNumUrlsToCopy] = useState(50)
@@ -30,14 +26,6 @@ export default function MyComponent() {
     setText(newText)
     displayToast(`${lines.length - uniqueLines.length} duplicates removed`)
     setRemoveDuplicates(true)
-  }
-
-  const increeaseNumUrlsToCopy = () => {
-    setNumUrlsToCopy(numUrlsToCopy + 1)
-  }
-
-  const decreeaseNumUrlsToCopy = () => {
-    setNumUrlsToCopy(numUrlsToCopy - 1)
   }
 
   useEffect(() => {
@@ -156,9 +144,8 @@ export default function MyComponent() {
           </div>{" "}
           <textarea
             spellCheck="false"
-            className={`absolute custom w-[90%] border-0  -top-[30px] focus:bg-gray-800 ${
-              hasText ? "bg-gray-800" : "bg-transparent"
-            }`}
+            className={`absolute custom w-[90%] border-0  -top-[30px] focus:bg-gray-800 ${hasText ? "bg-gray-800" : "bg-transparent"
+              }`}
             value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
