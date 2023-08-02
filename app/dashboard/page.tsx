@@ -1,8 +1,7 @@
 "use client"
-
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router"; // corrected import name
 import { Select, SelectValue } from "@radix-ui/react-select";
 import {
   addDoc,
@@ -24,54 +23,92 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import Drawer from "@/components/Drawer"
-import { Icons } from "@/components/icons"
-import { handleEdit, toggleEditMode, handleRemove } from "../../lib/createPosts"
-import PostIntro from "./../../components/ui-dashboard/PostIntro"
-import { MyDrawer } from './../../components/Drawer';
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import PostIntro from "../../components/ui-dashboard/PostIntro"; // corrected import path
+import { MyDrawer } from "../../components/Drawer"; // corrected import path
+import { Icons } from "@/components/icons";
+
+interface Note {
+  id: string;
+  title: string;
+  userId: string;
+  content: string;
+  category: string;
+  createdAt: any; // You might want to use the correct type for serverTimestamp()
+}
 
 export default function Dashboard() {
-  const [title, setTitle] = useState("")
-  const [category, setCategory] = useState("")
-  const [content, setContent] = useState("")
-  const [notes, setNotes] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [editModeMap, setEditModeMap] = useState({})
-  const user = auth.currentUser
+  const [title, setTitle] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({});
+  const user = auth?.currentUser;
 
   const fetchNotes = async () => {
-    const notesCollection = collection(db, "notes")
-    const snapshot = await getDocs(notesCollection)
-    const notes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    setNotes(notes)
-  }
+    const notesCollection = collection(db, "notes");
+    const snapshot = await getDocs(notesCollection);
+    const notesData = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    })) as Note[]; // Added type assertion
+    setNotes(notesData);
+  };
 
   useEffect(() => {
-    fetchNotes()
-  }, [])
+    fetchNotes();
+  }, []);
 
   const categories = [
     { id: "1", name: "Pleio" },
     { id: "2", name: "Softhouse" },
     { id: "3", name: "Prive" },
-  ]
+  ];
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        fetchNotes()
+        fetchNotes();
       }
-      setLoading(false)
-    })
+      setLoading(false);
+    });
 
-    return () => unsubscribe()
-  }, [])
+    return () => unsubscribe();
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const toggleEditMode = (id: string | number) => {
+    setEditModeMap((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const handleEdit = async (data: Note) => {
+    try {
+      await updateDoc(doc(db, "datas", data.id), {
+        title: data.title,
+        content: data.content,
+      });
+
+      toggleEditMode(data.id);
+
+      toast({
+        title: "data updated successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Couldn't update data.",
+        variant: "destructive",
+      });
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!user) {
       return;
     }
@@ -83,14 +120,13 @@ export default function Dashboard() {
         content,
         category,
         createdAt: serverTimestamp(),
-        id: "", // This will be filled with the auto-generated document ID
+        id: "",
       };
 
       const docRef = await addDoc(collection(db, "notes"), newNote);
       newNote.id = docRef.id;
 
-      setNotes((prevNotes) => [newNote, ...prevNotes]);
-
+      setNotes((prevNotes: Note[]) => [newNote, ...prevNotes]);
       setCategory("");
       setTitle("");
       setContent("");
@@ -106,7 +142,24 @@ export default function Dashboard() {
       });
       console.error(error);
     }
-  }
+  };
+
+  const handleRemove = async (userId: string) => {
+    try {
+      await deleteDoc(doc(db, "notes", userId));
+      toast({
+        title: "Note deleted successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Couldn't delete note.",
+        variant: "destructive",
+      });
+      console.error(error);
+    }
+  };
+
+
 
   const form = (
     <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
@@ -134,7 +187,7 @@ export default function Dashboard() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <Button onClick={handleSubmit} className="inline-flex w-fit">
+      <Button onClick={(e) => { e.preventDefault(); handleSubmit(e); }} className="inline-flex w-fit">
         New post
       </Button>
     </form>
