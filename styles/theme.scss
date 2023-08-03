@@ -30,20 +30,6 @@
       z-index: -2;
       filter: invert(1);
     }
-
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABJQTFRFMLJ/9fz6z/Dg////N7WE2PPlI1+DXwAAACNJREFUeJxjYFTCDhQZTIyxAxOGYBwyxqMyozKjMqMyQ1sGAGB//T4IpyOHAAAAAElFTkSuQmCC")
-        repeat 0 0;
-      animation-timing-function: linear;
-      z-index: -2;
-      opacity: 0;
-      filter: invert(1);
-    }
   }
 }
 
@@ -53,7 +39,13 @@
   }
 
   100% {
-    transform: translateY(200%);
+    transform: translateY(0%);
+  }
+}
+
+.custom-icons {
+  svg {
+    filter: grayscale(100%);
   }
 }
 

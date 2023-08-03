@@ -99,8 +99,8 @@ export function MainNav({ items, children }: MainNavProps) {
                 Logout
               </button>
             ) : (
-              <Link href="https://github.com/remcostoeten" target="_blank">
-                Github
+              <Link href="login">
+                Login
               </Link>
             )}
           </span>

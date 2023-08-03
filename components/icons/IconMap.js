@@ -1,8 +1,8 @@
+import React from "react"
+
 import { AdobeIcon } from "./AdobeIcon"
 import { BootstrapIcon } from "./BootstrapIcon"
 import { CssIcon } from "./CssIcon"
-import { Es6 } from "./Es6"
-import { FirebaseLogo } from "./FirebaseLogo"
 import { GitICon } from "./GitICon"
 import { Gitlab } from "./Gitlab"
 import { HtmlIcon } from "./HtmlIcon"
@@ -22,40 +22,62 @@ import { TypescriptIcon } from "./TypescriptIcon"
 import { Vim } from "./Vim"
 import { Vue } from "./Vue"
 
-const iconMapper = {
-  adobe: <AdobeIcon />,
-  bootstrap: <BootstrapIcon />,
-  css: <CssIcon />,
-  es6: <Es6 />,
-  firebase: <FirebaseLogo />,
-  git: <GitICon />,
-  gitlab: <Gitlab />,
-  html: <HtmlIcon />,
-  jira: <JiraIcon />,
-  linkedin: <LinkedIn />,
-  magento: <Magento />,
-  mui: <Mui />,
-  next: <Next />,
-  npm: <NpmIcon />,
-  photoshop: <Photoshop />,
-  react: <ReactIcon />,
-  sass: <Sass />,
-  sketch: <Sketch />,
-  styled: <StyledComponentIcon />,
-  tailwind: <TailwindIcon />,
-  typescript: <TypescriptIcon />,
-  vim: <Vim />,
-  vue: <Vue />,
-}
+export default function IconMap() {
+  const iconMapper = {
+    adobe: <AdobeIcon />,
+    bootstrap: <BootstrapIcon />,
+    css: <CssIcon />,
+    git: <GitICon />,
+    gitlab: <Gitlab />,
+    html: <HtmlIcon />,
+    jira: <JiraIcon />,
+    linkedin: <LinkedIn />,
+    magento: <Magento />,
+    mui: <Mui />,
+    next: <Next />,
+    npm: <NpmIcon />,
+    photoshop: <Photoshop />,
+    react: <ReactIcon />,
+    sass: <Sass />,
+    sketch: <Sketch />,
+    styled: <StyledComponentIcon />,
+    tailwind: <TailwindIcon />,
+    typescript: <TypescriptIcon />,
+    vim: <Vim />,
+    vue: <Vue />,
+  }
 
-export default function IconMap({ icon, title, description }) {
+  const iconsToShow = [
+    "adobe",
+    "bootstrap",
+    "css",
+    "git",
+    "gitlab",
+    "html",
+    "jira",
+    "linkedin",
+    "magento",
+    "mui",
+    "next",
+    "npm",
+    "photoshop",
+    "react",
+    "sass",
+    "sketch",
+    "styled",
+    "tailwind",
+    "typescript",
+    "vim",
+    "vue",
+  ]
+
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="flex items-center justify-center w-16 h-16 mb-4 bg-white rounded-full shadow-md">
-        {iconMapper[icon]}
-      </div>
-      <h3 className="mb-2 text-lg font-semibold text-center">{title}</h3>
-      <p className="text-sm text-center">{description}</p>
+    <div className="grid grid-cols-4 gap-4">
+      {iconsToShow.map((icon) => (
+        <div key={icon} className="flex justify-center items-center">
+          {iconMapper[icon]}
+        </div>
+      ))}
     </div>
   )
 }

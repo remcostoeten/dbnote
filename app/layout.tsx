@@ -12,12 +12,11 @@ import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-
+import Cursor from "@/components/Cursor"
 import Greeting from "./../components/Greeting"
 import { MainNav } from "@/components/header/navigation-items"
 import { marketingConfig } from "@/config/marketing"
 import Link from "next/link"
-
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -91,23 +90,26 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="page-wrapper">
-            <div className="page-wrapper__inner">
-              <>
-                <header className="container z-40 ">
-                  <div className="flex h-20 items-center justify-between py-6">
-                    <MainNav items={marketingConfig.mainNav} />
-                  </div>
-                </header>
-                {children}
-              </>
+        <CursorProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Cursor />
+            <div className="page-wrapper">
+              <div className="page-wrapper__inner">
+                <>
+                  <header className="container z-40 ">
+                    <div className="flex h-20 items-center justify-between py-6">
+                      <MainNav items={marketingConfig.mainNav} hidecircel="true" />
+                    </div>
+                  </header>
+                  {children}
+                </>
+              </div>
             </div>
-          </div>
-          <Analytics />
-          <Toaster />
-          <TailwindIndicator />
-        </ThemeProvider>
+            <Analytics />
+            <Toaster />
+            <TailwindIndicator />
+          </ThemeProvider>
+        </CursorProvider>
       </body>
     </html>
   )
