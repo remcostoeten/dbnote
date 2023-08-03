@@ -2,27 +2,21 @@ import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
 import "@/styles/globals.scss"
-import { AuthProvider } from "@/AuthContext"
-import { GoogleAuthProvider } from "firebase/auth"
-import { CursorProvider } from "@/lib/CursorContext"
-
+import { marketingConfig } from "@/config/marketing"
 import { siteConfig } from "@/config/site"
-import { absoluteUrl, cn } from "@/lib/utils"
+import { CursorProvider } from "@/lib/CursorContext"
 import { Toaster } from "@/components/ui/toaster"
+import Cursor from "@/components/Cursor"
 import { Analytics } from "@/components/analytics"
+import { MainNav } from "@/components/header/navigation-items"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import Cursor from "@/components/Cursor"
-import Greeting from "./../components/Greeting"
-import { MainNav } from "@/components/header/navigation-items"
-import { marketingConfig } from "@/config/marketing"
-import Link from "next/link"
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
-// Font files can be colocated inside of `pages`
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
@@ -30,6 +24,7 @@ const fontHeading = localFont({
 
 interface RootLayoutProps {
   children: React.ReactNode
+  hidecircel?: string
 }
 
 export const metadata = {
@@ -44,6 +39,7 @@ export const metadata = {
     "Tailwind CSS",
     "Server Components",
     "Radix UI",
+    "Firebase",
   ],
   authors: [
     {
@@ -83,26 +79,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-          fontHeading.variable
-        )}
-      >
+      <body className="min-h-screen bg-background font-sans antialiased">
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Cursor />
             <div className="page-wrapper">
               <div className="page-wrapper__inner">
-                <>
-                  <header className="container z-40 ">
-                    <div className="flex h-20 items-center justify-between py-6">
-                      <MainNav items={marketingConfig.mainNav} hidecircel="true" />
-                    </div>
-                  </header>
-                  {children}
-                </>
+                <header className="container z-40 ">
+                  <div className="flex h-20 items-center justify-between py-6">
+                    <MainNav
+                      items={marketingConfig.mainNav}
+                      hidecircel="true"
+                    />
+                  </div>
+                </header>
+                {children}
               </div>
             </div>
             <Analytics />

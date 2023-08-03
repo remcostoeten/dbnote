@@ -1,60 +1,63 @@
-'use client'
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
-import { getAuth } from "firebase/auth";
+"use client"
 
-import { MainNavItem } from "types";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
-import { toast } from "@/components/ui/use-toast";
-import { Icons } from "@/components/icons";
-import { MobileNav } from "@/components/mobile-nav";
+import React, { useEffect, useState } from "react"
+import Link from "next/link"
+import { useSelectedLayoutSegment } from "next/navigation"
+import { getAuth } from "firebase/auth"
 
-import LogoIconOnly from "../LogoIconOnly";
-import { auth } from "@/lib/firebase";
-import CustomMenu from "./custom-menu";
+import { MainNavItem } from "types"
+import { siteConfig } from "@/config/site"
+import { auth } from "@/lib/firebase"
+import { cn } from "@/lib/utils"
+import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/icons"
+import { MobileNav } from "@/components/mobile-nav"
+
+import LogoIconOnly from "../LogoIconOnly"
+import CustomMenu from "./custom-menu"
 
 interface MainNavProps {
-  items?: MainNavItem[];
-  children?: React.ReactNode;
+  items?: MainNavItem[]
+  children?: React.ReactNode
+  hidecircel?: string
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment();
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(null);
+  const segment = useSelectedLayoutSegment()
+  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
+  const [userEmail, setUserEmail] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(
+    null
+  )
 
-  const signOut = async () => {
-  };
+  const signOut = async () => {}
 
   const fetchUserProfilePicture = async () => {
     if (auth.currentUser) {
-      const photoURL = auth.currentUser.photoURL;
-      setUserProfilePicture(photoURL);
+      const photoURL = auth.currentUser.photoURL
+      setUserProfilePicture(photoURL)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchUserProfilePicture();
-  }, []);
+    fetchUserProfilePicture()
+  }, [])
 
   useEffect(() => {
     async function checkLoggedInStatus() {
-      const user = auth.currentUser;
+      const user = auth.currentUser
       if (user) {
-        setUserEmail(stripDomainFromEmail(user.email) || "User");
-        setIsLoggedIn(true);
+        setUserEmail(stripDomainFromEmail(user.email) || "User")
+        setIsLoggedIn(true)
       } else {
-        setUserEmail("");
-        setIsLoggedIn(false);
+        setUserEmail("")
+        setIsLoggedIn(false)
       }
     }
 
-    checkLoggedInStatus();
-  }, []);
+    checkLoggedInStatus()
+  }, [])
 
   return (
     <div className="flex w-full gap-6 md:gap-10">
@@ -83,7 +86,6 @@ export function MainNav({ items, children }: MainNavProps) {
               </Link>
             ))}
             <CustomMenu />
-
           </nav>
           <span className="flex-end flex-1 flex w-max items-center justify-end">
             {userProfilePicture && (
@@ -99,9 +101,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 Logout
               </button>
             ) : (
-              <Link href="login">
-                Login
-              </Link>
+              <Link href="login">Login</Link>
             )}
           </span>
         </>
@@ -117,8 +117,10 @@ export function MainNav({ items, children }: MainNavProps) {
         <MobileNav items={items}>{children}</MobileNav>
       )}
     </div>
-  );
+  )
 }
-function stripDomainFromEmail(email: string | null): React.SetStateAction<string> {
-  throw new Error("Function not implemented.");
+function stripDomainFromEmail(
+  email: string | null
+): React.SetStateAction<string> {
+  throw new Error("Function not implemented.")
 }
