@@ -7,9 +7,7 @@ import { GitICon } from "./GitICon"
 import { Gitlab } from "./Gitlab"
 import { HtmlIcon } from "./HtmlIcon"
 import { JiraIcon } from "./JiraIcon"
-import { Link } from "./Link"
 import { LinkedIn } from "./LinkedIn"
-import { Logo } from "./Logo"
 import { Magento } from "./Magento"
 import { Mui } from "./Mui"
 import { Next } from "./Next"
@@ -20,38 +18,44 @@ import { Sass } from "./Sass"
 import { Sketch } from "./Sketch"
 import { StyledComponentIcon } from "./StyledComponentIcon"
 import { TailwindIcon } from "./TailwindIcon"
-import { Trash } from "./Trash"
 import { TypescriptIcon } from "./TypescriptIcon"
 import { Vim } from "./Vim"
 import { Vue } from "./Vue"
 
-const IconMap = [
-  AdobeIcon,
-  BootstrapIcon,
-  CssIcon,
-  Es6,
-  FirebaseLogo,
-  GitICon,
-  Gitlab,
-  HtmlIcon,
-  JiraIcon,
-  Link,
-  LinkedIn,
-  Logo,
-  Magento,
-  Mui,
-  Next,
-  NpmIcon,
-  Photoshop,
-  ReactIcon,
-  Sass,
-  Sketch,
-  StyledComponentIcon,
-  TailwindIcon,
-  Trash,
-  TypescriptIcon,
-  Vim,
-  Vue,
-]
+const iconMapper = {
+  adobe: <AdobeIcon />,
+  bootstrap: <BootstrapIcon />,
+  css: <CssIcon />,
+  es6: <Es6 />,
+  firebase: <FirebaseLogo />,
+  git: <GitICon />,
+  gitlab: <Gitlab />,
+  html: <HtmlIcon />,
+  jira: <JiraIcon />,
+  linkedin: <LinkedIn />,
+  magento: <Magento />,
+  mui: <Mui />,
+  next: <Next />,
+  npm: <NpmIcon />,
+  photoshop: <Photoshop />,
+  react: <ReactIcon />,
+  sass: <Sass />,
+  sketch: <Sketch />,
+  styled: <StyledComponentIcon />,
+  tailwind: <TailwindIcon />,
+  typescript: <TypescriptIcon />,
+  vim: <Vim />,
+  vue: <Vue />,
+}
 
-export default IconMap
+export default function IconMap({ icon, title, description }) {
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex items-center justify-center w-16 h-16 mb-4 bg-white rounded-full shadow-md">
+        {iconMapper[icon]}
+      </div>
+      <h3 className="mb-2 text-lg font-semibold text-center">{title}</h3>
+      <p className="text-sm text-center">{description}</p>
+    </div>
+  )
+}

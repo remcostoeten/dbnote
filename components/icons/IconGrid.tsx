@@ -1,9 +1,7 @@
+import { title } from 'process';
+import IconMap from './IconMap';
 
-interface IconGridProps {
-    svg?: JSX.Element
-}
-
-export default function IconGrid({ svg }: { svg?: JSX.Element }) {
+export default function IconGrid() {
     return (
         <section
             id="features"
@@ -20,24 +18,15 @@ export default function IconGrid({ svg }: { svg?: JSX.Element }) {
                 </p>
             </div>
             <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
-                <div className="relative overflow-hidden rounded-lg border bg-background p-2">
-                    <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-                        {svg}
-                        <div className="space-y-2">
-                            <h3 className="font-bold">Next.js 13</h3>
-                            <p className="text-sm text-muted-foreground">
-                                App dir, Routing, Layouts, Loading UI and API routes.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+
+                {IconMap.map(({ icon }) => (
+                ))}
             </div>
             <div className="mx-auto text-center md:max-w-[58rem]">
                 <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                    Taxonomy also includes a blog and a full-featured documentation site
-                    built using Contentlayer and MDX.
+                    Taxonomy also includes a blog and a full-featured documentation site built using Contentlayer and MDX.
                 </p>
             </div>
         </section>
-    )
+    );
 }
