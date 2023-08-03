@@ -77,20 +77,23 @@
   }
 }
 
-body{
-
-&::after {
-	content: "";
-	width: 500vw;
-	height: 200vh;
-	background: linear-gradient(313deg, rgba(255, 255, 255, 0) 0%, rgb(3, 7, 17) 24%);
-	animation: bodyLinear 10s infinite;
-	border-radius: 50%;
-	position: absolute;
-	bottom: -233px;
-	right: -1133px;
-	z-index: -1;
-}
+body {
+  &::after {
+    content: "";
+    width: 500vw;
+    height: 200vh;
+    background: linear-gradient(
+      239deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(148, 187, 233, 0) 100%
+    );
+    animation: bodyLinear 10s infinite;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    right: -1133px;
+    z-index: -1;
+  }
 
   @keyframes gradient {
     0% {
