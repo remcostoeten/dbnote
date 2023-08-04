@@ -50,7 +50,7 @@
     "components/Google.js",
     "app/dashboard/page.tsx",
     "components/icons.tsx",
-    "components/icons/IconGrid.jsx"
+    "components/icons/IconGrid.tsx"
   ],
   "exclude": [
     "node_modules"

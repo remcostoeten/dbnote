@@ -82,6 +82,7 @@ export default function Cursor() {
           transition: "scale 1s cubic-bezier(.33,.98,0,0.84), opacity 0.5s",
           position: "fixed",
           zIndex: 9999,
+          pointerEvents: "none",
           transform: `translate3d(${position.x - (linkHovered ? 0 : 0)}px, ${
             position.y - (linkHovered ? 0 : 0)
           }px, 0)`,
