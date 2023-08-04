@@ -45,7 +45,6 @@ export default function Dashboard() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // Fetch facebook from the "Pleio" category
         fetchfacebook(user, "Pleio")
       } else {
         router.push("/login")
@@ -176,39 +175,39 @@ export default function Dashboard() {
     <>
       <div className="mx-auto w-3/6 mt-4 max-w-3xl">
         <div className="grid items-start gap-8">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">Facebook</h1>
-              <p className="text-lg text-muted-foreground">Friendlist D.</p>
-            </div>
-            Welcome {username?.email}
-            <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <Textarea
-                placeholder="List"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
+          <div className="grid gap-1">
+            <h1 className="font-heading text-3xl md:text-4xl">Facebook</h1>
+            <p className="text-lg text-muted-foreground">Friendlist D.</p>
+          </div>
+          Welcome {username?.email}
+          <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Textarea
+              placeholder="List"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
 
-              <Button
-                className={cn(
-                  buttonVariants({
-                    variant: "primary",
-                    color: "primary",
-                    size: "md",
-                  })
-                )}
-                onClick={handleSubmit}
-                type="submit"
-              >
-                New post
-              </Button>
-            </form>
-         
+            <Button
+              className={cn(
+                buttonVariants({
+                  variant: "primary",
+                  color: "primary",
+                  size: "md",
+                })
+              )}
+              onClick={handleSubmit}
+              type="submit"
+            >
+              New post
+            </Button>
+          </form>
+
           <div>
             {facebook.map((note) => (
               <div

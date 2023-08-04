@@ -31,7 +31,7 @@ export function MainNav({ items, children }: MainNavProps) {
     null
   )
 
-  const signOut = async () => {}
+  const signOut = async () => { }
 
   const fetchUserProfilePicture = async () => {
     if (auth.currentUser) {
@@ -101,11 +101,22 @@ export function MainNav({ items, children }: MainNavProps) {
                 Logout
               </button>
             ) : (
-              <Link href="login">Login</Link>
+              <Link aria-label='Register' className='h-button ' data-text='Login' href='#'>
+                <span>R</span>
+                <span>e</span>
+                <span>g</span>
+                <span>i</span>
+                <span>s</span>
+                <span>t</span>
+                <span>e</span>
+                <span>r</span>
+              </Link>
+
             )}
           </span>
         </>
-      ) : null}
+      ) : null
+      }
       <button
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -113,10 +124,12 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
         <span className="font-bold">Menu</span>
       </button>
-      {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
-      )}
-    </div>
+      {
+        showMobileMenu && items && (
+          <MobileNav items={items}>{children}</MobileNav>
+        )
+      }
+    </div >
   )
 }
 function stripDomainFromEmail(
