@@ -49,7 +49,8 @@
     "app/mark/layoutjsx",
     "components/Google.js",
     "app/dashboard/page.tsx",
-    "components/icons.tsx"
+    "components/icons.tsx",
+    "components/icons/IconGrid.jsx"
   ],
   "exclude": [
     "node_modules"
