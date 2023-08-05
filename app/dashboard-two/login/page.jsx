@@ -17,17 +17,24 @@ import { toast } from "@/components/ui/use-toast"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
 
-export default function L() {
+export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [rememberEmail, setRememberEmail] = useState(false)
   const user = auth.currentUser
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setEmail(localStorage.getItem("email") || "")
+      setRememberEmail(!!localStorage.getItem("email"))
+    }
+  }, [])
 
   const handleClick = async (e) => {
     e.preventDefault()
 
     setIsLoading(true)
-
     // Set persistence to Local (default setting)
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -35,7 +42,6 @@ export default function L() {
         return signInWithEmailAndPassword(auth, email, password)
       })
       .then((userCredential) => {
-        // User successfully logged in
         toast({
           title: "Login successful.",
           description: "You have successfully signed in.",
@@ -46,6 +52,11 @@ export default function L() {
 
         const user = userCredential.user
         console.log(`User ${user.email} logged in.`)
+        if (rememberEmail) {
+          localStorage.setItem("email", email)
+        } else {
+          localStorage.removeItem("email")
+        }
       })
       .catch((error) => {
         console.error(error)
@@ -77,6 +88,12 @@ export default function L() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
+          <input
+            type="checkbox"
+            checked={rememberEmail}
+            onChange={(e) => setRememberEmail(e.target.checked)}
+          />
+          <label>Remember Email</label>
         </div>
         <button onClick={handleClick} disabled={isLoading}>
           {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}

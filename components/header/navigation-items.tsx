@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
-import { getAuth } from "firebase/auth"
+import { onAuthStateChanged } from "firebase/auth"
 
 import { MainNavItem } from "types"
 import { siteConfig } from "@/config/site"
@@ -23,7 +22,6 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
   const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -31,7 +29,32 @@ export function MainNav({ items, children }: MainNavProps) {
     null
   )
 
-  const signOut = async () => { }
+  const signOut = async () => {
+    await auth.signOut()
+    setIsLoggedIn(false)
+    setUserEmail("")
+    toast({
+      title: "Goodbye " + userEmail,
+    })
+  }
+
+  const deleteAccount = async () => {
+    if (auth.currentUser) {
+      try {
+        await auth.currentUser.delete()
+        setIsLoggedIn(false)
+        setUserEmail("")
+        toast({
+          title: "Your account has been deleted",
+        })
+      } catch (error) {
+        toast({
+          title:
+            "An error occurred while deleting your account. You may need to sign in again.",
+        })
+      }
+    }
+  }
 
   const fetchUserProfilePicture = async () => {
     if (auth.currentUser) {
@@ -45,8 +68,7 @@ export function MainNav({ items, children }: MainNavProps) {
   }, [])
 
   useEffect(() => {
-    async function checkLoggedInStatus() {
-      const user = auth.currentUser
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserEmail(stripDomainFromEmail(user.email) || "User")
         setIsLoggedIn(true)
@@ -54,10 +76,17 @@ export function MainNav({ items, children }: MainNavProps) {
         setUserEmail("")
         setIsLoggedIn(false)
       }
-    }
+    })
 
-    checkLoggedInStatus()
+    return () => unsubscribe()
   }, [])
+
+  function stripDomainFromEmail(email: string | null): string {
+    if (email && email.includes("@")) {
+      return email.split("@")[0]
+    }
+    return email || ""
+  }
 
   return (
     <div className="flex w-full gap-6 md:gap-10">
@@ -76,9 +105,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 href={item.disabled ? "#" : item.href}
                 className={cn(
                   "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                  item.href.startsWith(`/${segment}`)
-                    ? "text-foreground"
-                    : "text-foreground/60",
+                  "text-foreground/60",
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
               >
@@ -97,11 +124,29 @@ export function MainNav({ items, children }: MainNavProps) {
             )}
 
             {isLoggedIn ? (
-              <button className="cursor-pointer" onClick={signOut}>
-                Logout
-              </button>
+              <>
+                <span
+                  aria-label="Sign out"
+                  className="h-button signout"
+                  data-text="Sign out"
+                  onClick={signOut}
+                >
+                  <span>B</span>
+                  <span>y</span>
+                  <span>e</span>
+                  <span>b</span>
+                  <span>y</span>
+                  <span>e</span>
+                  <span>!</span>
+                </span>
+              </>
             ) : (
-              <Link aria-label='Register' className='h-button ' data-text='Login' href='#'>
+              <Link
+                aria-label="Register"
+                className="h-button "
+                data-text="Login"
+                href="/login"
+              >
                 <span>R</span>
                 <span>e</span>
                 <span>g</span>
@@ -111,12 +156,11 @@ export function MainNav({ items, children }: MainNavProps) {
                 <span>e</span>
                 <span>r</span>
               </Link>
-
             )}
           </span>
         </>
-      ) : null
-      }
+      ) : null}
+
       <button
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -124,16 +168,9 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
         <span className="font-bold">Menu</span>
       </button>
-      {
-        showMobileMenu && items && (
-          <MobileNav items={items}>{children}</MobileNav>
-        )
-      }
-    </div >
+      {showMobileMenu && items && (
+        <MobileNav items={items}>{children}</MobileNav>
+      )}
+    </div>
   )
-}
-function stripDomainFromEmail(
-  email: string | null
-): React.SetStateAction<string> {
-  throw new Error("Function not implemented.")
 }

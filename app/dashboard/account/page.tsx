@@ -6,6 +6,7 @@ import { getAuth, updateProfile } from "firebase/auth"
 
 import { toast } from "@/components/ui/use-toast"
 import ChangeUsername from "@/components/account/ChangeUsername"
+import DeleteAccount from "@/components/ui-dashboard/DeleteAccount"
 
 export default function UpdateNamePage() {
   const [name, setName] = useState("")
@@ -43,6 +44,7 @@ export default function UpdateNamePage() {
               title="Update Name"
               label="Name"
             />
+            <DeleteAccount />
           </div>
         </div>
       </div>

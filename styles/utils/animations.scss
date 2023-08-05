@@ -1,3 +1,100 @@
+@keyframes topBottomFade {
+  0% {
+    transform: translateY(-230%);
+  }
+
+  100% {
+    transform: translateY(160%);
+    transform: translateX(5%);
+  }
+}
+
+@keyframes topBottom {
+  from {
+    height: 0;
+    opacity: 1;
+  }
+
+  to {
+    height: 25%;
+    opacity: 1;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes bodyLinear {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes growHeight {
+  50% {
+    height: 100vh;
+    top: -100%;
+  }
+  100% {
+    height: 2500vh;
+    top: 500%;
+  }
+}
+@-webkit-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-moz-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-o-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes bg-scrolling-reverse-two {
+  to {
+    opacity: 1;
+    background-position: 20px -210px;
+  }
+}
+
+@keyframes bg-scrolling {
+  0% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes show {
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes dutchFlagGradient {
   0% {
     background-position: 0% 50%;

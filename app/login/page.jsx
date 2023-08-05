@@ -1,112 +1,129 @@
-'use client';
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Metadata } from "next";
-import Link from "next/link";
-import { getAuth, onAuthStateChanged, browserLocalPersistence, setPersistence, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "@/lib/firebase";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
-import LogoIconOnly from "@/components/LogoIconOnly";
-import { Icons } from "@/components/icons";
-import Google from "@/components/Google";
-import { Label } from '@radix-ui/react-label';
+"use client"
+
+import React, { useEffect, useState } from "react"
+import { Metadata } from "next"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import {
+  GoogleAuthProvider,
+  browserLocalPersistence,
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth"
+
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
+import Google from "@/components/Google"
+import LogoIconOnly from "@/components/LogoIconOnly"
+import { Icons } from "@/components/icons"
+
+Checkbox
+
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const router = useRouter();
-  const auth = getAuth();
-  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+  const [rememberEmail, setRememberEmail] = useState(false)
+  const router = useRouter()
+  const auth = getAuth()
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      setUser(user)
       if (user) {
-        router.push("/dashboard/my-account");
+        router.push("/dashboard/my-account")
       }
-    });
+    })
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setEmail(localStorage.getItem("email") || "")
+      setRememberEmail(!!localStorage.getItem("email"))
+    }
+  }, [])
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard/my-account");
+      router.push("/dashboard/my-account")
     }
-  }, [user]);
+  }, [user])
 
   const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider()
 
-    setIsGoogleLoading(true);
+    setIsGoogleLoading(true)
 
     signInWithPopup(auth, provider)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(`User ${user.displayName} logged in with Google.`);
+        const user = userCredential.user
+        console.log(`User ${user.displayName} logged in with Google.`)
 
         toast({
           title: "Google login successful.",
           description: `Welcome, ${user.displayName}!`,
-        });
+        })
 
-        router.push("/dashboard");
+        router.push("/dashboard")
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error)
 
         toast({
           title: "Google login failed.",
           description: "Failed to sign in with Google. Please try again.",
           variant: "destructive",
-        });
+        })
       })
       .finally(() => {
-        setIsGoogleLoading(false);
-      });
-  };
+        setIsGoogleLoading(false)
+      })
+  }
 
   const handleClick = async (e) => {
-    e.preventDefault();
-
-    setIsLoading(true);
+    e.preventDefault()
+    setIsLoading(true)
 
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        return signInWithEmailAndPassword(auth, email, password);
+        return signInWithEmailAndPassword(auth, email, password)
       })
       .then((userCredential) => {
         toast({
           title: "Login successful.",
           description: "You have successfully signed in.",
-        });
-        router.push("/dashboard");
+        })
+        router.push("/dashboard")
 
-        const user = userCredential.user;
-        console.log(`User ${user.email} logged in.`);
+        const user = userCredential.user
+        console.log(`User ${user.email} logged in.`)
+
+        if (rememberEmail) {
+          localStorage.setItem("email", email)
+          console.log("remember email")
+        } else {
+          localStorage.removeItem("email")
+        }
       })
-      .catch((error) => {
-        console.error(error);
-        toast({
-          title: "Something went wrong.",
-          description: "Your sign in request failed. Please try again.",
-          variant: "destructive",
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  }
+
   return (
     <>
       {user ? (
         router.push("/dashboard/my-account")
       ) : (
-        <div className="container flex h-screen flex-col items-center justify-center">
+        <div className="container flex h-[75vh] flex-col items-center justify-center">
           <Link
             href="/"
             className={cn(
@@ -162,6 +179,24 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                   />
+                  <div className="items-top mt-2 mb-2 flex space-x-2">
+                    <Input
+                      type="checkbox"
+                      className="peer h-4 w-4 text-primary-black bg-black focus:ring-primary-black"
+                      checked={rememberEmail}
+                      onChange={(e) => setRememberEmail(e.target.checked)}
+                      id="terms1"
+                    />
+
+                    <div className="grid gap-1.5 leading-none">
+                      <label
+                        htmlFor="terms1"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        Remember email
+                      </label>
+                    </div>
+                  </div>
                 </div>
                 <button
                   onClick={handleClick}
