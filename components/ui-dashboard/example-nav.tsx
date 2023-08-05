@@ -98,8 +98,8 @@ export function ExampleCodeLink({ pathname }: ExampleCodeLinkProps) {
         rel="nofollow"
         className="absolute view-code right-0 top-0 hidden items-center rounded-[0.5rem] text-sm font-medium md:flex"
       >
-        <motion.span
-          whileHover={{ x: 10, filter: 'blur(2px)' }}
+        <motion.span className='pr-2'
+          whileHover={{ x: -5, filter: 'blur(.5px)' }}
         >
           View code
         </motion.span>

@@ -8,6 +8,7 @@
 @import "./theme/grid.scss";
 @import "./theme.scss";
 @import "./error.scss";
+@import "./typography.scss";
 
 // Components
 @import "./components/skeleton.scss";
@@ -22,6 +23,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.translate-y-1px {
+  transform: translateY(1px);
+}
 
 @layer base {
   :root {
