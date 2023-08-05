@@ -71,10 +71,12 @@ export default async function IndexPage() {
           <div className="z-10 flex items-center align-middle space-x-4">
             <Link
               aria-label="Register"
-              className="h-button  inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-md"
+              className="h-button  inline-flex items-center justify-center text-sm font-medium transition-colors  disabled:opacity-50  h-11 px-8 rounded-md"
               data-text="Dashboard"
               href="/dashboard"
             >
+              <div>Dashboard</div>
+
               <span>s</span>
               <span>o</span>
               <span>m</span>
@@ -87,11 +89,12 @@ export default async function IndexPage() {
 
             <Link
               aria-label="Github"
-              className="h-button b-button h-10 px-8 rounded-md"
+              className="h-button b-button h-[44px] px-8 rounded-md"
               data-text="Github"
               href="https://github.com/remcostoeten"
               target={"_blank"}
             >
+              <span class="colored-text">Dashboard</span>
               <span>G</span>
               <span>i</span>
               <span>v</span>

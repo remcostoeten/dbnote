@@ -1,0 +1,33 @@
+//  basic colors
+$dark-blue: #0f1629;
+$dark-grey: #1d283a;
+$black: #030711;
+$light-grey: #7f8ea3;
+$blue-alternative: #1d283a;
+$pink: #ff7597;
+$teal: #03dac5;
+$purple: #bb86fc;
+$error: #cf6679;
+
+// Button colors
+
+$button-dark-background: #272e3f;
+$button-dark-background-hover: $blue-alternative;
+$button-light-background: #dfe2e5;
+$button-light-background-hover: #dfe2e5;
+
+// Theme colors
+$offwhite: #e1e7ef;
+$white: $offwhite;
+$text-color: $light-grey;
+$border-color: $dark-grey;
+$theme-blue: $dark-blue;
+
+$color-primary: $pink;
+$color-secondary: $teal;
+$text-color: $light-grey;
+
+$spacing: 8px;
+$spacing-medium: $spacing * 2;
+$spacing-large: $spacing * 3;
+$spacing-xlarge: $spacing * 4;

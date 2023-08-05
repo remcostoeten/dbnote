@@ -7,32 +7,6 @@
   animation: dutchFlagGradient 5s ease-in-out infinite;
 }
 
-.page-wrapper {
-  &__inner {
-    // green
-
-    // data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABJQTFRFMLJ/9fz6z/Dg////N7WE2PPlI1+DXwAAACNJREFUeJxjYFTCDhQZTIyxAxOGYBwyxqMyozKjMqMyQ1sGAGB//T4IpyOHAAAAAElFTkSuQmCC
-
-    // purple
-    // data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABJQTFRFlFS++ff86dTy////l1jB7Nv0UEtMTgAAACNJREFUeJxjYFTCDhQZTIyxAxOGYBwyxqMyozKjMqMyQ1sGAGB//T4IpyOHAAAAAElFTkSuQmCC
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC")
-        repeat 0 0;
-      animation: bg-scrolling-reverse 3s infinite;
-      animation-timing-function: linear;
-      z-index: -2;
-      filter: invert(1);
-    }
-  }
-}
-
 @keyframes topToBottom {
   0% {
     transform: translateY(-200%);
