@@ -6,10 +6,6 @@ $action-color: $green;
   position: absolute;
 }
 
-* {
-  border-color: #27272a;
-}
-
 .button--bubble__effect-container {
   position: absolute;
   display: block;
@@ -69,11 +65,14 @@ $action-color: $green;
   }
 }
 
-.custom-buttons {
-  button,
-  a {
-    display: flex;
-    align-self: baseline;
+button,
+a {
+  display: flex;
+  align-self: baseline;
+
+  &.default {
+    align-self: unset;
+    display: inline;
   }
 }
 
@@ -87,9 +86,13 @@ $action-color: $green;
   color: $text-color;
   position: relative;
 
+  &:before {
+    content: attr(data-text);
+    color: #020205;
+  }
+
   &::after,
   &::before {
-    color: $white;
   }
 
   &.b-button {
@@ -175,12 +178,6 @@ $action-color: $green;
   }
 }
 
-.border-btn .center {
-  width: 180px;
-  height: 60px;
-  position: absolute;
-}
-
 .button {
   &--border {
     display: flex;
@@ -189,16 +186,28 @@ $action-color: $green;
     width: 180px;
     height: 60px;
     background: transparent;
-    border: 1px solid #91c9ff;
+    border: 1px solid $color-primary;
     outline: none;
     transition: 1s ease-in-out;
+    font-weight: 600;
+    &.teal {
+      border: 1px solid $teal;
+
+      &:hover {
+        color: $black;
+        span {
+          color: darken($teal, 90%);
+        }
+        background: $teal;
+      }
+    }
 
     svg {
       position: absolute;
       left: 0;
       top: 0;
       fill: none;
-      stroke: #fff;
+      stroke: $white;
       stroke-dasharray: 150 480;
       stroke-dashoffset: 150;
       transition: 1s ease-in-out;
@@ -206,7 +215,7 @@ $action-color: $green;
 
     &:hover {
       transition: 1s ease-in-out;
-      background: #4f95da;
+      background: $color-primary;
     }
 
     &:hover svg {
@@ -214,9 +223,8 @@ $action-color: $green;
     }
 
     span {
-      color: white;
+      color: $white;
       font-size: 1$spacing;
-      font-weight: 100;
     }
   }
 
@@ -224,7 +232,6 @@ $action-color: $green;
     display: block;
     height: 100%;
     animation: hue-rotate 10s linear infinite;
-    background-color: red;
     border: none;
     color: $white;
     display: inline-block;
@@ -289,12 +296,11 @@ $action-color: $green;
   }
 
   &--glow {
-    height: 50px;
     border: none;
     outline: none;
-    color: #fff;
+    color: $white;
     background: #111;
-    padding: $spacing $spacing-large;
+    padding: 12px $spacing-large;
     cursor: pointer;
     position: relative;
     z-index: 0;
@@ -319,6 +325,7 @@ $action-color: $green;
       left: -2px;
       background-size: 400%;
       z-index: -1;
+      font-weight: 400;
       filter: blur(5px);
       width: calc(100% + 4px);
       height: calc(100% + 4px);
@@ -326,6 +333,10 @@ $action-color: $green;
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
       border-radius: 10px;
+    }
+
+    a {
+      font-weight: 400;
     }
 
     &:active {
