@@ -1,4 +1,5 @@
 import { DashboardConfig } from "types"
+import TailwindIcon from './../components/icons/TailwindIcon';
 
 export const dashboardConfig: DashboardConfig = {
   mainNav: [
@@ -16,42 +17,42 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: "Account",
       href: "/dashboard/account",
-      icon: "post",
+      icon: "UserIcon",
+    },
+    {
+      title: "Vapes",
+      href: "/dashboard/vapes",
+      icon: "VapeIcon",
     },
     {
       title: "Posts",
       href: "/dashboard",
-      icon: "post",
+      icon: "DataIcon",
     },
     {
       title: "Data",
       href: "/dashboard/data",
-      icon: "billing",
+      icon: "ListIcon",
     },
     {
       title: "Work log",
       href: "/dashboard/users",
-      icon: "billing",
+      icon: "NotesIcon",
     },
     {
       title: "Expenses",
       href: "/dashboard/expenses",
-      icon: "billing",
+      icon: "ExpensesIcon",
     },
     {
       title: "Uitzet",
       href: "/producitvity-tools/uitzet",
-      icon: "billing",
-    },
-    {
-      title: "Billing",
-      href: "/producitvity-tools/billing",
-      icon: "billing",
+      icon: "DataIcon",
     },
     {
       title: "Settings",
       href: "/producitvity-tools/settings",
-      icon: "settings",
+      icon: "SettingsIcon",
     },
   ],
-}
+}                     

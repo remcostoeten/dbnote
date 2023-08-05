@@ -64,17 +64,38 @@ export default async function IndexPage() {
 
           <div className="absolute h-[20vh] w-[50vw]"></div>
 
-          <div className="z-10 space-x-4">
-            <Link href="/login" className={cn(buttonVariants({ size: "lg" }))}>
-              Go to Dashboard
-            </Link>
+          <div className="z-10 flex items-center align-middle space-x-4">
             <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              aria-label="Register"
+              className="h-button  inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-md"
+              data-text="Dashboard"
+              href="/dashboard"
             >
-              GitHub
+              <span>s</span>
+              <span>o</span>
+              <span>m</span>
+              <span>e</span>
+              <span>t</span>
+              <span>e</span>
+              <span>x</span>
+              <span>t</span>
+            </Link>
+
+            <Link
+              aria-label="Github"
+              className="h-button b-button h-10 px-8 rounded-md"
+              data-text="Github"
+              href="https://github.com/remcostoeten"
+              target={"_blank"}
+            >
+              <span>G</span>
+              <span>i</span>
+              <span>v</span>
+              <span>e</span>
+              <span>s</span>
+              <span>t</span>
+              <span>a</span>
+              <span>r</span>
             </Link>
           </div>
         </div>

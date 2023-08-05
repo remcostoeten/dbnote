@@ -27,6 +27,20 @@ body {
   color: #020205;
   position: relative;
 
+  &.b-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: transparent;
+    border: 1px solid rgb(29, 40, 58);
+
+    &::after,
+    &::before {
+      color: white;
+    }
+  }
+
   &.signout {
     padding: 8px 20px;
   }
@@ -173,12 +187,6 @@ body {
     100% {
       transform: translateX(calc(-80px * 5));
     }
-  }
-}
-
-.grid {
-  svg {
-    filter: grayscale(1);
   }
 }
 

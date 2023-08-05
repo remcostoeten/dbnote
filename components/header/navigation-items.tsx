@@ -127,7 +127,7 @@ export function MainNav({ items, children }: MainNavProps) {
               <>
                 <span
                   aria-label="Sign out"
-                  className="h-button signout"
+                  className="h-button signout font-semibold"
                   data-text="Sign out"
                   onClick={signOut}
                 >
@@ -143,7 +143,7 @@ export function MainNav({ items, children }: MainNavProps) {
             ) : (
               <Link
                 aria-label="Register"
-                className="h-button "
+                className="h-button font-semibold "
                 data-text="Login"
                 href="/login"
               >
