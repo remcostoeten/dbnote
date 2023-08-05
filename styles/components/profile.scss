@@ -110,6 +110,13 @@
   --bs-highlight-bg: #fce5d0;
 }
 
+.sidebar-items {
+  svg {
+    max-width: 25px;
+    margin-right: 16px;
+  }
+}
+
 *,
 :after,
 :before {

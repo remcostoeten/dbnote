@@ -14,14 +14,7 @@
 //     transform: translateX(-20%);
 //   }
 // }
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-20%);
-  }
-}
+
 .carousel-container {
   width: 100%;
   overflow: hidden;

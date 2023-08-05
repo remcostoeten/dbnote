@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .banner {
+    flex: 0 0 auto;
+    width: 20%;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: scroll 5s linear infinite;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  

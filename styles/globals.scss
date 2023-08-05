@@ -1,26 +1,31 @@
-@import "./cursor.scss";
-@import "./bg.scss";
-@import "./grid.scss";
-@import "./theme.scss";
-@import "./loading.scss";
-@import "./error.scss";
+// Utils
 @import "./utils/animations.scss";
+@import "./utils/variables.scss";
+
+// Theme
+
+@import "./theme/bg.scss";
+@import "./theme/grid.scss";
+@import "./theme.scss";
+@import "./error.scss";
+@import "./typography.scss";
+
+// Components
 @import "./components/skeleton.scss";
 @import "./components/profile.scss";
 @import "./components/ui-elements.scss";
+@import "./components/card.scss";
+@import "./components/buttons.scss";
+@import "./components/loading.scss";
+@import "./components/cursor.scss";
 
+// Tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.horizontal-grid {
-  display: grid;
-  grid-gap: 16px;
-  padding: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(160px, 1fr);
-  overflow-x: auto;
+.translate-y-1px {
+  transform: translateY(1px);
 }
 
 @layer base {
@@ -88,15 +93,5 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

@@ -95,8 +95,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="page-wrapper">
               <div className="page-wrapper__inner">
                 <>
-                  <header className="container z-40 ">
-                    <div className="flex h-20 items-center justify-between py-6">
+                  <header className="border-b ">
+                    <div className="flex container z-40 h-20 items-center justify-between py-6">
                       <MainNav items={marketingConfig.mainNav} />
                     </div>
                   </header>

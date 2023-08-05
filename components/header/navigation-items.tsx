@@ -15,6 +15,8 @@ import { MobileNav } from "@/components/mobile-nav"
 
 import LogoIconOnly from "../LogoIconOnly"
 import CustomMenu from "./custom-menu"
+import { motion } from "framer-motion"
+import { GlowButton } from "../buttons/CustomButtons"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -30,6 +32,9 @@ export function MainNav({ items, children }: MainNavProps) {
     null
   )
 
+  if (!items) {
+    return null
+  }
   const signOut = async () => {
     await auth.signOut()
     setIsLoggedIn(false)
@@ -91,33 +96,46 @@ export function MainNav({ items, children }: MainNavProps) {
 
   return (
     <div className="flex w-full gap-6 md:gap-10">
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <LogoIconOnly />
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
-      </Link>
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }}>
+        <Link href="/" className="hidden items-center space-x-2 md:flex">
+          <LogoIconOnly />
+          <span className="hidden font-bold sm:inline-block">
+            {siteConfig.name}
+          </span>
+        </Link>
+      </motion.div>
       {items?.length ? (
         <>
-          <nav className="hidden  gap-6 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             {items?.map((item, index) => (
-              <Link
+              <motion.div
                 key={index}
-                href={item.disabled ? "#" : item.href}
-                className={cn(
-                  "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                  "text-foreground/60",
-                  item.disabled && "cursor-not-allowed opacity-80"
-                )}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
               >
-                {item.title}
-              </Link>
+                <Link
+                  href={item.disabled ? "#" : item.href}
+                  className={cn(
+                    "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                    "text-foreground/60",
+                    item.disabled && "cursor-not-allowed opacity-80"
+                  )}
+                >
+                  {item.title}
+                </Link>
+              </motion.div>
             ))}
-            <CustomMenu />
+            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }}>
+              <CustomMenu />
+            </motion.div>
           </nav>
           <span className="flex-end flex-1 flex w-max items-center justify-end">
             {userProfilePicture && (
-              <img
+              <motion.img
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * (items?.length + 2), duration: 0.5 }}
                 src={userProfilePicture}
                 alt="Profile Picture"
                 className="w-10 h-10 rounded-full object-cover"
@@ -126,52 +144,45 @@ export function MainNav({ items, children }: MainNavProps) {
 
             {isLoggedIn ? (
               <>
-                <span
-                  aria-label="Sign out"
-                  className="h-button signout"
-                  data-text="Sign out"
-                  onClick={signOut}
+
+                <motion.span
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * (items?.length + 3), duration: 0.5 }} onClick={signOut}
                 >
-                  <span>B</span>
-                  <span>y</span>
-                  <span>e</span>
-                  <span>b</span>
-                  <span>y</span>
-                  <span>e</span>
-                  <span>!</span>
-                </span>
+                  <GlowButton text="Sign Out" link='#' />
+                </motion.span>
               </>
             ) : (
-              <Link
-                aria-label="Register"
-                className="h-button "
-                data-text="Login"
-                href="/login"
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * (items?.length + 3), duration: 0.5 }}
               >
-                <span>R</span>
-                <span>e</span>
-                <span>g</span>
-                <span>i</span>
-                <span>s</span>
-                <span>t</span>
-                <span>e</span>
-                <span>r</span>
-              </Link>
+                <Link href="login">
+                  <GlowButton text=" Login" />
+                </Link>  </motion.div>
             )}
           </span>
         </>
-      ) : null}
+      ) : null
+      }
 
-      <button
+      <motion.button
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 * (items?.length + 4), duration: 0.5 }}
         className="flex items-center space-x-2 md:hidden"
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
         <span className="font-bold">Menu</span>
-      </button>
-      {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
-      )}
-    </div>
-  )
-}
+      </motion.button>
+      {
+        showMobileMenu && items && (
+          <MobileNav items={items}>{children}</MobileNav>
+        )
+      }
+    </div >
+  );
+} 

@@ -1,3 +1,13 @@
+import TailwindIcon from './icons/TailwindIcon';
+import UserIcon from './icons/UserIcon';
+import ExpenseIcon from './icons/ExpenseIcon';
+import VapeIcon from './icons/SmokeIcon';
+import ListIcon from './icons/ListIcon';
+import { Dashboard } from 'react-icons/fa';
+import DataIcon from './icons/DataIcon';
+import MoneyIcon from './icons/MoneyIcon';
+import NotesIcon from './icons/NotesIcon';
+import SettingsIcon from './icons/SettingsIcon';
 import {
   AlertTriangle,
   ArrowRight,
@@ -17,6 +27,7 @@ import {
   MoreVertical,
   Pizza,
   Plus,
+
   Settings,
   SunMedium,
   Trash,
@@ -25,19 +36,26 @@ import {
   X,
   type Icon as LucideIcon,
 } from "lucide-react"
-
 export type Icon = LucideIcon
 
 export const Icons = {
+  TailwindIcon: TailwindIcon,
   logo: Command,
   close: X,
+  VapeIcon: VapeIcon,
+  Dashboard: Dashboard,
+  ListIcon: ListIcon, SettingsIcon: SettingsIcon,
+  UserIcon: UserIcon,
   spinner: Loader2,
+  NotesIcon: NotesIcon,
+  ExpensesIcon: ExpenseIcon,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
   trash: Trash,
   post: FileText,
+  MoneyIcon: MoneyIcon,
   page: File,
-  media: Image,
+  media: Image, DataIcon: DataIcon,
   settings: Settings,
   billing: CreditCard,
   ellipsis: MoreVertical,
