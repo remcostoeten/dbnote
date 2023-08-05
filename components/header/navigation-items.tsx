@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
+import { NavigationMenu } from "@radix-ui/react-navigation-menu"
 import { onAuthStateChanged } from "firebase/auth"
 
 import { MainNavItem } from "types"
