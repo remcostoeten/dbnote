@@ -1,3 +1,4 @@
+import { HomeFeatures } from './HomeFeatures'
 import Link from "next/link"
 import { Icon } from "@radix-ui/react-select"
 
@@ -57,22 +58,7 @@ export default async function IndexPage() {
   return (
     <>
       <HomeIntroduction title="Showcasing various UI's and features i've built." />
-      <section
-        id="features"
-        className=" space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
-      >
-        <div className="container mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Features
-          </h2>
-          <p className="w-7/12 leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            This project is an experiment to see how a modern app, with features
-            like auth, subscriptions, API routes, and static pages would work in
-            Next.js 13 app dir.
-          </p>
-        </div>
-        <Banner />
-      </section>
+      <HomeFeatures />
     </>
   )
 }
