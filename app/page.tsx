@@ -53,6 +53,7 @@ async function getGitHubStars(): Promise<string | null> {
   }
 }
 
+
 export default async function IndexPage() {
   const stars = await getGitHubStars()
 
@@ -61,6 +62,14 @@ export default async function IndexPage() {
       <Carousel />
       <HomeIntroduction title="Showcasing various UI's and features i've built." />
       <HomeFeatures />
+      <div className="grid col-span-3 gap-3">
+        {banners.map((banner, index) => (
+          <div key={index}>
+            <ToolCard title={banner.title} description={banner.description} icon={banner.icon} />
+          </div>
+        ))}
+
+      </div>
     </>
   )
 }

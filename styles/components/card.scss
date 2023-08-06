@@ -31,23 +31,18 @@ h3,
 p {
   margin: 0rem;
 }
-.card-scroll-container {
+.icon-card-scroll-container {
   display: flex;
   overflow-x: auto;
   gap: 10px;
 }
-.card-scroll-container {
+.icon-card-scroll-container {
   display: flex;
   overflow-x: scroll;
   width: 100%; /* Adjust the width as per your requirements */
 }
 
-.card {
-  flex: 0 0 auto;
-  /* Add your card styles here */
-}
-
-.card-scroll-wrapper {
+.icon-card-scroll-wrapper {
   overflow: hidden;
   position: relative;
   white-space: nowrap;
@@ -69,17 +64,28 @@ p {
   }
 }
 
-.card {
+.icon-card {
   position: relative;
   border-radius: 1.5rem;
   width: 100%;
   max-width: 320px;
+  background-color: $black;
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    @include glowing-effect-instant;
+    scale: 0.9;
+    opacity: 0.1;
+  }
 
   &__inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 1rem;
     // background-image: radial-gradient(
     //   rgba(255, 255, 255, 0.1) 1px,
@@ -87,7 +93,7 @@ p {
     // );
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
-    padding: 4rem;
+    padding: $spacing;
     border-radius: 1.25rem;
     overflow: hidden;
   }
@@ -113,16 +119,13 @@ p {
 }
 
 @media (max-width: 700px) {
-  .card {
-    width: calc(100% - 2rem);
-    margin: 0rem 1rem;
-    padding: 0.75rem;
+  .icon-card {
     border-radius: 1rem;
   }
 }
 
 @media (max-width: 600px) {
-  .card__inner {
+  .icon-card__inner {
     padding: 3rem;
   }
 }
