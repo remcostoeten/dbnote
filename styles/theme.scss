@@ -3,6 +3,14 @@
     font-size: 22px !important;
   }
 }
+.slick-slide {
+  float: left;
+  width: 30%;
+}
+
+.slick-slide img {
+  width: 100%;
+}
 
 .dutch {
   background: linear-gradient(90deg, rgb(177, 35, 47), white, rgb(37, 74, 143));

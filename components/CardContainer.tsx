@@ -1,7 +1,7 @@
-
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Slider from 'react-slick';
 import ToolCard from './CardComponent';
 import FirebaseLogo from './icons/FirebaseLogo';
 import NextIcon from './icons/NextIcon';
@@ -10,8 +10,34 @@ import ShadCn from './icons/ShadCn';
 import TailwindIcon from './icons/TailwindIcon';
 import TypescriptIcon from './icons/TypescriptIcon';
 
-const Banner = () => {
-    const initialBanners = [
+const Carousel = () => {
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 2000,
+        slidesToShow: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        cssEase: 'linear',
+        swipeToSlide: true,
+        touchThreshold: 10,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
+        ],
+    };
+
+    const banners = [
         { title: "Firebase", description: "For authentication + storage. Also some MySQL in the mix.", icon: <FirebaseLogo /> },
         { title: "Next.js 13", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <NextIcon /> },
         { title: "React 18", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <ReactIcon /> },
@@ -19,27 +45,16 @@ const Banner = () => {
         { title: "ShadCN/ui + Radix", description: "For unstyled out of the box proper components.", icon: <ShadCn /> },
         { title: "Typescript", description: "For type safety and a better developer experience.", icon: <TypescriptIcon /> }
     ];
-    const [banners, setBanners] = useState(initialBanners);
-
-    const scrollBanner = () => {
-        const newBanners = [...banners];
-        const firstBanner = newBanners.shift();
-        newBanners.push(firstBanner as any);
-        setBanners(newBanners);
-    };
-
-    useEffect(() => {
-        const interval = setInterval(scrollBanner, 5000);
-        return () => clearInterval(interval);
-    }, [banners]);
 
     return (
-        <div className="banner">
+        <Slider {...settings}>
             {banners.map((banner, index) => (
-                <ToolCard key={index} title={banner.title} description={banner.description} icon={banner.icon} />
+                <div key={index}>
+                    <ToolCard title={banner.title} description={banner.description} icon={banner.icon} />
+                </div>
             ))}
-        </div>
+        </Slider>
     );
 };
 
-export default Banner;
+export default Carousel;

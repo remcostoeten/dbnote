@@ -1,4 +1,4 @@
-import { HomeFeatures } from './HomeFeatures'
+import { HomeFeatures } from "./HomeFeatures"
 import Link from "next/link"
 import { Icon } from "@radix-ui/react-select"
 
@@ -22,11 +22,14 @@ import NextIcon from "./../components/icons/NextIcon"
 import ShadCn from "./../components/icons/ShadCn"
 import TailwindIcon from "./../components/icons/TailwindIcon"
 import { HomeIntroduction } from "./HomeIntroduction"
-
+import TrustedBySwiper from "./../components/ui/Swiper"
+import InfiniteSlider, { generateSlides } from "@/components/ui/Slide"
+import Carousel from './../components/ui/Slide';
+import { Card } from "@/components/ui/card"
 async function getGitHubStars(): Promise<string | null> {
   try {
     const response = await fetch(
-      "https://api.github.com/repos/shadcn/taxonomy",
+      "https://api.github.com/repos/remcostoeten/remcostoeten.com",
       {
         headers: {
           Accept: "application/vnd.github+json",
@@ -55,6 +58,7 @@ export default async function IndexPage() {
 
   return (
     <>
+      <Carousel />
       <HomeIntroduction title="Showcasing various UI's and features i've built." />
       <HomeFeatures />
     </>
