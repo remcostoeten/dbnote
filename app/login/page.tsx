@@ -35,9 +35,9 @@ export default function LoginPage() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user)
+      setUser(user as any)
       if (user) {
-        router.push("/dashboard/settigs")
+        router.push("/dashboard/settings")
       }
     })
 
