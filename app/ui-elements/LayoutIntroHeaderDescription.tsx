@@ -17,22 +17,23 @@ export const LayoutIntroHeaderDescription = () => (
     >
       Some examples which I have not abbandoned yet.
     </motion.span>
-    <motion.PageHeaderDescription
+    <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1, duration: 0.5 }}
-    >
-      Dashboard, e-commerce, blogs, landing pages, parallax scrolls, portfolio
-      designs, authentication pages... I've made countless UI's which I all have
-      scrapped. Some{" "}
-      <Link
-        className="default font-normal underline"
-        href="https://github.com/remcostoeten/remcostoeten.com"
-        target="_blank"
-      >
-        repos
-      </Link>{" "}
-      have over 700+ commits before getting sick off it.
-    </motion.PageHeaderDescription>
+      transition={{ delay: 0.1, duration: 0.5 }}>
+      <PageHeaderDescription>
+        Dashboard, e-commerce, blogs, landing pages, parallax scrolls, portfolio
+        designs, authentication pages... I've made countless UI's which I all have
+        scrapped. Some{" "}
+        <Link
+          className="default font-normal underline"
+          href="https://github.com/remcostoeten/remcostoeten.com"
+          target="_blank"
+        >
+          repos
+        </Link>
+        have over 700+ commits before getting sick off it.
+      </PageHeaderDescription>
+    </motion.div>
   </>
 )

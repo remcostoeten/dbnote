@@ -2,7 +2,7 @@
 import Banner from '@/components/CardContainer'
 import { motion } from 'framer-motion'
 
-export const HomeFeatures = ({ undefined }) => (
+export const HomeFeatures = () => (
   <section
     id="features"
     className=" space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"

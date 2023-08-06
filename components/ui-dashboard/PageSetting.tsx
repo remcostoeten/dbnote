@@ -43,8 +43,12 @@ export default function PageSetting({ title, description, settings }: PageSettin
                         <Switch
                             id={setting.id}
                             defaultChecked={setting.defaultChecked}
-                            onChange={(e) => setting.onToggle && setting.onToggle(e.target.checked)}
+                            onChange={(e: React.FormEvent<HTMLButtonElement>) => {
+                                const target = e.target as HTMLInputElement;
+                                setting.onToggle && setting.onToggle(target.checked);
+                            }}
                         />
+
                     </div>
                 ))}
             </CardContent>

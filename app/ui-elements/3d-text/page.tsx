@@ -1,35 +1,33 @@
-"use client"
-
-import { MouseEvent, useEffect, useRef } from "react"
-
-import Text3d from "@/components/Text3d"
-import PageSetting from "@/components/ui-dashboard/PageSetting"
+'use client';
+import { MouseEvent, useEffect, useRef } from "react";
+import Text3d from "@/components/Text3d";
+import PageSetting from "@/components/ui-dashboard/PageSetting";
 
 export default function Home() {
-  const plane = useRef(null);
-  const maxRotate = 45
+  const plane = useRef<HTMLDivElement | null>(null);
+  const maxRotate = 45;
 
   useEffect(() => {
-    document.body.classList.add("d-perspective")
+    document.body.classList.add("d-perspective");
     return () => {
-      document.body.classList.remove("d-perspective")
-    }
-  }, [])
+      document.body.classList.remove("d-perspective");
+    };
+  }, []);
 
   const manageMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const x = e.clientX / window.innerWidth
-    const y = e.clientY / window.innerHeight
-    const perspective = window.innerWidth * 4
-    const rotateX = maxRotate * x - maxRotate / 2
-    const rotateY = (maxRotate * y - maxRotate / 2) * -1
     if (plane.current) {
-      plane.current.style.transform = `perspective(${perspective}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg)`
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      const perspective = window.innerWidth * 4;
+      const rotateX = maxRotate * x - maxRotate / 2;
+      const rotateY = (maxRotate * y - maxRotate / 2) * -1;
+      plane.current.style.transform = `perspective(${perspective}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg)`;
     }
-  }
+  };
 
   const changeColorToggle = () => {
-    document.body.classList.toggle("d-perspective--color")
-  }
+    document.body.classList.toggle("d-perspective--color");
+  };
 
   return (
     <>
@@ -44,7 +42,7 @@ export default function Home() {
               "These cookies are essential for the website to function.",
             defaultChecked: true,
             onToggle: (isChecked) => {
-              console.log("Necessary Cookies toggled:", isChecked)
+              console.log("Necessary Cookies toggled:", isChecked);
             },
           },
         ]}
@@ -52,12 +50,14 @@ export default function Home() {
       <div className="perspective-text">
         <div
           onMouseMove={(e) => {
-            manageMouseMove(e)
+            manageMouseMove(e);
           }}
           className="perspective-text__inner "
         >
-          <div ref={plane} className="flex flex-col gap-8 perspective-text__wrapper">
-
+          <div
+            ref={plane}
+            className="flex flex-col gap-8 perspective-text__wrapper"
+          >
             <Text3d primary={"Hover me"} secondary={"Woooooo"} />
             <Text3d primary={"Also me!"} secondary={"Boooooooo"} />
             <Text3d primary={"Usecase?"} secondary={"I don't know"} />
@@ -66,5 +66,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  )
+  );
 }

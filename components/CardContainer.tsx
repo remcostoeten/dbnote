@@ -2,7 +2,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import styles from './Banner.module.css'; // Import CSS Module
 import ToolCard from './CardComponent';
 import FirebaseLogo from './icons/FirebaseLogo';
 import NextIcon from './icons/NextIcon';
@@ -25,7 +24,7 @@ const Banner = () => {
     const scrollBanner = () => {
         const newBanners = [...banners];
         const firstBanner = newBanners.shift();
-        newBanners.push(firstBanner);
+        newBanners.push(firstBanner as any);
         setBanners(newBanners);
     };
 
