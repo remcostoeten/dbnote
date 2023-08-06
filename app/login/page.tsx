@@ -130,9 +130,7 @@ export default function LoginPage() {
             className="flex items-center   pr-2"
             whileHover={{ x: 2, filter: "blur(.2px)" }}
           >
-            <span className="pl-4 font-extralight" href="/">
-              go back
-            </span>
+            <span className="pl-4 font-extralight">go back</span>
           </motion.div>
         </motion.div>
       </Link>
@@ -229,8 +227,10 @@ export default function LoginPage() {
             </>
           ) : (
             <>
-              <Google className="mr-2 h-4 w-4" />
-              Google
+              <span className="mr-2 h-4 w-4">
+                <Google />
+                Google
+              </span>
             </>
           )}
         </button>
