@@ -11,6 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+const goToError = () => {
+  window.location.href = "/dawdawdadwd"
+}
+
+
 export default function CustomMenu() {
   return (
     <DropdownMenu>
@@ -26,6 +31,9 @@ export default function CustomMenu() {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href="/ui-elements/3d-text">3d text</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <span onClick={goToError}>404 errror page design</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

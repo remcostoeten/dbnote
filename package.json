@@ -68,6 +68,7 @@
     "@vercel/og": "^0.0.21",
     "class-variance-authority": "^0.4.0",
     "classnames": "^2.3.2",
+    "clippyjs": "^0.0.3",
     "clsx": "^1.2.1",
     "cmdk": "^0.1.22",
     "concurrently": "^8.0.1",
