@@ -93,16 +93,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Cursor />
             <div className="page-wrapper">
-              <div className="page-wrapper__inner">
-                <>
-                  <header className="border-b ">
-                    <div className="flex container z-40 h-20 items-center justify-between py-6">
-                      <MainNav items={marketingConfig.mainNav} />
-                    </div>
-                  </header>
-                  {children}
-                </>
-              </div>
+              <header className="border-b ">
+                <div className="container z-40 flex h-20 items-center justify-between py-6">
+                  <MainNav items={marketingConfig.mainNav} />
+                </div>
+              </header>
+              <div className="page-wrapper__inner">{children}</div>
             </div>
             <Analytics />
             <Toaster />

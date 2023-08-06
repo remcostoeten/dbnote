@@ -1,105 +1,132 @@
-'use client';
-import { useState, useCallback } from "react";
-import { Editor } from '@monaco-editor/react';
-
-function convertHtmlToJSX(html: string): string {
-    let jsx = html.replace(/\bclass=/g, "className=");
-    jsx = jsx.replace(/\bfor=/g, "htmlFor=");
-
-    jsx = jsx.replace(/\bon([a-z]+)/g, function (match: any, group: string) {
-        return "on" + group.charAt(0).toUpperCase() + group.slice(1);
-    });
-
-    jsx = jsx.replace(/=(\w+)/g, function (match: any, group: string) {
-        return `="${group}"`;
-    });
-
-    jsx = jsx.replace(/style="([^"]*)"/g, function (match: any, group: string) {
-        let style = group.split(";").reduce(function (style, rule) {
-            let parts = rule.split(":");
-            if (parts[1]) {
-                let key = parts[0].trim();
-                let value = parts[1].trim();
-                if (!isNaN(value as any)) {
-                    value = parseInt(value).toString();
-                } else if (value !== "true" && value !== "false") {
-                    value = `'${value}'`;
-                }
-                key = key.replace(/-./g, function (x) {
-                    return x[1].toUpperCase();
-                });
-                style += key + ": " + value + ", ";
-            }
-            return style;
-        }, "");
-        return `style={{${style}}}`;
-    });
-
-    const booleanAttributes = ["checked", "selected", "disabled", "readOnly", "multiple", "hidden"];
-    booleanAttributes.forEach((attr) => {
-        const re = new RegExp(`<([a-zA-Z][a-zA-Z0-9]*)\\b[^>]*?\\b${attr}(?![^>]*?>)`, "g");
-        jsx = jsx.replace(re, `<$1 ${attr}={true}`);
-    });
-
-    const selfClosingTags = ["br", "hr", "img", "input", "link", "meta"];
-    selfClosingTags.forEach((tag) => {
-        const re = new RegExp(`<${tag}\\b([^>]*)(?<!/)>`, "g");
-        jsx = jsx.replace(re, `<${tag}$1 />`);
-    });
-
-    jsx = jsx.replace(/<!--([\s\S]*?)-->/g, function (match: any, group: string) {
-        const lines = group.split("\n");
-        return lines.map((line) => `{/*${line.trim()}*/}`).join("\n");
-    });
-
-    jsx = jsx.replace(
-        /<(svg|path|circle|rect|line|polyline|polygon|text|g|defs|use|mask)[^>]*>/g,
-        function (match: any) {
-            return match.replace(/-([a-z])/g, function (match: any, group: string) {
-                return group.toUpperCase();
-            });
-        }
-    );
-
-    jsx = jsx.replace(/&amp;/g, "");
-
-    return jsx;
-}
+"use client"
+import { useState, useCallback, useEffect } from "react"
+import { Editor } from "@monaco-editor/react"
 
 const Home: React.FC = () => {
-    const [code, setCode] = useState<string | undefined>("// Enter HTML here");
-    const [jsx, setJSX] = useState<string>("");
-    const [showNotification, setShowNotification] = useState<boolean>(false);
+    const [code, setCode] = useState<string | undefined>("// Enter HTML here")
+    const [jsx, setJSX] = useState<string>("")
+    const [showNotification, setShowNotification] = useState<boolean>(false)
+    const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
+
+    function convertHtmlToJSX(html: string): string {
+        let jsx = html.replace(/\bclass=/g, "className=")
+        jsx = jsx.replace(/\bfor=/g, "htmlFor=")
+
+        jsx = jsx.replace(/\bon([a-z]+)/g, function (match: any, group: string) {
+            return "on" + group.charAt(0).toUpperCase() + group.slice(1)
+        })
+
+        jsx = jsx.replace(/=(\w+)/g, function (match: any, group: string) {
+            return `="${group}"`
+        })
+
+        jsx = jsx.replace(/style="([^"]*)"/g, function (match: any, group: string) {
+            let style = group.split(";").reduce(function (style, rule) {
+                let parts = rule.split(":")
+                if (parts[1]) {
+                    let key = parts[0].trim()
+                    let value = parts[1].trim()
+                    if (!isNaN(value as any)) {
+                        value = parseInt(value).toString()
+                    } else if (value !== "true" && value !== "false") {
+                        value = `'${value}'`
+                    }
+                    key = key.replace(/-./g, function (x) {
+                        return x[1].toUpperCase()
+                    })
+                    style += key + ": " + value + ", "
+                }
+                return style
+            }, "")
+            return `style={{${style}}}`
+        })
+
+        const booleanAttributes = [
+            "checked",
+            "selected",
+            "disabled",
+            "readOnly",
+            "multiple",
+            "hidden",
+        ]
+        booleanAttributes.forEach((attr) => {
+            const re = new RegExp(
+                `<([a-zA-Z][a-zA-Z0-9]*)\\b[^>]*?\\b${attr}(?![^>]*?>)`,
+                "g"
+            )
+            jsx = jsx.replace(re, `<$1 ${attr}={true}`)
+        })
+
+        const selfClosingTags = ["br", "hr", "img", "input", "link", "meta"]
+        selfClosingTags.forEach((tag) => {
+            const re = new RegExp(`<${tag}\\b([^>]*)(?<!/)>`, "g")
+            jsx = jsx.replace(re, `<${tag}$1 />`)
+        })
+
+        jsx = jsx.replace(
+            /<!--([\s\S]*?)-->/g,
+            function (match: any, group: string) {
+                const lines = group.split("\n")
+                return lines.map((line) => `{/*${line.trim()}*/}`).join("\n")
+            }
+        )
+
+        jsx = jsx.replace(
+            /<(svg|path|circle|rect|line|polyline|polygon|text|g|defs|use|mask)[^>]*>/g,
+            function (match: any) {
+                return match.replace(/-([a-z])/g, function (match: any, group: string) {
+                    return group.toUpperCase()
+                })
+            }
+        )
+
+        if (isClientComponent) {
+            jsx = jsx.replace(/&amp;/g, "is client")
+        }
+
+        return jsx
+    }
 
     const handleCopy = useCallback(() => {
         navigator.clipboard
             .writeText(jsx)
             .then(() => {
-                console.log("Copying to clipboard was successful!");
-                setShowNotification(true);
-                setTimeout(() => setShowNotification(false), 5000);
+                console.log("Copying to clipboard was successful!")
+                setShowNotification(true)
+                setTimeout(() => setShowNotification(false), 5000)
             })
             .catch((err) => {
-                console.error("Could not copy text: ", err);
-            });
-    }, [jsx]);
+                console.error("Could not copy text: ", err)
+            })
+    }, [jsx])
 
     function handleEditorChange(value: string | undefined) {
         if (value !== undefined) {
             setCode(value);
             let jsxCode = convertHtmlToJSX(value);
             setJSX(jsxCode);
+
+            if (jsxCode.length > 0) {
+                useEffect(() => {
+                    document.body.classList.add("isTyping");
+                    const timeout = setTimeout(() => {
+                        document.body.classList.remove("isTyping");
+                    }, 1000);
+                    return () => clearTimeout(timeout);
+                }, [jsxCode]);
+            }
         }
     }
+
 
     return (
         <div className="bg-black">
             <div
                 style={{ width: "600px", top: "-180px" }}
-                className="absolute right-[100px] z-10 h-[150px] w-[400px] rotate-[0deg] transform rounded-full bg-orange-400 blur-[150px]"
+                className="absolute right-[100px] z-10 h-[150px] w-[400px] rotate-[0deg] transform rounded-full bg-indigo-400 blur-[150px]"
             ></div>
-            <div className="absolute dotted-background h-full top-0 left-0 right-0 z-0">
-                <div className="absolute left-0 right-0 bottom-0 h-[300px]"></div>
+            <div className="dotted-background absolute left-0 right-0 top-0 top-[80px] z-0 h-full">
+                <div className="absolute bottom-0 left-0 right-0 h-[300px]"></div>
             </div>
             <div className="relative isolate pt-14">
                 <div className="py-24 sm:py-32 lg:pb-40">
@@ -113,11 +140,17 @@ const Home: React.FC = () => {
                                 below.
                             </p>
                         </div>
+                        <input
+                            type="checkbox"
+                            checked={isClientComponent}
+                            onChange={(e) => setIsClientComponent(e.target.checked)}
+                        />
+                        <label>Client component?</label>
 
                         {showNotification ? (
                             <div
                                 aria-live="assertive"
-                                className="pointer-events-none fixed z-50 inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+                                className="pointer-events-none fixed inset-0 z-50 flex items-end px-4 py-6 sm:items-start sm:p-6"
                             >
                                 <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
                                     <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-zinc-900 shadow-lg ring-1 ring-black ring-opacity-5">
@@ -168,7 +201,7 @@ const Home: React.FC = () => {
                             </div>
                         ) : null}
 
-                        <div className="grid relative max-w-full sm:grid-cols-2 gap-4 mt-16 rounded-md p-4 border bg-neutral-900 border-zinc-900 ring-1 ring-white/10 sm:mt-24 shadow-[0_20px_207px_rgba(249,_115,_22,_0.2)]">
+                        <div className="jsx-converter relative mt-16 grid max-w-full gap-4 rounded-md border border-zinc-900 bg-neutral-900 p-4 shadow-[0_20px_207px_rgba(249,_115,_22,_0.2)] ring-1 ring-white/10 sm:mt-24 sm:grid-cols-2">
                             <Editor
                                 height="60vh"
                                 defaultLanguage="javascript"
@@ -187,11 +220,11 @@ const Home: React.FC = () => {
                             <div className="relative">
                                 <button
                                     onClick={handleCopy}
-                                    className="absolute p-2 bg-zinc-900 border rounded-md border-zinc-700 top-0 right-0 z-50"
+                                    className="absolute right-0 top-0 z-50 rounded-md border border-zinc-700 bg-zinc-900 p-2"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-5 h-5 text-white"
+                                        className="h-5 w-5 text-white"
                                         fill="#fff"
                                         viewBox="0 0 256 256"
                                     >
@@ -217,7 +250,7 @@ const Home: React.FC = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

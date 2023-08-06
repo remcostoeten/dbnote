@@ -1,6 +1,7 @@
 // // Utils
 @import "./utils/animations.scss";
 @import "./utils/variables.scss";
+@import "./utils/mixins.scss";
 
 // // Theme
 
@@ -20,7 +21,7 @@
 @import "./components/header.scss";
 @import "./components/cursor.scss";
 @import "./components/text-perspective.scss";
-
+@import "./components/html-to-jsx-converter.scss";
 // Tailwind
 @tailwind base;
 @tailwind components;

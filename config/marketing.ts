@@ -7,13 +7,16 @@ export const marketingConfig: MarketingConfig = {
       href: "/dashboard",
     },
     {
-      title: "Url extractor",
-      href: "/url-extract",
-    },
-    {
       title: "Html to JSX",
       href: "/html-to-jsx",
+      done: true,
     },
+    {
+      title: "Url extractor",
+      href: "/url-extract",
+      done: false,
+    },
+  
     {
       title: "Docs",
       href: "/docs",

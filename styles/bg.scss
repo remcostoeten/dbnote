@@ -183,6 +183,8 @@ body {
 }
 
 .page-wrapper {
+  margin-top: 80px;
+
   &::after {
     content: "";
     width: 100vw;

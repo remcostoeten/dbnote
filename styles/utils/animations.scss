@@ -1,3 +1,35 @@
+// Animation for glowing btn/element effect.
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+// Body before gradient fade animation to reveal some off the background.
+@keyframes showMoreBodyBg {
+  0% {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+  }
+  50% {
+    width: 85vw;
+    height: 85vh;
+    opacity: 0.9;
+  }
+
+  100% {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
 @keyframes topBottomFade {
   0% {
     transform: translateY(-230%);

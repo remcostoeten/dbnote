@@ -35,6 +35,7 @@ export function MainNav({ items, children }: MainNavProps) {
   if (!items) {
     return null
   }
+
   const signOut = async () => {
     await auth.signOut()
     setIsLoggedIn(false)
@@ -96,7 +97,11 @@ export function MainNav({ items, children }: MainNavProps) {
 
   return (
     <div className="flex w-full gap-6 md:gap-10">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.5 }}>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1, duration: 0.5 }}
+      >
         <Link href="/" className="hidden items-center space-x-2 md:flex">
           <LogoIconOnly />
           <span className="hidden font-bold sm:inline-block">
@@ -115,22 +120,26 @@ export function MainNav({ items, children }: MainNavProps) {
                 transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
               >
                 <Link
-                  href={item.disabled ? "#" : item.href}
+                  href={item.done ? item.href : "#"} // Disable link if "done" is false
                   className={cn(
                     "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
                     "text-foreground/60",
-                    item.disabled && "cursor-not-allowed opacity-80"
+                    item.done === false && "cursor-not-allowed opacity-80" // Add "disabled" class if "done" is false
                   )}
                 >
                   {item.title}
                 </Link>
               </motion.div>
             ))}
-            <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.5 }}>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
               <CustomMenu />
             </motion.div>
           </nav>
-          <span className="flex-end flex-1 flex w-max items-center justify-end">
+          <span className="flex-end flex w-max flex-1 items-center justify-end">
             {userProfilePicture && (
               <motion.img
                 initial={{ opacity: 0, y: -20 }}
@@ -138,19 +147,22 @@ export function MainNav({ items, children }: MainNavProps) {
                 transition={{ delay: 0.1 * (items?.length + 2), duration: 0.5 }}
                 src={userProfilePicture}
                 alt="Profile Picture"
-                className="w-10 h-10 rounded-full object-cover"
+                className="h-10 w-10 rounded-full object-cover"
               />
             )}
 
             {isLoggedIn ? (
               <>
-
                 <motion.span
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * (items?.length + 3), duration: 0.5 }} onClick={signOut}
+                  transition={{
+                    delay: 0.1 * (items?.length + 3),
+                    duration: 0.5,
+                  }}
+                  onClick={signOut}
                 >
-                  <GlowButton text="Sign Out" link='#' />
+                  <GlowButton text="Sign Out" link="#" />
                 </motion.span>
               </>
             ) : (
@@ -159,14 +171,12 @@ export function MainNav({ items, children }: MainNavProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * (items?.length + 3), duration: 0.5 }}
               >
-                <Link href="login">
-                  <WeakGlowButton text=" Login" />
-                </Link>  </motion.div>
+                <WeakGlowButton text=" Login" link="/login" />
+              </motion.div>
             )}
           </span>
         </>
-      ) : null
-      }
+      ) : null}
 
       <motion.button
         initial={{ opacity: 0, y: -20 }}
@@ -178,11 +188,9 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
         <span className="font-bold">Menu</span>
       </motion.button>
-      {
-        showMobileMenu && items && (
-          <MobileNav items={items}>{children}</MobileNav>
-        )
-      }
-    </div >
+      {showMobileMenu && items && (
+        <MobileNav items={items}>{children}</MobileNav>
+      )}
+    </div>
   );
-} 
+}
