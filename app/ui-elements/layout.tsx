@@ -43,7 +43,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
         </PageHeader>
         <section>
           <ExamplesNav />
-          <div className=" space-y-6 border p-10 pb-16 shadow md:block">
+          <div className="min-h-[65vh] space-y-6 border p-10 pb-16 shadow">
             {children}
           </div>
         </section>

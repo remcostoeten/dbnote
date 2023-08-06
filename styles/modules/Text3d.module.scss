@@ -1,9 +1,11 @@
+@import "../utils/variables";
+
 .container {
   height: 100vh;
   width: 100vw;
   display: flex;
+  background-color: lightgrey;
 }
-
 .body {
   display: flex;
   flex-direction: column;
@@ -27,14 +29,30 @@
   color: $white;
   line-height: 8vw;
 }
+$colors: $pink, $teal, $purple, $error;
+
+$counter: 1;
+
+@function getNextColor() {
+  @return nth($colors, $counter);
+}
+
+@mixin incrementCounter() {
+  $counter: $counter + 1;
+  @if $counter > length($colors) {
+    $counter: 1;
+  }
+}
 
 .textContainer .secondary {
   transform: rotateX(-90deg) translateY(3.5vw);
   transform-origin: bottom center;
   position: absolute;
   top: 0;
-  color: $pink;
+  color: getNextColor();
   opacity: 0;
+
+  @include incrementCounter();
 }
 
 .textContainer:hover {

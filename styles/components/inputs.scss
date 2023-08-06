@@ -5,22 +5,27 @@
   transform-style: preserve-3d;
   margin-top: 25px;
   margin-left: 25px;
+
+  &__inner {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+    p {
+      font-size: 8vw;
+      font-weight: 700;
+      margin: 0px;
+      transition: all 0.4s;
+      color: $white;
+      line-height: 8vw;
+    }
+  }
 }
 
 .textContainer {
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.4s;
-  transform-style: preserve-3d;
 }
 
 .textContainer p {
-  font-size: 8vw;
-  font-weight: 700;
-  margin: 0px;
-  transition: all 0.4s;
-  color: white;
-  line-height: 8vw;
 }
 
 .textContainer .secondary {

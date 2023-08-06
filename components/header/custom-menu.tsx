@@ -24,8 +24,9 @@ export default function CustomMenu() {
         <DropdownMenuItem>
           <Link href="/ui-elements/scroller">Infinite scroller</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/ui-elements/3d-text">3d text</Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
