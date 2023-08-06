@@ -16,7 +16,6 @@ import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
@@ -117,21 +116,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container relative -translate-y-36 flex h-screen flex-col items-center justify-center">
+    <div className="container relative flex h-screen -translate-y-36 flex-col items-center justify-center">
       <Link href="/">
         <motion.div
-          className="flex align-middle items-center left-0 pl-8 top-4 absolute"
+          className="absolute left-0 top-4 flex items-center pl-8 align-middle"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1 }}
         >
-          <Icons.chevronLeft className="mr-2 translate-y-1px h-4 w-4" />
+          <Icons.chevronLeft className="translate-y-1px mr-2 h-4 w-4" />
           <motion.div
-            className="pr-2 flex   items-center"
+            className="flex items-center   pr-2"
             whileHover={{ x: 2, filter: "blur(.2px)" }}
           >
-            <span className="font-extralight pl-4" href="/">
+            <span className="pl-4 font-extralight" href="/">
               go back
             </span>
           </motion.div>
@@ -182,7 +181,7 @@ export default function LoginPage() {
                 value={password}
               />
 
-              <div className="flex items-center mb-2 mt-2">
+              <div className="mb-2 mt-2 flex items-center">
                 <input
                   type="checkbox"
                   className="translate-y-0.5"
@@ -246,6 +245,5 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
-  );
-
+  )
 }
