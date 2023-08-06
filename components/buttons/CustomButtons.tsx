@@ -11,6 +11,24 @@ export const GlowButton = ({ text, link }) => {
   )
 }
 
+export const WeakGlowButton = ({ text, link }) => {
+  return (
+    <button className="button button--glow weak" type="button">
+      {link ? <Link href={link}>{text}</Link> : text}
+    </button>
+  )
+}
+
+
+export const ProminentGlowButton = ({ text, link }) => {
+  return (
+    <button className="button button--glow prominent" type="button">
+      {link ? <Link href={link}>{text}</Link> : text}
+    </button>
+  )
+}
+
+
 export const SwapButton = ({ text }) => {
   return (
     <button

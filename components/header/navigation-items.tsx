@@ -16,7 +16,7 @@ import { MobileNav } from "@/components/mobile-nav"
 import LogoIconOnly from "../LogoIconOnly"
 import CustomMenu from "./custom-menu"
 import { motion } from "framer-motion"
-import { GlowButton } from "../buttons/CustomButtons"
+import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -160,7 +160,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 transition={{ delay: 0.1 * (items?.length + 3), duration: 0.5 }}
               >
                 <Link href="login">
-                  <GlowButton text=" Login" />
+                  <WeakGlowButton text=" Login" />
                 </Link>  </motion.div>
             )}
           </span>

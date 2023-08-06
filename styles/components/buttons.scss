@@ -313,6 +313,18 @@ a {
     z-index: 0;
     border-radius: 10px;
 
+    &.prominent {
+      &::before {
+        opacity: 0.5;
+      }
+    }
+
+    &.weak {
+      &::before {
+        opacity: 0.3;
+      }
+    }
+
     &::before {
       content: "";
       background: linear-gradient(
