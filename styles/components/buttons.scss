@@ -2,6 +2,12 @@ $dark-blue: #222;
 $green: #90feb5;
 $action-color: $green;
 
+.button-showcase {
+  button {
+    align-self: baseline;
+  }
+}
+
 .goo {
   position: absolute;
 }

@@ -1,13 +1,12 @@
-import TailwindIcon from './icons/TailwindIcon';
-import UserIcon from './icons/UserIcon';
-import ExpenseIcon from './icons/ExpenseIcon';
-import VapeIcon from './icons/SmokeIcon';
-import ListIcon from './icons/ListIcon';
-import { Dashboard } from 'react-icons/fa';
-import DataIcon from './icons/DataIcon';
-import MoneyIcon from './icons/MoneyIcon';
-import NotesIcon from './icons/NotesIcon';
-import SettingsIcon from './icons/SettingsIcon';
+import TailwindIcon from "./icons/TailwindIcon"
+import UserIcon from "./icons/UserIcon"
+import ExpenseIcon from "./icons/ExpenseIcon"
+import VapeIcon from "./icons/SmokeIcon"
+import ListIcon from "./icons/ListIcon"
+import DataIcon from "./icons/DataIcon"
+import MoneyIcon from "./icons/MoneyIcon"
+import NotesIcon from "./icons/NotesIcon"
+import SettingsIcon from "./icons/SettingsIcon"
 import {
   AlertTriangle,
   ArrowRight,
@@ -27,7 +26,6 @@ import {
   MoreVertical,
   Pizza,
   Plus,
-
   Settings,
   SunMedium,
   Trash,
@@ -43,8 +41,8 @@ export const Icons = {
   logo: Command,
   close: X,
   VapeIcon: VapeIcon,
-  Dashboard: Dashboard,
-  ListIcon: ListIcon, SettingsIcon: SettingsIcon,
+  ListIcon: ListIcon,
+  SettingsIcon: SettingsIcon,
   UserIcon: UserIcon,
   spinner: Loader2,
   NotesIcon: NotesIcon,
@@ -55,7 +53,8 @@ export const Icons = {
   post: FileText,
   MoneyIcon: MoneyIcon,
   page: File,
-  media: Image, DataIcon: DataIcon,
+  media: Image,
+  DataIcon: DataIcon,
   settings: Settings,
   billing: CreditCard,
   ellipsis: MoreVertical,
@@ -89,4 +88,4 @@ export const Icons = {
   check: Check,
 }
 
-export { }
+export {}

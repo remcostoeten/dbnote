@@ -1,4 +1,3 @@
-import { HomeIntroduction } from './HomeIntroduction'
 import Link from "next/link"
 import { Icon } from "@radix-ui/react-select"
 
@@ -7,21 +6,22 @@ import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+import AutoScrollComponent from "@/components/Auttoscroll"
+import CardComponent from "@/components/CardComponent"
+import ToolCard from "@/components/CardComponent"
+import CardContainer from "@/components/CardContainer"
+import Banner from "@/components/CardContainer"
 import Cursor from "@/components/Cursor"
+import ReactIcon from "@/components/icons/ReactIcon"
+import TypescriptIcon from "@/components/icons/TypescriptIcon"
 
 import IconMap from "../components/icons/IconMap"
-import CardComponent from "@/components/CardComponent"
-import FirebaseLogo from './../components/icons/FirebaseLogo';
-import ReactIcon from "@/components/icons/ReactIcon"
-import TailwindIcon from './../components/icons/TailwindIcon';
-import TypescriptIcon from "@/components/icons/TypescriptIcon"
-import NextIcon from './../components/icons/NextIcon';
-import ShadCn from './../components/icons/ShadCn';
-import IconGrid from './../components/icons/IconGrid';
-import CardContainer from "@/components/CardContainer"
-import ToolCard from "@/components/CardComponent"
-import AutoScrollComponent from "@/components/Auttoscroll"
-import Banner from "@/components/CardContainer"
+import FirebaseLogo from "./../components/icons/FirebaseLogo"
+import IconGrid from "./../components/icons/IconGrid"
+import NextIcon from "./../components/icons/NextIcon"
+import ShadCn from "./../components/icons/ShadCn"
+import TailwindIcon from "./../components/icons/TailwindIcon"
+import { HomeIntroduction } from "./HomeIntroduction"
 
 async function getGitHubStars(): Promise<string | null> {
   try {

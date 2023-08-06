@@ -31,3 +31,5 @@ $spacing: 8px;
 $spacing-medium: $spacing * 2;
 $spacing-large: $spacing * 3;
 $spacing-xlarge: $spacing * 4;
+
+@import "./theme/colors.scss";
