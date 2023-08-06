@@ -16,10 +16,11 @@ body {
     top: 0;
     background: rgb(3, 7, 17);
     background: linear-gradient(
-      180deg,
-      rgba(3, 7, 17, 1) 89%,
+      129deg,
+      rgba(3, 7, 17, 1) 53%,
       rgba(221, 222, 224, 0) 100%
     );
+
     height: 100vh;
     width: 100vw;
     animation: showMoreBodyBg 25s ease-in-out infinite;
@@ -56,12 +57,13 @@ body {
       content: "";
       position: absolute;
       top: 0;
+      height: 100%;
       right: 0;
       bottom: 0;
       left: 0;
       background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC")
         repeat 0 0;
-      // animation: bg-scrolling-reverse 3s infinite;
+      animation: bg-scrolling-reverse 3s infinite;
       animation-timing-function: linear;
       z-index: -3;
       filter: invert(1);
@@ -76,7 +78,7 @@ body {
       left: 0;
       background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABJQTFRFMLJ/9fz6z/Dg////N7WE2PPlI1+DXwAAACNJREFUeJxjYFTCDhQZTIyxAxOGYBwyxqMyozKjMqMyQ1sGAGB//T4IpyOHAAAAAElFTkSuQmCC")
         repeat 0 0;
-      // animation: bg-scrolling-reverse 3s infinite, grid-overlay 20s infinite;
+      animation: bg-scrolling-reverse 3s infinite, grid-overlay 20s infinite;
       animation: grid-overlay 20s infinite;
       animation-timing-function: linear;
       z-index: -2;
@@ -201,17 +203,17 @@ body {
   }
 }
 
-// .page-wrapper {
-//   &::after {
-//     content: "";
-//     width: 100vw;
-//     background: linear-gradient(transparent, rgba(174, 19, 19, 0.438));
-//     position: absolute;
-//     mix-blend-mode: color-dodge;
-//     bottom: 0;
-//     z-index: -2;
-//     opacity: 0.1;
-//     animation: growHeight 10s ease-in-out infinite,
-//       bg-scrolling-reverse-two 10s 1s infinite, gradientRandomBg 10s 1s infinite;
-//   }
-// }
+.page-wrapper {
+  &::after {
+    content: "";
+    width: 100vw;
+    background: linear-gradient(transparent, rgba(174, 19, 19, 0.438));
+    position: absolute;
+    mix-blend-mode: color-dodge;
+    bottom: 0;
+    z-index: -2;
+    opacity: 0.1;
+    animation: growHeight 10s ease-in-out infinite,
+      bg-scrolling-reverse-two 10s 1s infinite, gradientRandomBg 10s 1s infinite;
+  }
+}

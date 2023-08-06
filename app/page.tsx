@@ -22,6 +22,7 @@ import NextIcon from "./../components/icons/NextIcon"
 import ShadCn from "./../components/icons/ShadCn"
 import TailwindIcon from "./../components/icons/TailwindIcon"
 import { HomeIntroduction } from "./HomeIntroduction"
+import InfiniteSlider from './../components/InfiniteSlider';
 
 async function getGitHubStars(): Promise<string | null> {
   try {

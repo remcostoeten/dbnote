@@ -13,8 +13,8 @@ const examples = [
     code: "https://github.com/remcostoeten/dbnote/blob/develop/components/buttons/CustomButtons.tsx",
   },
   {
-    name: "Cards",
-    href: "/examples/cards",
+    name: "Infinite scroller",
+    href: "/ui-elements/scroller",
     code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/cards",
   },
   {
@@ -39,7 +39,7 @@ const examples = [
   },
 ]
 
-interface ExamplesNavProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface ExamplesNavProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function ExamplesNav({ className, ...props }: ExamplesNavProps) {
   const pathname = usePathname()
