@@ -9,6 +9,14 @@ export default function NotFound() {
     const router = useRouter();
 
     useEffect(() => {
+        setTimeout(() => {
+            // play audio
+            audioRef.current?.play();
+        }, 1000);
+    }, []);
+
+
+    useEffect(() => {
         const timer = setTimeout(() => {
             setShowError(false);
             router.push("/");
@@ -95,9 +103,13 @@ export default function NotFound() {
                             <span className="orange">&lt;/html&gt;</span>
                         </span>
                     </code>
-                    <span onClick={toHome}>
-                        <span className="orange">&lt;--</span> Go back to the home page
-                    </span>
+                    <button type="button" onClick={() => {
+                        router.push("/");
+                        window.location.reload();
+                    }}>
+                        <span className="orange">&lt;--</span> Go back to the home page and reload
+                    </button>
+
                 </div>
             </div>
             <audio ref={audioRef} src="/music.mp3" loop autoPlay />
