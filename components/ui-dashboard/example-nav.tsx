@@ -51,7 +51,7 @@ export function ExamplesNav({ className, ...props }: ExamplesNavProps) {
           {examples.map((example) => (
             <motion.div
               key={example.href}
-              whileHover={{ x: 10, filter: "blur(2px)" }}
+              whileHover={{ x: 10, filter: "blur(.4px)" }}
             >
               <Link
                 href={example.href}

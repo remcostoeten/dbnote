@@ -11,8 +11,12 @@ export const marketingConfig: MarketingConfig = {
       href: "/url-extract",
     },
     {
-      title: "Blog",
-      href: "/blog",
+      title: "Html to JSX",
+      href: "/html-to-jsx",
+    },
+    {
+      title: "Docs",
+      href: "/docs",
     },
     {
       title: "Documentation",

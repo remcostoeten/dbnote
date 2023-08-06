@@ -128,6 +128,10 @@ export default function CustomButtons() {
       </Link>
       <h2 className="font-semibold ">Glow on hover</h2>
       <GlowButton text="Glow on hover" link={undefined} />
+      <h2 className="font-semibold ">Weak Glow</h2>
+      <WeakGlowButton text="Weak Glow on hover" link={undefined} />
+      <h2 className="font-semibold ">Prominent Glow</h2>
+      <ProminentGlowButton text="Prominent Glow on hover" link={undefined} />
       <h2 className="font-semibold ">Blob buton</h2>
       <BlobButton text="Blob on hover" />
       <h2 className="font-semibold">Border buton</h2>
