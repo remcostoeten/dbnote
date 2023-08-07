@@ -5,70 +5,6 @@ import { useEffect, useState } from "react"
 import { useCursor } from "@/lib/CursorContext"
 
 export default function Cursor() {
-  const { cursorSize, setCursorSize } = useCursor()
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [linkHovered, setLinkHovered] = useState(false)
-  const [showHand, setShowHand] = useState(false)
-  const [clicked, setClicked] = useState(false)
-
-  useEffect(() => {
-    const onMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-    }
-
-    const onMouseOver = (e) => {
-      if (e.target.getAttribute("cursorIncreaseSize") === "true") {
-        setLinkHovered(true)
-        setCursorSize("60px")
-      }
-
-      if (e.target.getAttribute("showHand") === "true") {
-        setShowHand(true)
-      }
-
-      if (e.target.getAttribute("hideCircel") === "true") {
-        setCursorSize("0px")
-      }
-    }
-
-    const onMouseOut = (e) => {
-      if (e.target.getAttribute("cursorIncreaseSize") === "true") {
-        setLinkHovered(false)
-        setCursorSize("20px")
-      }
-
-      if (e.target.getAttribute("showHand") === "true") {
-        setShowHand(false)
-      }
-
-      if (e.target.getAttribute("hideCircel") === "true") {
-        setCursorSize("20px")
-      }
-    }
-
-    const onMouseDown = (e) => {
-      setClicked(true)
-    }
-
-    const onMouseUp = (e) => {
-      setClicked(false)
-    }
-
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseover", onMouseOver)
-    document.addEventListener("mouseout", onMouseOut)
-    document.addEventListener("mousedown", onMouseDown)
-    document.addEventListener("mouseup", onMouseUp)
-
-    return () => {
-      document.removeEventListener("mousemove", onMouseMove)
-      document.removeEventListener("mouseover", onMouseOver)
-      document.removeEventListener("mouseout", onMouseOut)
-      document.removeEventListener("mousedown", onMouseDown)
-      document.removeEventListener("mouseup", onMouseUp)
-    }
-  }, [setCursorSize])
-
   return (
     <>
       <svg
@@ -80,9 +16,9 @@ export default function Cursor() {
           position: "fixed",
           zIndex: 9999,
           pointerEvents: "none",
-          transform: `translate3d(${position.x - (linkHovered ? 0 : 0)}px, ${
-            position.y - (linkHovered ? 0 : 0)
-          }px, 0)`,
+          // transform: `translate3d(${position.x - (linkHovered ? 0 : 0)}px, ${
+          // position.y - (linkHovered ? 0 : 0)
+          // }px, 0)`,
         }}
       >
         <path

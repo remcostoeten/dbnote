@@ -98,7 +98,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>
-              <div className="page-wrapper__inner">{children}</div>
+              <div className="page-wrapper__inner h-[20000px]">{children}</div>
             </div>
             <Analytics />
             <Toaster />

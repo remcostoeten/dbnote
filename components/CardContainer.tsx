@@ -1,6 +1,4 @@
-'use client';
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import ToolCard from './CardComponent';
 import FirebaseLogo from './icons/FirebaseLogo';
@@ -9,30 +7,52 @@ import ReactIcon from './icons/ReactIcon';
 import ShadCn from './icons/ShadCn';
 import TailwindIcon from './icons/TailwindIcon';
 import TypescriptIcon from './icons/TypescriptIcon';
-import { Banner } from '@/components/CardContainer';
 
+interface Banner {
+    title: string;
+    description: string;
+    icon: JSX.Element;
+}
 
+const Carousel: React.FC = () => {
+    const [banners, setBanners] = useState<Banner[]>([]);
+    const [loading, setLoading] = useState(true);
 
-const banners = [
-    { title: "Firebase", description: "For authentication + storage. Also some MySQL in the mix.", icon: <FirebaseLogo /> },
-    { title: "Next.js 13", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <NextIcon /> },
-    { title: "React 18", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <ReactIcon /> },
-    { title: "TailwindIcon", description: "Tailwind for styling and some SCSS for animations.", icon: <TailwindIcon /> },
-    { title: "ShadCN/ui + Radix", description: "For unstyled out of the box proper components.", icon: <ShadCn /> },
-    { title: "Typescript", description: "For type safety and a better developer experience.", icon: <TypescriptIcon /> }
-];
+    useEffect(() => {
+        // Fetch data asynchronously
+        const fetchData = async () => {
+            try {
+                // Mimic the data fetching process
+                const response = await fetch('/api/banners');
+                const data = await response.json();
+                setBanners(data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
-const Carousel = () => {
+    // Handle rendering while data is being fetched
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    // Handle empty banners
+    if (banners.length === 0) {
+        return <div>No banners available.</div>;
+    }
+
     const settings = {
         dots: false,
         infinite: true,
         speed: 3000,
         slidesToShow: 4,
         autoplay: true,
-        autoplaySpeed: 50,
         cssEase: 'linear',
-        swipeToSlide: true,
+        swipeToSlide: false,
         touchThreshold: 10,
         responsive: [
             {
@@ -48,6 +68,7 @@ const Carousel = () => {
                 },
             },
         ],
+        rtl: scrollPosition > 400 ? false : true,
     };
 
     return (
@@ -61,4 +82,4 @@ const Carousel = () => {
     );
 };
 
-export { Carousel, banners };
+export default Carousel;
