@@ -9,15 +9,28 @@ import ReactIcon from './icons/ReactIcon';
 import ShadCn from './icons/ShadCn';
 import TailwindIcon from './icons/TailwindIcon';
 import TypescriptIcon from './icons/TypescriptIcon';
+import { Banner } from '@/components/CardContainer';
+
+
+
+const banners = [
+    { title: "Firebase", description: "For authentication + storage. Also some MySQL in the mix.", icon: <FirebaseLogo /> },
+    { title: "Next.js 13", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <NextIcon /> },
+    { title: "React 18", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <ReactIcon /> },
+    { title: "TailwindIcon", description: "Tailwind for styling and some SCSS for animations.", icon: <TailwindIcon /> },
+    { title: "ShadCN/ui + Radix", description: "For unstyled out of the box proper components.", icon: <ShadCn /> },
+    { title: "Typescript", description: "For type safety and a better developer experience.", icon: <TypescriptIcon /> }
+];
+
 
 const Carousel = () => {
     const settings = {
         dots: false,
         infinite: true,
-        speed: 2000,
-        slidesToShow: 1,
+        speed: 3000,
+        slidesToShow: 4,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 50,
         cssEase: 'linear',
         swipeToSlide: true,
         touchThreshold: 10,
@@ -37,15 +50,6 @@ const Carousel = () => {
         ],
     };
 
-    const banners = [
-        { title: "Firebase", description: "For authentication + storage. Also some MySQL in the mix.", icon: <FirebaseLogo /> },
-        { title: "Next.js 13", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <NextIcon /> },
-        { title: "React 18", description: "App dir, Routing, Layouts, Loading UI and API routes.", icon: <ReactIcon /> },
-        { title: "TailwindIcon", description: "Tailwind for styling and some SCSS for animations.", icon: <TailwindIcon /> },
-        { title: "ShadCN/ui + Radix", description: "For unstyled out of the box proper components.", icon: <ShadCn /> },
-        { title: "Typescript", description: "For type safety and a better developer experience.", icon: <TypescriptIcon /> }
-    ];
-
     return (
         <Slider {...settings}>
             {banners.map((banner, index) => (
@@ -57,4 +61,4 @@ const Carousel = () => {
     );
 };
 
-export default Carousel;
+export { Carousel, banners };

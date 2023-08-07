@@ -1,11 +1,10 @@
 'use client'; import React from 'react'
-import Banner from '@/components/CardContainer'
 import { motion } from 'framer-motion'
 
 export const HomeFeatures = () => (
   <section
     id="features"
-    className=" space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
+    className="  bg-slate-50  dark:bg-transparent git"
   >
     <div className="container mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
       <motion.h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl" initial={{ skewX: 9, opacity: 0, y: -20 }}
@@ -21,6 +20,7 @@ export const HomeFeatures = () => (
         Next.js 13 app dir.
       </motion.p>
     </div>
-    <Banner />
   </section>
 )
+
+export default HomeFeatures

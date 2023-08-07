@@ -67,20 +67,9 @@ p {
 .icon-card {
   position: relative;
   border-radius: 1.5rem;
-  width: 100%;
+  width: 90%;
   max-width: 320px;
   background-color: $black;
-  &:hover {
-    &::before {
-      opacity: 1;
-    }
-  }
-
-  &::before {
-    @include glowing-effect-instant;
-    scale: 0.9;
-    opacity: 0.1;
-  }
 
   &__inner {
     display: flex;

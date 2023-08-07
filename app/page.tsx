@@ -1,3 +1,4 @@
+import { HomeBanners } from './HomeBanners'
 import { HomeFeatures } from "./HomeFeatures"
 import Link from "next/link"
 import { Icon } from "@radix-ui/react-select"
@@ -9,8 +10,6 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import CardComponent from "@/components/CardComponent"
 import ToolCard from "@/components/CardComponent"
-import CardContainer from "@/components/CardContainer"
-import Banner from "@/components/CardContainer"
 import Cursor from "@/components/Cursor"
 import ReactIcon from "@/components/icons/ReactIcon"
 import TypescriptIcon from "@/components/icons/TypescriptIcon"
@@ -21,11 +20,9 @@ import IconGrid from "./../components/icons/IconGrid"
 import NextIcon from "./../components/icons/NextIcon"
 import ShadCn from "./../components/icons/ShadCn"
 import TailwindIcon from "./../components/icons/TailwindIcon"
-import { HomeIntroduction } from "./HomeIntroduction"
-import TrustedBySwiper from "./../components/ui/Swiper"
-import InfiniteSlider, { generateSlides } from "@/components/ui/Slide"
-import Carousel from './../components/ui/Slide';
 import { Card } from "@/components/ui/card"
+import { Carousel } from '@/components/CardContainer'
+import { HomeIntroduction } from './HomeIntroduction'
 async function getGitHubStars(): Promise<string | null> {
   try {
     const response = await fetch(
@@ -59,17 +56,11 @@ export default async function IndexPage() {
 
   return (
     <>
-      <Carousel />
       <HomeIntroduction title="Showcasing various UI's and features i've built." />
-      <HomeFeatures />
-      <div className="grid col-span-3 gap-3">
-        {banners.map((banner, index) => (
-          <div key={index}>
-            <ToolCard title={banner.title} description={banner.description} icon={banner.icon} />
-          </div>
-        ))}
 
-      </div>
+      <HomeFeatures />
+      <HomeBanners />
+      <Carousel />
     </>
   )
 }
