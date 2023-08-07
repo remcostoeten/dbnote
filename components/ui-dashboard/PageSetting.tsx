@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button"
+import React, { ChangeEvent } from "react";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -6,9 +7,9 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 interface Setting {
     id: string;
@@ -24,7 +25,7 @@ interface PageSettingProps {
     settings: Setting[];
 }
 
-export default function PageSetting({ title, description, settings }: PageSettingProps) {
+export default function PageSetting({ title, description, settings }: PageSettingProps): JSX.Element {
     return (
         <Card>
             <CardHeader>
@@ -43,12 +44,10 @@ export default function PageSetting({ title, description, settings }: PageSettin
                         <Switch
                             id={setting.id}
                             defaultChecked={setting.defaultChecked}
-                            onChange={(e: React.FormEvent<HTMLButtonElement>) => {
-                                const target = e.target as HTMLInputElement;
-                                setting.onToggle && setting.onToggle(target.checked);
+                            onCheckedChange={(isChecked: boolean) => {
+                                setting.onToggle && setting.onToggle(isChecked);
                             }}
                         />
-
                     </div>
                 ))}
             </CardContent>

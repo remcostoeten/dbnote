@@ -37,12 +37,12 @@ export default function Home() {
         settings={[
           {
             id: "necessary",
-            title: "Necessary Cookies",
+            title: "Toggle color",
             description:
-              "These cookies are essential for the website to function.",
+              "Fancy some teal?.",
             defaultChecked: true,
             onToggle: (isChecked) => {
-              console.log("Necessary Cookies toggled:", isChecked);
+              document.body.classList.toggle("d-perspective--color");
             },
           },
         ]}

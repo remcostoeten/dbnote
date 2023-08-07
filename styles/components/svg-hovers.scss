@@ -1,0 +1,48 @@
+.firebase {
+  fill: red;
+
+  path {
+    &:hover {
+      &:nth-child(1) {
+        fill: $color-primary;
+      }
+
+      &:nth-child(2) {
+        fill: $white;
+      }
+
+      &:nth-child(3) {
+        fill: $color-primary;
+      }
+
+      &:nth-child(4) {
+        fill: $white;
+      }
+    }
+  }
+  &:hover {
+    &__one {
+      path {
+        fill: $color-primary;
+      }
+    }
+
+    &__two {
+      path {
+        fill: $white;
+      }
+    }
+
+    &__three {
+      path {
+        fill: $color-primary;
+      }
+    }
+
+    &__four {
+      path {
+        fill: $white;
+      }
+    }
+  }
+}

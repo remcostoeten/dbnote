@@ -1,8 +1,5 @@
 import { LayoutIntroHeaderDescription } from "./LayoutIntroHeaderDescription"
-import uiLinks from "./ui-links"
 import { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRightIcon } from "@radix-ui/react-icons"
 
 import {
   PageHeader,
@@ -13,6 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { ExamplesNav } from "@/components/ui-dashboard/example-nav"
 import UiLinks from "./ui-links"
+import MsgBar from "@/components/MsgBar"
 
 export const metadata: Metadata = {
   title: "Ui showcase",
@@ -29,15 +27,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
     <>
       <div className="container relative flex flex-col">
         <PageHeader className="page-header pb-8">
-          <Link
-            href="/roadmap"
-            className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium"
-          >
-            🎉 <Separator className="mx-2 h-4" orientation="vertical" />
-            ETA off my own component library is ~ spring 2034.
-            <ArrowRightIcon className="ml-1 h-4 w-4" />
-          </Link>
-
+          <MsgBar />
           <LayoutIntroHeaderDescription />
           <UiLinks />
         </PageHeader>
