@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
-import PageSetting from "@/components/ui-dashboard/PageSetting"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import Link from "next/link"
