@@ -13,17 +13,15 @@ export default function UiLinks() {
     }, [])
 
     return (
-        <motion.section className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10" initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{
-                delay: 0.1,
-                duration: 0.5,
-                ease: "easeInOut",
-            }}>
+        <motion.section className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10" initial={{
+            opacity: 0, y: -20
+        }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}>
             <GlowButton
                 link="https://github.com/remcostoeten/dbnote/blob/develop/components/buttons/CustomButtons.tsx"
                 text="View component"
             />
-        </motion.section>
+        </motion.section >
     )
 }

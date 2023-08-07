@@ -87,7 +87,7 @@ export const BlobButton = ({ text }) => {
 export const BorderButton = ({ text, variant = "" }) => {
   return (
     <div className="border-btn h-[60px]">
-      <div className="absolute h-[60px]  w-[180px]">
+      <div className="absolute h-[60px]  w-[155px]">
         <button className={`button button--border ${variant}`}>
           <svg
             width="180px"

@@ -8,14 +8,9 @@ import { motion } from "framer-motion"
 export default function MsgBar() {
     return (
         <motion.span
-            initial={{ scale: 0.8, opacity: 0, y: -40 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.03, transition: { duration: 0.6 } }}
-            transition={{
-                delay: 0.1,
-                duration: 0.5,
-                ease: "easeInOut",
-            }}
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: .5 }}
             className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium"
         >
             <Link href="roadmap">

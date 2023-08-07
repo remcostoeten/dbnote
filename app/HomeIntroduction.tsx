@@ -22,7 +22,7 @@ export const HomeIntroduction = ({ title }) => {
           className="max-w-[48rem] w-full leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
         >
           I&apos;m a <span className="dutch">dutch</span> creative front-end developer
           with a graphic design degree. Passionate about unique development and creating UI's with micro-interactions.
