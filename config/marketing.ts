@@ -19,11 +19,11 @@ export const marketingConfig: MarketingConfig = {
   
     {
       title: "Docs",
-      href: "/docs",
+      href: "/docs/docs",
     },
     {
-      title: "Documentation",
-      href: "/docs",
-    },
+      title: "Ui elements",
+      href: "/ui-elements",
+    }
   ],
 }

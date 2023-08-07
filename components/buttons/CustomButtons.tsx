@@ -1,38 +1,42 @@
-import Link from "next/link";
-import { ReactNode } from "react";
-import { Button, buttonVariants } from "../ui/button";
+import { ReactNode } from "react"
+import Link from "next/link"
+
+import { Button, buttonVariants } from "../ui/button"
 
 interface ButtonProps {
-  text: string;
-  className?: string;
-  link?: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  children?: React.ReactNode;
+  text: string
+  className?: string
+  link?: string
+  onClick?: () => void
+  disabled?: boolean
+  children?: React.ReactNode
 }
 
-export const GlowButton = ({ text, className, link, onClick, disabled }: ButtonProps) => {
+export const GlowButton = ({
+  text,
+  className,
+  link,
+  onClick,
+  disabled,
+}: ButtonProps) => {
   return (
     <button
-      className={`${className ? className + ' ' : ''}button button--glow`}
+      className={`${className ? className + " " : ""}button button--glow`}
       type="button"
       onClick={onClick}
       disabled={disabled}
     >
-      {link ? <Link href={link}><a>{text}</a></Link> : text}
+      {link ? <Link href={link}>{text}</Link> : text}
     </button>
   )
 }
 
 export const WeakGlowButton = ({ text, link }) => {
-  return link ? (
-    <Link href={link} >button button--glow weak">{text}
-    </Link>
-  ) : (
+  return (
     <button className="button button--glow weak" type="button">
-      {text}
+      {link ? <Link href={link}>{text}</Link> : text}
     </button>
-  );
+  )
 }
 
 export const ProminentGlowButton = ({ text, link }) => {
@@ -58,19 +62,20 @@ export const SwapButton = ({ text }) => {
       <span>e</span>
       <span>!</span>
     </button>
-  );
+  )
 }
 
 interface BlobButtonProps {
-  text: string;
-  icon?: string;
+  text: string
+  icon?: string
 }
 
 export const BlobButton = ({ text, icon }: BlobButtonProps) => {
   return (
     <>
       <button className="blob-btn">
-        {icon && <i className={icon}></i>}{text}
+        {icon && <i className={icon}></i>}
+        {text}
         <span className="blob-btn__inner">
           <span className="blob-btn__blobs">
             <span className="blob-btn__blob"></span>
@@ -100,7 +105,7 @@ export const BlobButton = ({ text, icon }: BlobButtonProps) => {
         </defs>
       </svg>
     </>
-  );
+  )
 }
 
 export const BorderButton = ({ text, variant = "" }) => {
@@ -127,7 +132,7 @@ export const BorderButton = ({ text, variant = "" }) => {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
 export default function CustomButtons() {
@@ -161,5 +166,5 @@ export default function CustomButtons() {
         </div>
       </div>
     </div>
-  );
+  )
 }
