@@ -24,9 +24,8 @@ export const HomeIntroduction = ({ title }) => {
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          I&apos;m a <span className="dutch">dutch</span> front-end developer
-          with a graphic design degree. Passionate about building beautiful
-          applications. And lately features which help me be more productive.
+          I&apos;m a <span className="dutch">dutch</span> creative front-end developer
+          with a graphic design degree. Passionate about unique development and creating UI's with micro-interactions.
         </motion.p>
 
         <div className="absolute h-[20vh] w-[50vw]"></div>

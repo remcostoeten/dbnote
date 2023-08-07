@@ -1,8 +1,8 @@
 'use client';
-
-import React, { useEffect, useState } from 'react'
-import ToolCard from '@/components/CardComponent'
-import { Carousel, banners } from '@/components/CardContainer'
+import React, { useEffect, useState } from 'react';
+import ToolCard from '@/components/homepage/CardComponent';
+import { Carousel, banners } from '@/components/homepage/Carousel';
+import { motion } from 'framer-motion';
 
 export const HomeBanners = () => {
   const [scrollPosition, setScrollPosition] = useState(100);
@@ -19,20 +19,26 @@ export const HomeBanners = () => {
     };
   }, []);
 
-  console.log(scrollPosition)
+  console.log(scrollPosition);
 
   return (
     <>
-      <div className="container">
-        <div className="grid mx-auto gap-4 selection:grid col-span-3 gap-3 grid-cols-3 content-center items-center justify-items-center m-0">
+      <div className="container py-8">
+        <div className="grid mx-auto selection:grid col-span-3 gap-6 grid-cols-3 content-center items-center justify-items-center">
           {banners.map((banner, index) => (
-            <div key={index}>
+            <motion.div className='w-full'
+              key={index}
+              initial={{ scale: 0.8, opacity: 0, y: -40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.03, transition: { duration: .6 } }}
+              transition={{ delay: 0.9 + index * 0.05, duration: 0.5, ease: 'easeInOut' }}
+            >
               <ToolCard title={banner.title} description={banner.description} icon={banner.icon} />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
       <Carousel />
     </>
-  )
-}
+  );
+};

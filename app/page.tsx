@@ -8,8 +8,9 @@ import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import CardComponent from "@/components/CardComponent"
-import ToolCard from "@/components/CardComponent"
+
+import CardComponent from "@/components/homepage/CardComponent"
+import ToolCard from "@/components/homepage/CardComponent"
 import Cursor from "@/components/Cursor"
 import ReactIcon from "@/components/icons/ReactIcon"
 import TypescriptIcon from "@/components/icons/TypescriptIcon"
@@ -21,7 +22,7 @@ import NextIcon from "./../components/icons/NextIcon"
 import ShadCn from "./../components/icons/ShadCn"
 import TailwindIcon from "./../components/icons/TailwindIcon"
 import { Card } from "@/components/ui/card"
-import { Carousel } from '@/components/CardContainer'
+import { Carousel } from '@/components/homepage/Carousel'
 import { HomeIntroduction } from './HomeIntroduction'
 async function getGitHubStars(): Promise<string | null> {
   try {
@@ -60,7 +61,6 @@ export default async function IndexPage() {
 
       <HomeFeatures />
       <HomeBanners />
-      <Carousel />
     </>
   )
 }

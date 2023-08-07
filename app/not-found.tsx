@@ -5,6 +5,7 @@ import { toast } from "@/components/ui/use-toast"
 import PageSetting from "@/components/ui-dashboard/PageSetting"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import Link from "next/link"
 
 export default function NotFound() {
     const [showError, setShowError] = useState<boolean>(true)
@@ -60,8 +61,9 @@ export default function NotFound() {
     }
     return (
         <div className="error-wrapper">
-            <div className="flex items-center p-8 justify-between space-x-2">
-                <div className="flex  gap-4 flex-col items-center justify-between space-x-2">
+            <div className="flex items-center p-8 flex-end space-x-2 justify-between">
+                <Link className="text-2xl font-medium" href="/">Return back to home</Link>
+                <div className="flex items-center p-8 flex-end space-x-2 justify-between content-center">
                     <Label htmlFor="song" className="flex flex-col space-y-1">
                         <span className="font-2xl font-semibold">Switch song</span>
                     </Label>
@@ -72,82 +74,10 @@ export default function NotFound() {
                 </div>
             </div>
 
-            <div className="error">
-                <div className="wrap">
-                    <div className="error">
-                        <pre>
-                            <code>
-                                {"\n"}
-                                {"\t"} <span className="green">&lt;!</span>
-                                <span>DOCTYPE html</span>
-                                <span className="green">&gt;</span>
-                                {"\n"}
-                                <span className="orange">&lt;html&gt;</span>
-                                {"\n"}
-                                {"    "}
-                                <span className="orange">&lt;style&gt;</span>
-                                {"\n"}
-                                {"   "}* {"{"}
-                                {"\n"}
-                                {"\t"}
-                                {"\t"}
-                                {"        "}
-                                <span className="green">u dun</span>:
-                                <span className="blue">goofed</span>;{"\n"}
-                                {"}"}
-                                {"\n"}
-                                {"     "}
-                                <span className="orange">&lt;/style&gt;</span>
-                                {"\n"} <span className="orange">&lt;body&gt;</span> {"\n"}
-                                {"              "}.... YOU MADE A TYPO!{"\n"}
-                                {"\t"}
-                                {"\t"}
-                                {"\t"}
-                                {"\t"}ROUTE IS NOT FOUND!{"\n"}
-                                {"\t"}
-                                {"\t"}
-                                {"\t"}
-                                {"\t"}
-                                <span className="comment">
-                                    &lt;!--The file you are looking for, {"\n"}
-                                    {"\t"}
-                                    {"\t"}
-                                    {"\t"}
-                                    {"\t"}
-                                    {"\t"}is not where you think it is.--&gt;{"\n"}
-                                    {"\t"}
-                                    {"\t"}
-                                </span>
-                                {"\n"} <span className="orange" /> {"\n"}
-                                {"\t"}
-                                {"\t"}
-                                {"\t"}
-                                {"  "}
-                                {"\n"}
-                                {"\n"}
-                                {"\n"}
-                            </code>
-                        </pre>
-                    </div>
-                    <code>
-                        <br />
-                        <span className="info">
-                            <br />
-                            <span className="orange">&nbsp;&lt;/body&gt;</span>
-                            <br />
-                            <span className="orange">&lt;/html&gt;</span>
-                        </span>
-                    </code>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            router.push("/")
-                            window.location.reload()
-                        }}
-                    ></button>
-                </div>
-            </div>
-            <audio ref={elevatorRef} src="/music.mp3" loop autoPlay />
+            <div className="error">404</div>
+            <br /><br />
+            <span className="info">File not found</span>
+            <img src="http://images2.layoutsparks.com/1/160030/too-much-tv-static.gif" className="static" />            <audio ref={elevatorRef} src="/music.mp3" loop autoPlay />
 
             <audio ref={abbaRef} src="/abba.mp3" loop />
         </div>

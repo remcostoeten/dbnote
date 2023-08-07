@@ -16,6 +16,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { MainNav } from "@/components/header/navigation-items"
 import { marketingConfig } from "@/config/marketing"
 import Cursor from "@/components/Cursor"
+import TrailerCursor from "@/components/TrailerCursor"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -98,11 +99,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>
-              <div className="page-wrapper__inner h-[20000px]">{children}</div>
+              <div className="page-wrapper__inner">{children}</div>
             </div>
             <Analytics />
             <Toaster />
             <TailwindIndicator />
+            <TrailerCursor />
           </ThemeProvider>
         </CursorProvider>
       </body>
