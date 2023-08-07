@@ -1,21 +1,21 @@
-// .cursor {
-//   width: 40px;
-//   height: 40px;
-//   border-radius: 100%;
-//   position: fixed;
-//   transform: translate(-50%, -50%);
-//   pointer-events: none;
-//   z-index: 9999;
-//   transition: width 333ms ease, height 333ms ease-in-out;
-// }
+.cursor {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 333ms ease, height 333ms ease-in-out;
+}
 
-// * {
-//   cursor: none;
+* {
+  cursor: none;
 
-//   &:hover {
-//     cursor: none;
-//   }
-// }
+  &:hover {
+    cursor: none;
+  }
+}
 
 body:hover > #trailer {
   opacity: 1;

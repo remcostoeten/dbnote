@@ -16,9 +16,9 @@ export default function Cursor() {
           position: "fixed",
           zIndex: 9999,
           pointerEvents: "none",
-          // transform: `translate3d(${position.x - (linkHovered ? 0 : 0)}px, ${
-          // position.y - (linkHovered ? 0 : 0)
-          // }px, 0)`,
+          transform: `translate3d(${position.x - (linkHovered ? 0 : 0)}px, ${
+            position.y - (linkHovered ? 0 : 0)
+          }px, 0)`,
         }}
       >
         <path
