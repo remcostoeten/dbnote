@@ -15,13 +15,15 @@ import {
 import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import Google from "@/components/Google"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
+import { BlobButton } from "@/components/buttons/CustomButtons"
+import { GlowButton } from './../../components/buttons/CustomButtons';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -213,10 +215,9 @@ export default function LoginPage() {
             </span>
           </div>
         </div>
-
-        <button
-          type="button"
-          className={cn(buttonVariants({ variant: "outline" }))}
+        <GlowButton
+          text=" Google"
+          className="w-full text-center mx-auto flex justify-center"
           onClick={signInWithGoogle}
           disabled={isLoading || isGoogleLoading}
         >
@@ -227,15 +228,14 @@ export default function LoginPage() {
             </>
           ) : (
             <>
-              <span className="mr-2 h-4 w-4">
+              <div className="flex align-center items-center justify-center">
                 <Google />
-                Google
-              </span>
+              </div>
             </>
           )}
-        </button>
+        </GlowButton>
 
-        <p className="px-8 text-center text-sm text-muted-foreground">
+        <p className="px-8 text-center text-sm text-muted-foreground mx-auto">
           <Link
             href="/register"
             className="hover:text-brand underline underline-offset-4"
@@ -244,6 +244,6 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </div >
   )
 }

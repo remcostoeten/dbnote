@@ -1,24 +1,39 @@
-"use client"
+import Link from "next/link";
+import { ReactNode } from "react";
+import { Button, buttonVariants } from "../ui/button";
 
-import Link from "next/link"
-import { Button, buttonVariants } from "../ui/button"
+interface ButtonProps {
+  text: string;
+  className?: string;
+  link?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  children?: React.ReactNode;
+}
 
-export const GlowButton = ({ text, link }) => {
+export const GlowButton = ({ text, className, link, onClick, disabled }: ButtonProps) => {
   return (
-    <button className="button button--glow" type="button">
-      {link ? <Link href={link}>{text}</Link> : text}
+    <button
+      className={`${className ? className + ' ' : ''}button button--glow`}
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {link ? <Link href={link}><a>{text}</a></Link> : text}
     </button>
   )
 }
 
 export const WeakGlowButton = ({ text, link }) => {
-  return (
+  return link ? (
+    <Link href={link} >button button--glow weak">{text}
+    </Link>
+  ) : (
     <button className="button button--glow weak" type="button">
-      {link ? <Link href={link}>{text}</Link> : text}
+      {text}
     </button>
-  )
+  );
 }
-
 
 export const ProminentGlowButton = ({ text, link }) => {
   return (
@@ -27,7 +42,6 @@ export const ProminentGlowButton = ({ text, link }) => {
     </button>
   )
 }
-
 
 export const SwapButton = ({ text }) => {
   return (
@@ -44,14 +58,19 @@ export const SwapButton = ({ text }) => {
       <span>e</span>
       <span>!</span>
     </button>
-  )
+  );
 }
 
-export const BlobButton = ({ text }) => {
+interface BlobButtonProps {
+  text: string;
+  icon?: string;
+}
+
+export const BlobButton = ({ text, icon }: BlobButtonProps) => {
   return (
     <>
       <button className="blob-btn">
-        Blob Button
+        {icon && <i className={icon}></i>}{text}
         <span className="blob-btn__inner">
           <span className="blob-btn__blobs">
             <span className="blob-btn__blob"></span>
@@ -73,7 +92,7 @@ export const BlobButton = ({ text }) => {
             <feColorMatrix
               in="blur"
               mode="matrix"
-              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
+              values="1 0 0 0 0 0 1 0   0 0 0 0 1 0 0 0 0 0 21 -7"
               result="goo"
             ></feColorMatrix>
             <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
@@ -81,13 +100,13 @@ export const BlobButton = ({ text }) => {
         </defs>
       </svg>
     </>
-  )
+  );
 }
 
 export const BorderButton = ({ text, variant = "" }) => {
   return (
     <div className="border-btn h-[60px]">
-      <div className="absolute h-[60px]  w-[155px]">
+      <div className="absolute h-[60px] w-[155px]">
         <button className={`button button--border ${variant}`}>
           <svg
             width="180px"
@@ -108,33 +127,33 @@ export const BorderButton = ({ text, variant = "" }) => {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default function CustomButtons() {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="font-semibold">
-        Swap buton (hover to see effect === bugged
+        Swap button (hover to see effect) === bugged
       </h2>
-      <SwapButton text="Swap on hover" />{" "}
-      <h2 className="font-semibold ">Stock shadcn/ui</h2>
+      <SwapButton text="Swap on hover" />
+      <h2 className="font-semibold">Stock shadcn/ui</h2>
       <Button className={buttonVariants({ variant: "outline" })}>
         Click here
       </Button>
-      <h2 className="m font-semibold">Stock shadcn/ui Link"</h2>
+      <h2 className="font-semibold">Stock shadcn/ui Link</h2>
       <Link href="#" className={buttonVariants({ variant: "outline" })}>
         Click here
       </Link>
-      <h2 className="font-semibold ">Glow on hover</h2>
+      <h2 className="font-semibold">Glow on hover</h2>
       <GlowButton text="Glow on hover" link={undefined} />
-      <h2 className="font-semibold ">Weak Glow</h2>
+      <h2 className="font-semibold">Weak Glow</h2>
       <WeakGlowButton text="Weak Glow on hover" link={undefined} />
-      <h2 className="font-semibold ">Prominent Glow</h2>
+      <h2 className="font-semibold">Prominent Glow</h2>
       <ProminentGlowButton text="Prominent Glow on hover" link={undefined} />
-      <h2 className="font-semibold ">Blob buton</h2>
+      <h2 className="font-semibold">Blob button</h2>
       <BlobButton text="Blob on hover" />
-      <h2 className="font-semibold">Border buton</h2>
+      <h2 className="font-semibold">Border button</h2>
       <div className="flex flex-col gap-2 sm:flex-row">
         <BorderButton text="Border on hover" variant={undefined} />
         <div className="left-[270px] sm:absolute">
@@ -142,5 +161,5 @@ export default function CustomButtons() {
         </div>
       </div>
     </div>
-  )
+  );
 }
