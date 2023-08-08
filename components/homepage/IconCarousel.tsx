@@ -11,7 +11,6 @@ import GitICon from "@/components/icons/GitICon";
 import LinkedIn from "@/components/icons/LinkedIn";
 import Magento from "@/components/icons/Magento";
 import Mui from "@/components/icons/Mui";
-import Next from "@/components/icons/Next";
 import Photoshop from "@/components/icons/PhotoshopIcon";
 import Sass from "@/components/icons/Sass";
 import Sketch from "@/components/icons/Sketch";
@@ -23,7 +22,6 @@ const banners = [
     { icon: <LinkedIn /> },
     { icon: <Magento /> },
     { icon: <Mui /> },
-    { icon: <Next /> },
     { icon: <Photoshop /> },
     { icon: <Sass /> },
     { icon: <Sketch /> },
