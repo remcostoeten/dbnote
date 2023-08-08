@@ -4,6 +4,37 @@
 // @import "@radix-ui/colors/purple.css";
 // @import "@radix-ui/colors/violet.css";
 
+.header {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    animation: borderGrow 1s 2s ease-in forwards;
+    bottom: 0;
+    width: 0;
+    left: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #48484e, transparent);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    animation: borderGrow 1s 2s ease-in forwards;
+    bottom: 0;
+    width: 0;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #4a4a50, transparent);
+  }
+  &::hover {
+    a.hidden.items-center.space-x-2.md\:flex {
+      scale: 2;
+    }
+  }
+}
+
 /* reset */
 
 .NavigationMenuRoot {

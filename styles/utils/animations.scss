@@ -1,3 +1,33 @@
+// header border on load animatiion
+@keyframes borderGrow {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 45vw;
+  }
+}
+
+@keyframes leftIn {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 15%;
+  }
+}
+
+@keyframes rightIn {
+  from {
+    right: 0;
+  }
+  to {
+    right: 15%;
+  }
+}
+
 // Animation for glowing btn/element effect.
 @keyframes glowing {
   0% {
