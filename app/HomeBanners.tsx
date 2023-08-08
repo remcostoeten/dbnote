@@ -23,7 +23,7 @@ export const HomeBanners = () => {
 
   return (
     <>
-      <div className="container py-8">
+      <div className="big-container pt-8 mQ3_iconsb-22">
         <div className="grid mx-auto selection:grid col-span-3 gap-6 grid-cols-3 content-center items-center justify-items-center">
           {banners.map((banner, index) => (
             <motion.div className='w-full'
@@ -38,7 +38,6 @@ export const HomeBanners = () => {
           ))}
         </div>
       </div>
-      <Carousel />
     </>
   );
 };

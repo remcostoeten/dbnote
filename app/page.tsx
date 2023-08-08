@@ -24,6 +24,7 @@ import TailwindIcon from "./../components/icons/TailwindIcon"
 import { Card } from "@/components/ui/card"
 import { Carousel } from '@/components/homepage/Carousel'
 import { HomeIntroduction } from './HomeIntroduction'
+import { IconCarousel } from '@/components/homepage/IconCarousel'
 
 export default async function IndexPage() {
   return (
@@ -32,6 +33,7 @@ export default async function IndexPage() {
 
       <HomeFeatures />
       <HomeBanners />
+      <IconCarousel />
     </>
   )
 }

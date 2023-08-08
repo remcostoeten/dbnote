@@ -17,6 +17,13 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    bigContainer: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1600px",
+      },
+    },
     extend: {
       borderColor: {
         DEFAULT: "#27272a",

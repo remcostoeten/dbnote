@@ -12,7 +12,7 @@ import NpmIcon from "./NpmIcon";
 import Photoshop from "./Photoshop";
 import Sass from "./Sass";
 import Sketch from "./Sketch";
-import StyledComponentIcon from "./StyledComponentIcon";
+import StyledComponentIcon from "./PhotoshopIcon";
 import TailwindIcon from "./TailwindIcon";
 import TypescriptIcon from "./TypescriptIcon";
 import Vim from "./Vim";

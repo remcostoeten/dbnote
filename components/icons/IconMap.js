@@ -16,7 +16,7 @@ import { Photoshop } from "./Photoshop"
 import { ReactIcon } from "./ReactIcon"
 import { Sass } from "./Sass"
 import { Sketch } from "./Sketch"
-import { StyledComponentIcon } from "./StyledComponentIcon"
+import { StyledComponentIcon } from "./PhotoshopIcon"
 import { TailwindIcon } from "./TailwindIcon"
 import { TypescriptIcon } from "./TypescriptIcon"
 import { Vim } from "./Vim"
@@ -74,7 +74,7 @@ export default function IconMap() {
   return (
     <div className="grid grid-cols-4 gap-4">
       {iconsToShow.map((icon) => (
-        <div key={icon} className="flex justify-center items-center">
+        <div key={icon} className="flex items-center justify-center">
           {iconMapper[icon]}
         </div>
       ))}

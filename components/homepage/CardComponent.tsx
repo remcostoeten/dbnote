@@ -6,7 +6,7 @@ interface ToolCardProps {
 
 const ToolCard: React.FC<ToolCardProps> = ({ icon, title, description }) => {
   return (
-    <div className="icon-card border flex h-[200px] flex-col justify-between rounded-md p-6">
+    <div className="icon-card border flex h-[250px] flex-col justify-between rounded-md p-6">
       <div className="icon-card__inner space-y-1">
 
         <span className="font-bold items-start" >{icon}</span>
