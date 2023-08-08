@@ -123,7 +123,7 @@ export function MainNav({ items, children }: MainNavProps) {
                   href={item.done ? item.href : "#"} // Disable link if "done" is false
                   className={cn(
                     "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    "text-foreground/60",
+                    "text-white ",
                     item.done === false && "cursor-not-allowed opacity-80" // Add "disabled" class if "done" is false
                   )}
                 >

@@ -2,6 +2,10 @@ body {
   min-height: 3vh;
 }
 
+.z-max {
+  z-index: 999;
+}
+
 // // Utils
 @import "./utils/animations.scss";
 @import "./utils/variables.scss";
