@@ -7,12 +7,12 @@ export default function Home() {
     const [isHovered, setIsHovered] = useState(false);
     const { x, y } = useMousePosition();
     const [size, setSize] = useState(40);
-    const [maskPosition, setMaskPosition] = useState({ x: x - size / 2, y: y - size / 2 });
+    const [maskPosition, setMaskPosition] = useState({ x: - size / 2, y: - size / 2 });
     const [maskSize, setMaskSize] = useState(size);
 
     useEffect(() => {
         setSize(isHovered ? 400 : 40);
-        setMaskPosition({ x: x - size / 2, y: y - size / 2 });
+        setMaskPosition({ x: - size / 2, y: - size / 2 });
         setMaskSize(size);
     }, [x, y, isHovered]);
 
