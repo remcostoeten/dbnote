@@ -11,7 +11,7 @@ import { ArrowTopLeftIcon } from '@radix-ui/react-icons'
 import router from "next/router"
 import { motion } from "framer-motion"
 
-export default function NotFound() {
+export default function Error() {
     const [showError, setShowError] = useState<boolean>(true)
     const [playAbba, setPlayAbba] = useState<boolean>(false)
     const elevatorRef = useRef<HTMLAudioElement>(null)

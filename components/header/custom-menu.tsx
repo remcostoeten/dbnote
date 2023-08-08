@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { useEffect, useRef, useState } from "react";
 
 interface Component {
   title: string;
@@ -56,21 +57,20 @@ const components: Component[] = [
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
 ]
-
 export default function CustomMenu() {
-  const [activeItem, setActiveItem] = React.useState<number | null>(null);
-  const menuRef = React.useRef(null);
+  const [activeItem, setActiveItem] = useState<number | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null); // Specify the type of the ref
 
-  const handleOutsideClick = (e) => {
-    if (menuRef.current && !menuRef.current.contains(e.target)) {
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
       setActiveItem(null);
     }
   };
 
-  React.useEffect(() => {
-    document.addEventListener("click", handleOutsideClick);
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
     return () => {
-      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener('click', handleOutsideClick);
     };
   }, []);
 
@@ -78,61 +78,26 @@ export default function CustomMenu() {
     <NavigationMenu ref={menuRef}>
       <NavigationMenuList>
         <NavigationMenuItem
-          className={activeItem === 0 ? "active" : ""}
+          className={activeItem === 0 ? 'active' : ''}
           onClick={() => setActiveItem(0)}
           onMouseLeave={() => setActiveItem(null)}
         >
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent> onclick add class active
-          </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem
-          className={activeItem === 1 ? "active" : ""}
+          className={activeItem === 1 ? 'active' : ''}
           onClick={() => setActiveItem(1)}
           onMouseLeave={() => setActiveItem(null)}
         >
           <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
+            {components.map((component, index) => (
+              <NavigationMenuLink key={index} href={component.href}>
+                {component.title}
+              </NavigationMenuLink>
+            ))}
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-ListItem.displayName = "ListItem"
