@@ -12,6 +12,11 @@ export const marketingConfig: MarketingConfig = {
       done: true,
     },
     {
+      title: "forms",
+      href: "/forms",
+      done: true,
+    },
+    {
       title: "Url extractor",
       href: "/url-extract",
       done: false,

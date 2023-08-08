@@ -14,7 +14,7 @@ import { Icons } from "@/components/icons"
 import { MobileNav } from "@/components/mobile-nav"
 
 import LogoIconOnly from "../LogoIconOnly"
-import CustomMenu from "./custom-menu"
+
 import { motion } from "framer-motion"
 import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
 
@@ -136,7 +136,6 @@ export function MainNav({ items, children }: MainNavProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <CustomMenu />
             </motion.div>
           </nav>
           <span className="flex-end flex w-max flex-1 items-center justify-end">

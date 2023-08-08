@@ -103,7 +103,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Analytics />
             <Toaster />
             <TailwindIndicator />
-            <Cursor />
           </ThemeProvider>
         </CursorProvider>
       </body>
