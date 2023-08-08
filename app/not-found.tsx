@@ -7,13 +7,15 @@ import { useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { toast } from "@/components/ui/use-toast"
+import { ArrowTopLeftIcon } from '@radix-ui/react-icons'
+import router from "next/router"
+import { motion } from "framer-motion"
 
 export default function NotFound() {
     const [showError, setShowError] = useState<boolean>(true)
     const [playAbba, setPlayAbba] = useState<boolean>(false)
     const elevatorRef = useRef<HTMLAudioElement>(null)
     const abbaRef = useRef<HTMLAudioElement>(null)
-    const router = useRouter()
 
     useEffect(() => {
         setTimeout(() => {
@@ -63,9 +65,11 @@ export default function NotFound() {
     return (
         <div className="error-wrapper">
             <div className="flex items-center p-8 flex-end space-x-2 justify-between">
-                <Link className="text-2xl font-medium" href="/">
-                    Return back to home
-                </Link>
+                <motion.link
+                    whileHover={{ scale: 1.04, transition: { duration: .6 } }}
+                    transition={{ delay: 0.2, duration: 0.5, ease: 'easeInOut' }} className="text-sm flex gap-2 items-center align-middle font-medium" href="/">
+                    <ArrowTopLeftIcon width={25} height={25} /><span>Return back to home</span>
+                </motion.link>
                 <div className="flex items-center p-8 flex-end space-x-2 justify-between content-center">
                     <Label htmlFor="song" className="flex flex-col space-y-1">
                         <span className="font-2xl font-semibold">Switch song</span>
@@ -73,10 +77,10 @@ export default function NotFound() {
                     <Switch id="song" onClick={(e) => switchSong()} />
                 </div>
             </div>
-            <div className="error">404</div>
+            <div className="error font-[80px]">404</div>
             <br />
             <br />
-            <span className="info">File not found</span>
+            <span className="info font-[40px]">File not found</span>
             <img
                 src="http://images2.layoutsparks.com/1/160030/too-much-tv-static.gif"
                 className="static"

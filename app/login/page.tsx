@@ -24,6 +24,7 @@ import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
 import { BlobButton } from "@/components/buttons/CustomButtons"
 import { GlowButton } from './../../components/buttons/CustomButtons';
+import router from "next/router"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -31,7 +32,6 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [rememberEmail, setRememberEmail] = useState(false)
-  const router = useRouter()
   const auth = getAuth()
   const [user, setUser] = useState(null)
 

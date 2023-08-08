@@ -2,8 +2,9 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+import { MdxCard } from '@/components/mdx-card';
 
-interface EmptyPlaceholderProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface EmptyPlaceholderProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function EmptyPlaceholder({
   className,
@@ -13,12 +14,12 @@ export function EmptyPlaceholder({
   return (
     <div
       className={cn(
-        "flex min-h-[400px] flex-col items-center justify-center rounded-md border border-dashed p-8 text-center animate-in fade-in-50",
+        "flex min-h-[400px] flex-col items-center justify-center rounded-md border border-dashed p-8 text-center animate-in z-max fade-in-50",
         className
       )}
       {...props}
     >
-      <div className="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center">
+      <div className="mx-auto z-max flex max-w-[420px] flex-col items-center justify-center text-center">
         {children}
       </div>
     </div>
@@ -49,7 +50,7 @@ EmptyPlaceholder.Icon = function EmptyPlaceHolderIcon({
 }
 
 interface EmptyPlacholderTitleProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {}
+  extends React.HTMLAttributes<HTMLHeadingElement> { }
 
 EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
   className,
@@ -61,7 +62,7 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
 }
 
 interface EmptyPlacholderDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
+  extends React.HTMLAttributes<HTMLParagraphElement> { }
 
 EmptyPlaceholder.Description = function EmptyPlaceholderDescription({
   className,
