@@ -55,7 +55,7 @@ const IconCarousel = () => {
 
     const settings = {
         dots: false,
-        navigator: false
+        navigator: false,
         infinite: true,
         speed: 5000,
         slidesToShow: 14,
