@@ -1,0 +1,33 @@
+.slick-slider {
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(
+      90deg,
+      rgba(3, 7, 17) 50%,
+      rgba(3, 7, 17, 0) 100%
+    );
+    position: absolute;
+    left: 0;
+    top: -50px;
+    z-index: 10;
+  }
+  &::after {
+    content: "";
+    width: 300px;
+    height: 200px;
+    background: linear-gradient(
+      90deg,
+      rgba(3, 7, 17) 50%,
+      rgba(3, 7, 17, 0) 100%
+    );
+    position: absolute;
+    right: 0;
+    transform: rotate(180deg);
+    top: -50px;
+    z-index: 10;
+  }
+}

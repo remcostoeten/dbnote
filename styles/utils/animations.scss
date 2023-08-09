@@ -117,8 +117,9 @@
 }
 
 @keyframes bg-scrolling-reverse {
+  // base animation for the grid tile background to move slighly. Used @bg.scss page-wrapper::before & ::after.
   100% {
-    background-position: 25px 25px;
+    background-position: 175px 175px;
   }
 }
 

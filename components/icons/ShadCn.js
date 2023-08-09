@@ -3,6 +3,7 @@ export default function ShadCn() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className="h-6 w-6"
+      height={40}
       viewBox="0 0 256 256"
     >
       <path fill="none" d="M0 0H256V256H0z"></path>
