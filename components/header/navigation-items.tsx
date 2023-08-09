@@ -17,6 +17,7 @@ import LogoIconOnly from "../LogoIconOnly"
 
 import { motion } from "framer-motion"
 import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
+import { Megamenu } from "../Megamenu"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -138,6 +139,7 @@ export function MainNav({ items, children }: MainNavProps) {
             >
             </motion.div>
           </nav>
+          <Megamenu />
           <span className="flex-end flex w-max flex-1 items-center justify-end">
             {userProfilePicture && (
               <motion.img

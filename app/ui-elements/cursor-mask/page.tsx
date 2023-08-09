@@ -1,30 +1,23 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import useMousePosition from '@/lib/useMousePosition';
 import styles from '@/styles/modules/mask-cursor.module.scss';
 
 export default function Home() {
     const [isHovered, setIsHovered] = useState(false);
     const { x, y } = useMousePosition();
-    const [size, setSize] = useState(40);
-    const [maskPosition, setMaskPosition] = useState({ x: - size / 2, y: - size / 2 });
-    const [maskSize, setMaskSize] = useState(size);
-
-    useEffect(() => {
-        setSize(isHovered ? 400 : 40);
-        setMaskPosition({ x: - size / 2, y: - size / 2 });
-        setMaskSize(size);
-    }, [x, y, isHovered]);
+    const size = isHovered ? 400 : 40;
 
     return (
         <main className={styles.main}>
-            <div
+            <motion.div
                 className={styles.mask}
-                style={{
-                    WebkitMaskPosition: `${maskPosition.x}px ${maskPosition.y}px`,
-                    WebkitMaskSize: `${maskSize}px`,
-                    transition: 'all 0.5s ease-out'
+                animate={{
+                    WebkitMaskPosition: `${x - size / 2 - 930}px ${y - size / 2 - 200}px`,
+                    WebkitMaskSize: `${size}px`,
                 }}
+                transition={{ type: 'tween', ease: 'backOut', duration: 0.5 }}
             >
                 <p
                     onMouseEnter={() => {
@@ -36,11 +29,11 @@ export default function Home() {
                 >
                     A visual designer - with skills that haven't been replaced by A.I (yet) - making good shit only if the paycheck is equally good.
                 </p>
-            </div>
+            </motion.div>
 
             <div className={styles.body}>
                 <p>
-                    I'm a <span>selectively skilled</span> product designer with a strong focus on producing high-quality & impactful digital experiences.
+                    I'm a <span>selectively skilled</span> product designer with a strong focus on producing high-quality and impactful digital experiences.
                 </p>
             </div>
         </main>

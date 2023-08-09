@@ -4,11 +4,13 @@ import type { Icon } from "lucide-react"
 import { Icons } from "@/components/icons"
 
 export type NavItem = {
-  title: string
-  href: string
-  disabled?: boolean
-  done?: boolean
-}
+  title: string;
+  href: string;
+  disabled?: boolean;
+  done?: boolean;
+  dropdown?: NavItem[];
+  [navItem]?: NavItem;
+};
 
 export type MainNavItem = NavItem
 

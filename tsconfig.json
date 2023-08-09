@@ -51,7 +51,8 @@
     "app/dashboard/page.tsx",
     "components/icons.tsx",
     "components/icons/IconGrid.tsx",
-    "lib/useMousePosition.tsx"
+    "lib/useMousePosition.tsx",
+    "components/header/custom-menu.tsx"
   ],
   "exclude": [
     "node_modules"

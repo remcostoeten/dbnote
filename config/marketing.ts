@@ -9,26 +9,18 @@ export const marketingConfig: MarketingConfig = {
     {
       title: "Html to JSX",
       href: "/html-to-jsx",
-      done: true,
     },
     {
       title: "forms",
       href: "/forms",
-      done: true,
     },
     {
       title: "Url extractor",
       href: "/url-extract",
-      done: false,
     },
-  
     {
       title: "Docs",
       href: "/docs/docs",
     },
-    {
-      title: "Ui elements",
-      href: "/ui-elements",
-    }
   ],
 }

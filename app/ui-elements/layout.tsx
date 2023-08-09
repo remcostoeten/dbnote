@@ -1,5 +1,6 @@
-import { LayoutIntroHeaderDescription } from "./LayoutIntroHeaderDescription"
+'use client'; import { LayoutIntroHeaderDescription } from "./LayoutIntroHeaderDescription"
 import { Metadata } from "next"
+import { motion } from "framer-motion"
 
 import {
   PageHeader,
@@ -12,11 +13,11 @@ import { ExamplesNav } from "@/components/ui-dashboard/example-nav"
 import UiLinks from "./ui-links"
 import MsgBar from "@/components/MsgBar"
 
-export const metadata: Metadata = {
-  title: "Ui showcase",
-  description:
-    "Check out some examples app built using the components. I've made countless UI's which I all have scrapped. Some repos have over 700+ commits before getting sick off it. ",
-}
+// export const metadata: Metadata = {
+// title: "Ui showcase",
+// description:
+// "Check out some examples app built using the components. I've made countless UI's which I all have scrapped. Some repos have over 700+ commits before getting sick off it. ",
+// }
 
 interface UiShowcaseLayoutProps {
   children: React.ReactNode
@@ -32,12 +33,17 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
           <UiLinks />
         </PageHeader>
         <section>
-          <ExamplesNav />
-          <div className="min-h-[65vh] space-y-6 border p-10 pb-16 shadow">
+          <motion.div className="min-h-[65vh] space-y-6 border p-10 pb-16 shadow"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 1 }}
+
+          >
+            <ExamplesNav />
             {children}
-          </div>
-        </section>
-      </div>
+          </motion.div>
+        </section >
+      </div >
     </>
   )
 }
