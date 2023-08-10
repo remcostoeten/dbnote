@@ -117,10 +117,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container -z-10 relative flex h-screen -translate-y-36 flex-col items-center justify-center">
+    <div className="container mt-24 relative flex h-screen -translate-y-36 flex-col items-center justify-center">
       <Link href="/">
         <motion.div
-          className="absolute left-0 top-4 flex items-center pl-8 align-middle"
+          className="absolute left-0 top-14 flex items-center pl-8 align-middle"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           whileTap={{ scale: 0.9 }}
