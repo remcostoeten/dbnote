@@ -5,8 +5,8 @@ import { TypeAnimation } from "react-type-animation"
 
 import { CursorProvider } from "@/lib/CursorContext"
 
+import { removeAllExceptCharacter } from "../lib/rmCharacters"
 import BlinkingCursor from "./BlinkingCursor"
-import { removeAllExceptCharacter } from "@/utils"
 
 export default function Terminal({ title, computer, paragraph }) {
   const [inputFocused, setInputFocused] = useState(false)
@@ -22,7 +22,6 @@ export default function Terminal({ title, computer, paragraph }) {
     const newText = removeAllExceptCharacter(character)
     setFilteredText(newText)
   }, [character])
-
 
   return (
     <>
