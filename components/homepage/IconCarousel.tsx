@@ -16,6 +16,7 @@ import Sass from "@/components/icons/Sass";
 import Sketch from "@/components/icons/Sketch";
 import Vim from "@/components/icons/Vim";
 import Vue from "@/components/icons/Vue";
+import { cubicBezier, motion } from 'framer-motion';
 const banners = [
     { icon: <BootstrapIcon /> },
     { icon: <GitICon /> },
@@ -70,9 +71,14 @@ const IconCarousel = () => {
     return (
         <Slider {...settings}>
             {banners.map((banner, index) => (
-                <div key={index}>
+                <motion.div
+                    initial={{ opacity: 0, y: -5, scale: .2, transformOrigin: 'left', translateX: -50 }}
+                    animate={{ opacity: 1, y: 0, scale: 1, transformOrigin: 'left', translateX: 0 }}
+                    transition={{ delay: 1.1, duration: 0.5, ease: cubicBezier(0.35, 0.17, 0.46, 0.35) }}
+
+                    key={index}>
                     {banner.icon}
-                </div>
+                </motion.div>
             ))}
         </Slider>
     );

@@ -30,7 +30,6 @@ export default async function IndexPage() {
   return (
     <>
       <HomeIntroduction title="Showcasing various UI's and features i've built." />
-
       <HomeFeatures />
       <HomeBanners />
       <IconCarousel />
