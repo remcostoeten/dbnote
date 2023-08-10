@@ -62,7 +62,7 @@ const Carousel = () => {
     };
 
     return (
-        <Slider {...settings}>
+        <Slider className="mt-4" {...settings}>
             {banners.map((banner, index) => (
                 <div key={index}>
                     <ToolCard title={banner.title} description={banner.description} icon={banner.icon} />

@@ -121,7 +121,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
               >
                 <Link
-                  href={item.done ? item.href : "#"} // Disable link if "done" is false
+                  href={item.done ? item.href : item.href} // Disable link if "done" is false
                   className={cn(
                     "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
                     "text-white ",

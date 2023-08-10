@@ -64,7 +64,7 @@ export default function RegisterPage() {
             </Label>
             <Input
               id="name"
-              placeholder="Johny Sins"
+              placeholder="Jan Jansma"
               type="name"
               autoCapitalize="none"
               autoComplete="name"

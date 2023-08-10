@@ -33,7 +33,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
           <UiLinks />
         </PageHeader>
         <section>
-          <motion.div className="min-h-[65vh] space-y-6 border p-10 pb-16 shadow"
+          <motion.div className="min-h-[70vh] space-y-6 border p-10 pb-16 shadow"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 1 }}
