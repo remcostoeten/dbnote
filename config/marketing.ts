@@ -11,10 +11,6 @@ export const marketingConfig: MarketingConfig = {
       href: "/html-to-jsx",
     },
     {
-      title: "forms",
-      href: "/forms",
-    },
-    {
       title: "Url extractor",
       href: "https://vsc.remcostoeten.com/url",
       target: "_blank",

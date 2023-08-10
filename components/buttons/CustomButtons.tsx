@@ -142,11 +142,11 @@ export default function CustomButtons() {
         Swap button (hover to see effect) === bugged
       </h2>
       <SwapButton text="Swap on hover" />
-      <h2 className="font-semibold">Stock shadcn/ui</h2>
+      <h2 className="font-semibold">Stock remcostoeten/ui</h2>
       <Button className={buttonVariants({ variant: "outline" })}>
         Click here
       </Button>
-      <h2 className="font-semibold">Stock shadcn/ui Link</h2>
+      <h2 className="font-semibold">Stock remcostoeten/ui Link</h2>
       <Link href="#" className={buttonVariants({ variant: "outline" })}>
         Click here
       </Link>

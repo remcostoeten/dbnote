@@ -15,7 +15,6 @@ import {
 import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
@@ -118,7 +117,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container relative flex h-screen -translate-y-36 flex-col items-center justify-center">
+    <div className="container -z-10 relative flex h-screen -translate-y-36 flex-col items-center justify-center">
       <Link href="/">
         <motion.div
           className="absolute left-0 top-4 flex items-center pl-8 align-middle"

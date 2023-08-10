@@ -87,8 +87,8 @@ export default function Megamenu() {
               <ListItem href="/ui-elements/cursor-mask" title="Cursor mask">
                 Cursor mask
               </ListItem>
-              <ListItem href="/ui-elements/Infinite-scroller" title="Infinite scroller">
-                Infinite scroller
+              <ListItem href="/dwwddddwaddd" title="Infinite scroller">
+                404 error page
               </ListItem>
               <ListItem href="/forms" title="Infinite scroller">
                 Form - TW/JSX reference

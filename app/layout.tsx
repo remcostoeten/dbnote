@@ -2,8 +2,7 @@ import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
 import "@/styles/globals.scss"
-import { AuthProvider } from "@/AuthContext"
-import { GoogleAuthProvider } from "firebase/auth"
+
 import { CursorProvider } from "@/lib/CursorContext"
 
 import { siteConfig } from "@/config/site"
@@ -46,11 +45,11 @@ export const metadata = {
   ],
   authors: [
     {
-      name: "shadcn",
-      url: "https://shadcn.com",
+      name: "remcostoeten",
+      url: "https://remcostoeten.com",
     },
   ],
-  creator: "shadcn",
+  creator: "remcostoeten",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -62,13 +61,6 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
-    creator: "@shadcn",
   },
   icons: {
     icon: "/favicon.ico",
@@ -84,7 +76,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-[300vh] bg-background font-sans antialiased",
           fontSans.variable,
           fontHeading.variable
         )}

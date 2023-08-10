@@ -1,4 +1,5 @@
 'use client';
+'use client';
 
 import { useEffect, useState } from "react";
 import { AuthProvider } from "@/AuthContext";
@@ -8,14 +9,14 @@ import { auth } from "@/lib/firebase";
 import Greeting from "@/components/Greeting";
 import { DashboardNav } from "@/components/nav";
 import { SiteFooter } from "@/components/site-footer";
-import withAuthRedirect from "@/lib/withAuthRedirect";
+import withAuth from "@/lib/withAuth";
 import { User } from "firebase/auth";
 
-interface AuthLayoutProps {
+interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-function AuthLayout({ children }: AuthLayoutProps) {
+function RootLayout({ children }: RootLayoutProps) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -45,4 +46,4 @@ function AuthLayout({ children }: AuthLayoutProps) {
   );
 }
 
-export default withAuthRedirect(AuthLayout);
+export default withAuth(RootLayout);

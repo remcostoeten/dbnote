@@ -15,17 +15,12 @@ const examples = [
   {
     name: "Forms",
     href: "/ui-elements/forms",
-    code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/tasks",
+    code: "https://github.com/remcostoeten/dbnote/tree/develop/app/ui-elements/forms",
   },
   {
-    name: "Landing",
-    href: "/examples/playground",
-    code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/playground",
-  },
-  {
-    name: "Authentication",
-    href: "/examples/forms",
-    code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/forms",
+    name: "3d text effect",
+    href: "/ui-elements/3d-text",
+    code: "",
   },
   {
     name: "Miscellaneous",
