@@ -54,7 +54,7 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export function Megamenu() {
+export default function Megamenu() {
   return (
     <NavigationMenu>
       <NavigationMenuList>

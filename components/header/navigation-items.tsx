@@ -17,7 +17,7 @@ import LogoIconOnly from "../LogoIconOnly"
 
 import { motion } from "framer-motion"
 import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
-import { Megamenu } from "../Megamenu"
+import Megamenu from "../Megamenu"
 
 interface MainNavProps {
   items?: MainNavItem[]

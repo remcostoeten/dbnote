@@ -9,6 +9,8 @@ export default function Home() {
     const { x, y } = useMousePosition();
     const size = isHovered ? 400 : 40;
 
+    if (x === null || y === null) { return null; }
+
     return (
         <main className={styles.main}>
             <motion.div

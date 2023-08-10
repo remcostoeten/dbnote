@@ -16,7 +16,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { MainNav } from "@/components/header/navigation-items"
 import { marketingConfig } from "@/config/marketing"
 import Cursor from "@/components/Cursor"
-import MegaMenu, { Megamenu } from "@/components/Megamenu"
 
 const fontSans = FontSans({
   subsets: ["latin"],
