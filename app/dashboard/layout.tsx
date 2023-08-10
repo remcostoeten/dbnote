@@ -1,19 +1,31 @@
-import { notFound } from "next/navigation"
-import { AuthProvider } from "@/AuthContext"
+'use client';
 
-import { dashboardConfig } from "@/config/dashboard"
-import { auth } from "@/lib/firebase"
-import Greeting from "@/components/Greeting"
-import { MainNav } from "@/components/header/navigation-items"
-import { DashboardNav } from "@/components/nav"
-import { SiteFooter } from "@/components/site-footer"
+import { useEffect, useState } from "react";
+import { AuthProvider } from "@/AuthContext";
+
+import { dashboardConfig } from "@/config/dashboard";
+import { auth } from "@/lib/firebase";
+import Greeting from "@/components/Greeting";
+import { DashboardNav } from "@/components/nav";
+import { SiteFooter } from "@/components/site-footer";
+import withAuthRedirect from "@/lib/withAuthRedirect";
+import { User } from "firebase/auth";
 
 interface AuthLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export default async function AuthLayout({ children }: AuthLayoutProps) {
-  const user = await auth.currentUser
+function AuthLayout({ children }: AuthLayoutProps) {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await auth.currentUser;
+      setUser(currentUser);
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <AuthProvider>
@@ -30,5 +42,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
         <SiteFooter className="border-t" />
       </div>
     </AuthProvider>
-  )
+  );
 }
+
+export default withAuthRedirect(AuthLayout);

@@ -7,7 +7,7 @@ export const marketingConfig: MarketingConfig = {
       href: "/dashboard",
     },
     {
-      title: "Html to JSX",
+      title: "HTML to JSX",
       href: "/html-to-jsx",
     },
     {
@@ -16,7 +16,8 @@ export const marketingConfig: MarketingConfig = {
     },
     {
       title: "Url extractor",
-      href: "/url-extract",
+      href: "https://vsc.remcostoeten.com/url",
+      target: "_blank",
     },
     {
       title: "Docs",

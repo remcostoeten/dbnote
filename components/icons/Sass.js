@@ -1,15 +1,8 @@
 export default function Sass() {
   return (
     <>
-      <svg viewBox="0 0 50 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <mask
-          id="mask0_1_288"
-          maskUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="40"
-          height="40"
-        >
+      <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask maskUnits="userSpaceOnUse" x="0" y="0" width={30} height={30}>
           <path
             fillRule="evenodd"
             clipRule="evenodd"

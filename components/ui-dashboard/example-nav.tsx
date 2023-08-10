@@ -13,13 +13,8 @@ const examples = [
     code: "https://github.com/remcostoeten/dbnote/blob/develop/components/buttons/CustomButtons.tsx",
   },
   {
-    name: "Infinite scroller",
-    href: "/ui-elements/scroller",
-    code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/cards",
-  },
-  {
-    name: "Parallax",
-    href: "/examples/tasks",
+    name: "Forms",
+    href: "/ui-elements/forms",
     code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/tasks",
   },
   {

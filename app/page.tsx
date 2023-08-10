@@ -1,5 +1,5 @@
-import { HomeBanners } from './HomeBanners'
-import { HomeFeatures } from "./HomeFeatures"
+import { HomeBanners } from "@/components/HomeBanners"
+import { HomeFeatures } from "@/components/HomeFeatures"
 import Link from "next/link"
 import { Icon } from "@radix-ui/react-select"
 
@@ -23,7 +23,7 @@ import ShadCn from "./../components/icons/ShadCn"
 import TailwindIcon from "./../components/icons/TailwindIcon"
 import { Card } from "@/components/ui/card"
 import { Carousel } from '@/components/homepage/Carousel'
-import { HomeIntroduction } from './HomeIntroduction'
+import { HomeIntroduction } from '@/components/HomeIntroduction'
 import { IconCarousel } from '@/components/homepage/IconCarousel'
 
 export default async function IndexPage() {

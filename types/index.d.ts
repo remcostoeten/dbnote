@@ -10,7 +10,8 @@ export type NavItem = {
   done?: boolean;
   dropdown?: NavItem[];
   [navItem]?: NavItem;
-};
+  target?: string 
+  
 
 export type MainNavItem = NavItem
 

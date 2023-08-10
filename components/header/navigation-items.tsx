@@ -120,25 +120,35 @@ export function MainNav({ items, children }: MainNavProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
               >
-                <Link
-                  href={item.done ? item.href : item.href} // Disable link if "done" is false
-                  className={cn(
-                    "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    "text-white ",
-                    item.done === false && "cursor-not-allowed opacity-80" // Add "disabled" class if "done" is false
-                  )}
-                >
-                  {item.title}
-                </Link>
+                {item.target === "_blank" ? (
+                  <a
+                    href={item.href}
+                    className={cn(
+                      "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      "text-white ",
+                      item.done === false && "cursor-not-allowed opacity-80"
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.done ? item.href : item.href}
+                    className={cn(
+                      "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      "text-white ",
+                      item.done === false && "cursor-not-allowed opacity-80"
+                    )}
+                  >
+                    {item.title}
+                  </Link>
+                )}
               </motion.div>
             ))}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-            </motion.div>
           </nav>
+
           <Megamenu />
           <span className="flex-end flex w-max flex-1 items-center justify-end">
             {userProfilePicture && (
@@ -163,7 +173,7 @@ export function MainNav({ items, children }: MainNavProps) {
                   }}
                   onClick={signOut}
                 >
-                  <GlowButton text="Sign Out" link="#" />
+                  <WeakGlowButton text="Sign Out" link="#" />
                 </motion.span>
               </>
             ) : (
