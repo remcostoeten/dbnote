@@ -1,5 +1,4 @@
 'use client';
-'use client';
 
 import { useEffect, useState } from "react";
 import { AuthProvider } from "@/AuthContext";
@@ -11,13 +10,41 @@ import { DashboardNav } from "@/components/nav";
 import { SiteFooter } from "@/components/site-footer";
 import withAuth from "@/lib/withAuth";
 import { User } from "firebase/auth";
+import { Separator } from "@radix-ui/react-select";
+import { SidebarNav } from "./forms/components/sidebar-nav";
+
+
+
+const sidebarNavItems = [
+  {
+    title: "Profile",
+    href: "/examples/forms",
+  },
+  {
+    title: "Account",
+    href: "/examples/forms/account",
+  },
+  {
+    title: "Appearance",
+    href: "/examples/forms/appearance",
+  },
+  {
+    title: "Notifications",
+    href: "/examples/forms/notifications",
+  },
+  {
+    title: "Display",
+    href: "/examples/forms/display",
+  },
+]
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 function RootLayout({ children }: RootLayoutProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,22 +55,28 @@ function RootLayout({ children }: RootLayoutProps) {
     fetchUser();
   }, []);
 
-  return (
-    <AuthProvider>
-      <div className="flex min-h-screen flex-col space-y-6 mt-4 mb-4">
-        <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
-          <aside className="hidden w-[200px] flex-col md:flex">
-            <DashboardNav items={dashboardConfig.sidebarNav} />
-          </aside>
-          <main className="flex w-full flex-1 flex-col overflow-hidden">
-            <Greeting />
-            {children}
-          </main>
-        </div>
-        <SiteFooter className="border-t" />
+  const layoutContent = (
+    <div className={`container ${!user ? "blur-sm" : ""} space-y-6 p-10 pb-16 md:block`}>
+      <div className="space-y-0.5">
+        <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
+        <p className="text-muted-foreground">
+          Manage your account settings and set e-mail preferences.
+        </p>
       </div>
-    </AuthProvider>
+      <Separator className="my-6" />
+      <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+        <aside className="-mx-4 lg:w-1/5">
+          <SidebarNav items={sidebarNavItems} />
+        </aside>
+        <div className="flex-1 flex-col lg:max-w-2xl">
+          <Greeting />
+          {children}
+        </div>
+      </div>
+      <SiteFooter className="border-t" />
+    </div>
   );
-}
 
+  return user ? layoutContent : <AuthProvider>{layoutContent}</AuthProvider>;
+}
 export default withAuth(RootLayout);
