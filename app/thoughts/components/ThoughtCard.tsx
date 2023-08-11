@@ -13,6 +13,7 @@ import { db, auth } from "@/lib/firebase";
 import { Thought } from "@/lib/types";
 import { onSnapshot, query, collection, deleteDoc, doc, getDocs, writeBatch } from "firebase/firestore";
 import { toast } from "@/components/ui/use-toast";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export default function ThoughtCard() {
   const [thoughts, setThoughts] = useState<Thought[]>([]);
@@ -49,20 +50,25 @@ export default function ThoughtCard() {
     return () => unsubscribe();
   }, []);
 
-  const handleRemove = async (thoughtId: string) => {
-    try {
-      await deleteDoc(doc(db, "thoughts", thoughtId));
-      toast({
-        title: "Note deleted successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Couldn't delete note.",
-        variant: "destructive",
-      });
-      console.error(error);
-    }
+  const handleRemove = (thoughtId: string) => {
+    setThoughts(prev => prev.filter(t => t.id !== thoughtId));
+
+    setTimeout(async () => {
+      try {
+        await deleteDoc(doc(db, "thoughts", thoughtId));
+        toast({
+          title: "Note deleted successfully.",
+        });
+      } catch (error) {
+        toast({
+          title: "Couldn't delete note.",
+          variant: "destructive",
+        });
+        console.error(error);
+      }
+    }, 500);
   }
+
   const handleRemoveAll = async () => {
     try {
       const thoughtsCollection = collection(db, "thoughts");
@@ -86,55 +92,64 @@ export default function ThoughtCard() {
 
   return (
     <>
-      <span onClick={handleRemoveAll}>rm - rf all thoughts</span>
-
-      {
-        thoughts.map((thought) => (
-          <div key={thought.id} className="p-6 font-notes  bg-[#212028] border-card rounded-2xl border-zinc-800 border">
-            <div className="top sidebar-notes flex-col flex align-middle gap-4">
-              <div className="flex gap-2 w-full">
-                <div className="flex gap-4 align-middle items-center flex-1">
-                  <div className="rounded-xl w-14 h-14 align-middle items-center justify-center bg-[#2E2D35] mr-2 flex flex-col text-center">
-                    <span className="font-notes text-xs text-[#5D5C63] uppercase">
-                      {isNaN(new Date(thought.selectedDate?.seconds * 1000).getDay()) ? "N/A" : new Date(thought.selectedDate?.seconds * 1000).toLocaleString('en-US', { weekday: 'short' })}
-                    </span>
-                    <span className="text-notes -translate-y-.5 text-lg font-notes-bold uppercase">
-                      {isNaN(new Date(thought.selectedDate?.seconds * 1000).getDate()) ? "N/A" : new Date(thought.selectedDate?.seconds * 1000).getDate()}
-                    </span>
-
-                  </div>
-                  <div className="flex flex-col items">
-                    <span className="text-[#EDEDEE] text-lg font-notes-bold font-notes">
-                      {thought.title}
-                    </span>
-                    <span className="text-[#5D5C63] font-notes">
-                      {isNaN(new Date(thought.createdAt?.seconds * 1000).getHours()) ? "N/A" : new Date(thought.createdAt?.seconds * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                  </div>
-                </div>
-                <ContextMenu>
-                  <ContextMenuTrigger>. . . </ContextMenuTrigger>
-                  <ContextMenuContent>
-                    <ContextMenuItem>Edit</ContextMenuItem>
-                    <ContextMenuItem>
-                      <span onClick={() => handleRemove(thought.id)}>
-                        Delete
+      <span className="absolute right-4 top-4" onClick={handleRemoveAll}>rm - rf all thoughts</span>
+      <TransitionGroup>
+        {thoughts.map((thought) => (
+          <CSSTransition key={thought.id} timeout={500} classNames="fade">
+            <div className="p-6 mb-6 font-notes bg-[#212028] border-card rounded-2xl border-zinc-800 border" key={thought.id}>
+              <div className="top sidebar-notes flex-col flex align-middle gap-4">
+                <div className="flex gap-2 w-full">
+                  <div className="flex gap-4 align-middle items-center flex-1">
+                    <div className="rounded-xl w-14 h-14 align-middle items-center justify-center bg-[#2E2D35] mr-2 flex flex-col text-center">
+                      <span className="font-notes text-xs text-[#5D5C63] uppercase">
+                        {thought.selectedDate
+                          ? thought.selectedDate.toDate().toLocaleString('en-US', { weekday: 'short' })
+                          : "N/A"}
                       </span>
 
-                    </ContextMenuItem>
-                  </ContextMenuContent>
-                </ContextMenu>
+                      <span className="text-notes -translate-y-.5 text-lg font-notes-bold uppercase">
+                        {thought.selectedDate
+                          ? thought.selectedDate.toDate().getDate()
+                          : "N/A"}
+                      </span>
+
+                    </div>
+                    <div className="flex flex-col items">
+                      <span className="text-[#EDEDEE] text-lg font-notes-bold font-notes">
+                        {thought.title}
+                      </span>
+
+                      <span className="text-[#5D5C63] font-notes">
+                        {thought.createdAt
+                          ? thought.createdAt.toDate().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                          : "N/A"}
+                      </span>
+                    </div>
+                  </div>
+                  <ContextMenu>
+                    <ContextMenuTrigger>. . . </ContextMenuTrigger>
+                    <ContextMenuContent>
+                      <ContextMenuItem>Edit</ContextMenuItem>
+                      <ContextMenuItem>
+                        <span onClick={() => handleRemove(thought.id)}>
+                          Delete
+                        </span>
+                      </ContextMenuItem>
+                    </ContextMenuContent>
+                  </ContextMenu>
+                </div>
+                <ReactMarkdown
+                  className="text-[#5D5C63] font-notes"
+                  rehypePlugins={[rehypeRaw]}
+                >
+                  {thought.description || ""}
+                </ReactMarkdown>
+
               </div>
-              <ReactMarkdown
-                className="text-[#5D5C63] font-notes"
-                rehypePlugins={[rehypeRaw]}
-              >
-                {thought.description}
-              </ReactMarkdown>
             </div>
-          </div>
-        ))
-      }
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </>
   );
 }

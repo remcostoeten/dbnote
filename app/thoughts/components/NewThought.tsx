@@ -129,7 +129,7 @@ export function NewThought({ content }) {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed  bottom-0 bg-[#212028] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
+        <Drawer.Content className="fixed  bottom-0 shadow-lg bg-[#212028] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
           <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
             <div className="mx-auto  w-4/12">
               <Drawer.Title className="mb-4 font-medium text-4xl font-serif">

@@ -12,8 +12,8 @@ export interface Note {
     title?: string;
     description?: string;
     createdAt: any;
-    userName?: user.displayName,;
+    userName?: user.displayName;
     userId: string;  
-    selectedDate: Date | null;
+    selectedDate: any;
 
   }
