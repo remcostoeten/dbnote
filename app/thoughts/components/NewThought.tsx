@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { PlusSquare } from "lucide-react"
+import MonacoEditor from "react-monaco-editor"
 import { Drawer } from "vaul"
 
 import { auth, db } from "@/lib/firebase"
@@ -59,7 +60,15 @@ export function NewThought({ content }) {
     }
   }
 
-  const form = (
+  const handleEditorChange = (value) => {
+    setDescription(value)
+  }
+
+  const editorOptions = {
+    selectOnLineNumbers: true,
+  }
+
+  const formWithEditor = (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label
@@ -89,13 +98,13 @@ export function NewThought({ content }) {
         </label>
 
         <div className="mt-1">
-          <textarea
-            id="description"
-            name="description"
-            rows={3}
+          <MonacoEditor
+            height="400"
+            language="javascript"
+            theme="vs-light"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="shadow-sm focus:ring-zinc-500 focus:border-zinc-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            options={editorOptions}
+            onChange={handleEditorChange}
           />
         </div>
       </div>
@@ -132,7 +141,7 @@ export function NewThought({ content }) {
               <Drawer.Title className="font-medium mb-4">
                 Add whatever is on your mind.
               </Drawer.Title>
-              {form}
+              {formWithEditor}
               <Button
                 type="button"
                 className="rounded-md mb-6 w-full bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
