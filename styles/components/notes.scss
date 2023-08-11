@@ -30,8 +30,8 @@ $text-white-color: #eee;
 $text-notes: #eee;
 $title-notes: #ededee;
 $notes-background-color: #1d1b22;
-$notes-border: #2d2b31;
-$bg-card: #212028;
+$notes-border: #27272e;
+$bg-card: transparent;
 $border-card: #292830;
 
 .text-\[\#5D5C63\].font-notes {
@@ -45,8 +45,6 @@ $border-card: #292830;
 
 .ql-editor.ql-blank::before {
   color: $title-notes !important;
-  padding-left: 40px !important;
-  padding-top: 30px !important;
 }
 
 .wysiwyg-input {

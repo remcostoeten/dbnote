@@ -15,12 +15,15 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { cn } from './../../../lib/utils';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@radix-ui/react-select";
+import { name } from './../../../.next/server/app/dashboard/settings/page';
 
 export function NewThought({ content }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState<Date | null>(null);
   const [description, setDescription] = useState("");
+  const [subject, setSubject] = useState("");
   const [thoughts, setThoughts] = useState<Thought[]>([]);
   const [loading, setLoading] = useState(false);
   const user = auth?.currentUser;
@@ -49,6 +52,7 @@ export function NewThought({ content }) {
         description: markdownContent,
         createdAt: serverTimestamp(),
         id: "",
+        subject: subject,
         selectedDate: date
       };
 
@@ -58,6 +62,8 @@ export function NewThought({ content }) {
       setThoughts((prevThoughts: Thought[]) => [newThought, ...prevThoughts]);
       setDescription("");
       setTitle("");
+      setDate(null);
+      setSubject("");
       setMarkdownContent("");
       toast({
         title: "Thought created successfully.",
@@ -77,6 +83,13 @@ export function NewThought({ content }) {
     }
   };
 
+  const subjectOptions = [
+    { name: "Personal", value: "personal" },
+    { name: "Work", value: "work" },
+    { name: "Other", value: "other" },
+  ];
+
+
   const form = (
     <form className="flex flex-col gap-2 py-6" onSubmit={handleSubmit}>
       <input
@@ -89,7 +102,7 @@ export function NewThought({ content }) {
       <Popover>
         <PopoverTrigger asChild>
           <Button
-            className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#212028]">
+            className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#0a0a0a]">
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date ? format(date, "PPP") : <span>Pick a date</span>}
           </Button>
@@ -103,6 +116,19 @@ export function NewThought({ content }) {
           />
         </PopoverContent>
       </Popover>
+      <select onChange={setSubject} value={subject}>
+        <select>
+          <select placeholder="Select a verified email to display" />
+        </select>
+        <select>
+          {subjectOptions.map((subject) => (
+            <select key={subject.name} value={subject.name}>
+              {subject.name}
+            </select>
+          ))}
+        </select>
+      </select>
+
       <ReactQuill
         placeholder="Thought content"
         value={markdownContent}
@@ -129,7 +155,7 @@ export function NewThought({ content }) {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed  bottom-0 shadow-lg bg-[#212028] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
+        <Drawer.Content className="fixed  bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
           <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
             <div className="mx-auto  w-4/12">
               <Drawer.Title className="mb-4 font-medium text-4xl font-serif">

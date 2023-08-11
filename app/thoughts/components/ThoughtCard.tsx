@@ -96,11 +96,11 @@ export default function ThoughtCard() {
       <TransitionGroup>
         {thoughts.map((thought) => (
           <CSSTransition key={thought.id} timeout={500} classNames="fade">
-            <div className="p-6 mb-6 font-notes bg-[#212028] border-card rounded-2xl border-zinc-800 border" key={thought.id}>
+            <div className="icon-card border flex flex-col mb-4 justify-between rounded-md p-6" key={thought.id}>
               <div className="top sidebar-notes flex-col flex align-middle gap-4">
                 <div className="flex gap-2 w-full">
                   <div className="flex gap-4 align-middle items-center flex-1">
-                    <div className="rounded-xl w-14 h-14 align-middle items-center justify-center bg-[#2E2D35] mr-2 flex flex-col text-center">
+                    <div className="rounded-xl w-14 h-14 align-middle items-center justify-center mr-2 flex flex-col text-center border    ">
                       <span className="font-notes text-xs text-[#5D5C63] uppercase">
                         {thought.selectedDate
                           ? thought.selectedDate.toDate().toLocaleString('en-US', { weekday: 'short' })

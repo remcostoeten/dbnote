@@ -44,7 +44,7 @@ interface RootLayoutProps {
 function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <div className="flex relative container notes-background flex-col">
+      <div className="flex relative container  flex-col">
         {/* <ThoughtsAside /> */}
         <AllThoughts />
         {/* {/* <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">

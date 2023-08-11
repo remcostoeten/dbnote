@@ -148,7 +148,7 @@ export default function Dashboard() {
             })
         } catch (error) {
             toast({
-                titlhandleRemovee: "Couldn't delete note.",
+                title: "Couldn't delete note.",
                 variant: "destructive",
             })
             console.error(error)

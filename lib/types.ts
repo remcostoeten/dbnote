@@ -14,6 +14,7 @@ export interface Note {
     createdAt: any;
     userName?: user.displayName;
     userId: string;  
+    subject: string;
     selectedDate: any;
 
   }
