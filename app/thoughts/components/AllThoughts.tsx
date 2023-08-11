@@ -6,11 +6,12 @@ import NotesIcon from "@/components/icons/NotesIcon"
 
 import { NewThought } from "./NewThought"
 import ThoughtCard from "./ThoughtCard"
+import ThoughtDetail from "./ThoughtSingle"
 
 export default function AllThoughts() {
   return (
     <>
-      <div className="flex w-4/12  flex-col px-4 py-6  ">
+      <div className="flex-col px-4 py-6  ">
         <div className="flex w-full ">
           <div className="flex gap-1 w-full">
             <NotesIcon />

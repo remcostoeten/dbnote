@@ -1,4 +1,4 @@
-.trailer {
+.cursor {
   height: 20px;
   width: 20px;
   background-color: white;
@@ -11,10 +11,22 @@
 
   pointer-events: none;
   opacity: 0;
-  transition: opacity 500ms ease;
+  transition: opacity 500ms ease, transform 250ms ease-in;
 
   display: grid;
   place-items: center;
+}
+body {
+  &.hovered {
+    .cursor {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .cursor {
+      opacity: 1;
+    }
+  }
 }
 .mask {
   position: absolute;

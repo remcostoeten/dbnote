@@ -326,7 +326,7 @@ a {
     }
 
     &::before {
-      @include glowing-effect;
+      @include glowing-effect-instant;
     }
 
     a {

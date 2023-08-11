@@ -152,3 +152,28 @@ $border-card: #292830;
   transition-timing-function: cubic-bezier(1, 0.05, 0, 0.94);
   transition: all 1s ease-in;
 }
+
+.icon-card {
+  &.active {
+    border-color: #1d1b22;
+
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(212, 20, 119);
+      opacity: 0.2;
+      z-index: -1;
+      filter: blur(100px);
+    }
+    // .font-notes,
+    // .text-notes {
+    //   color: #1d1b22 !important;
+    // }
+  }
+}
