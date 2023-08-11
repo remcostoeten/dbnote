@@ -21,7 +21,7 @@ export default function AllThoughts() {
           <NewThought content={undefined} />
         </div>
         <div className="seperator-notes"></div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 py-4">
           <ThoughtCard />
         </div>
       </div>

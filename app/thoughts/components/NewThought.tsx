@@ -1,4 +1,3 @@
-"use client"
 "use client";
 import React, { useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -11,11 +10,16 @@ import { auth, db } from "@/lib/firebase";
 import { Thought } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { cn } from './../../../lib/utils';
 
 export function NewThought({ content }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
   const [description, setDescription] = useState("");
   const [thoughts, setThoughts] = useState<Thought[]>([]);
   const [loading, setLoading] = useState(false);
@@ -45,6 +49,7 @@ export function NewThought({ content }) {
         description: markdownContent,
         createdAt: serverTimestamp(),
         id: "",
+        selectedDate: date
       };
 
       const docRef = await addDoc(collection(db, "thoughts"), newThought);
@@ -73,28 +78,49 @@ export function NewThought({ content }) {
   };
 
   const form = (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <Input
+    <form className="flex flex-col gap-2 py-6" onSubmit={handleSubmit}>
+      <input
         type="text"
+        className="wysiwyg-input"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#212028]">
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date ? format(date, "PPP") : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
       <ReactQuill
         placeholder="Thought content"
         value={markdownContent}
+        className="h-[200px] sm:h-[400px]"
         onChange={setMarkdownContent}
       />
-      <Button type="submit" className="inline-flex w-fit">
-        New post
-      </Button>
-    </form>
-  );
 
+      <div className="flex items-center gap-2">
+        <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 inline-flex w-fit translate-y-14">
+          New post
+        </Button></div>
+    </form >
+  );
 
   const toggleClass = () => {
     document.body.classList.remove('drawer-closed');
   }
+
 
   return (
     <Drawer.Root shouldScaleBackground>
@@ -103,10 +129,10 @@ export function NewThought({ content }) {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed  bottom-0 left-0 right-0 mt-24 flex h-[50vh] flex-col rounded-t-[10px] bg-zinc-100">
-          <div className="flex-1 rounded-t-[10px] bg-[#212028] [text-[#5D5C63] font-notes] p-4">
-            <div className="mx-auto max-w-md">
-              <Drawer.Title className="mb-4 font-medium">
+        <Drawer.Content className="fixed  bottom-0 bg-[#212028] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
+          <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
+            <div className="mx-auto  w-4/12">
+              <Drawer.Title className="mb-4 font-medium text-4xl font-serif">
                 Add whatever is on your mind.
               </Drawer.Title>
               {form}
