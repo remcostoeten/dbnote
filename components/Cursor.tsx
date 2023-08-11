@@ -1,30 +1,34 @@
 "use client"
-import React, { useEffect, useRef } from 'react';
-import styles from './Cursor.module.scss';
+
+import React, { useEffect, useRef } from "react"
 
 interface CursorProps {
-  interacting: boolean;
+  interacting?: boolean
 }
 
 const Cursor: React.FC<CursorProps> = ({ interacting }) => {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
       }
-    };
+    }
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+      window.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [])
 
-  return <div className={`cursor ${interacting ? 'interacting' : ''}`}
-    ref={cursorRef}></div>;
-};
+  return (
+    <div
+      className={`cursor ${interacting ? "interacting" : ""}`}
+      ref={cursorRef}
+    ></div>
+  )
+}
 
-export default Cursor;
+export default Cursor

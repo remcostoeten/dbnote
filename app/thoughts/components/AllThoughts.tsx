@@ -19,7 +19,7 @@ export default function AllThoughts() {
               All thoughts
             </span>
           </div>
-          <NewThought content={undefined} />
+          <NewThought />
         </div>
         <div className="seperator-notes"></div>
         <div className="flex flex-col gap-4 py-4">

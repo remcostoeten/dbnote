@@ -70,7 +70,7 @@ const defaultValues: Partial<AccountFormValues> = {
   // dob: new Date("2023-01-23"),
 }
 
-export function AccountForm() {
+export default function AccountForm() {
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -170,8 +170,8 @@ export function AccountForm() {
                     >
                       {field.value
                         ? languages.find(
-                          (language) => language.value === field.value
-                        )?.label
+                            (language) => language.value === field.value
+                          )?.label
                         : "Select language"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>

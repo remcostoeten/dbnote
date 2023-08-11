@@ -1,48 +1,64 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { PlusSquare } from "lucide-react";
-import { Drawer } from "vaul";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+"use client"
 
-import { auth, db } from "@/lib/firebase";
-import { Thought } from "@/lib/types";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/use-toast";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
-import { cn } from './../../../lib/utils';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@radix-ui/react-select";
-import { name } from './../../../.next/server/app/dashboard/settings/page';
+import React, { useEffect, useState } from "react"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { PlusSquare } from "lucide-react"
+import ReactQuill from "react-quill"
+import { Drawer } from "vaul"
 
-export function NewThought({ content }) {
-  const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState<Date | null>(null);
-  const [description, setDescription] = useState("");
-  const [subject, setSubject] = useState("");
-  const [thoughts, setThoughts] = useState<Thought[]>([]);
-  const [loading, setLoading] = useState(false);
-  const user = auth?.currentUser;
-  const [markdownContent, setMarkdownContent] = useState("");
+import "react-quill/dist/quill.snow.css"
+import { CalendarIcon } from "@radix-ui/react-icons"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@radix-ui/react-select"
+import { format } from "date-fns"
+
+import { auth, db } from "@/lib/firebase"
+import { Thought } from "@/lib/types"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { toast } from "@/components/ui/use-toast"
+
+import { cn } from "./../../../lib/utils"
+
+interface NewThoughtProps {
+  content?: string
+}
+
+export function NewThought({ content }: NewThoughtProps) {
+  const [open, setOpen] = useState(false)
+  const [title, setTitle] = useState("")
+  const [date, setDate] = useState<Date | null>(null)
+  const [description, setDescription] = useState("")
+  const [subject, setSubject] = useState("")
+  const [thoughts, setThoughts] = useState<Thought[]>([])
+  const [loading, setLoading] = useState(false)
+  const user = auth?.currentUser
+  const [markdownContent, setMarkdownContent] = useState("")
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("user", user);
+        console.log("user", user)
       }
-      setLoading(false);
-    });
-    return (): void => unsubscribe();
-  }, []);
+      setLoading(false)
+    })
+    return (): void => unsubscribe()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (!user) {
-      return;
+      return
     }
 
     try {
@@ -53,42 +69,41 @@ export function NewThought({ content }) {
         createdAt: serverTimestamp(),
         id: "",
         subject: subject,
-        selectedDate: date
-      };
+        selectedDate: date,
+      }
 
-      const docRef = await addDoc(collection(db, "thoughts"), newThought);
-      newThought.id = docRef.id;
+      const docRef = await addDoc(collection(db, "thoughts"), newThought)
+      newThought.id = docRef.id
 
-      setThoughts((prevThoughts: Thought[]) => [newThought, ...prevThoughts]);
-      setDescription("");
-      setTitle("");
-      setDate(null);
-      setSubject("");
-      setMarkdownContent("");
+      setThoughts((prevThoughts: Thought[]) => [newThought, ...prevThoughts])
+      setDescription("")
+      setTitle("")
+      setDate(null)
+      setSubject("")
+      setMarkdownContent("")
       toast({
         title: "Thought created successfully.",
         description: `with title ${title}`,
-      });
-      console.log("Document written with ID: ", docRef.id);
+      })
+      console.log("Document written with ID: ", docRef.id)
     } catch (error) {
       toast({
         title: "Something went wrong.",
         description: `Your sign-in request failed. Please try again. ${error}`,
         variant: "destructive",
-      });
-      console.error(error);
+      })
+      console.error(error)
     } finally {
-      setOpen(false);
-      document.body.classList.add('drawer-closed');
+      setOpen(false)
+      document.body.classList.add("drawer-closed")
     }
-  };
+  }
 
   const subjectOptions = [
     { name: "Personal", value: "personal" },
     { name: "Work", value: "work" },
     { name: "Other", value: "other" },
-  ];
-
+  ]
 
   const form = (
     <form className="flex flex-col gap-2 py-6" onSubmit={handleSubmit}>
@@ -101,8 +116,7 @@ export function NewThought({ content }) {
       />
       <Popover>
         <PopoverTrigger asChild>
-          <Button
-            className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#0a0a0a]">
+          <Button className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#0a0a0a]">
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date ? format(date, "PPP") : <span>Pick a date</span>}
           </Button>
@@ -110,13 +124,13 @@ export function NewThought({ content }) {
         <PopoverContent className="w-auto p-0">
           <Calendar
             mode="single"
-            selected={date}
-            onSelect={setDate}
+            selected={date || undefined} // Assuming null is not a valid value
+            onSelect={(selectedDate) => setDate(selectedDate as any)}
             initialFocus
           />
         </PopoverContent>
       </Popover>
-      <select onChange={setSubject} value={subject}>
+      <select onChange={(e) => setSubject(e.target.value)} value={subject}>
         <select>
           <select placeholder="Select a verified email to display" />
         </select>
@@ -137,16 +151,19 @@ export function NewThought({ content }) {
       />
 
       <div className="flex items-center gap-2">
-        <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 inline-flex w-fit translate-y-14">
+        <Button
+          type="submit"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 inline-flex w-fit translate-y-14"
+        >
           New post
-        </Button></div>
-    </form >
-  );
+        </Button>
+      </div>
+    </form>
+  )
 
   const toggleClass = () => {
-    document.body.classList.remove('drawer-closed');
+    document.body.classList.remove("drawer-closed")
   }
-
 
   return (
     <Drawer.Root shouldScaleBackground>
@@ -170,5 +187,5 @@ export function NewThought({ content }) {
         </Drawer.Content>
       </Drawer.Portal>
     </Drawer.Root>
-  );
+  )
 }
