@@ -1,34 +1,39 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { PlusSquare } from "lucide-react"
-import MonacoEditor from "react-monaco-editor"
-import { Drawer } from "vaul"
+import React, { useEffect, useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { PlusSquare } from "lucide-react";
+import { Drawer } from "vaul";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-import { auth, db } from "@/lib/firebase"
-import { Thought } from "@/lib/types"
-import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
+import { auth, db } from "@/lib/firebase";
+import { Thought } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Select } from '@radix-ui/react-select';
 
 export function NewThought({ content }) {
-  const [open, setOpen] = useState(false)
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [thoughts, setThoughts] = useState<Thought[]>([])
-  const [loading, setLoading] = useState(false)
-  const user = auth?.currentUser
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [thoughts, setThoughts] = useState<Thought[]>([]);
+  const [loading, setLoading] = useState(false);
+  const user = auth?.currentUser;
+  const [category, setCategory] = useState<string>("")
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("user", user)
-        // fetchThoughts()
+        console.log("user", user);
       }
-      setLoading(false)
-    })
-    return (): void => unsubscribe()
-  }, [])
+      setLoading(false);
+    });
+    return (): void => unsubscribe();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -39,93 +44,75 @@ export function NewThought({ content }) {
     try {
       const newThought: Thought = {
         title,
+        userId: user.uid,
         description,
         createdAt: serverTimestamp(),
-        userId: user.uid,
-        userName: user.displayName,
         id: "",
       }
 
       const docRef = await addDoc(collection(db, "thoughts"), newThought)
       newThought.id = docRef.id
 
-      setThoughts([newThought, ...thoughts])
-      setTitle("")
+      setThoughts((prevThoughts: Thought[]) => [newThought, ...prevThoughts])
       setDescription("")
-      setOpen(false)
-      toast({ title: "Success!", description: "Your thought was added!" })
+      setTitle("")
+      toast({
+        title: "Thought created successfully.",
+        description: `In the category ${category} with title ${title}`,
+      })
+      console.log("Document written with ID: ", docRef.id)
     } catch (error) {
-      toast({ title: "Error!", description: error.message })
-      console.log(error)
+      toast({
+        title: "Something went wrong.",
+        description: `Your sign-in request failed. Please try again. ${error}`,
+        variant: "destructive",
+      })
+      console.error(error)
     }
   }
+  const categories = [
+    { id: "1", name: "Pleio" },
+    { id: "2", name: "Softhouse" },
+    { id: "3", name: "Prive" },
+  ]
+  const form = (
+    <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <Select onValueChange={setCategory} value={category}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select a verified email to display" />
+        </SelectTrigger>
+        <SelectContent>
+          {categories.map((category) => (
+            <SelectItem key={category.id} value={category.name}>
+              {category.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-  const handleEditorChange = (value) => {
-    setDescription(value)
-  }
-
-  const editorOptions = {
-    selectOnLineNumbers: true,
-  }
-
-  const formWithEditor = (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-4">
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Title
-        </label>
-        <div className="mt-1">
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="shadow-sm focus:ring-zinc-500 focus:border-zinc-500 block w-full sm:text-sm border-gray-300 rounded-md"
-          />
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Description
-        </label>
-
-        <div className="mt-1">
-          <MonacoEditor
-            height="400"
-            language="javascript"
-            theme="vs-light"
-            value={description}
-            options={editorOptions}
-            onChange={handleEditorChange}
-          />
-        </div>
-      </div>
-
-      <div className="flex justify-end">
-        <Button
-          type="button"
-          className="mr-4 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
-        <Button
-          type="submit"
-          className="px-4 py-2 text-sm font-medium text-white bg-zinc-500 border border-transparent rounded-md shadow-sm hover:bg-zinc-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-        >
-          Submit
-        </Button>
-      </div>
+      <Textarea
+        placeholder="Thought content"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <Button
+        onClick={(e) => {
+          e.preventDefault()
+          handleSubmit(e as any)
+        }}
+        className="inline-flex w-fit"
+      >
+        New post
+      </Button>
     </form>
   )
+
 
   return (
     <Drawer.Root dismissible={false} open={open}>
@@ -141,7 +128,7 @@ export function NewThought({ content }) {
               <Drawer.Title className="font-medium mb-4">
                 Add whatever is on your mind.
               </Drawer.Title>
-              {formWithEditor}
+              {form}
               <Button
                 type="button"
                 className="rounded-md mb-6 w-full bg-gray-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"

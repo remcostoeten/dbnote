@@ -93,6 +93,7 @@
     "react-hook-form": "^7.43.9",
     "react-id-swiper": "^4.0.0",
     "react-infinite-logo-slider": "^1.0.13",
+    "react-quill": "^2.0.0",
     "react-slick": "^0.29.0",
     "react-textarea-autosize": "^8.5.2",
     "react-type-animation": "^3.1.0",
