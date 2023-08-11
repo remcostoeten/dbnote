@@ -1,9 +1,7 @@
 "use client"
 
 import React from "react"
-import { Drawer } from "vaul"
 
-import { MyDrawer } from "@/components/Drawer"
 import NotesIcon from "@/components/icons/NotesIcon"
 
 import { NewThought } from "./NewThought"

@@ -28,11 +28,38 @@ $icon-outline-color: #5c5a5e;
 $icon-fill-color: #eee;
 $text-white-color: #eee;
 $text-notes: #eee;
+$title-notes: #ededee;
 $notes-background-color: #1d1b22;
 $notes-border: #2d2b31;
 $bg-card: #212028;
 $border-card: #292830;
 
+.ql-editor.ql-blank::before {
+  color: $title-notes !important;
+}
+
+.quill {
+  div {
+    color: $text-notes;
+    border-color: $border-card !important;
+  }
+
+  .ql-blank {
+    &::before {
+      color: $title-notes !important;
+    }
+  }
+  p {
+    color: $title-notes !important;
+  }
+
+  .ql-stroke {
+    fill: $title-notes !important;
+  }
+}
+.ql-toolbar.ql-snow {
+  border-color: $border-card !important;
+}
 .border-card {
   border: 1px solid $border-card;
 }

@@ -2,6 +2,42 @@ body {
   min-height: 3vh;
 }
 
+.drawer-closed {
+  div#radix-\:r0\: {
+    animation: bottomOut 0.3s ease-in-out forwards;
+  }
+
+  .fixed.inset-0.bg-black\/40 {
+    animation: bottomOutOverlay 0.3s ease-in-out forwards;
+  }
+}
+
+@keyframes bottomOut {
+  0% {
+    transform: translateY(0);
+  }
+
+  90% {
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hiden;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes bottomOutOverlay {
+  90% {
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hiden;
+  }
+}
 .z-max {
   z-index: 999;
 }

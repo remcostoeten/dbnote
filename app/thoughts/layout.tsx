@@ -12,6 +12,7 @@ import { SidebarNav } from "../ui-elements/forms/components/sidebar-nav"
 import { ThoughtsAside } from "./components/ThoughtsAside."
 import AllNotes from "./components/AllThoughts"
 import AllThoughts from "./components/AllThoughts"
+import Draw from "./components/Draw"
 
 const sidebarNavItems = [
   {
@@ -52,6 +53,7 @@ function RootLayout({ children }: RootLayoutProps) {
           </aside>
           <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div> */}
       </div>
+      <Draw />
     </>
   )
 }
