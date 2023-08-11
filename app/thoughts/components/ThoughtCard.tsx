@@ -117,9 +117,10 @@ export default function ThoughtCard() {
                   <ContextMenuContent>
                     <ContextMenuItem>Edit</ContextMenuItem>
                     <ContextMenuItem>
-                      <span onClick={() => handleRemove(thought.userId)}>
+                      <span onClick={() => handleRemove(thought.id)}>
                         Delete
                       </span>
+
                     </ContextMenuItem>
                   </ContextMenuContent>
                 </ContextMenu>
