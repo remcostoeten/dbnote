@@ -1,3 +1,21 @@
+.trailer {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 20px;
+
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 10000;
+
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+
+  display: grid;
+  place-items: center;
+}
 .mask {
   position: absolute;
   mask-image: url(../../public/mask.svg);
@@ -18,13 +36,13 @@
   transition: width 333ms ease, height 333ms ease-in-out;
 }
 
-* {
-  // cursor: none;
+// * {
+// cursor: none;
 
-  &:hover {
-    cursor: none;
-  }
-}
+// &:hover {
+// cursor: none;
+// }
+// }
 
 body:hover > #trailer {
   opacity: 1;

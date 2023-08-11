@@ -7,3 +7,11 @@ export interface Note {
     createdAt: any; 
   }
   
+  export interface Thought {
+    id: string;
+    title?: string;
+    description?: string;
+    createdAt: any;
+    userName: string;
+    userId: string;
+  }
