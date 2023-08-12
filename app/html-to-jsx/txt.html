@@ -1,28 +1,373 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="test">
-        <!-- test -->
-        <div class="test__two">
-            <h2>dwawdawd</h2>
-            <p> dadaw</p>
-            <ul>
-                <li>ddd</li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+<div class="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px] w-full pr-8">
+    <div class="hidden flex-col space-y-4 sm:flex md:order-2">
+        <div class="grid gap-2"><span
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                data-state="closed">Mode</span>
+            <div role="tablist" aria-orientation="horizontal"
+                class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid grid-cols-3"
+                tabindex="0" data-orientation="horizontal" style="outline:none"><button type="button" role="tab"
+                    aria-selected="true" aria-controls="radix-:R1pmmmr9acq:-content-insert" data-state="active"
+                    id="radix-:R1pmmmr9acq:-trigger-insert"
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+                    tabindex="-1" data-orientation="horizontal" data-radix-collection-item=""><span
+                        class="sr-only">Insert</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="none" class="h-5 w-5">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M14.491 7.769a.888.888 0 0 1 .287.648.888.888 0 0 1-.287.648l-3.916 3.667a1.013 1.013 0 0 1-.692.268c-.26 0-.509-.097-.692-.268L5.275 9.065A.886.886 0 0 1 5 8.42a.889.889 0 0 1 .287-.64c.181-.17.427-.267.683-.269.257-.002.504.09.69.258L8.903 9.87V3.917c0-.243.103-.477.287-.649.183-.171.432-.268.692-.268.26 0 .509.097.692.268a.888.888 0 0 1 .287.649V9.87l2.245-2.102c.183-.172.432-.269.692-.269.26 0 .508.097.692.269Z"
+                            fill="currentColor"></path>
+                        <rect x="4" y="15" width="3" height="2" rx="1" fill="currentColor"></rect>
+                        <rect x="8.5" y="15" width="3" height="2" rx="1" fill="currentColor"></rect>
+                        <rect x="13" y="15" width="3" height="2" rx="1" fill="currentColor"></rect>
+                    </svg></button></div>
+        </div>
+        <div class="grid gap-6">
+            <div class="flex items-center justify-between space-x-2 w-full"><label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col space-y-1"
+                    for="typescript"><span
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col space-y-1 ">Typescript</span></label><button
+                    type="button" role="switch" aria-checked="false" data-state="unchecked" value="on"
+                    class="peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                    id="typescript"><span data-state="unchecked"
+                        class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"></span></button>
+            </div>
+            <div class="flex items-center justify-between space-x-2 w-full">
+                <div class="flex items-center justify-between space-x-2"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col space-y-1"
+                        for="fc"><span
+                            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col space-y-1 ">Functional
+                            component</span></label><button type="button" role="switch" aria-checked="false"
+                        data-state="unchecked" value="on"
+                        class="peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                        id="fc"><span data-state="unchecked"
+                            class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"></span></button>
+                </div>
+            </div>
+            <div class="flex items-center justify-between space-x-2 w-full">
+                <div class="flex items-center justify-between space-x-2"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col space-y-1"
+                        for="client"><span class="font-normal leading-snug ">Prefix with 'use
+                            client'</span></label><button type="button" role="switch" aria-checked="false"
+                        data-state="unchecked" value="on"
+                        class="peer inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                        id="client"><span data-state="unchecked"
+                            class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="grid gap-2 pt-2">
+            <div class="grid gap-4" data-state="closed">
+                <div class="flex items-center justify-between"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        for="maxlength">Useless slider.</label><span
+                        class="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">69</span>
+                </div><span dir="ltr" data-orientation="horizontal" aria-disabled="false"
+                    class="relative flex w-full touch-none select-none items-center [&amp;_[role=slider]]:h-4 [&amp;_[role=slider]]:w-4"
+                    id="maxlength" aria-label="Maximum Length"
+                    style="--radix-slider-thumb-transform:translateX(-50%)"><span data-orientation="horizontal"
+                        class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary"><span
+                            data-orientation="horizontal" class="absolute h-full bg-primary"
+                            style="left:0%;right:98.275%"></span></span><span
+                        style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(1.725% + 7.724px);"><span
+                            role="slider" aria-valuemin="0" aria-valuemax="4000" aria-orientation="horizontal"
+                            data-orientation="horizontal" tabindex="0"
+                            class="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                            style="" data-radix-collection-item="" aria-valuenow="69"></span></span></span>
+            </div>
         </div>
     </div>
-
-</body>
-
-</html>
+    <div class="md:order-1">
+        <div data-state="inactive" data-orientation="horizontal" role="tabpanel"
+            aria-labelledby="radix-:R1pmmmr9acq:-trigger-complete" hidden="" id="radix-:R1pmmmr9acq:-content-complete"
+            tabindex="0"
+            class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-0 border-0 p-0">
+        </div>
+        <div data-state="active" data-orientation="horizontal" role="tabpanel"
+            aria-labelledby="radix-:R1pmmmr9acq:-trigger-insert" id="radix-:R1pmmmr9acq:-content-insert" tabindex="0"
+            class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-0 border-0 p-0"
+            style="">
+            <div class="flex flex-col space-y-4">
+                <div class="grid h-full grid-rows-2 gap-6 lg:grid-cols-2 lg:grid-rows-1">
+                    <section style="display:flex;position:relative;text-align:initial;width:100%;height:60vh">
+                        <div style="width: 100%; --vscode-editorCodeLens-lineHeight: 16px; --vscode-editorCodeLens-fontSize: 12px; --vscode-editorCodeLens-fontFeatureSettings: &quot;liga&quot; off, &quot;calt&quot; off; --code-editorInlayHintsFontFamily: Consolas, 'Courier New', monospace;"
+                            class="rounded-full" data-keybinding-context="1" data-mode-id="javascript">
+                            <div class="monaco-editor no-user-select  showUnused showDeprecated vs-dark" role="code"
+                                data-uri="inmemory://model/1" style="width: 627px; height: 948px;">
+                                <div data-mprt="3" class="overflow-guard" style="width: 627px; height: 948px;">
+                                    <div class="margin" role="presentation" aria-hidden="true"
+                                        style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 948px; width: 64px;">
+                                        <div class="glyph-margin" style="left: 0px; width: 0px; height: 948px;"></div>
+                                        <div class="margin-view-zones" role="presentation" aria-hidden="true"
+                                            style="position: absolute;"></div>
+                                        <div class="margin-view-overlays" role="presentation" aria-hidden="true"
+                                            style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 64px; height: 948px;">
+                                            <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                <div class="current-line current-line-margin-both"
+                                                    style="width:64px; height:19px;"></div>
+                                                <div class="line-numbers active-line-number"
+                                                    style="left:0px;width:38px;">1</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="monaco-scrollable-element editor-scrollable vs-dark" role="presentation"
+                                        data-mprt="5"
+                                        style="position: absolute; overflow: hidden; left: 64px; height: 948px; width: 563px;">
+                                        <div class="lines-content monaco-editor-background"
+                                            style="position: absolute; overflow: hidden; width: 1e+06px; height: 1e+06px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;">
+                                            <div class="view-overlays" role="presentation" aria-hidden="true"
+                                                style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; height: 0px; width: 563px;">
+                                                <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                    <div class="current-line" style="width:563px; height:19px;"></div>
+                                                </div>
+                                            </div>
+                                            <div role="presentation" aria-hidden="true" class="view-rulers"></div>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="blockDecorations-container"></div>
+                                            <div class="view-zones" role="presentation" aria-hidden="true"
+                                                style="position: absolute;"></div>
+                                            <div class="view-lines monaco-mouse-cursor-text" role="presentation"
+                                                aria-hidden="true" data-mprt="7"
+                                                style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 563px; height: 948px;">
+                                                <div style="top:0px;height:19px;" class="view-line"><span><span
+                                                            class="mtk7">//&nbsp;Enter&nbsp;HTML&nbsp;here</span></span>
+                                                </div>
+                                            </div>
+                                            <div data-mprt="1" class="contentWidgets"
+                                                style="position: absolute; top: 0px;">
+                                                <div class="lightBulbWidget codicon codicon-light-bulb"
+                                                    widgetid="LightBulbWidget" title="Show Code Actions (Ctrl+.)"
+                                                    style="position: absolute; display: none; visibility: hidden; max-width: 563px;">
+                                                </div>
+                                            </div>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="cursors-layer cursor-line-style cursor-solid">
+                                                <div class="cursor monaco-mouse-cursor-text "
+                                                    style="height: 19px; top: 0px; left: 139px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; padding-left: 0px; width: 1.6px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="presentation" aria-hidden="true"
+                                            class="invisible scrollbar horizontal"
+                                            style="position: absolute; width: 549px; height: 12px; left: 0px; bottom: 0px;">
+                                            <div class="slider"
+                                                style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 549px;">
+                                            </div>
+                                        </div><canvas class="decorationsOverviewRuler" aria-hidden="true" width="17"
+                                            height="1185"
+                                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 948px; display: block;"></canvas>
+                                        <div role="presentation" aria-hidden="true" class="invisible scrollbar vertical"
+                                            style="position: absolute; width: 14px; height: 948px; right: 0px; top: 0px;">
+                                            <div class="slider"
+                                                style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 948px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="presentation" aria-hidden="true" style="width: 627px;"></div><textarea
+                                        data-mprt="6" class="inputarea monaco-mouse-cursor-text" wrap="on"
+                                        autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"
+                                        aria-label="Editor content;Press Alt+F1 for Accessibility Options." tabindex="0"
+                                        role="textbox" aria-roledescription="editor" aria-multiline="true"
+                                        aria-haspopup="false" aria-autocomplete="both"
+                                        style="tab-size: 30.7969px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; top: 0px; left: 64px; width: 547px; height: 1px;"></textarea>
+                                    <div class="monaco-editor-background textAreaCover line-numbers"
+                                        style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px;"></div>
+                                    <div data-mprt="4" class="overlayWidgets" style="width: 627px;"></div>
+                                    <div data-mprt="8" class="minimap slider-mouseover" role="presentation"
+                                        aria-hidden="true"
+                                        style="position: absolute; left: 0px; width: 0px; height: 948px;">
+                                        <div class="minimap-shadow-hidden" style="height: 948px;"></div><canvas
+                                            width="0" height="1185"
+                                            style="position: absolute; left: 0px; width: 0px; height: 948px;"></canvas><canvas
+                                            class="minimap-decorations-layer" width="0" height="1185"
+                                            style="position: absolute; left: 0px; width: 0px; height: 948px;"></canvas>
+                                        <div class="minimap-slider"
+                                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 0px;">
+                                            <div class="minimap-slider-horizontal"
+                                                style="position: absolute; width: 0px; height: 0px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-mprt="2" class="overflowingContentWidgets">
+                                    <div class="monaco-hover hidden" tabindex="0" role="tooltip"
+                                        widgetid="editor.contrib.contentHoverWidget"
+                                        style="position: absolute; display: none; visibility: hidden; max-width: 2379px;">
+                                        <div class="monaco-scrollable-element " role="presentation"
+                                            style="position: relative; overflow: hidden;">
+                                            <div class="monaco-hover-content"
+                                                style="overflow: hidden; font-size: 14px; line-height: 1.35714; max-height: 250px; max-width: 500px;">
+                                            </div>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="invisible scrollbar horizontal" style="position: absolute;">
+                                                <div class="slider"
+                                                    style="position: absolute; top: 0px; left: 0px; height: 10px; transform: translate3d(0px, 0px, 0px); contain: strict;">
+                                                </div>
+                                            </div>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="invisible scrollbar vertical" style="position: absolute;">
+                                                <div class="slider"
+                                                    style="position: absolute; top: 0px; left: 0px; width: 10px; transform: translate3d(0px, 0px, 0px); contain: strict;">
+                                                </div>
+                                            </div>
+                                            <div class="shadow"></div>
+                                            <div class="shadow"></div>
+                                            <div class="shadow"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="relative"><button
+                            class="absolute right-0 top-0 z-50 rounded-md border border-zinc-700 bg-zinc-900 p-2"><svg
+                                xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="#fff"
+                                viewBox="0 0 256 256">
+                                <path
+                                    d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z">
+                                </path>
+                            </svg></button>
+                        <section style="display:flex;position:relative;text-align:initial;width:100%;height:60vh">
+                            <div style="width: 100%; --vscode-editorCodeLens-lineHeight: 16px; --vscode-editorCodeLens-fontSize: 12px; --vscode-editorCodeLens-fontFeatureSettings: &quot;liga&quot; off, &quot;calt&quot; off; --code-editorInlayHintsFontFamily: Consolas, 'Courier New', monospace;"
+                                data-keybinding-context="2" data-mode-id="javascript">
+                                <div class="monaco-editor no-user-select  showUnused showDeprecated vs-dark" role="code"
+                                    data-uri="inmemory://model/2" style="width: 627px; height: 948px;">
+                                    <div data-mprt="3" class="overflow-guard" style="width: 627px; height: 948px;">
+                                        <div class="margin" role="presentation" aria-hidden="true"
+                                            style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 948px; width: 64px;">
+                                            <div class="glyph-margin" style="left: 0px; width: 0px; height: 948px;">
+                                            </div>
+                                            <div class="margin-view-zones" role="presentation" aria-hidden="true"
+                                                style="position: absolute;"></div>
+                                            <div class="margin-view-overlays" role="presentation" aria-hidden="true"
+                                                style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 64px; height: 948px;">
+                                                <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                    <div class="current-line current-line-margin-both"
+                                                        style="width:64px; height:19px;"></div>
+                                                    <div class="line-numbers active-line-number"
+                                                        style="left:0px;width:38px;">1</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="monaco-scrollable-element editor-scrollable vs-dark"
+                                            role="presentation" data-mprt="5"
+                                            style="position: absolute; overflow: hidden; left: 64px; height: 948px; width: 563px;">
+                                            <div class="lines-content monaco-editor-background"
+                                                style="position: absolute; overflow: hidden; width: 1e+06px; height: 1e+06px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;">
+                                                <div class="view-overlays" role="presentation" aria-hidden="true"
+                                                    style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; height: 0px; width: 563px;">
+                                                    <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                        <div class="current-line" style="width:563px; height:19px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div role="presentation" aria-hidden="true" class="view-rulers"></div>
+                                                <div role="presentation" aria-hidden="true"
+                                                    class="blockDecorations-container"></div>
+                                                <div class="view-zones" role="presentation" aria-hidden="true"
+                                                    style="position: absolute;"></div>
+                                                <div class="view-lines monaco-mouse-cursor-text" role="presentation"
+                                                    aria-hidden="true" data-mprt="7"
+                                                    style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 563px; height: 948px;">
+                                                    <div style="top:0px;height:19px;" class="view-line">
+                                                        <span><span></span></span></div>
+                                                </div>
+                                                <div data-mprt="1" class="contentWidgets"
+                                                    style="position: absolute; top: 0px;"></div>
+                                                <div role="presentation" aria-hidden="true"
+                                                    class="cursors-layer cursor-line-style cursor-solid">
+                                                    <div class="cursor monaco-mouse-cursor-text "
+                                                        style="height: 19px; top: 0px; left: 0px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; padding-left: 0px; width: 1.6px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="invisible scrollbar horizontal"
+                                                style="position: absolute; width: 549px; height: 12px; left: 0px; bottom: 0px;">
+                                                <div class="slider"
+                                                    style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 549px;">
+                                                </div>
+                                            </div><canvas class="decorationsOverviewRuler" aria-hidden="true" width="17"
+                                                height="1185"
+                                                style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 948px; display: block;"></canvas>
+                                            <div role="presentation" aria-hidden="true"
+                                                class="invisible scrollbar vertical"
+                                                style="position: absolute; width: 14px; height: 948px; right: 0px; top: 0px;">
+                                                <div class="slider"
+                                                    style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 948px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="presentation" aria-hidden="true" style="width: 627px;"></div>
+                                        <textarea data-mprt="6" class="inputarea monaco-mouse-cursor-text" wrap="on"
+                                            autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false"
+                                            aria-label="Editor content;Press Alt+F1 for Accessibility Options."
+                                            tabindex="0" role="textbox" aria-roledescription="editor"
+                                            aria-multiline="true" aria-haspopup="false" aria-autocomplete="both"
+                                            style="tab-size: 30.7969px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; top: 0px; left: 64px; width: 547px; height: 1px;"></textarea>
+                                        <div class="monaco-editor-background textAreaCover line-numbers"
+                                            style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px;">
+                                        </div>
+                                        <div data-mprt="4" class="overlayWidgets" style="width: 627px;"></div>
+                                        <div data-mprt="8" class="minimap slider-mouseover" role="presentation"
+                                            aria-hidden="true"
+                                            style="position: absolute; left: 0px; width: 0px; height: 948px;">
+                                            <div class="minimap-shadow-hidden" style="height: 948px;"></div><canvas
+                                                width="0" height="1185"
+                                                style="position: absolute; left: 0px; width: 0px; height: 948px;"></canvas><canvas
+                                                class="minimap-decorations-layer" width="0" height="1185"
+                                                style="position: absolute; left: 0px; width: 0px; height: 948px;"></canvas>
+                                            <div class="minimap-slider"
+                                                style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 0px;">
+                                                <div class="minimap-slider-horizontal"
+                                                    style="position: absolute; width: 0px; height: 0px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-mprt="2" class="overflowingContentWidgets">
+                                        <div class="monaco-hover hidden" tabindex="0" role="tooltip"
+                                            widgetid="editor.contrib.contentHoverWidget"
+                                            style="position: absolute; display: none; visibility: hidden; max-width: 2379px;">
+                                            <div class="monaco-scrollable-element " role="presentation"
+                                                style="position: relative; overflow: hidden;">
+                                                <div class="monaco-hover-content"
+                                                    style="overflow: hidden; font-size: 14px; line-height: 1.35714; max-height: 250px; max-width: 500px;">
+                                                </div>
+                                                <div role="presentation" aria-hidden="true"
+                                                    class="invisible scrollbar horizontal" style="position: absolute;">
+                                                    <div class="slider"
+                                                        style="position: absolute; top: 0px; left: 0px; height: 10px; transform: translate3d(0px, 0px, 0px); contain: strict;">
+                                                    </div>
+                                                </div>
+                                                <div role="presentation" aria-hidden="true"
+                                                    class="invisible scrollbar vertical" style="position: absolute;">
+                                                    <div class="slider"
+                                                        style="position: absolute; top: 0px; left: 0px; width: 10px; transform: translate3d(0px, 0px, 0px); contain: strict;">
+                                                    </div>
+                                                </div>
+                                                <div class="shadow"></div>
+                                                <div class="shadow"></div>
+                                                <div class="shadow"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2"><button
+                        class="bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4">Submit</button><button
+                        class="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 py-2 px-4"><span
+                            class="sr-only">Show history</span><svg width="15" height="15" viewBox="0 0 15 15"
+                            fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4">
+                            <path
+                                d="M13.15 7.49998C13.15 4.66458 10.9402 1.84998 7.50002 1.84998C4.72167 1.84998 3.34849 3.9064 2.76335 5H4.5C4.77614 5 5 5.22386 5 5.5C5 5.77614 4.77614 6 4.5 6H1.5C1.22386 6 1 5.77614 1 5.5V2.5C1 2.22386 1.22386 2 1.5 2C1.77614 2 2 2.22386 2 2.5V4.31318C2.70453 3.07126 4.33406 0.849976 7.50002 0.849976C11.5628 0.849976 14.15 4.18537 14.15 7.49998C14.15 10.8146 11.5628 14.15 7.50002 14.15C5.55618 14.15 3.93778 13.3808 2.78548 12.2084C2.16852 11.5806 1.68668 10.839 1.35816 10.0407C1.25306 9.78536 1.37488 9.49315 1.63024 9.38806C1.8856 9.28296 2.17781 9.40478 2.2829 9.66014C2.56374 10.3425 2.97495 10.9745 3.4987 11.5074C4.47052 12.4963 5.83496 13.15 7.50002 13.15C10.9402 13.15 13.15 10.3354 13.15 7.49998ZM7.5 4.00001C7.77614 4.00001 8 4.22387 8 4.50001V7.29291L9.85355 9.14646C10.0488 9.34172 10.0488 9.65831 9.85355 9.85357C9.65829 10.0488 9.34171 10.0488 9.14645 9.85357L7.14645 7.85357C7.05268 7.7598 7 7.63262 7 7.50001V4.50001C7 4.22387 7.22386 4.00001 7.5 4.00001Z"
+                                fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg></button></div>
+            </div>
+        </div>
+        <div data-state="inactive" data-orientation="horizontal" role="tabpanel"
+            aria-labelledby="radix-:R1pmmmr9acq:-trigger-edit" hidden="" id="radix-:R1pmmmr9acq:-content-edit"
+            tabindex="0"
+            class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-0 border-0 p-0">
+        </div>
+    </div>
+</div>

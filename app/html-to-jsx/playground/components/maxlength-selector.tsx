@@ -24,7 +24,7 @@ export function MaxLengthSelector({ defaultValue }: MaxLengthSelectorProps) {
         <HoverCardTrigger asChild>
           <div className="grid gap-4">
             <div className="flex items-center justify-between">
-              <Label htmlFor="maxlength">Maximum Length</Label>
+              <Label htmlFor="maxlength">Useless slider.</Label>
               <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
                 {value}
               </span>
@@ -45,9 +45,7 @@ export function MaxLengthSelector({ defaultValue }: MaxLengthSelectorProps) {
           className="w-[260px] text-sm"
           side="left"
         >
-          The maximum number of tokens to generate. Requests can use up to 2,048
-          or 4,000 tokens, shared between prompt and completion. The exact limit
-          varies by model.
+          I also dont know why.
         </HoverCardContent>
       </HoverCard>
     </div>

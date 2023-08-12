@@ -3,15 +3,27 @@ $dark-accent: #212124;
 $accent: $pink;
 
 .html-to-jsx {
+  .bg-popover {
+    background-color: $black !important;
+  }
   .page-wrapper {
     .bg-muted {
       background-color: $black !important;
     }
 
+    button.bg-secondary {
+      background-color: transparent !important;
+    }
+
     button {
-      background-color: $dark-accent !important;
       border-color: $dark-accent !important;
     }
+  }
+
+  button#client,
+  button#typescript,
+  button#fc {
+    background-color: #fafafa !important;
   }
 }
 
