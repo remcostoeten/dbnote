@@ -8,7 +8,6 @@ import {
   getDocs,
   onSnapshot,
   query,
-  writeBatch,
 } from "firebase/firestore"
 import ReactMarkdown from "react-markdown"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
@@ -124,11 +123,10 @@ export default function ThoughtCard() {
           {thoughts.map((thought) => (
             <CSSTransition key={thought.id} timeout={500} classNames="fade">
               <div
-                className={`icon-card border flex flex-col mb-4 justify-between rounded-md break-words p-6 ${
-                  selectedThought && selectedThought.id === thought.id
+                className={`icon-card border flex flex-col mb-4 justify-between rounded-md break-words p-6 ${selectedThought && selectedThought.id === thought.id
                     ? "active"
                     : ""
-                }`}
+                  }`}
                 onClick={() => handleSelect(thought.id)}
               >
                 <div className="top sidebar-notes flex-col flex align-middle gap-4">
@@ -138,10 +136,10 @@ export default function ThoughtCard() {
                         <span className="font-notes text-xs text-[#5D5C63] uppercase">
                           {thought.selectedDate
                             ? thought.selectedDate
-                                .toDate()
-                                .toLocaleString("en-US", {
-                                  weekday: "short",
-                                })
+                              .toDate()
+                              .toLocaleString("en-US", {
+                                weekday: "short",
+                              })
                             : "N/A"}
                         </span>
 
@@ -159,11 +157,11 @@ export default function ThoughtCard() {
                         <span className="text-[#5D5C63] font-notes">
                           {thought.createdAt
                             ? thought.createdAt
-                                .toDate()
-                                .toLocaleTimeString("en-US", {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })
+                              .toDate()
+                              .toLocaleTimeString("en-US", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })
                             : "N/A"}
                         </span>
                       </div>

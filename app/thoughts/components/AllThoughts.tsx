@@ -6,7 +6,6 @@ import NotesIcon from "@/components/icons/NotesIcon"
 
 import { NewThought } from "./NewThought"
 import ThoughtCard from "./ThoughtCard"
-import ThoughtDetail from "./ThoughtSingle"
 
 export default function AllThoughts() {
   return (

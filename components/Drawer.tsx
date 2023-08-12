@@ -18,6 +18,7 @@ import { Drawer } from "vaul"
 import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
 import { toast } from "@/components/ui/use-toast"
+import { string } from "zod"
 
 export function MyDrawer({ content }) {
   const [open, setOpen] = useState(false)
@@ -50,8 +51,9 @@ export function MyDrawer({ content }) {
         description,
         createdAt: serverTimestamp(),
         userId: user.uid,
-        userName: user.displayName,
         id: "",
+        subject: "",
+        selectedDate: undefined
       }
 
       const docRef = await addDoc(collection(db, "thoughts"), newThought)

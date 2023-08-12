@@ -10,11 +10,10 @@ export interface Note {
   export interface Thought {
     id: string;
     title?: string;
+    userId: string;
     description?: string;
     createdAt: any;
-    userName?: user.displayName;
-    userId: string;  
+    userName?: string;
     subject: string;
     selectedDate: any;
-
   }

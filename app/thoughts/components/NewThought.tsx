@@ -28,8 +28,6 @@ import {
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
 
-import { cn } from "./../../../lib/utils"
-
 interface NewThoughtProps {
   content?: string
 }
@@ -116,7 +114,7 @@ export function NewThought({ content }: NewThoughtProps) {
       />
       <Popover>
         <PopoverTrigger asChild>
-          <Button className="text-[#ededee] flex items-center border hover:bg-[212020] border-color-[#212028] bg-[#0a0a0a]">
+          <Button className="border-color-[#212028] flex items-center border bg-[#0a0a0a] text-[#ededee] hover:bg-[212020]">
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date ? format(date, "PPP") : <span>Pick a date</span>}
           </Button>
@@ -124,7 +122,7 @@ export function NewThought({ content }: NewThoughtProps) {
         <PopoverContent className="w-auto p-0">
           <Calendar
             mode="single"
-            selected={date || undefined} // Assuming null is not a valid value
+            selected={date || undefined}
             onSelect={(selectedDate) => setDate(selectedDate as any)}
             initialFocus
           />
@@ -153,7 +151,7 @@ export function NewThought({ content }: NewThoughtProps) {
       <div className="flex items-center gap-2">
         <Button
           type="submit"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4 inline-flex w-fit translate-y-14"
+          className="inline-flex h-10 w-fit translate-y-14 bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
         >
           New post
         </Button>
@@ -172,10 +170,10 @@ export function NewThought({ content }: NewThoughtProps) {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed  bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
-          <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
+        <Drawer.Content className="fixed  bottom-0 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-2xl rounded-t-[10px] bg-[#0a0a0a] p-12 shadow-lg">
+          <div className="[text-[#5D5C63] font-notes] flex-1 rounded-t-[10px] p-4">
             <div className="mx-auto  w-4/12">
-              <Drawer.Title className="mb-4 font-medium text-4xl font-serif">
+              <Drawer.Title className="mb-4 font-serif text-4xl font-medium">
                 Add whatever is on your mind.
               </Drawer.Title>
               {form}
