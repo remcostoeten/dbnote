@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import ToolCard from '@/components/homepage/CardComponent';
 import { Carousel, banners } from '@/components/homepage/Carousel';
 import { motion } from 'framer-motion';
-import { addBodyHoverClass, removeBodyHoverClass } from '@/hooks/HoverBodyClass';
 
 export const HomeBanners = () => {
   const [scrollPosition, setScrollPosition] = useState(100);
@@ -25,8 +24,6 @@ export const HomeBanners = () => {
   return (
     <>
       <div
-        onMouseEnter={addBodyHoverClass}
-        onMouseLeave={removeBodyHoverClass}
         className="big-container pt-8 mQ3_iconsb-22">
         <div className="grid mx-auto selection:grid col-span-3 gap-6 grid-cols-3 content-center items-center justify-items-center">
           {banners.map((banner, index) => (

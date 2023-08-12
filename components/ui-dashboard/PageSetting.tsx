@@ -13,8 +13,8 @@ import { Switch } from "@/components/ui/switch";
 
 interface Setting {
     id: string;
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     defaultChecked?: boolean;
     onToggle?: (isChecked: boolean) => void;
 }

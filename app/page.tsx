@@ -11,7 +11,6 @@ import { buttonVariants } from "@/components/ui/button"
 
 import CardComponent from "@/components/homepage/CardComponent"
 import ToolCard from "@/components/homepage/CardComponent"
-import Cursor from "@/components/Cursor"
 import ReactIcon from "@/components/icons/ReactIcon"
 import TypescriptIcon from "@/components/icons/TypescriptIcon"
 

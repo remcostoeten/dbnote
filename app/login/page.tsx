@@ -14,16 +14,13 @@ import {
 } from "firebase/auth"
 import { motion } from "framer-motion"
 
-import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
-import Google from "@/components/Google"
+import Google from "@/components/icons/Google"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
-import { BlobButton } from "@/components/buttons/CustomButtons"
 import { GlowButton } from './../../components/buttons/CustomButtons';
-import router from "next/router"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")

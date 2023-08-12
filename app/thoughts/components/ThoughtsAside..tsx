@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { AuthProvider } from '@/AuthContext'
+import { AuthProvider } from '@/lib/AuthContext'
 import { auth } from '@/lib/firebase'
 import { SiteFooter } from '@/components/site-footer'
 import { User } from 'firebase/auth'

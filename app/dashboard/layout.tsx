@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { AuthProvider } from "@/AuthContext";
+import { AuthProvider } from "@/lib/AuthContext";
 
 import { dashboardConfig } from "@/config/dashboard";
 import { auth } from "@/lib/firebase";

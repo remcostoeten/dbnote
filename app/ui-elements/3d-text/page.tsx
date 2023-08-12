@@ -36,15 +36,13 @@ export default function Home() {
           {
             id: "necessary",
             title: "Toggle color",
-            description:
-              "Fancy some teal?.",
+            description: "Fancy some teal?.",
             defaultChecked: true,
-            onToggle: (isChecked) => {
+            onToggle: (_isChecked) => {
               document.body.classList.toggle("d-perspective--color");
             },
           },
-        ]}
-      />
+        ]} description={""} />
       <div className="perspective-text">
         <div
           onMouseMove={(e) => {
