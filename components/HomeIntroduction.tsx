@@ -3,7 +3,13 @@
 import React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { GlowButton, ProminentGlowButton, SwapButton, WeakGlowButton } from "@/components/buttons/CustomButtons"
+
+import {
+  GlowButton,
+  ProminentGlowButton,
+  SwapButton,
+  WeakGlowButton,
+} from "@/components/buttons/CustomButtons"
 
 export const HomeIntroduction = ({ title }) => {
   return (
@@ -25,19 +31,23 @@ export const HomeIntroduction = ({ title }) => {
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          I&apos;m a <span className="dutch">dutch</span> creative front-end developer
-          with a graphic design degree. Passionate about unique development and creating UI's with micro-interactions.
+          I&apos;m a <span className="dutch">dutch</span> creative front-end
+          developer with a graphic design degree. Passionate about unique
+          development and creating UI's with micro-interactions.
         </motion.p>
 
         <div className="absolute h-[20vh] w-[50vw]"></div>
 
-        <motion.div className="z-10 flex items-center align-middle space-x-6" initial={{ skewX: 4, opacity: 0, y: -40 }}
+        <motion.div
+          className="z-10 flex items-center align-middle space-x-6"
+          initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}>
+          transition={{ delay: 0.7, duration: 0.5 }}
+        >
           <ProminentGlowButton link="/dashboard" text="Go to dashboard" />
           <GlowButton link="https://github.com/remcostoeten" text="Github" />
         </motion.div>
       </div>
-    </section >
+    </section>
   )
 }

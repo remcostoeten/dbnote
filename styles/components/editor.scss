@@ -1,0 +1,39 @@
+$black: #000;
+$dark-accent: #212124;
+$accent: $pink;
+
+.html-to-jsx {
+  .page-wrapper {
+    .bg-muted {
+      background-color: $black !important;
+    }
+
+    button {
+      background-color: $dark-accent !important;
+      border-color: $dark-accent !important;
+    }
+  }
+}
+
+.view-lines .monaco-mouse-cursor-text {
+  background-color: $black !important;
+}
+
+.monaco-editor .margin {
+  background-color: $black !important;
+}
+
+.monaco-editor-background {
+  background-color: $black !important;
+  padding: 12px !important;
+  margin: 12px !important;
+}
+.monaco-scrollable-element.editor-scrollable.vs-dark {
+  border: 1px solid #27272a;
+  border-radius: calc(var(--radius) - 2px);
+  background-color: $black !important;
+}
+
+.current-line {
+  border: none !important;
+}

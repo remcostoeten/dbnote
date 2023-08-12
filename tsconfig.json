@@ -53,7 +53,8 @@
     "components/icons/IconGrid.tsx",
     "lib/useMousePosition.tsx",
     "components/header/custom-menu.tsx",
-    "app/thoughts/layout.tsx"
+    "app/thoughts/layout.tsx",
+    "app/html-to-jsx/playground/AppContext.tsx"
   ],
   "exclude": [
     "node_modules"
