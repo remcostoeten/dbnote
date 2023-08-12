@@ -4,8 +4,8 @@ import React from "react"
 
 import NotesIcon from "@/components/icons/NotesIcon"
 
-import { NewThought } from "./NewThought"
 import ThoughtCard from "./ThoughtCard"
+import { NewThought } from './NewThought';
 
 export default function AllThoughts() {
   return (

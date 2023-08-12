@@ -8,11 +8,11 @@ import { auth } from "@/lib/firebase"
 import withAuth from "@/lib/withAuth"
 import { SiteFooter } from "@/components/site-footer"
 
-import { SidebarNav } from "../ui-elements/forms/components/sidebar-nav"
 import { ThoughtsAside } from "./components/ThoughtsAside."
 import AllNotes from "./components/AllThoughts"
 import AllThoughts from "./components/AllThoughts"
 import Draw from "./components/Draw"
+import { SidebarNav } from './../ui-elements/forms/components/sidebar-nav';
 
 const sidebarNavItems = [
   {
