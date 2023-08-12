@@ -1,3 +1,21 @@
+.cursor-trailer {
+  opacity: 0;
+  width: 0;
+  transition: 2s cubic-bezier(0.465, 0.84, 0.44, 1) all;
+  height: 0;
+}
+
+body {
+  &:hover {
+    .cursor-trailer {
+      width: 20px;
+      height: 20px;
+      transition: 1s cubic-bezier(0.45, 0.84, 0.44, 1) all;
+      opacity: 1;
+    }
+  }
+}
+
 .interactable:hover {
   background-size: 105%;
   opacity: 0.8;
@@ -21,13 +39,6 @@ body:hover > #trailer {
   opacity: 0;
   display: grid;
   place-items: center;
-}
-#trailer[data-type="video"] {
-  height: 40px; /* Example increased size */
-  width: 40px; /* Example increased size */
-}
-#trailer:not([data-type=""]) > #trailer-icon {
-  opacity: 1;
 }
 
 #trailer-icon {

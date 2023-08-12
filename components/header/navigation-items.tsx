@@ -1,101 +1,106 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { NavigationMenu } from "@radix-ui/react-navigation-menu";
-import { onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react"
+import Link from "next/link"
+import { NavigationMenu } from "@radix-ui/react-navigation-menu"
+import { onAuthStateChanged } from "firebase/auth"
+import { motion } from "framer-motion"
 
-import { MainNavItem } from "types";
-import { siteConfig } from "@/config/site";
-import { auth } from "@/lib/firebase";
-import { cn } from "@/lib/utils";
-import { toast } from "@/components/ui/use-toast";
-import { Icons } from "@/components/icons";
-import { MobileNav } from "@/components/mobile-nav";
+import { MainNavItem } from "types"
+import { siteConfig } from "@/config/site"
+import { auth } from "@/lib/firebase"
+import { cn } from "@/lib/utils"
+import { toast } from "@/components/ui/use-toast"
+import { Icons } from "@/components/icons"
+import { MobileNav } from "@/components/mobile-nav"
 
-import LogoIconOnly from "../LogoIconOnly";
-
-import { motion } from "framer-motion";
-import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons";
-import Megamenu from "../Megamenu";
+import LogoIconOnly from "../LogoIconOnly"
+import Megamenu from "../Megamenu"
+import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
+import { type } from "./../../lib/toc"
 
 interface MainNavProps {
-  items?: MainNavItem[];
-  children?: React.ReactNode;
-  hidecircel?: string;
+  items?: MainNavItem[]
+  children?: React.ReactNode
+  hidecircel?: string
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(null);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const [userEmail, setUserEmail] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userProfilePicture, setUserProfilePicture] = useState<string | null>(
+    null
+  )
 
   if (!items) {
-    return null;
+    return null
   }
 
   const signOut = async () => {
-    await auth.signOut();
-    setIsLoggedIn(false);
-    setUserEmail("");
+    await auth.signOut()
+    setIsLoggedIn(false)
+    setUserEmail("")
     toast({
       title: "Goodbye " + userEmail,
-    });
-  };
+    })
+  }
 
   const deleteAccount = async () => {
     if (auth.currentUser) {
       try {
-        await auth.currentUser.delete();
-        setIsLoggedIn(false);
-        setUserEmail("");
+        await auth.currentUser.delete()
+        setIsLoggedIn(false)
+        setUserEmail("")
         toast({
           title: "Your account has been deleted",
-        });
+        })
       } catch (error) {
         toast({
           title:
             "An error occurred while deleting your account. You may need to sign in again.",
-        });
+        })
       }
     }
-  };
+  }
 
   const fetchUserProfilePicture = async () => {
     if (auth.currentUser) {
-      const photoURL = auth.currentUser.photoURL;
-      setUserProfilePicture(photoURL);
+      const photoURL = auth.currentUser.photoURL
+      setUserProfilePicture(photoURL)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchUserProfilePicture();
-  }, []);
+    fetchUserProfilePicture()
+  }, [])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserEmail(stripDomainFromEmail(user.email) || "User");
-        setIsLoggedIn(true);
+        setUserEmail(stripDomainFromEmail(user.email) || "User")
+        setIsLoggedIn(true)
       } else {
-        setUserEmail("");
-        setIsLoggedIn(false);
+        setUserEmail("")
+        setIsLoggedIn(false)
       }
-    });
+    })
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe()
+  }, [])
 
   function stripDomainFromEmail(email: string | null): string {
     if (email && email.includes("@")) {
-      return email.split("@")[0];
+      return email.split("@")[0]
     }
-    return email || "";
+    return email || ""
   }
 
   return (
-    <div className="flex w-full gap-6 md:gap-10 cursor-hover items-center" data-type="cursor">
+    <div
+      className="flex w-full gap-6 md:gap-10 cursor-hover items-center"
+      data-type="cursor"
+    >
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -103,7 +108,9 @@ export function MainNav({ items, children }: MainNavProps) {
       >
         <Link href="/" className="hidden items-center space-x-2 md:flex">
           <LogoIconOnly />
-          <span className="hidden font-bold sm:inline-block">{siteConfig.name}</span>
+          <span className="hidden font-bold sm:inline-block">
+            {siteConfig.name}
+          </span>
         </Link>
       </motion.div>
       {items.map((item, index) => (
@@ -140,9 +147,11 @@ export function MainNav({ items, children }: MainNavProps) {
           )}
         </motion.div>
       ))}
-      <motion.div initial={{ opacity: 0, y: -20 }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}>
+        transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}
+      >
         <Megamenu />
       </motion.div>
 
@@ -164,7 +173,7 @@ export function MainNav({ items, children }: MainNavProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
             onClick={signOut}
-            className='cursor-hover'
+            data-type="cursor"
           >
             <WeakGlowButton text="Sign Out" link="#" />
           </motion.span>
@@ -188,7 +197,9 @@ export function MainNav({ items, children }: MainNavProps) {
         {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
         <span className="font-bold">Menu</span>
       </motion.button>
-      {showMobileMenu && items && <MobileNav items={items}>{children}</MobileNav>}
+      {showMobileMenu && items && (
+        <MobileNav items={items}>{children}</MobileNav>
+      )}
     </div>
-  );
+  )
 }

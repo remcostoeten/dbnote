@@ -1,19 +1,18 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
+
 import "@/styles/globals.scss"
-
-import { CursorProvider } from "@/lib/CursorContext"
-
+import { marketingConfig } from "@/config/marketing"
 import { siteConfig } from "@/config/site"
+import { CursorProvider } from "@/lib/CursorContext"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
+import { MainNav } from "@/components/header/navigation-items"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
-import { MainNav } from "@/components/header/navigation-items"
-import { marketingConfig } from "@/config/marketing"
-import Trailer from './../components/core/Cursor/MouseTrailer';
+import Trailer from "./../components/core/Cursor/MouseTrailer"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -90,8 +89,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>
-              <div className="page-wrapper__inner">
-                {children}</div>
+              <div className="page-wrapper__inner">{children}</div>
             </div>
             <Analytics />
             <Toaster />
