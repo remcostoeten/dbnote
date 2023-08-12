@@ -3,11 +3,12 @@
   "version": "0.2.5",
   "private": true,
   "author": {
-    "name": "remcostoetenn",
+    "name": "Remco Stoeten",
     "url": "https://remcostoeten.com"
   },
   "scripts": {
-    "dev": "concurrently \"contentlayer dev\" \"next dev\"",
+    "dev": "next dev",
+    "dev-old": "concurrently \"contentlayer dev\" \"next dev\"",
     "build": "contentlayer build && next build",
     "nextbuild": "next build",
     "turbo": "next dev --turbo",
