@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import React, { useEffect, useRef } from 'react';
 import styles from '@/styles/modules/cursor.module.scss';
 
@@ -11,7 +9,7 @@ const Trailer: React.FC = () => {
 
     const getTrailerClass = (type: string) => {
         switch (type) {
-            case 'video':
+            case 'cursor':
                 return 'fa-solid fa-play';
             default:
                 return 'fa-solid fa-arrow-up-right';
@@ -21,7 +19,7 @@ const Trailer: React.FC = () => {
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             const interactable = e.target as HTMLElement;
-            const interacting = interactable.classList.contains(styles.interactable);
+            const interacting = interactable.classList.contains('cursor-hover');
 
             const x = e.clientX - (trailer.current?.offsetWidth || 0) / 2;
             const y = e.clientY - (trailer.current?.offsetHeight || 0) / 2;

@@ -1,6 +1,7 @@
 :root {
   --primary-color: mediumslateblue;
 }
+
 .container {
   display: flex;
   width: 100%;
@@ -15,51 +16,8 @@
   animation: scroll 5s linear infinite;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-h1,
-h2,
-h3,
-p {
-  margin: 0rem;
-}
-.icon-card-scroll-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-}
-.icon-card-scroll-container {
-  display: flex;
-  overflow-x: scroll;
-  width: 100%; /* Adjust the width as per your requirements */
-}
-
-.icon-card-scroll-wrapper {
-  overflow: hidden;
-  position: relative;
-  white-space: nowrap;
-  -webkit-animation: 10s scroll infinite linear;
-  -moz-animation: 10s scroll infinite linear;
-  -ms-animation: 10s scroll infinite linear;
-  -o-animation: 10s scroll infinite linear;
-  animation: 10s scroll infinite linear;
-}
 .banner {
   gap: 12px;
-}
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
 }
 
 .icon-card {
@@ -72,10 +30,10 @@ p {
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    // background-image: radial-gradient(
-    //   rgba(255, 255, 255, 0.1) 1px,
-    //   transparent 1px
-    // );
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
     padding: $spacing;

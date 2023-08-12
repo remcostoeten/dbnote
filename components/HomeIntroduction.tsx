@@ -19,7 +19,8 @@ export const HomeIntroduction = ({ title }) => {
         </motion.h1>
 
         <motion.p
-          className="max-w-[48rem] w-full leading-normal text-muted-foreground sm:text-xl sm:leading-8"
+          data-type="cursor"
+          className="max-w-[48rem] w-full cursor-hover leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}

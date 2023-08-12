@@ -28,6 +28,15 @@
   }
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 // Animation for glowing btn/element effect.
 @keyframes glowing {
   0% {

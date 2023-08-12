@@ -53,7 +53,7 @@ function RootLayout({ children }: RootLayoutProps) {
           </aside>
           <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div> */}
       </div>
-      <Draw />
+      <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div>
     </>
   )
 }
