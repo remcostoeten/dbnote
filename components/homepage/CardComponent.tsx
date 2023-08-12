@@ -12,7 +12,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ icon, title, description }) => {
         <span className="font-bold items-start" >{icon}</span>
         <h3 className="font-bold items-start">{title}</h3>
 
-        <p className="cursor-hover text-sm text-muted-foreground">
+        <p className="cursor-hover  text-sm text-muted-foreground">
           {description}
         </p>
       </div>

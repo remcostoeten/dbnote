@@ -24,16 +24,33 @@
   position: relative;
   border-radius: 1.5rem;
   background-color: rgb(1, 1, 1);
+  position: relative;
+
+  &:hover {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(212, 20, 119);
+      opacity: 0.15;
+      z-index: -1;
+      filter: blur(100px);
+    }
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
+  }
 
   &__inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    background-image: radial-gradient(
-      rgba(255, 255, 255, 0.1) 1px,
-      transparent 1px
-    );
+
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
     padding: $spacing;

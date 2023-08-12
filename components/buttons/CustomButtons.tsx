@@ -108,6 +108,15 @@ export const BlobButton = ({ text, icon }: BlobButtonProps) => {
   )
 }
 
+export const RoundedGlowButton = ({ text }) => {
+  return (
+    <div className="relative button-rounded-glow">
+      <button className="button-rounded-glow__inner " type="button">{text}</button>
+      <div className="button-rounded-glow__bg"></div>
+    </div>
+  )
+}
+
 export const BorderButton = ({ text, variant = "" }) => {
   return (
     <div className="border-btn h-[60px]">
@@ -154,6 +163,8 @@ export default function CustomButtons() {
       <WeakGlowButton text="Weak Glow on hover" link={undefined} />
       <h2 className="font-semibold">Glow on hover</h2>
       <GlowButton text="Glow on hover" link={undefined} />
+      <h2 className="font-semibold">Rounded glow</h2>
+      <RoundedGlowButton text="Glow rounded" />
       <h2 className="font-semibold">Prominent Glow</h2>
       <ProminentGlowButton text="Prominent Glow on hover" link={undefined} />
       <h2 className="font-semibold">Blob button</h2>
