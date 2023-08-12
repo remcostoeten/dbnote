@@ -1,6 +1,5 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
-import styles from '@/styles/modules/cursor.module.scss';
 import "@/styles/globals.scss"
 
 import { CursorProvider } from "@/lib/CursorContext"
@@ -92,16 +91,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </div>
               </header>
               <div className="page-wrapper__inner">
-                <div
-                  className={styles.interactable}
-                  data-type="video"
-                  style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1657779582398-a13b5896ff19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60)' }}
-                />
-                <div
-                  className={styles.interactable}
-                  data-type="video"
-                  style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1657779582398-a13b5896ff19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60)' }}
-                ></div>
                 {children}</div>
             </div>
             <Analytics />

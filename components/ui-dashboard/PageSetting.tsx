@@ -51,11 +51,6 @@ export default function PageSetting({ title, description, settings }: PageSettin
                     </div>
                 ))}
             </CardContent>
-            <CardFooter>
-                <Button variant="outline" className="w-full">
-                    Save preferences
-                </Button>
-            </CardFooter>
         </Card>
     );
 }

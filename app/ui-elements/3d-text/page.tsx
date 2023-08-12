@@ -32,8 +32,6 @@ export default function Home() {
   return (
     <>
       <PageSetting
-        title="Page Settings"
-        description="Configure your settings"
         settings={[
           {
             id: "necessary",

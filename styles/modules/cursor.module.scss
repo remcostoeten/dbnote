@@ -7,12 +7,11 @@ body:hover > #trailer {
   width: 20px;
   background-color: white;
   border-radius: 20px;
-  // transition: transform 800ms ease, scale 400ms ease, opacity 400ms ease;
   position: fixed;
   left: 0px;
   top: 0px;
   z-index: 10000;
-
+  mix-blend-mode: difference;
   pointer-events: none;
   opacity: 0;
   display: grid;

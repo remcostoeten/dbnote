@@ -68,7 +68,6 @@ export default function Megamenu() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    <LogoIconOnly />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       Showcasing UI elements
                     </div>
@@ -84,13 +83,10 @@ export default function Megamenu() {
               <ListItem href="/ui-elements/3d-text" title="3d text">
                 3d text
               </ListItem>
-              <ListItem href="/ui-elements/cursor-mask" title="Cursor mask">
-                Cursor mask
+              <ListItem href="/ui-elements/mouse-trailer" title="Mouse trailer">
+                With interactive hover effect
               </ListItem>
-              <ListItem href="/dwwddddwaddd" title="Infinite scroller">
-                404 error page
-              </ListItem>
-              <ListItem href="/forms" title="Infinite scroller">
+              <ListItem href="/ui-elements/forms" title="Forms">
                 Form - TW/JSX reference
               </ListItem>
             </ul>

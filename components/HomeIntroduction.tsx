@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { GlowButton, ProminentGlowButton, SwapButton } from "@/components/buttons/CustomButtons"
+import { GlowButton, ProminentGlowButton, SwapButton, WeakGlowButton } from "@/components/buttons/CustomButtons"
 
 export const HomeIntroduction = ({ title }) => {
   return (
@@ -34,7 +34,7 @@ export const HomeIntroduction = ({ title }) => {
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}>
           <ProminentGlowButton link="/dashboard" text="Go to dashboard" />
-          <GlowButton link="https://github.com/remcostoeten" text="Github" />
+          <WeakGlowButton link="https://github.com/remcostoeten" text="Github" />
         </motion.div>
       </div>
     </section >

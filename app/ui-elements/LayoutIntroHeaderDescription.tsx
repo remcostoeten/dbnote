@@ -30,7 +30,7 @@ export const LayoutIntroHeaderDescription = () => (
           href="https://github.com/remcostoeten/remcostoeten.com"
           target="_blank"
         >
-          repos
+          repos{' '}
         </Link>
         have over 700+ commits before getting sick off it.
       </PageHeaderDescription>

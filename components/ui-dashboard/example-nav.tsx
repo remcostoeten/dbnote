@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { ArrowRightIcon } from "@radix-ui/react-icons"
 
-const examples = [
+export const examples = [
   {
     name: "Buttons",
     href: "/ui-elements/buttons",
@@ -20,12 +20,12 @@ const examples = [
   {
     name: "3d text effect",
     href: "/ui-elements/3d-text",
-    code: "",
+    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/Text3d.jsx",
   },
   {
-    name: "Miscellaneous",
-    href: "/examples/music",
-    code: "https://github.com/shadcn/ui/tree/main/apps/www/app/examples/music",
+    name: "Cursor trailer",
+    href: "/ui-elements/mouse-trailer",
+    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/Cursor/MouseTrailer.tsx",
   },
 ]
 
