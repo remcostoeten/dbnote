@@ -30,7 +30,7 @@ export const HomeBanners = () => {
         className="big-container pt-8 mQ3_iconsb-22">
         <div className="grid mx-auto selection:grid col-span-3 gap-6 grid-cols-3 content-center items-center justify-items-center">
           {banners.map((banner, index) => (
-            <motion.div className='w-full'
+            <motion.div className='w-full card-glow'
               key={index}
               initial={{ scale: 0.8, opacity: 0, y: -40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}

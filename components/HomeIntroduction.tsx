@@ -31,11 +31,11 @@ export const HomeIntroduction = ({ title }) => {
 
         <div className="absolute h-[20vh] w-[50vw]"></div>
 
-        <motion.div className="z-10 flex items-center align-middle space-x-4" initial={{ skewX: 4, opacity: 0, y: -40 }}
+        <motion.div className="z-10 flex items-center align-middle space-x-6" initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}>
           <ProminentGlowButton link="/dashboard" text="Go to dashboard" />
-          <WeakGlowButton link="https://github.com/remcostoeten" text="Github" />
+          <GlowButton link="https://github.com/remcostoeten" text="Github" />
         </motion.div>
       </div>
     </section >
