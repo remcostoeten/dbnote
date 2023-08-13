@@ -54,7 +54,8 @@
     "lib/useMousePosition.tsx",
     "components/header/custom-menu.tsx",
     "app/thoughts/layout.tsx",
-    "app/html-to-jsx/playground/AppContext.tsx"
+    "app/html-to-jsx/playground/AppContext.tsx",
+    "components/icons/TrashIcon.js"
   ],
   "exclude": [
     "node_modules"

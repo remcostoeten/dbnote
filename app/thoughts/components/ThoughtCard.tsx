@@ -68,8 +68,10 @@ import { DataTableViewOptions } from "@/components/ui/data-table-view-options"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
+import TrashIcon from "@/components/icons/TrashIcon"
 
 import { GlowButton } from "./../../../components/buttons/CustomButtons"
+import { type } from "./../../../types/index.d"
 import { useThoughtContext } from "./ThoughtContext"
 import ThoughtDetail from "./ThoughtSingle"
 
@@ -180,15 +182,15 @@ export default function ThoughtCard() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center space-x-2">
-          <Input
-            placeholder="Filter tasks..."
-            className="h-8 w-[150px] lg:w-[250px]"
+          <input
+            placeholder="Filter Thoughts..."
+            className="border h-[50px] border-[#27272a] bg-transparent pl-4 placeholder:[#fafafa] placeholder:text-[#fafafa] text-[#fafafa] px-3"
           />
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex items-center gap-4">
           <select
-            className="border border-[#27272a] text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
+            className="border cursor-hover border-[#27272a] text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
             value={selectedLabel}
             onChange={(e) => setSelectedLabel(e.target.value)}
           >
@@ -200,25 +202,25 @@ export default function ThoughtCard() {
             ))}
           </select>
           <select
-            className="border border-[#27272a]  text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
+            className="border cursor-hover border-[#27272a]  text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
-          <DataTableViewOptions table={undefined} />
+          <DataTableViewOptions />
+          <p
+            onClick={handleRemoveAll}
+            className=" z-20  ml-4"
+            data-type="cursor"
+          >
+            <TrashIcon />
+          </p>
         </div>
       </div>
       <div className="flex gap-4">
         <div className="w-1/4">
-          <span
-            className="absolute break-word right-4 bottom-4"
-            onClick={handleRemoveAll}
-          >
-            rm - rf all thoughts
-          </span>
-
           {thoughts.map((thought, index) => (
             <motion.div
               key={thought.id}

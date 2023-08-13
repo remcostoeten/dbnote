@@ -12,7 +12,7 @@ export default function AllThoughts() {
     <>
       <div className="flex-col px-4 py-6  ">
         <div className="flex w-full ">
-          <div className="flex gap-1 w-full">
+          <div className="flex gap-1 w-full cursor-hover">
             <NotesIcon />
             <span className="pl-3 text-xl text-notes font-notes">
               All thoughts

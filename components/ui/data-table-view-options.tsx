@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 interface DataTableViewOptionsProps<TData> {
-  table: Table<TData>
+  table?: Table<TData>
 }
 
 export function DataTableViewOptions<TData>({
