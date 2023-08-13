@@ -7,9 +7,9 @@ import ReactQuill from "react-quill"
 import { Drawer } from "vaul"
 
 import "react-quill/dist/quill.snow.css"
-
 import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
+import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 
 interface NewThoughtProps {
@@ -80,12 +80,6 @@ export function NewThought({ content }: NewThoughtProps) {
     }
   }
 
-  const subjectOptions = [
-    { name: "Personal", value: "personal" },
-    { name: "Work", value: "work" },
-    { name: "Other", value: "other" },
-  ]
-
   const form = (
     <form className="flex flex-col gap-2 py-6" onSubmit={handleSubmit}>
       <input
@@ -108,7 +102,14 @@ export function NewThought({ content }: NewThoughtProps) {
           ))}
         </select>
       </select>
-
+      <div className="flex items-center gap-2">
+        <Button
+          type="submit"
+          className="inline-flex h-10 w-fit translate-y-14 bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+        >
+          New post
+        </Button>
+      </div>
       <ReactQuill
         placeholder="Thought content"
         value={markdownContent}
