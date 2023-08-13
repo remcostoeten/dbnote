@@ -2,6 +2,17 @@
 
 $notes-font: "Mobitale Cnd", sans-serif;
 
+select {
+  background: none !important;
+  box-sizing: content-box;
+  padding: 5px 14px !important;
+}
+
+.note-btn {
+  padding: 14px !important;
+  box-sizing: content-box;
+}
+
 .font-notes {
   font-family: $notes-font;
   font-weight: 400;

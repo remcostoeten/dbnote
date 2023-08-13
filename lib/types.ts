@@ -14,6 +14,7 @@ export interface Note {
     description?: string;
     createdAt: any;
     userName?: string;
+    content?: string;
     label?: string;
     subject: string;
     selectedDate: any;
