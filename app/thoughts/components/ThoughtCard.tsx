@@ -131,13 +131,13 @@ export default function ThoughtCard() {
                 }`}
                 onClick={() => handleSelect(thought.id)}
               >
-                {thought.label && (
-                  <span className="text-notes font-notes">
-                    Label: {thought.label}
-                  </span>
-                )}{" "}
                 <div className="top sidebar-notes flex-col flex align-middle gap-4">
                   <div className="flex gap-2 w-full">
+                    <div className="flex items-center absolute right-2 bottom-2">
+                      <span className="bg-black border  text-notes-secondary py-2 px-6 rounded-full text-xs">
+                        {thought.label}
+                      </span>
+                    </div>{" "}
                     <div className="flex gap-4 align-middle items-center flex-1">
                       <div className="rounded-xl w-14 h-14 align-middle items-center justify-center mr-2 flex flex-col text-center border">
                         <span className="font-notes text-xs text-[#5D5C63] uppercase">

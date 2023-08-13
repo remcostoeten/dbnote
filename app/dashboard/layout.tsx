@@ -1,19 +1,18 @@
-'use client';
+"use client"
 
-import { useEffect, useState } from "react";
-import { AuthProvider } from "@/lib/AuthContext";
+import { useEffect, useState } from "react"
+import { Separator } from "@radix-ui/react-select"
+import { User } from "firebase/auth"
 
-import { dashboardConfig } from "@/config/dashboard";
-import { auth } from "@/lib/firebase";
-import Greeting from "@/components/Greeting";
-import { DashboardNav } from "@/components/nav";
-import { SiteFooter } from "@/components/site-footer";
-import withAuth from "@/lib/withAuth";
-import { User } from "firebase/auth";
-import { Separator } from "@radix-ui/react-select";
-import { SidebarNav } from "./forms/components/sidebar-nav";
+import { dashboardConfig } from "@/config/dashboard"
+import { AuthProvider } from "@/lib/AuthContext"
+import { auth } from "@/lib/firebase"
+import withAuth from "@/lib/withAuth"
+import Greeting from "@/components/Greeting"
+import { DashboardNav } from "@/components/nav"
+import { SiteFooter } from "@/components/site-footer"
 
-
+import { SidebarNav } from "./forms/components/sidebar-nav"
 
 const sidebarNavItems = [
   {
@@ -43,20 +42,24 @@ interface RootLayoutProps {
 }
 
 function RootLayout({ children }: RootLayoutProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchUser = async () => {
-      const currentUser = await auth.currentUser;
-      setUser(currentUser);
-    };
+      const currentUser = await auth.currentUser
+      setUser(currentUser)
+    }
 
-    fetchUser();
-  }, []);
+    fetchUser()
+  }, [])
 
   const layoutContent = (
-    <div className={`container ${user ? "blur-sm" : ""} space-y-6 p-10 pb-16 md:block`}>
+    <div
+      className={`container ${
+        user ? "" : "blur-smhttps://vsc.remcostoeten.com/url"
+      } space-y-6 p-10 pb-16 md:block`}
+    >
       <div className="space-y-0.5">
         <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
         <p className="text-muted-foreground">
@@ -75,8 +78,8 @@ function RootLayout({ children }: RootLayoutProps) {
       </div>
       <SiteFooter className="border-t" />
     </div>
-  );
+  )
 
-  return user ? layoutContent : <AuthProvider>{layoutContent}</AuthProvider>;
+  return user ? layoutContent : <AuthProvider>{layoutContent}</AuthProvider>
 }
-export default withAuth(RootLayout);
+export default withAuth(RootLayout)
