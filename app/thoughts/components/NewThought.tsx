@@ -2,11 +2,19 @@
 
 import React, { useEffect, useState } from "react"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { PlusSquare } from "lucide-react"
+import { Calendar, PlusSquare } from "lucide-react"
 import ReactQuill from "react-quill"
 import { Drawer } from "vaul"
 
 import "react-quill/dist/quill.snow.css"
+import { CalendarIcon } from "@radix-ui/react-icons"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@radix-ui/react-popover"
+import { format } from "date-fns"
+
 import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
 import { Button } from "@/components/ui/button"
@@ -22,10 +30,13 @@ export function NewThought({ content }: NewThoughtProps) {
   const [date, setDate] = useState<Date | null>(null)
   const [description, setDescription] = useState("")
   const [subject, setSubject] = useState("")
+  const [label, setLabel] = useState("") // Added label state
   const [thoughts, setThoughts] = useState<Thought[]>([])
   const [loading, setLoading] = useState(false)
   const user = auth?.currentUser
   const [markdownContent, setMarkdownContent] = useState("")
+
+  const labelOptions = ["Label 1", "Label 2", "Label 3"] // Replace with your actual label options
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -50,8 +61,9 @@ export function NewThought({ content }: NewThoughtProps) {
         description: markdownContent,
         createdAt: serverTimestamp(),
         id: "",
-        subject: subject,
+        subject,
         selectedDate: date,
+        label, // Added label
       }
 
       const docRef = await addDoc(collection(db, "thoughts"), newThought)
@@ -62,6 +74,7 @@ export function NewThought({ content }: NewThoughtProps) {
       setTitle("")
       setDate(null)
       setSubject("")
+      setLabel("") // Reset label state
       setMarkdownContent("")
       toast({
         title: "Thought created successfully.",
@@ -89,18 +102,34 @@ export function NewThought({ content }: NewThoughtProps) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-
-      <select onChange={(e) => setSubject(e.target.value)} value={subject}>
-        <select>
-          <select placeholder="Select a verified email to display" />
-        </select>
-        <select>
-          {subjectOptions.map((subject) => (
-            <select key={subject.name} value={subject.name}>
-              {subject.name}
-            </select>
-          ))}
-        </select>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button className="border-color-[#212028] flex items-center border bg-[#0a0a0a] text-[#ededee] hover:bg-[212020]">
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date ? format(date, "PPP") : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0">
+          <Calendar
+            mode="single"
+            onSelect={(selectedDate) => setDate(selectedDate as any)}
+          />
+        </PopoverContent>
+      </Popover>
+      <input
+        type="text"
+        className="wysiwyg-input"
+        placeholder="Label"
+        value={label}
+        onChange={(e) => setLabel(e.target.value)} // add the label input
+      />
+      <select onChange={(e) => setLabel(e.target.value)} value={label}>
+        <option value="">Select a label</option>
+        {labelOptions.map((label) => (
+          <option key={label} value={label}>
+            {label}
+          </option>
+        ))}
       </select>
       <div className="flex items-center gap-2">
         <Button
@@ -126,7 +155,7 @@ export function NewThought({ content }: NewThoughtProps) {
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed  bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
+        <Drawer.Content className="fixed bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
           <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
             <div className="mx-auto  w-4/12">
               <Drawer.Title className="mb-4 font-medium text-4xl font-serif">
