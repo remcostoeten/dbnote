@@ -20,6 +20,8 @@ import { Thought } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 
+import { useThoughtContext } from "./ThoughtContext"
+
 interface NewThoughtProps {
   content?: string
 }
@@ -35,8 +37,7 @@ export function NewThought({ content }: NewThoughtProps) {
   const [loading, setLoading] = useState(false)
   const user = auth?.currentUser
   const [markdownContent, setMarkdownContent] = useState("")
-
-  const labelOptions = ["Label 1", "Label 2", "Label 3"] // Replace with your actual label options
+  const labelOptions = useThoughtContext()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -74,7 +75,7 @@ export function NewThought({ content }: NewThoughtProps) {
       setTitle("")
       setDate(null)
       setSubject("")
-      setLabel("") // Reset label state
+      setLabel("")
       setMarkdownContent("")
       toast({
         title: "Thought created successfully.",

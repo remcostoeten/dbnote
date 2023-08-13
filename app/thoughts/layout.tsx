@@ -1,18 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { AuthProvider } from "@/lib/AuthContext"
 import { User } from "firebase/auth"
 
+import { AuthProvider } from "@/lib/AuthContext"
 import { auth } from "@/lib/firebase"
 import withAuth from "@/lib/withAuth"
 import { SiteFooter } from "@/components/site-footer"
 
-import { ThoughtsAside } from "./components/ThoughtsAside."
+import { SidebarNav } from "./../ui-elements/forms/components/sidebar-nav"
 import AllNotes from "./components/AllThoughts"
 import AllThoughts from "./components/AllThoughts"
 import Draw from "./components/Draw"
-import { SidebarNav } from './../ui-elements/forms/components/sidebar-nav';
+import { ThoughtProvider } from "./components/ThoughtContext"
+import { ThoughtsAside } from "./components/ThoughtsAside."
 
 const sidebarNavItems = [
   {
@@ -44,16 +45,18 @@ interface RootLayoutProps {
 function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <div className="flex relative container  flex-col">
-        {/* <ThoughtsAside /> */}
-        <AllThoughts />
-        {/* {/* <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
+      <ThoughtProvider>
+        <div className="flex relative container  flex-col">
+          {/* <ThoughtsAside /> */}
+          <AllThoughts />
+          {/* {/* <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
           <aside className="-mx-4 lg:w-1/5">
             <SidebarNav items={sidebarNavItems} />
           </aside>
           <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div> */}
-      </div>
-      <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div>
+        </div>
+        <div className="flex-1 flex-col lg:max-w-2xl">{children}dd</div>
+      </ThoughtProvider>
     </>
   )
 }

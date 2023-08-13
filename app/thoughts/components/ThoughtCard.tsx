@@ -7,7 +7,9 @@ import {
   doc,
   getDocs,
   onSnapshot,
+  orderBy,
   query,
+  where,
 } from "firebase/firestore"
 import ReactMarkdown from "react-markdown"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
@@ -23,16 +25,29 @@ import {
 } from "@/components/ui/context-menu"
 import { toast } from "@/components/ui/use-toast"
 
+import { useThoughtContext } from "./ThoughtContext"
 import ThoughtDetail from "./ThoughtSingle"
 
 export default function ThoughtCard() {
   const [thoughts, setThoughts] = useState<Thought[]>([])
   const [selectedThought, setSelectedThought] = useState<Thought | null>(null)
   const [loading, setLoading] = useState(true)
+  const [selectedLabel, setSelectedLabel] = useState<string>("")
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
+  const labelOptions = useThoughtContext()
+  console.log("Selected Label:", selectedLabel)
 
   const fetchThoughts = () => {
     const thoughtsCollection = collection(db, "thoughts")
-    const q = query(thoughtsCollection)
+    let q = query(thoughtsCollection, orderBy("selectedDate", sortOrder))
+
+    if (selectedLabel) {
+      q = query(
+        thoughtsCollection,
+        where("label", "==", selectedLabel),
+        orderBy("selectedDate", sortOrder)
+      )
+    }
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const thoughtsData = snapshot.docs.map((doc) => ({
@@ -48,7 +63,7 @@ export default function ThoughtCard() {
   useEffect(() => {
     const unsubscribe = fetchThoughts()
     return () => unsubscribe()
-  }, [])
+  }, [selectedLabel, sortOrder])
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -121,6 +136,24 @@ export default function ThoughtCard() {
           rm - rf all thoughts
         </span>
         <TransitionGroup>
+          <select
+            value={selectedLabel}
+            onChange={(e) => setSelectedLabel(e.target.value)}
+          >
+            <option value="">All Labels</option>
+            {labelOptions.map((label) => (
+              <option key={label} value={label}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
           {thoughts.map((thought) => (
             <CSSTransition key={thought.id} timeout={500} classNames="fade">
               <div
