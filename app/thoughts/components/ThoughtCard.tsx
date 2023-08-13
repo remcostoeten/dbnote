@@ -221,8 +221,9 @@ export default function ThoughtCard() {
             animate={{ opacity: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="border cursor-hover border-[#27272a]  text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
+            className="border  border-[#27272a]  text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
             value={sortOrder}
+            data-type="hand"
             onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
           >
             <motion.option

@@ -18,7 +18,7 @@ export const HomeFeatures = () => (
         Features
       </motion.h2>
       <motion.p
-        className="container cursor-hover w-7/12 leading-normal text-muted-foreground sm:text-lg sm:leading-7"
+        className="container w-7/12 leading-normal text-muted-foreground sm:text-lg sm:leading-7"
         initial={{ skewX: -9, opacity: 0, y: -20 }}
         animate={{ skewX: 0, opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.5 }}

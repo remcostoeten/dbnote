@@ -97,10 +97,7 @@ export function MainNav({ items, children }: MainNavProps) {
   }
 
   return (
-    <div
-      className="flex w-full gap-6 md:gap-10 cursor-hover items-center"
-      data-type="cursor"
-    >
+    <div className="flex w-full gap-6 md:gap-10  items-center" data-type="hand">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -174,6 +171,7 @@ export function MainNav({ items, children }: MainNavProps) {
             transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
             onClick={signOut}
             data-type="cursor"
+            className="cursor-hover"
           >
             <WeakGlowButton text="Sign Out" link="#" />
           </motion.span>

@@ -13,10 +13,13 @@ import {
 
 export const HomeIntroduction = ({ title }) => {
   return (
-    <section className="space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12">
+    <section
+      data-type="hand-hover"
+      className="hand-hover space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12"
+    >
       <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center pb-8">
         <motion.h1
-          className="cursor-hover font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl z-10"
+          className=" font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl z-10"
           data-type="cursor"
           initial={{ skewX: -4, opacity: 0, y: -20 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
