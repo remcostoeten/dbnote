@@ -10,7 +10,8 @@ body {
     .cursor-trailer {
       width: 20px;
       height: 20px;
-      transition: 1s cubic-bezier(0.45, 0.84, 0.44, 1) all;
+      transition: 1s cubic-bezier(0.45, 0.84, 0.44, 1) width height,
+        250ms ease-in-out opacity;
       opacity: 1;
     }
   }

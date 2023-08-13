@@ -11,6 +11,12 @@
   place-items: center;
 }
 
+.cursor-hover {
+  &:hover {
+    cursor: none;
+  }
+}
+
 #trailer-icon {
   font-size: 6px;
   line-height: 4px;

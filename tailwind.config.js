@@ -35,8 +35,9 @@ module.exports = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         "notes-secondary": "#5D5C63",
-        background: "hsl(var(--background))",
+        background: "var(--offblack)",
         foreground: "hsl(var(--foreground))",
+        offblack: "var(--offblack)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

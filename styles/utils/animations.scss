@@ -9,6 +9,16 @@
   }
 }
 
+@keyframes borderGrowThougts {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100vw;
+  }
+}
+
 @keyframes leftIn {
   from {
     left: 0;
@@ -126,7 +136,7 @@
 @keyframes bg-scrolling-reverse {
   // base animation for the grid tile background to move slighly. Used @bg.scss page-wrapper::before & ::after.
   100% {
-    background-position: 175px 175px;
+    background-position: -20px -20px;
   }
 }
 

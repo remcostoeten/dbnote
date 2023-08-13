@@ -20,6 +20,7 @@ import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
+import NotesIcon from "@/components/icons/NotesIcon"
 
 import {
   GlowButton,
@@ -195,33 +196,59 @@ export function NewThought({ content }: NewThoughtProps) {
           exit={{ opacity: 0, y: 10 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <ProminentGlowButton text="New post" />
+          <ProminentGlowButton text="New post" link={undefined} />
         </motion.div>
       </motion.div>
     </form>
   )
 
   return (
-    <Drawer.Root shouldScaleBackground>
-      <Drawer.Trigger asChild onClick={() => setOpen(true)}>
-        <PlusSquare className="font-2xl w-[40px]" />
-      </Drawer.Trigger>
-      <Drawer.Portal>
-        <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
-          <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
-            <div className="mx-auto  w-4/12">
-              <Drawer.Title className="mb-4 font-medium text-4xl font-serif">
-                Add whatever is on your mind.
-              </Drawer.Title>
-              {form}
-              <Drawer.Trigger onClick={() => setOpen(false)}>
-                <span>Close</span>
-              </Drawer.Trigger>
+    <>
+      <motion.div
+        className="flex gap-1 w-full cursor-hover"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+      >
+        <motion.span
+          initial={{ opacity: 0, y: 15, scale: 0 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <NotesIcon />
+        </motion.span>
+        <span className="pl-3 text-xl text-notes font-notes">All thoughts</span>
+      </motion.div>
+      <Drawer.Root shouldScaleBackground>
+        <Drawer.Trigger asChild onClick={() => setOpen(true)}>
+          <motion.span
+            initial={{ opacity: 0, y: 15, scale: 0 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+          >
+            <PlusSquare className="font-2xl w-[40px]" />
+          </motion.span>
+        </Drawer.Trigger>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+          <Drawer.Content className="fixed bottom-0 shadow-lg bg-[#0a0a0a] p-12 left-0 right-0 mt-24 flex h-[75vh] flex-col rounded-t-[10px] rounded-2xl">
+            <div className="flex-1 rounded-t-[10px] [text-[#5D5C63] font-notes] p-4">
+              <div className="mx-auto  w-4/12">
+                <Drawer.Title className="mb-4 font-medium text-4xl font-serif">
+                  Add whatever is on your mind.
+                </Drawer.Title>
+                {form}
+                <Drawer.Trigger onClick={() => setOpen(false)}>
+                  <span>Close</span>
+                </Drawer.Trigger>
+              </div>
             </div>
-          </div>
-        </Drawer.Content>
-      </Drawer.Portal>
-    </Drawer.Root>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
+    </>
   )
 }

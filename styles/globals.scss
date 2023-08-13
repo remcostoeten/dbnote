@@ -1,7 +1,3 @@
-body {
-  min-height: 3vh;
-}
-
 .drawer-closed {
   div#radix-\:r0\: {
     animation: bottomOut 0.3s ease-in-out forwards;
@@ -93,7 +89,7 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: $black;
     --foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -121,12 +117,13 @@ body {
     --destructive-foreground: 210 40% 98%;
 
     --ring: 215 20.2% 65.1%;
+    --offblack: #101010;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 1 1% 1%;
+    --background: $black;
     --foreground: 213 31% 91%;
 
     --muted: 223 47% 11%;
@@ -140,6 +137,7 @@ body {
 
     --border: 216 34% 17%;
     --input: 216 34% 17%;
+    --offblack: #101010;
 
     --card: 224 71% 4%;
     --card-foreground: 213 31% 91%;

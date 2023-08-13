@@ -182,41 +182,87 @@ export default function ThoughtCard() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div className="flex flex-1 items-center space-x-2">
-          <input
+          <motion.input
+            initial={{ opacity: 0, y: 40, x: 10 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
             placeholder="Filter Thoughts..."
             className="border h-[50px] border-[#27272a] bg-transparent pl-4 placeholder:[#fafafa] placeholder:text-[#fafafa] text-[#fafafa] px-3"
-          />
+          ></motion.input>
         </div>
 
         <div className="flex items-center gap-4">
-          <select
+          <motion.select
+            initial={{ opacity: 0, y: 20, x: 20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
             className="border cursor-hover border-[#27272a] text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
             value={selectedLabel}
             onChange={(e) => setSelectedLabel(e.target.value)}
           >
             <option value="">All Labels</option>
             {labelOptions.map((label) => (
-              <option key={label} value={label}>
+              <motion.option
+                initial={{ opacity: 0, y: 20, x: 20 }}
+                animate={{ opacity: 1, y: 0, x: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                key={label}
+                value={label}
+              >
                 {label}
-              </option>
+              </motion.option>
             ))}
-          </select>
-          <select
+          </motion.select>
+          <motion.select
+            initial={{ opacity: 0, y: 20, x: 20 }}
+            animate={{ opacity: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
             className="border cursor-hover border-[#27272a]  text-[#fafafa] border-input hover:bg-accent hover:text-accent-foreground px-3 rounded-md note-btn ml-auto hidden h-[100%] lg:flex"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
           >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-          <DataTableViewOptions />
-          <p
+            <motion.option
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.65, duration: 0.5 }}
+              value="asc"
+            >
+              Ascending
+            </motion.option>
+            <motion.option
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+              value="desc"
+            >
+              Descending
+            </motion.option>
+          </motion.select>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.75, duration: 0.5 }}
+          >
+            <DataTableViewOptions />
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
             onClick={handleRemoveAll}
             className=" z-20  ml-4"
-            data-type="cursor"
           >
             <TrashIcon />
-          </p>
+          </motion.p>
         </div>
       </div>
       <div className="flex gap-4">
