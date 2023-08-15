@@ -1,5 +1,5 @@
-import React from "react"
-
-export default function page() {
-  return <div>page</div>
+const ComponentName = (): React.ReactElement => {
+  return <>dddddd</>
 }
+
+export default ComponentName

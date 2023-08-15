@@ -180,7 +180,9 @@ export default function PlaygroundPage() {
           renderedJSX = `
   ${clientPrefix}
   
-  const ${componentName} (${hasProps ? `${componentName}Props` : ""}) {
+  export default function ${componentName} (${
+            hasProps ? `{${propsInput}}` : ""
+          }) {
     return (<>\n${jsxCode}\n</>);
   };
           `
