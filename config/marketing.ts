@@ -8,7 +8,7 @@ export const marketingConfig: MarketingConfig = {
     },
     {
       title: "HTML to JSX",
-      href: "/html-to-jsx",
+      href: "/html-to-jsx/playground",
     },
     {
       title: "Url extractor",

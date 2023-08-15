@@ -1,6 +1,12 @@
 .jsx-converter {
   position: relative !important;
 
+  .monaco-editor.no-user-select .lines-content,
+  .monaco-editor.no-user-select .view-line,
+  .monaco-editor.no-user-select .view-lines {
+    transform: translateY(-5px);
+  }
+
   &::before {
     content: "";
     background: linear-gradient(

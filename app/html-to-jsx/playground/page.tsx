@@ -156,8 +156,8 @@ export default function PlaygroundPage() {
 
       const renderedJSX = wrapInFunctionComponent
         ? isTypescript
-          ? `export default function ${componentName}(): React.FC {\n ${jsxCode} \n}`
-          : `export default function ${componentName}() {\n return (<>${jsxCode} \n</>)}`
+          ? `const ${componentName}: React.FC = () => {\n  return (<>\n${jsxCode}\n</>);\n};\n\nexport default ${componentName};`
+          : `export default function ${componentName}() {\n  return (<>\n${jsxCode}\n</>);\n}`
         : jsxCode
 
       setJSX(renderedJSX)
