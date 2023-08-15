@@ -154,11 +154,33 @@ export default function PlaygroundPage() {
 
       const clientPrefix = isClientComponent ? "'use client';\n" : ""
 
-      const renderedJSX = wrapInFunctionComponent
-        ? isTypescript
-          ? `${clientPrefix}const ${componentName} = ({props}): React.ReactElement => {\n  return <div>\n${jsxCode}\n</div>;\n};\n\nexport default ${componentName};`
-          : `${clientPrefix} export default function ${componentName}({props}) {\n  return <div>\n${jsxCode}\n</div>;\n}`
-        : jsxCode
+      let renderedJSX
+
+      if (wrapInFunctionComponent) {
+        if (isTypescript) {
+          renderedJSX = `
+${clientPrefix}
+interface RootLayoutProps {
+  children?: React.ReactNode;
+}
+
+const ${componentName} = (props: RootLayoutProps): React.ReactElement => {
+  return <div>\n${jsxCode}\n</div>;
+};
+
+export default ${componentName};
+                `
+        } else {
+          renderedJSX = `
+${clientPrefix} 
+export default function ${componentName}({props}) {
+  return <div>\n${jsxCode}\n</div>;
+};
+                `
+        }
+      } else {
+        renderedJSX = jsxCode
+      }
 
       setJSX(renderedJSX)
 
