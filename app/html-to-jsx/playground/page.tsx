@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
+import { Toggle } from "@/components/ui/toggle"
 
 import { AppContext } from "./AppContext"
 import { CodeViewer } from "./components/code-viewer"
@@ -37,6 +38,7 @@ export default function PlaygroundPage() {
   const [showNotification, setShowNotification] = useState<boolean>(false)
   const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
+  const [propsInput, setPropsInput] = useState("") // New state for props input
 
   useEffect(() => {
     const editorInstance = editorRef.current
@@ -154,8 +156,8 @@ export default function PlaygroundPage() {
 
       const renderedJSX = wrapInFunctionComponent
         ? isTypescript
-          ? `${clientPrefix}const ${componentName}: React.FC = () => {\n  return (<>\n${jsxCode}\n</>);\n};\n\nexport default ${componentName};`
-          : `${clientPrefix} export default function ${componentName}() {\n  return (<>\n${jsxCode}\n</>);\n}`
+          ? `${clientPrefix}const ${componentName} = ({props}): React.ReactElement => {\n  return <div>\n${jsxCode}\n</div>;\n};\n\nexport default ${componentName};`
+          : `${clientPrefix} export default function ${componentName}({props}) {\n  return <div>\n${jsxCode}\n</div>;\n}`
         : jsxCode
 
       setJSX(renderedJSX)
@@ -207,7 +209,13 @@ export default function PlaygroundPage() {
           </div>
           <div className="hidden h-full flex-col md:flex">
             <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-              <h2 className="text-lg font-semibold">Playground</h2>
+              <h2 className="text-lg font-semibold w-full">Still in beta 🚀</h2>
+              <input
+                type="text"
+                value={propsInput}
+                onChange={(e) => setPropsInput(e.target.value)}
+                placeholder="Enter props (e.g. name: string, age: number)"
+              />{" "}
               <div className="ml-auto flex w-full space-x-2 sm:justify-end">
                 <PresetSelector presets={presets} />
                 <PresetSave />
@@ -218,71 +226,10 @@ export default function PlaygroundPage() {
                 <PresetActions />
               </div>
             </div>
-            <Separator />
             <Tabs defaultValue="insert" className="flex-1">
               <div className=" h-full py-6">
                 <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px] w-full pr-8">
                   <div className="hidden flex-col space-y-4 sm:flex md:order-2">
-                    <div className="grid gap-2">
-                      <HoverCard openDelay={200}>
-                        <HoverCardTrigger asChild>
-                          <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Mode
-                          </span>
-                        </HoverCardTrigger>
-                        <HoverCardContent
-                          className="w-[320px] text-sm"
-                          side="left"
-                        >
-                          Choose the interface that best suits your task. You
-                          can provide: a simple prompt to complete, starting and
-                          ending text to insert a completion within, or some
-                          text with instructions to edit it.
-                        </HoverCardContent>
-                      </HoverCard>
-                      <TabsList className="grid grid-cols-3">
-                        <TabsTrigger value="insert">
-                          <span className="sr-only">Insert</span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            className="h-5 w-5"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M14.491 7.769a.888.888 0 0 1 .287.648.888.888 0 0 1-.287.648l-3.916 3.667a1.013 1.013 0 0 1-.692.268c-.26 0-.509-.097-.692-.268L5.275 9.065A.886.886 0 0 1 5 8.42a.889.889 0 0 1 .287-.64c.181-.17.427-.267.683-.269.257-.002.504.09.69.258L8.903 9.87V3.917c0-.243.103-.477.287-.649.183-.171.432-.268.692-.268.26 0 .509.097.692.268a.888.888 0 0 1 .287.649V9.87l2.245-2.102c.183-.172.432-.269.692-.269.26 0 .508.097.692.269Z"
-                              fill="currentColor"
-                            ></path>
-                            <rect
-                              x="4"
-                              y="15"
-                              width="3"
-                              height="2"
-                              rx="1"
-                              fill="currentColor"
-                            ></rect>
-                            <rect
-                              x="8.5"
-                              y="15"
-                              width="3"
-                              height="2"
-                              rx="1"
-                              fill="currentColor"
-                            ></rect>
-                            <rect
-                              x="13"
-                              y="15"
-                              width="3"
-                              height="2"
-                              rx="1"
-                              fill="currentColor"
-                            ></rect>
-                          </svg>
-                        </TabsTrigger>
-                      </TabsList>
-                    </div>
                     <ModelSelector types={types} models={models} />
                     <MaxLengthSelector defaultValue={[256]} />
                   </div>
@@ -301,6 +248,7 @@ export default function PlaygroundPage() {
                           >
                             <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"></path>
                           </svg>
+                          aa
                         </button>
                         <Editor
                           height="60vh"
