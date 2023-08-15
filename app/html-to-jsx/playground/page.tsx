@@ -154,29 +154,36 @@ export default function PlaygroundPage() {
 
       const clientPrefix = isClientComponent ? "'use client';\n" : ""
 
+      const trimmedPropsInput = propsInput?.trim()
+      const hasProps = trimmedPropsInput && trimmedPropsInput.length > 0
       let renderedJSX
 
       if (wrapInFunctionComponent) {
         if (isTypescript) {
           renderedJSX = `
-${clientPrefix}
-interface RootLayoutProps {
-  children?: React.ReactNode;
-}
-
-const ${componentName} = (props: RootLayoutProps): React.ReactElement => {
-  return <div>\n${jsxCode}\n</div>;
-};
-
-export default ${componentName};
-                `
+  ${clientPrefix}
+  ${
+    hasProps
+      ? `interface ${componentName}Props {\n  ${trimmedPropsInput}?: any;\n}`
+      : ""
+  }
+  
+  const ${componentName} = (${
+            hasProps ? `props: ${componentName}Props` : ""
+          }): React.ReactElement => {
+    return (<>\n${jsxCode}\n</>);
+  };
+  
+  export default ${componentName};
+          `
         } else {
           renderedJSX = `
-${clientPrefix} 
-export default function ${componentName}({props}) {
-  return <div>\n${jsxCode}\n</div>;
-};
-                `
+  ${clientPrefix}
+  
+  const ${componentName} (${hasProps ? `${componentName}Props` : ""}) {
+    return (<>\n${jsxCode}\n</>);
+  };
+          `
         }
       } else {
         renderedJSX = jsxCode
@@ -232,12 +239,18 @@ export default function ${componentName}({props}) {
           <div className="hidden h-full flex-col md:flex">
             <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
               <h2 className="text-lg font-semibold w-full">Still in beta 🚀</h2>
-              <input
+              <Input
                 type="text"
                 value={propsInput}
                 onChange={(e) => setPropsInput(e.target.value)}
                 placeholder="Enter props (e.g. name: string, age: number)"
-              />{" "}
+              />
+              <Input
+                type="text"
+                value={componentName}
+                onChange={(e) => setComponentName(e.target.value)}
+                placeholder="Enter Component name)"
+              />
               <div className="ml-auto flex w-full space-x-2 sm:justify-end">
                 <PresetSelector presets={presets} />
                 <PresetSave />
