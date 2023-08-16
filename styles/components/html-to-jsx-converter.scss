@@ -1,5 +1,13 @@
+
 .jsx-converter {
   position: relative !important;
+
+.jsx-input {
+  color: var(--muted-foreground);
+ 
+}
+ 
+
 
   .monaco-editor.no-user-select .lines-content,
   .monaco-editor.no-user-select .view-line,
@@ -36,6 +44,12 @@
     transition: opacity 0.3s ease-in-out;
     border-radius: 10px;
   }
+
+  .margin-view-overlays,
+.margin,
+.margin-view-overlays {
+  display: none !important;
+}
 }
 
 .jsx-converter.jsx-has-content::before {

@@ -31,62 +31,70 @@ import {
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { toast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 export function PresetActions() {
   const [open, setIsOpen] = React.useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false)
+  const Router = useRouter();
+
+  const error = () => {
+    setTimeout(() => {
+      
+      Router.refresh();
+    }, 1000);
+    Router.push("/404");
+  };
+
 
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary">
-            <span className="sr-only">Actions</span>
+            <span className="sr-only">idk?</span>
             <DotsHorizontalIcon className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onSelect={() => setIsOpen(true)}>
-            Content filter preferences
+            Preferences
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onSelect={() => setShowDeleteDialog(true)}
             className="text-red-600"
           >
-            Delete preset
+            Red scary button
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={open} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Content filter preferences</DialogTitle>
+            <DialogTitle>Some menu with ???</DialogTitle>
             <DialogDescription>
-              The content filter flags text that may violate our content policy.
-              It&apos;s powered by our moderation endpoint which is free to use
-              to moderate your OpenAI API traffic. Learn more.
+              Did u know  the 404 page on this site plays Abba - dancing queen?
             </DialogDescription>
           </DialogHeader>
           <div className="py-6">
             <h4 className="text-sm text-muted-foreground">
-              Playground Warnings
+              For real
             </h4>
             <div className="flex items-start justify-between space-x-4 pt-3">
-              <Switch name="show" id="show" defaultChecked={true} />
+              <Switch name="show" id="show" defaultChecked={true} onClick={error} />
               <Label className="grid gap-1 font-normal" htmlFor="show">
                 <span className="font-semibold">
-                  Show a warning when content is flagged
+                  Toggle to see yourself
                 </span>
                 <span className="text-sm text-muted-foreground">
-                  A warning will be shown when sexual, hateful, violent or
-                  self-harm content is detected.
+             
                 </span>
               </Label>
             </div>
           </div>
           <DialogFooter>
-            <Button variant="secondary" onClick={() => setIsOpen(false)}>
+            <Button variant="secondary" onClick={error}>
               Close
             </Button>
           </DialogFooter>

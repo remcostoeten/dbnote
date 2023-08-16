@@ -38,7 +38,7 @@ export default function PlaygroundPage() {
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
   const [propsInput, setPropsInput] = useState("")
   const [propsArray, setPropsArray] = useState<string[]>([""])
-
+  
   useEffect(() => {
     const editorInstance = editorRef.current
 
@@ -157,7 +157,9 @@ export default function PlaygroundPage() {
       const hasProps = trimmedPropsArray.some((prop) => prop.length > 0)
       let renderedJSX
 
-      const propsString = trimmedPropsArray.join(", ")
+      const propsString = trimmedPropsArray
+      .map((prop) => `${prop.name}: ${prop.type}`)
+      .join(", ");
 
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
@@ -279,14 +281,14 @@ export default function PlaygroundPage() {
           </div>
           <div className="hidden h-full flex-col md:flex ">
             <div className="container relative mb-1.5 mt-8 flex items-start justify-between space-y-2 pb-4 pt-0 sm:flex-row sm:items-end sm:space-y-0.5 md:h-16">
-              <div className="flex w-40  flex-col gap-2">
+              <PresetActions />
+              <div className="flex w-min  flex-col gap-2">
                 <Label className="translate-x-2.5">
                   What is the component name?
                 </Label>
                 <Input
                   type="text"
-                  className="note-border w-[auto]"
-                  value={componentName}
+                  className="note-border w-[auto] placeholder:text-red-400] jsx-input"
                   onChange={(e) => setComponentName(e.target.value)}
                   placeholder="Enter Component name)"
                 />
@@ -298,6 +300,8 @@ export default function PlaygroundPage() {
                 addNewProp={addNewProp}
                 removeProp={removeProp}
               />
+              <PresetActions />
+
               <div className="ml-auto flex w-full space-x-2 sm:justify-end"></div>
             </div>
             <Tabs defaultValue="insert" className="flex-1">

@@ -1,6 +1,7 @@
-import { PlusIcon } from "@radix-ui/react-icons"
-import { motion } from "framer-motion"
-import React, { Fragment } from "react"
+import { PlusIcon } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
+import React, { Fragment, useState } from "react";
+import { Input } from "@/components/ui/input";
 
 const PropsEditor = ({
   removeProp,
@@ -8,6 +9,8 @@ const PropsEditor = ({
   handlePropChange,
   addNewProp,
 }) => {
+  const [focusedInput, setFocusedInput] = useState(null);
+
   return (
     <Fragment>
       <motion.div
@@ -20,43 +23,66 @@ const PropsEditor = ({
         <div className="flex w-full items-center">
           {propsArray.map((propValue, index) => (
             <motion.div
+              key={index}
               initial={{ width: 0, height: 0 }}
-              animate={{ width: 170, height: 40 }}
+              animate={{ width: 220, height: 40 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ type: "spring", stiffness: 150, damping: 15 }}
             >
-              <motion.input
-                key={index}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15 }}
-                onHover={{ scale: 1.1 }}
-                type="text"
-                value={propValue}
-                className="flex h-10 w-[150px] rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 "
-                onChange={(e) => handlePropChange(e, index)}
-                placeholder="Enter prop (e.g. name: string)"
-              />
+              <motion.div className="flex flex-col gap-1">
+                {focusedInput === index ? (
+                  <>
+                    <Input
+                      type="text"
+                      value={propValue.name}
+                      className="..."
+                      onChange={(e) => handlePropChange(e, index, "name")}
+                      placeholder="Enter prop name (e.g. name)"
+                    />
+                    <Input
+                      type="text"
+                      value={propValue.type}
+                      className="..."
+                      onChange={(e) => handlePropChange(e, index, "type")}
+                      placeholder="Enter prop type (e.g. string)"
+                    />
+                  </>
+                ) : (
+                  <Input
+                    type="text"
+                    value={propValue.name}
+                    className="..."
+                    onFocus={() => setFocusedInput(index)}
+                    onBlur={() => setFocusedInput(null)}
+                    onChange={(e) => handlePropChange(e, index, "name")}
+                    placeholder="Enter prop name (e.g. name)"
+                  />
+                )}
+              </motion.div>
             </motion.div>
           ))}
         </div>
-        <button
-          className="inline-flex h-[40px] w-[40px] items-center justify-center rounded-md border border-dashed border-input bg-transparent px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+        <motion.button
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex h-[40px] w-[40px] items-center justify-center rounded-md border border-dashed border-Input bg-transparent px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
           onClick={addNewProp}
         >
           <PlusIcon />
-        </button>
+        </motion.button>
         {propsArray.length > 1 && (
-          <button
-            className="-mt-2 ml-2 inline-flex h-[40px] w-[40px] -translate-y-1 items-center justify-center rounded-md border border-dashed border-input bg-transparent px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="-mt-2 ml-2 inline-flex h-[40px] w-[40px] -translate-y-1 items-center justify-center rounded-md border border-dashed border-Input bg-transparent px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
             onClick={removeProp}
           >
             -
-          </button>
-        )}{" "}
+          </motion.button>
+        )}
       </motion.div>
     </Fragment>
-  )
-}
+  );
+};
 
-export default PropsEditor
+export default PropsEditor;
