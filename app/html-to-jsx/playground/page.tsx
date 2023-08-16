@@ -27,10 +27,15 @@ import { presets } from "./data/presets"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
 
+type PropObject = {
+  name: string;
+  type: string;
+};
+
 export default function PlaygroundPage() {
   const [code, setCode] = useState<string | undefined>("// Enter HTML here")
   const [jsx, setJSX] = useState<string>("")
-  const editorRef = useRef(null)
+  const editorRef = useRef<any | null>(null);
   const [isTypescript, setIsTypescript] = useState(false)
   const [componentName, setComponentName] = useState<string>("ComponentName")
   const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -158,6 +163,7 @@ export default function PlaygroundPage() {
       let renderedJSX
 
       const propsString = trimmedPropsArray
+      .filter((prop): prop is PropObject => typeof prop === "object" && "name" in prop && "type" in prop)
       .map((prop) => `${prop.name}: ${prop.type}`)
       .join(", ");
 
