@@ -159,33 +159,37 @@ export default function PlaygroundPage() {
       let renderedJSX
 
       if (wrapInFunctionComponent) {
-        if (isTypescript) {
+        if (isTypescript && hasProps) {
+          const interfaceProps = hasProps
+            ? `
+    interface ${componentName}Props {
+        ${trimmedPropsInput.split(",").join("?: any;\n  ")}?: any;
+    }`
+            : ""
+
+          const propsType = hasProps ? `<${componentName}Props>` : ""
+          const funcProps = hasProps ? `({ ${trimmedPropsInput} })` : "()"
+
           renderedJSX = `
-  ${clientPrefix}
-  ${
-    hasProps
-      ? `interface ${componentName}Props {\n  ${trimmedPropsInput}?: any;\n}`
-      : ""
-  }
-  
-  const ${componentName} = (${
-            hasProps ? `props: ${componentName}Props` : ""
-          }): React.ReactElement => {
-    return (<>\n${jsxCode}\n</>);
-  };
-  
-  export default ${componentName};
-          `
+    ${clientPrefix}
+    ${interfaceProps}
+    
+    const ${componentName}: React.FC${propsType} = ${funcProps} => {
+        return (<>\n${jsxCode}\n</>);
+    };
+    
+    export default ${componentName};
+    `
         } else {
           renderedJSX = `
-  ${clientPrefix}
-  
-  export default function ${componentName} (${
-            hasProps ? `{${propsInput}}` : ""
+    ${clientPrefix}
+    
+    export default function ${componentName} (${
+            hasProps ? `{${trimmedPropsInput}}` : ""
           }) {
-    return (<>\n${jsxCode}\n</>);
-  };
-          `
+        return (<>\n${jsxCode}\n</>);
+    };
+    `
         }
       } else {
         renderedJSX = jsxCode

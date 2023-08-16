@@ -1,5 +1,3 @@
-const ComponentName = (): React.ReactElement => {
-  return <>dddddd</>
+export default function ComponentName() {
+  return <>ddddddd</>
 }
-
-export default ComponentName
