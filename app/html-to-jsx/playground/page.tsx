@@ -4,7 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Editor } from "@monaco-editor/react"
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
+import { motion } from "framer-motion"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -24,18 +26,16 @@ import { PresetSelector } from "./components/preset-selector"
 import { PresetShare } from "./components/preset-share"
 import { models, types } from "./data/models"
 import { presets } from "./data/presets"
-import { Badge } from "@/components/ui/badge"
-import { motion } from "framer-motion"
 
 type PropObject = {
-  name: string;
-  type: string;
-};
+  name: string
+  type: string
+}
 
 export default function PlaygroundPage() {
   const [code, setCode] = useState<string | undefined>("// Enter HTML here")
   const [jsx, setJSX] = useState<string>("")
-  const editorRef = useRef<any | null>(null);
+  const editorRef = useRef<any | null>(null)
   const [isTypescript, setIsTypescript] = useState(false)
   const [componentName, setComponentName] = useState<string>("ComponentName")
   const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -43,7 +43,7 @@ export default function PlaygroundPage() {
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
   const [propsInput, setPropsInput] = useState("")
   const [propsArray, setPropsArray] = useState<string[]>([""])
-  
+
   useEffect(() => {
     const editorInstance = editorRef.current
 
@@ -54,10 +54,10 @@ export default function PlaygroundPage() {
     return () => clearTimeout(timeoutId)
   }, [])
 
-  useEffect(() => {
-    document.body.classList.add("html-to-jsx")
-    return () => document.body.classList.remove("html-to-jsx")
-  }, [])
+  // useEffect(() => {
+  //   document.body.classList.add("html-to-jsx")
+  //   return () => document.body.classList.remove("html-to-jsx")
+  // }, [])
 
   function convertHtmlToJSX(html: string): string {
     let jsx = html.replace(/\bclass=/g, "className=")
@@ -163,9 +163,14 @@ export default function PlaygroundPage() {
       let renderedJSX
 
       const propsString = trimmedPropsArray
-      .filter((prop): prop is PropObject => typeof prop === "object" && "name" in prop && "type" in prop)
-      .map((prop) => `${prop.name}: ${prop.type}`)
-      .join(", ");
+        .filter(
+          // @ts-ignore
+          (prop): prop is PropObject =>
+            typeof prop === "object" && "name" in prop && "type" in prop
+        )
+        // @ts-ignore
+        .map((prop) => `${prop.name}: ${prop.type}`)
+        .join(", ")
 
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
@@ -349,13 +354,16 @@ export default function PlaygroundPage() {
                             defaultValue={code}
                             className="rounded-full"
                             options={{
-                              minimap: {
-                                enabled: true,
-                              },
+                              formatOnPaste: true,
+                              formatOnType: true,
                               wordWrap: "on",
-                              FormData: true,
-
                               renderValidationDecorations: "off",
+                              minimap: { enabled: false },
+                              lineNumbers: "off",
+                              lineDecorationsWidth: 12,
+                              suggest: {
+                                showFiles: false,
+                              },
                             }}
                             onChange={handleEditorChange}
                           />
