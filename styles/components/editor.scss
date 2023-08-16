@@ -19,6 +19,10 @@ $accent: $pink;
     }
   }
 
+  .decorationsOverviewRuler {
+    display: none !important;
+  }
+
   button#client,
   button#typescript,
   button#fc {
