@@ -1,3 +1,29 @@
+.typewriter {
+  border-right: 2px solid;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: blink 1s infinite;
+}
+
+.typewriter.typing {
+  animation: type 2s steps(3, end), blink 1s infinite;
+}
+
+@keyframes type {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
 // header border on load animatiion
 @keyframes borderGrow {
   0% {

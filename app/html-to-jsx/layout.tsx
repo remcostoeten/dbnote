@@ -12,6 +12,9 @@ import {
 
 import { LayoutIntroHeaderDescription } from "../ui-elements/LayoutIntroHeaderDescription"
 import UiLinks from "../ui-elements/ui-links"
+import TypingEffect from "./playground/components/alternating-text"
+import TypeSwap from "./playground/components/alternating-text"
+import Typewriter from "./playground/components/alternating-text"
 
 export default function ConverterLayout({ children }) {
   return (
@@ -24,7 +27,7 @@ export default function ConverterLayout({ children }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.5 }}
           >
-            Convert your HTML to JSX
+            Convert your HTML to <Typewriter />
           </motion.span>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -32,13 +35,15 @@ export default function ConverterLayout({ children }) {
             transition={{ delay: 0.7, duration: 0.5 }}
           >
             <PageHeaderDescription>
-              Simply paste in your HTML and get the JSX version. Also works for
-              plain SVG's. Working on adding a function to wrap the entire
-              output in a component with/withour props.
+              Simply paste in your HTML and get the JSX/TSX version. When you
+              want to prefix the output with{" "}
+              <pre className="inline-block"> 'use client '</pre> for NextJS
+              simply toggle the switch. When using TypeScript you can also get a
+              version with the types included by filling in the props.
             </PageHeaderDescription>
           </motion.div>
         </PageHeader>{" "}
-        <section>
+        <main>
           <motion.div
             className=""
             initial={{ opacity: 0, y: -20 }}
@@ -47,7 +52,7 @@ export default function ConverterLayout({ children }) {
           >
             {children}
           </motion.div>
-        </section>
+        </main>
       </div>
     </>
   )

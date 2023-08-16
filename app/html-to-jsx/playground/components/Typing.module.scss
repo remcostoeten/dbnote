@@ -1,0 +1,26 @@
+.type-effect {
+  .header-sub-title {
+    color: #fff;
+    font-family: "Courier";
+    font-size: 20px;
+    padding: 0.1em;
+  }
+
+  .blink {
+    animation: blink 0.5s infinite;
+  }
+
+  @keyframes blink {
+    to {
+      opacity: 0;
+    }
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  p > a {
+    color: #fd084a;
+  }
+}

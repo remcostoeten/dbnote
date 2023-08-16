@@ -6,11 +6,6 @@ import { Editor } from "@monaco-editor/react"
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
 
 import { Button } from "@/components/ui/button"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
@@ -19,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Toggle } from "@/components/ui/toggle"
 
 import { AppContext } from "./AppContext"
+import PropsEditor from "./components/ props-editor"
 import { CodeViewer } from "./components/code-viewer"
 import { MaxLengthSelector } from "./components/maxlength-selector"
 import ModelSelector from "./components/model-selector"
@@ -38,7 +34,8 @@ export default function PlaygroundPage() {
   const [showNotification, setShowNotification] = useState<boolean>(false)
   const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
-  const [propsInput, setPropsInput] = useState("") // New state for props input
+  const [propsInput, setPropsInput] = useState("")
+  const [propsArray, setPropsArray] = useState<string[]>([""])
 
   useEffect(() => {
     const editorInstance = editorRef.current
@@ -154,21 +151,21 @@ export default function PlaygroundPage() {
 
       const clientPrefix = isClientComponent ? "'use client';\n" : ""
 
-      const trimmedPropsInput = propsInput?.trim()
-      const hasProps = trimmedPropsInput && trimmedPropsInput.length > 0
+      const trimmedPropsArray = propsArray.map((prop) => prop.trim())
+      const hasProps = trimmedPropsArray.some((prop) => prop.length > 0)
       let renderedJSX
+
+      const propsString = trimmedPropsArray.join(", ")
 
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
-          const interfaceProps = hasProps
-            ? `
+          const interfaceProps = `
     interface ${componentName}Props {
-        ${trimmedPropsInput.split(",").join("?: any;\n  ")}?: any;
+        ${propsString.split(",").join("?: any;\n  ")}?: any;
     }`
-            : ""
 
           const propsType = hasProps ? `<${componentName}Props>` : ""
-          const funcProps = hasProps ? `({ ${trimmedPropsInput} })` : "()"
+          const funcProps = hasProps ? `({ ${propsString} })` : "()"
 
           renderedJSX = `
     ${clientPrefix}
@@ -185,7 +182,7 @@ export default function PlaygroundPage() {
     ${clientPrefix}
     
     export default function ${componentName} (${
-            hasProps ? `{${trimmedPropsInput}}` : ""
+            hasProps ? `{${propsString}}` : ""
           }) {
         return (<>\n${jsxCode}\n</>);
     };
@@ -207,6 +204,19 @@ export default function PlaygroundPage() {
         }, [jsxCode])
       }
     }
+  }
+
+  function handlePropChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) {
+    const updatedProps = [...propsArray]
+    updatedProps[index] = event.target.value
+    setPropsArray(updatedProps)
+  }
+
+  function addNewProp() {
+    setPropsArray([...propsArray, ""])
   }
 
   return (
@@ -245,11 +255,10 @@ export default function PlaygroundPage() {
           <div className="hidden h-full flex-col md:flex">
             <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
               <h2 className="text-lg font-semibold w-full">Still in beta 🚀</h2>
-              <Input
-                type="text"
-                value={propsInput}
-                onChange={(e) => setPropsInput(e.target.value)}
-                placeholder="Enter props (e.g. name: string, age: number)"
+              <PropsEditor
+                propsArray={propsArray}
+                handlePropChange={handlePropChange}
+                addNewProp={addNewProp}
               />
               <Input
                 type="text"
