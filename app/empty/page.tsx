@@ -1,12 +1,11 @@
 "use client"
 
-export default function discord({ title }) {
+export default function discord() {
   return (
     <>
-      <div clas="discord">
+      <div className="discord">
         <h2 className="someclass">sometext</h2>
       </div>
-      d
     </>
   )
 }

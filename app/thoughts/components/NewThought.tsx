@@ -87,7 +87,7 @@ export function NewThought({ content }: NewThoughtProps) {
         title: "Thought created successfully.",
         description: `with title ${title}`,
       })
-      console.log("Document written with ID: ", docRef.id)
+      // console.log("Document written with ID: ", docRef.id)
     } catch (error) {
       toast({
         title: "Something went wrong.",

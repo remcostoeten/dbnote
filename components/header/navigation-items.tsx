@@ -17,7 +17,6 @@ import { MobileNav } from "@/components/mobile-nav"
 import LogoIconOnly from "../LogoIconOnly"
 import Megamenu from "../Megamenu"
 import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
-import { type } from "./../../lib/toc"
 
 interface MainNavProps {
   items?: MainNavItem[]

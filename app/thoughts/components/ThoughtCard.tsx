@@ -70,8 +70,6 @@ import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import TrashIcon from "@/components/icons/TrashIcon"
 
-import { GlowButton } from "./../../../components/buttons/CustomButtons"
-import { type } from "./../../../types/index.d"
 import { useThoughtContext } from "./ThoughtContext"
 import ThoughtDetail from "./ThoughtSingle"
 

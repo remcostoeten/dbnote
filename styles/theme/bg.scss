@@ -37,11 +37,10 @@ body {
     background: linear-gradient(
       129deg,
       var(--offblack),
-      90%,
-      rgba(255, 255, 255, 0) 100%
+      74%,
+      rgba(255, 255, 255, 0) 130%
     );
-
-    height: 140%;
+    height: 100%;
     width: 100%;
     z-index: -1;
     animation: rotateShowGradient 5s infinite;

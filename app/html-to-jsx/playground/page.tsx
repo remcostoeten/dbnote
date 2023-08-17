@@ -4,7 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Editor } from "@monaco-editor/react"
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
+import { motion } from "framer-motion"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -24,13 +26,16 @@ import { PresetSelector } from "./components/preset-selector"
 import { PresetShare } from "./components/preset-share"
 import { models, types } from "./data/models"
 import { presets } from "./data/presets"
-import { Badge } from "@/components/ui/badge"
-import { motion } from "framer-motion"
+
+type PropObject = {
+  name: string
+  type: string
+}
 
 export default function PlaygroundPage() {
   const [code, setCode] = useState<string | undefined>("// Enter HTML here")
   const [jsx, setJSX] = useState<string>("")
-  const editorRef = useRef(null)
+  const editorRef = useRef<any | null>(null)
   const [isTypescript, setIsTypescript] = useState(false)
   const [componentName, setComponentName] = useState<string>("ComponentName")
   const [showNotification, setShowNotification] = useState<boolean>(false)
@@ -49,10 +54,10 @@ export default function PlaygroundPage() {
     return () => clearTimeout(timeoutId)
   }, [])
 
-  useEffect(() => {
-    document.body.classList.add("html-to-jsx")
-    return () => document.body.classList.remove("html-to-jsx")
-  }, [])
+  // useEffect(() => {
+  //   document.body.classList.add("html-to-jsx")
+  //   return () => document.body.classList.remove("html-to-jsx")
+  // }, [])
 
   function convertHtmlToJSX(html: string): string {
     let jsx = html.replace(/\bclass=/g, "className=")
@@ -157,7 +162,15 @@ export default function PlaygroundPage() {
       const hasProps = trimmedPropsArray.some((prop) => prop.length > 0)
       let renderedJSX
 
-      const propsString = trimmedPropsArray.join(", ")
+      const propsString = trimmedPropsArray
+        .filter(
+          // @ts-ignore
+          (prop): prop is PropObject =>
+            typeof prop === "object" && "name" in prop && "type" in prop
+        )
+        // @ts-ignore
+        .map((prop) => `${prop.name}: ${prop.type}`)
+        .join(", ")
 
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
@@ -279,14 +292,14 @@ export default function PlaygroundPage() {
           </div>
           <div className="hidden h-full flex-col md:flex ">
             <div className="container relative mb-1.5 mt-8 flex items-start justify-between space-y-2 pb-4 pt-0 sm:flex-row sm:items-end sm:space-y-0.5 md:h-16">
-              <div className="flex w-40  flex-col gap-2">
+              <PresetActions />
+              <div className="flex w-min  flex-col gap-2">
                 <Label className="translate-x-2.5">
                   What is the component name?
                 </Label>
                 <Input
                   type="text"
-                  className="note-border w-[auto]"
-                  value={componentName}
+                  className="note-border w-[auto] placeholder:text-red-400] jsx-input"
                   onChange={(e) => setComponentName(e.target.value)}
                   placeholder="Enter Component name)"
                 />
@@ -298,6 +311,8 @@ export default function PlaygroundPage() {
                 addNewProp={addNewProp}
                 removeProp={removeProp}
               />
+              <PresetActions />
+
               <div className="ml-auto flex w-full space-x-2 sm:justify-end"></div>
             </div>
             <Tabs defaultValue="insert" className="flex-1">
@@ -339,13 +354,16 @@ export default function PlaygroundPage() {
                             defaultValue={code}
                             className="rounded-full"
                             options={{
-                              minimap: {
-                                enabled: true,
-                              },
+                              formatOnPaste: true,
+                              formatOnType: true,
                               wordWrap: "on",
-                              FormData: true,
-
                               renderValidationDecorations: "off",
+                              minimap: { enabled: false },
+                              lineNumbers: "off",
+                              lineDecorationsWidth: 12,
+                              suggest: {
+                                showFiles: false,
+                              },
                             }}
                             onChange={handleEditorChange}
                           />
