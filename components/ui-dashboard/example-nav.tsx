@@ -23,13 +23,19 @@ export const examples = [
     code: "https://github.com/remcostoeten/dbnote/blob/develop/components/Text3d.jsx",
   },
   {
+    name: "Data table tasks",
+    href: "/ui-elements/data-todos",
+    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/data-todos.jsx",
+    page: "https://github.com/remcostoeten/dbnote/blob/develop/pages/ui-elements/data-tables/page.tsx",
+  },
+  {
     name: "Cursor trailer",
     href: "/ui-elements/mouse-trailer",
     code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/Cursor/MouseTrailer.tsx",
   },
 ]
 
-interface ExamplesNavProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface ExamplesNavProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function ExamplesNav({ className, ...props }: ExamplesNavProps) {
   const pathname = usePathname()
@@ -59,15 +65,49 @@ export function ExamplesNav({ className, ...props }: ExamplesNavProps) {
         </div>
         <ScrollBar orientation="horizontal" className="invisible" />
       </ScrollArea>
-      <ExampleCodeLink
-        pathname={pathname === "/" ? "/ui-elements/" : pathname}
-      />
+      <div className="flex gap-2">
+        <ExampleCodeLink
+          pathname={pathname === "/" ? "/ui-elements/" : pathname}
+        />
+        <ExamplePageLink
+          pathname={pathname === "/" ? "/ui-elements/" : pathname}
+        />
+      </div>
     </div>
   )
 }
 
 interface ExampleCodeLinkProps {
   pathname: string | null
+}
+
+export function ExamplePageLink({ pathname }) {
+  const example = examples.find((example) => pathname?.startsWith(example.href))
+
+  if (!example?.page) {
+    return null
+  }
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Link
+        href={example?.page}
+        target="_blank"
+        rel="nofollow"
+        className="view-code absolute right-0 top-8 hidden items-center rounded-[0.5rem] text-sm font-medium md:flex"
+      >
+        <motion.span
+          className="pr-2"
+          whileHover={{ x: -5, filter: "blur(.5px)" }}
+        >
+          View page
+        </motion.span>
+        <motion.div whileHover={{ x: 10, filter: "blur(2px)" }}>
+          <ArrowRightIcon />
+        </motion.div>
+      </Link>
+    </motion.div>
+  )
 }
 
 export function ExampleCodeLink({ pathname }: ExampleCodeLinkProps) {
@@ -78,23 +118,43 @@ export function ExampleCodeLink({ pathname }: ExampleCodeLinkProps) {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Link
-        href={example?.code}
-        target="_blank"
-        rel="nofollow"
-        className="view-code absolute right-0 top-0 hidden items-center rounded-[0.5rem] text-sm font-medium md:flex"
-      >
-        <motion.span
-          className="pr-2"
-          whileHover={{ x: -5, filter: "blur(.5px)" }}
+    <>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <Link
+          href={example?.code}
+          target="_blank"
+          rel="nofollow"
+          className="view-code absolute right-0 top-0 hidden items-center rounded-[0.5rem] text-sm font-medium md:flex"
         >
-          View code
-        </motion.span>
-        <motion.div whileHover={{ x: 10, filter: "blur(2px)" }}>
-          <ArrowRightIcon />
-        </motion.div>
-      </Link>
-    </motion.div>
+          <motion.span
+            className="pr-2"
+            whileHover={{ x: -5, filter: "blur(.5px)" }}
+          >
+            View code
+          </motion.span>
+          <motion.div whileHover={{ x: 10, filter: "blur(2px)" }}>
+            <ArrowRightIcon />
+          </motion.div>
+        </Link>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <Link
+          href={example?.code}
+          target="_blank"
+          rel="nofollow"
+          className="view-code absolute right-0 top-0 hidden items-center rounded-[0.5rem] text-sm font-medium md:flex"
+        >
+          <motion.span
+            className="pr-2"
+            whileHover={{ x: -5, filter: "blur(.5px)" }}
+          >
+            View code
+          </motion.span>
+          <motion.div whileHover={{ x: 10, filter: "blur(2px)" }}>
+            <ArrowRightIcon />
+          </motion.div>
+        </Link>
+      </motion.div>
+    </>
   )
 }

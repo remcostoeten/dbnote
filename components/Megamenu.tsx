@@ -72,7 +72,8 @@ export default function Megamenu() {
                       Showcasing UI elements
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Some used and unused which I have built for this project or other projects.
+                      Some used and unused which I have built for this project
+                      or other projects.
                     </p>
                   </a>
                 </NavigationMenuLink>
@@ -83,6 +84,9 @@ export default function Megamenu() {
               <ListItem href="/ui-elements/3d-text" title="3d text">
                 3d text
               </ListItem>
+              <ListItem href="/ui-elements/data-todos" title="Data table">
+                Data table
+              </ListItem>
               <ListItem href="/ui-elements/mouse-trailer" title="Mouse trailer">
                 With interactive hover effect
               </ListItem>
@@ -92,10 +96,8 @@ export default function Megamenu() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-
-
-      </NavigationMenuList >
-    </NavigationMenu >
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
 

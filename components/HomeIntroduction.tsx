@@ -15,11 +15,11 @@ export const HomeIntroduction = ({ title }) => {
   return (
     <section
       data-type="hand-hover"
-      className="hand-hover space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12"
+      className="hand-hover showsvg space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12"
     >
-      <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center pb-8">
+      <div className="container flex max-w-[64rem] flex-col items-center gap-4 pb-8 text-center">
         <motion.h1
-          className=" font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl z-10"
+          className=" z-10 font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           data-type="cursor"
           initial={{ skewX: -4, opacity: 0, y: -20 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
@@ -30,7 +30,7 @@ export const HomeIntroduction = ({ title }) => {
 
         <motion.p
           data-type="cursor"
-          className="max-w-[48rem] w-full cursor-hover leading-normal text-muted-foreground sm:text-xl sm:leading-8"
+          className="cursor-hover w-full max-w-[48rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8"
           initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
@@ -43,7 +43,7 @@ export const HomeIntroduction = ({ title }) => {
         <div className="absolute h-[20vh] w-[50vw]"></div>
 
         <motion.div
-          className="z-10 flex items-center align-middle space-x-6"
+          className="z-10 flex items-center space-x-6 align-middle"
           initial={{ skewX: 4, opacity: 0, y: -40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
