@@ -28,14 +28,17 @@ import {
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
 
+import { collection, getDocs } from "firebase/firestore"
+import { db } from "@/lib/firebase"
+
+import { Note } from "@/lib/types"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -44,6 +47,18 @@ export function DataTable<TData, TValue>({
     []
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
+
+  const [data, setData] = React.useState<TData[]>([])
+
+  React.useEffect(() => {
+    const fetchNotesData = async () => {
+      const querySnapshot = await getDocs(collection(db, "notes"))
+      const notesData = querySnapshot.docs.map((doc) => doc.data())
+      setData(notesData)
+    }
+
+    fetchNotesData()
+  }, [])
 
   const table = useReactTable({
     data,

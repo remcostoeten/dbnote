@@ -39,6 +39,9 @@ export default function Dashboard() {
   const [category, setCategory] = useState<string>("")
   const [content, setContent] = useState<string>("")
   const [notes, setNotes] = useState<Note[]>([])
+  const [status, setStatus] = useState<Note[]>([])
+  const [label, setLabel] = useState<Note[]>([])
+  const [priority, setPriority] = useState<Note[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({})
   const user = auth?.currentUser
@@ -115,7 +118,9 @@ export default function Dashboard() {
         content,
         category,
         createdAt: serverTimestamp(),
-        id: "",
+        status,
+        label,
+        priority,
       }
 
       const docRef = await addDoc(collection(db, "notes"), newNote)
@@ -155,12 +160,30 @@ export default function Dashboard() {
   }
 
   const form = (
-    <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <Input
         type="text"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+      />
+      <Input
+        type="text"
+        placeholder="Status"
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
+      />
+      <Input
+        type="text"
+        placeholder="Title"
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+      />
+      <Input
+        type="text"
+        placeholder="Title"
+        value={label}
+        onChange={(e) => setLabel(e.target.value)}
       />
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
@@ -197,12 +220,30 @@ export default function Dashboard() {
       <div className="max-w-3xl">
         <div className="grid items-start gap-8">
           <PostIntro title="Posts" text="Create and manage posts." />
-          <form className="flex gap-2 flex-col" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <Input
               type="text"
               placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Title"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            />
+            <Input
+              type="text"
+              placeholder="Title"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
             />
             <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>
@@ -240,7 +281,7 @@ export default function Dashboard() {
                 key={note.id}
                 className="divide-y divide-border rounded-md border"
               >
-                <div className="flex  py-4 px-8 content-center flex-col gap-2">
+                <div className="flex  flex-col content-center gap-2 px-8 py-4">
                   {editModeMap[note.userId] ? (
                     <>
                       <Input
@@ -294,7 +335,7 @@ export default function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <span className="font-semibold hover:underline flex flex-col">
+                      <span className="flex flex-col font-semibold hover:underline">
                         {note.title}
                         <small>{note.category}</small>
                         <p>{note.content}</p>{" "}
@@ -323,7 +364,7 @@ export default function Dashboard() {
           </div>
         </div>
         <form>
-          <div className="grid w-full gap-10 mx-auto m-w-[1280px]">
+          <div className="m-w-[1280px] mx-auto grid w-full gap-10">
             <div className="flex w-full items-center justify-between">
               <div className="flex items-center space-x-10">
                 <p className="text-sm text-muted-foreground">dddd </p>

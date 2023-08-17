@@ -5,6 +5,10 @@ export interface Note {
     content: string;
     category: string;
     createdAt: any; 
+    status: string;
+    label: string;
+    subject: string;
+    priority: string;
   }
   
   export interface Thought {
