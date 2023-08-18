@@ -28,10 +28,11 @@ import {
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
 
-import { collection, getDocs } from "firebase/firestore"
+import { collection, onSnapshot } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 
 import { Task } from "@/lib/types"
+import { useEffect } from "react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -50,14 +51,19 @@ export function DataTable<TData, TValue>({
 
   const [data, setData] = React.useState<TData[]>([])
 
-  React.useEffect(() => {
-    const fetchTasksData = async () => {
-      const querySnapshot = await getDocs(collection(db, "tasks"))
-      const tasksData = querySnapshot.docs.map((doc) => doc.data())
-      setData(tasksData)
-    }
+  const fetchTasks = () => {
+    const taskCollection = collection(db, "tasks")
+    onSnapshot(taskCollection, (snapshot) => {
+      const tasksData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Task[]
+      setData(tasksData as unknown as TData[])
+    })
+  }
 
-    fetchTasksData()
+  useEffect(() => {
+    fetchTasks()
   }, [])
 
   const table = useReactTable({
