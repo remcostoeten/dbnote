@@ -9,6 +9,7 @@ export interface Note {
     label: string;
     subject: string;
     priority: string;
+    task: string;
   }
   
   export interface Thought {

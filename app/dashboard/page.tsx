@@ -118,9 +118,6 @@ export default function Dashboard() {
         content,
         category,
         createdAt: serverTimestamp(),
-        status,
-        label,
-        priority,
       }
 
       const docRef = await addDoc(collection(db, "notes"), newNote)
@@ -170,21 +167,24 @@ export default function Dashboard() {
       <Input
         type="text"
         placeholder="Status"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
+        value={status.join(", ")}
+        onChange={(e) => setStatus(e.target.value.split(", "))}
       />
+
       <Input
         type="text"
-        placeholder="Title"
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)}
+        placeholder="Priority"
+        value={priority.join(", ")}
+        onChange={(e) => setPriority(e.target.value.split(", "))}
       />
+
       <Input
         type="text"
-        placeholder="Title"
-        value={label}
-        onChange={(e) => setLabel(e.target.value)}
+        placeholder="Label"
+        value={label.join(", ")}
+        onChange={(e) => setLabel(e.target.value.split(", "))}
       />
+
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
           <SelectValue placeholder="Select a verified email to display" />
@@ -223,27 +223,23 @@ export default function Dashboard() {
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <Input
               type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <Input
-              type="text"
               placeholder="Status"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
+              value={status.map((note) => note.title).join(", ")}
+              onChange={(e) => setStatus([{ title: e.target.value }])}
             />
+
             <Input
               type="text"
-              placeholder="Title"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
+              placeholder="Priority"
+              value={priority.map((note) => note.title).join(", ")}
+              onChange={(e) => setPriority([{ title: e.target.value }])}
             />
+
             <Input
               type="text"
-              placeholder="Title"
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
+              placeholder="Label"
+              value={label.map((note) => note.title).join(", ")}
+              onChange={(e) => setLabel([{ title: e.target.value }])}
             />
             <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>
