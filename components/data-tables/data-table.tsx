@@ -31,7 +31,7 @@ import { DataTableToolbar } from "./data-table-toolbar"
 import { collection, getDocs } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 
-import { Note } from "@/lib/types"
+import { Task } from "@/lib/types"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -51,13 +51,13 @@ export function DataTable<TData, TValue>({
   const [data, setData] = React.useState<TData[]>([])
 
   React.useEffect(() => {
-    const fetchNotesData = async () => {
-      const querySnapshot = await getDocs(collection(db, "notes"))
-      const notesData = querySnapshot.docs.map((doc) => doc.data())
-      setData(notesData)
+    const fetchTasksData = async () => {
+      const querySnapshot = await getDocs(collection(db, "tasks"))
+      const tasksData = querySnapshot.docs.map((doc) => doc.data())
+      setData(tasksData)
     }
 
-    fetchNotesData()
+    fetchTasksData()
   }, [])
 
   const table = useReactTable({

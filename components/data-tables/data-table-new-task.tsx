@@ -22,24 +22,14 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { Post } from "@/lib/types"
-import { setPriority } from "os"
 import { auth, db } from "@/lib/firebase"
-import { Task } from "../data-schema"
 import { toast } from "../ui/use-toast"
-import { handleSubmit } from "@/app/api/submitData"
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@radix-ui/react-select"
+
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
-import { stat } from "fs"
 import { motion } from "framer-motion"
 
-interface DataTableNewPost<TData, TValue> {
+interface DataTableNewTask<TData, TValue> {
   column?: Column<TData, TValue>
   titlee?: string
   options: {
@@ -49,11 +39,11 @@ interface DataTableNewPost<TData, TValue> {
   }[]
 }
 
-export function DataTableNewPost<TData, TValue>({
+export function DataTableNewTask<TData, TValue>({
   column,
   titlee,
   options,
-}: DataTableNewPost<TData, TValue>) {
+}: DataTableNewTask<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues()
   const selectedValues = new Set(column?.getFilterValue() as string[])
   const [task, setTask] = React.useState("")
@@ -66,14 +56,14 @@ export function DataTableNewPost<TData, TValue>({
   const [posts, setPosts] = React.useState<Post[]>([])
   const user = auth?.currentUser
 
-  const addPost = async (e: React.FormEvent<HTMLFormElement>) => {
+  const addTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!user) {
       return
     }
 
     try {
-      const newPost: Post = {
+      const newTask: Task = {
         task,
         priority,
         status,
@@ -83,10 +73,10 @@ export function DataTableNewPost<TData, TValue>({
         createdAt: serverTimestamp(),
         id: "",
       }
-      const docRef = await addDoc(collection(db, "posts"), newPost)
-      newPost.id = docRef.id
+      const docRef = await addDoc(collection(db, "tasks"), newTask)
+      newTask.id = docRef.id
 
-      setPosts([...posts, newPost])
+      setPosts([...posts, newTask])
       setTask("")
       setPriority("")
       setStatus("")
@@ -112,7 +102,7 @@ export function DataTableNewPost<TData, TValue>({
       initial={{ scale: 0.9 }}
       animate={{ scale: 1 }}
       exit={{ scale: 0.9 }}
-      onSubmit={addPost}
+      onSubmit={addTask}
       className="flex flex-col gap-2"
     >
       <Input
@@ -150,11 +140,11 @@ export function DataTableNewPost<TData, TValue>({
       <Button
         onClick={(e) => {
           e.preventDefault()
-          addPost(e as any)
+          addTask(e as any)
         }}
         className="inline-flex w-fit"
       >
-        New post
+        New task
       </Button>
     </motion.form>
   )

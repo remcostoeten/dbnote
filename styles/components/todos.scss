@@ -1,7 +1,14 @@
-.todo-data {
+.todos {
+  button,
+  select,
+  input,
+  textarea {
+    border-color: rgb(39, 39, 42) !important;
+  }
+
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 }

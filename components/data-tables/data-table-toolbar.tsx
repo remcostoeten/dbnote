@@ -9,7 +9,7 @@ import { DataTableViewOptions } from "./data-table-view-options"
 
 import { priorities, statuses } from "./data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
-import { DataTableNewPost } from "./data-table-new-post"
+import { DataTableNewTask } from "./data-table-new-task"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -45,7 +45,7 @@ export function DataTableToolbar<TData>({
             options={priorities}
           />
         )}
-        <DataTableNewPost column={table.getColumn("title")} options={[]} />
+        <DataTableNewTask column={table.getColumn("title")} options={[]} />
 
         {isFiltered && (
           <Button
