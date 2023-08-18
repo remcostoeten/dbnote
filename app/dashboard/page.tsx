@@ -127,6 +127,8 @@ export default function Dashboard() {
       setCategory("")
       setTitle("")
       setContent("")
+      setStatus([])
+      setPriority([])
       toast({
         title: "Note created successfully.",
         description: `In the category ${category} with title ${title}`,

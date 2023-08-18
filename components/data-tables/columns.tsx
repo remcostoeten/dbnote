@@ -21,14 +21,17 @@ export const columns: ColumnDef<Task>[] = [
         className="translate-y-[2px]"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
+    cell: ({ row }) => {
+      console.log("Row Data:", row.original) // Log the entire row data
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="translate-y-[2px]"
+        />
+      )
+    },
     enableSorting: false,
     enableHiding: false,
   },
@@ -48,33 +51,35 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
-
+      const labell = labels.find((label) => label.value === row.label)
       return (
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
+            {row.getValue("createdAt")}
           </span>
         </div>
       )
     },
   },
   {
-    accessorKey: "Status",
+    accessorKey: "Content",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="Content" />
     ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
-
       return (
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("status")}
+            {row.getValue("content")}
           </span>
         </div>
       )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     },
   },
   {

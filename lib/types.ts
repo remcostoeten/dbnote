@@ -1,3 +1,14 @@
+export interface Post {
+    id: string;
+    title: string;
+    label: string;
+    priority: string;
+    task: string;
+    description: string;
+    createdAt: any;
+    status: string;
+}
+
 export interface Note {
     id: string;
     title: string;
