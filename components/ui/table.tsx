@@ -1,8 +1,10 @@
+// @ts-nocheck ! same for this TODO:
+
+"use client "
 import * as React from "react"
-
+import ReactDOM from "react-dom"
 import { cn } from "@/lib"
-import { motion } from "framer-motion"
-
+import motion from "framer-motion"
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
@@ -29,14 +31,17 @@ const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <motion.tbody
+  <motion.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3, ease: "easeInOut" }}
-    ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
-    {...props}
-  />
+  >
+    <tbody
+      ref={ref}
+      className={cn("[&_tr:last-child]:border-0", className)}
+      {...props}
+    />
+  </motion.div>
 ))
 TableBody.displayName = "TableBody"
 
@@ -59,14 +64,13 @@ const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
-  <motion.tr
-    ref={ref}
-    className={cn("border-b", className)}
+  <motion.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3, ease: "easeInOut" }}
-    {...props}
-  />
+  >
+    <tr ref={ref}>{...props}</tr>
+  </motion.div>
 ))
 TableRow.displayName = "TableRow"
 

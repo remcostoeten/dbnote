@@ -39,9 +39,6 @@ export default function Dashboard() {
   const [category, setCategory] = useState<string>("")
   const [content, setContent] = useState<string>("")
   const [notes, setNotes] = useState<Note[]>([])
-  const [status, setStatus] = useState<Note[]>([])
-  const [label, setLabel] = useState<Note[]>([])
-  const [priority, setPriority] = useState<Note[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({})
   const user = auth?.currentUser
@@ -59,6 +56,7 @@ export default function Dashboard() {
   useEffect(() => {
     fetchNotes()
   }, [])
+  // Firebase Security Rules
 
   const categories = [
     { id: "1", name: "Pleio" },
@@ -133,8 +131,6 @@ export default function Dashboard() {
       setCategory("")
       setTitle("")
       setContent("")
-      setStatus([])
-      setPriority([])
       toast({
         title: "Note created successfully.",
         description: `In the category ${category} with title ${title}`,
@@ -172,28 +168,9 @@ export default function Dashboard() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <Input
-        type="text"
-        placeholder="Status"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-      />
-      <Input
-        type="text"
-        placeholder="Priority"
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)} // Fixed missing closing parenthesis
-      />
-      <Input
-        type="text"
-        placeholder="Label"
-        value={label.join(", ")}
-        onChange={(e) => setLabel(e.target.value.split(", "))} // Adjusted the setLabel call
-      />
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
-          <SelectValue placeholder="Select a category" />{" "}
-          {/* Updated placeholder */}
+          <SelectValue placeholder="Select a verified email to display" />
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -203,6 +180,7 @@ export default function Dashboard() {
           ))}
         </SelectContent>
       </Select>
+
       <Textarea
         placeholder="Note content"
         value={content}
@@ -211,7 +189,7 @@ export default function Dashboard() {
       <Button
         onClick={(e) => {
           e.preventDefault()
-          handleSubmit(e)
+          handleSubmit(e as any)
         }}
         className="inline-flex w-fit"
       >
@@ -228,23 +206,9 @@ export default function Dashboard() {
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <Input
               type="text"
-              placeholder="Status"
-              value={status.map((note) => note.title).join(", ")}
-              onChange={(e) => setStatus([{ title: e.target.value }])}
-            />
-
-            <Input
-              type="text"
-              placeholder="Priority"
-              value={priority.map((note) => note.title).join(", ")}
-              onChange={(e) => setPriority([{ title: e.target.value }])}
-            />
-
-            <Input
-              type="text"
-              placeholder="Label"
-              value={label.map((note) => note.title).join(", ")}
-              onChange={(e) => setLabel([{ title: e.target.value }])}
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>

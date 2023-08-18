@@ -1,11 +1,9 @@
 "use client"
-import Link from "next/link"
-
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { toast } from "@/components/ui/use-toast"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -13,6 +11,8 @@ import { Auth } from "firebase/auth"
 import { ClassValue } from "clsx"
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
 import { signUp } from "@/lib/firebase"
+import Link from "next/link"
+
 export default function RegisterPage() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -41,11 +41,7 @@ export default function RegisterPage() {
 
   return (
     <div className="container grid h-screen w-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/login"
-      >
-        Login
-      </Link>
+      <Link href="/login">Login</Link>
       <div className="hidden h-full bg-muted lg:block" />
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
@@ -123,6 +119,6 @@ export default function RegisterPage() {
           </p>
         </div>
       </div>
-    </div >
+    </div>
   )
 }

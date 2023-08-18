@@ -1,5 +1,5 @@
 "use client"
-
+React
 import { ColumnDef } from "@tanstack/react-table"
 
 import { Badge } from "@/components/ui/badge"
@@ -9,6 +9,7 @@ import { labels } from "./data/data"
 import { Task } from "./data/schema"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "../data-table-row-actions"
+import React from "react"
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -56,7 +57,6 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label)
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("title")}
           </span>
@@ -82,7 +82,6 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label)
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("title")}
           </span>
@@ -96,7 +95,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
-      const priority = row.getValue("priority")
+      const priority = row.getValue("priority") as string
       return (
         <div className="flex items-center space-x-2">
           {priority === "low" && (
@@ -105,7 +104,6 @@ export const columns: ColumnDef<Task>[] = [
               height="15"
               viewBox="0 0 15 15"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               className="textMutedForeground mr-2 h-4 w-4"
             >
               <path
@@ -122,7 +120,6 @@ export const columns: ColumnDef<Task>[] = [
               height="15"
               viewBox="0 0 15 15"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               className="textMutedForeground mr-2 h-4 w-4"
             >
               <path
@@ -155,7 +152,6 @@ export const columns: ColumnDef<Task>[] = [
       )
     },
   },
-
   {
     accessorKey: "description",
     header: ({ column }) => (
@@ -163,10 +159,8 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
-      const labell = labels.find((label) => label.value === row.label)
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("description")}
           </span>
@@ -174,7 +168,6 @@ export const columns: ColumnDef<Task>[] = [
       )
     },
   },
-
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,

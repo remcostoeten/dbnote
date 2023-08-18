@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Link } from "lucide-react"
 
 import MsgBar from "@/components/MsgBar"
@@ -15,6 +14,7 @@ import UiLinks from "../ui-elements/ui-links"
 import TypingEffect from "./playground/components/alternating-text"
 import TypeSwap from "./playground/components/alternating-text"
 import Typewriter from "./playground/components/alternating-text"
+import { motion } from "framer-motion"
 
 export default function ConverterLayout({ children }) {
   return (
@@ -41,9 +41,11 @@ export default function ConverterLayout({ children }) {
               simply toggle the switch. When using TypeScript you can also get a
               version with the types included by filling in the props.
             </PageHeaderDescription>
+            {/* @ts-ignore */}
           </motion.div>
         </PageHeader>{" "}
         <main>
+          {/* @ts-ignore */}
           <motion.div
             className=""
             initial={{ opacity: 0, y: -20 }}
@@ -51,6 +53,7 @@ export default function ConverterLayout({ children }) {
             transition={{ delay: 0.7, duration: 1 }}
           >
             {children}
+            {/* @ts-ignore */}
           </motion.div>
         </main>
       </div>
