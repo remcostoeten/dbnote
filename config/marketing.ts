@@ -22,7 +22,7 @@ export const marketingConfig: MarketingConfig = {
     {
       title: "Todos",
       href: "/todo"
-    }
+    },
     {
       title: "Thoughts",
       href: "/thoughts",
