@@ -299,7 +299,7 @@ export default function PlaygroundPage() {
                 </Label>
                 <Input
                   type="text"
-                  className="note-border w-[auto] placeholder:text-red-400] jsx-input"
+                  className="note-border placeholder:text-red-400] jsx-input w-[auto]"
                   onChange={(e) => setComponentName(e.target.value)}
                   placeholder="Enter Component name)"
                 />
@@ -482,7 +482,7 @@ export default function PlaygroundPage() {
                               />
                             </div>
                           </div>
-                          <div className="mt-[21px] min-h-[400px] rounded-md border bg-muted lg:min-h-[700px]" />
+                          <div className="min-h-[400px] rounded-md border bg-muted lg:min-h-[700px]" />
                         </div>
                         <div className="flex items-center space-x-2">
                           <Button>Submit</Button>

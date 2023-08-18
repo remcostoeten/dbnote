@@ -10,31 +10,20 @@ import { UserNav } from "@/components/data-tables/user-nav"
 import { taskSchema } from "@/components/data-tables/data/schema"
 import { db } from "@/lib/firebase"
 import { getDocs, collection } from "firebase/firestore"
-
 export const metadata: Metadata = {
   title: "Tasks",
-  description: "A task and issue tracker build using Tanstack Table.",
+  description: "A task and issue tracker built using Tanstack Table.",
 }
 
 async function getTasks() {
   const querySnapshot = await getDocs(collection(db, "tasks"))
   const tasks = []
   querySnapshot.forEach((doc) => {
-    tasks.push(doc.data())
+    const taskData = doc.data() as any
   })
 
   return z.array(taskSchema).parse(tasks)
 }
-
-// async function getTasks() {
-//   const data = await fs.readFile(
-//     path.join(process.cwd(), "components/data-tables/data/tasks.json")
-//   )
-
-//   const tasks = JSON.parse(data.toString())
-
-//   return z.array(taskSchema).parse(tasks)
-// }
 
 export default async function TaskPage() {
   const tasks = await getTasks()

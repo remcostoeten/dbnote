@@ -4,6 +4,16 @@
 // @import "@radix-ui/colors/purple.css";
 // @import "@radix-ui/colors/violet.css";
 
+div[role="menu"] {
+  background-color: $black;
+  /* Add more styles as needed */
+  border: none !important;
+}
+
+div[role="dialog"] {
+  border-color: transparent !important;
+  background-color: $black !important;
+}
 .header {
   position: relative;
 

@@ -118,6 +118,12 @@ export default function Dashboard() {
         content,
         category,
         createdAt: serverTimestamp(),
+        id: "",
+        status: "",
+        label: "",
+        subject: "",
+        priority: "",
+        task: "",
       }
 
       const docRef = await addDoc(collection(db, "notes"), newNote)
@@ -169,27 +175,25 @@ export default function Dashboard() {
       <Input
         type="text"
         placeholder="Status"
-        value={status.join(", ")}
-        onChange={(e) => setStatus(e.target.value.split(", "))}
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
       />
-
       <Input
         type="text"
         placeholder="Priority"
-        value={priority.join(", ")}
-        onChange={(e) => setPriority(e.target.value.split(", "))}
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)} // Fixed missing closing parenthesis
       />
-
       <Input
         type="text"
         placeholder="Label"
         value={label.join(", ")}
-        onChange={(e) => setLabel(e.target.value.split(", "))}
+        onChange={(e) => setLabel(e.target.value.split(", "))} // Adjusted the setLabel call
       />
-
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
-          <SelectValue placeholder="Select a verified email to display" />
+          <SelectValue placeholder="Select a category" />{" "}
+          {/* Updated placeholder */}
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -199,7 +203,6 @@ export default function Dashboard() {
           ))}
         </SelectContent>
       </Select>
-
       <Textarea
         placeholder="Note content"
         value={content}
@@ -208,7 +211,7 @@ export default function Dashboard() {
       <Button
         onClick={(e) => {
           e.preventDefault()
-          handleSubmit(e as any)
+          handleSubmit(e)
         }}
         className="inline-flex w-fit"
       >

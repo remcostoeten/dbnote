@@ -2,22 +2,38 @@
 
 $notes-font: "Mobitale Cnd", sans-serif;
 
-select,
-option {
-  background: none !important;
-  padding: 5px 14px !important;
-  border: 1px solid #27272a !important;
-  outline: none !important;
+// select,
+// option {
+//   padding: 5px 14px !important;
+//   border: 1px solid #27272a !important;
+//   outline: none !important;
+// }
+
+// option {
+//   background-color: black !important;
+//   padding: 5px 14px !important;
+//   border: 1px solid #27272a !important;
+//   height: 40px !important;
+
+//   &::hover {
+//     background-color: lighten(black, 10%) !important;
+//   }
+// }
+
+form {
+  button[role="combobox"] {
+    width: 100%;
+  }
 }
+select {
+  width: 100%;
+  option {
+    background-color: red !important;
 
-option {
-  background-color: black !important;
-  padding: 5px 14px !important;
-  border: 1px solid #27272a !important;
-  height: 40px !important;
-
-  &::hover {
-    background-color: lighten(black, 10%) !important;
+    z-index: 999999999999999999;
+    &:hover {
+      background-color: red !important;
+    }
   }
 }
 

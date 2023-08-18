@@ -5,8 +5,8 @@ export interface Task {
     priority: string;
     task: string;
     description: string;
-    createdAt: any;
-    status: string;
+    createdAt: string;  
+       status: string;
 }
 
 export interface Note {
