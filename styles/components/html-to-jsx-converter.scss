@@ -1,13 +1,9 @@
-
 .jsx-converter {
   position: relative !important;
 
-.jsx-input {
-  color: var(--muted-foreground);
- 
-}
- 
-
+  .jsx-input {
+    color: var(--muted-foreground);
+  }
 
   .monaco-editor.no-user-select .lines-content,
   .monaco-editor.no-user-select .view-line,
@@ -39,17 +35,17 @@
     width: calc(100% + 4px);
     scale: 1.02;
     height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
+    animation: glowingEffect 20s linear infinite;
     opacity: 0.3;
     transition: opacity 0.3s ease-in-out;
     border-radius: 10px;
   }
 
   .margin-view-overlays,
-.margin,
-.margin-view-overlays {
-  display: none !important;
-}
+  .margin,
+  .margin-view-overlays {
+    display: none !important;
+  }
 }
 
 .jsx-converter.jsx-has-content::before {

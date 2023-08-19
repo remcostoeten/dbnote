@@ -1,30 +1,17 @@
-.typewriter {
-  border-right: 2px solid;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: blink 1s infinite;
-}
-
-.typewriter.typing {
-  animation: type 2s steps(3, end), blink 1s infinite;
-}
-
-@keyframes type {
+/* Rounded border glow effect animation */
+@keyframes RoundedGlowBorder {
   0% {
-    width: 100%;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    width: 0;
+    background-position: 0% 50%;
   }
 }
 
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-// header border on load animatiion
+/* header psuedo element 1px border on load animatiion */
 @keyframes borderGrow {
   0% {
     width: 0;
@@ -35,6 +22,7 @@
   }
 }
 
+/* header psuedo element 1px border on load animatiion  for thoughts page*/
 @keyframes borderGrowThougts {
   0% {
     width: 0;
@@ -45,25 +33,7 @@
   }
 }
 
-@keyframes leftIn {
-  from {
-    left: 0;
-  }
-
-  to {
-    left: 15%;
-  }
-}
-
-@keyframes rightIn {
-  from {
-    right: 0;
-  }
-  to {
-    right: 15%;
-  }
-}
-
+/* body background scroll animation */
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -73,8 +43,8 @@
   }
 }
 
-// Animation for glowing btn/element effect.
-@keyframes glowing {
+/* Glowing effect used for @mixin glowing-effect */
+@keyframes glowingEffect {
   0% {
     background-position: 0 0;
   }
@@ -86,68 +56,7 @@
   }
 }
 
-// Body before gradient fade animation to reveal some off the background.
-@keyframes showMoreBodyBg {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.9;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes topBottomFade {
-  0% {
-    transform: translateY(-230%);
-  }
-
-  100% {
-    transform: translateY(160%);
-    transform: translateX(5%);
-  }
-}
-
-@keyframes topBottom {
-  from {
-    height: 0;
-    opacity: 1;
-  }
-
-  to {
-    height: 25%;
-    opacity: 1;
-  }
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes bodyLinear {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
+/* Body grow heigth animation used in bg.scss */
 @keyframes growHeight {
   50% {
     height: 100vh;
@@ -159,6 +68,7 @@
   }
 }
 
+/* background scrolling animation used for square repeating grid effect used in bg.scss */
 @keyframes bg-scrolling-reverse {
   10% {
     background-position: 0px 0px;
@@ -166,12 +76,13 @@
 
   50% {
     background-position: -25px -25px;
-
   }
   100% {
     background-position: -30px -30px;
   }
 }
+
+/* alternative background scrolling animation used for square repeating grid effect used in bg.scss */
 
 @keyframes bg-scrolling-reverse-two {
   to {
@@ -180,27 +91,14 @@
   }
 }
 
+/* background scrolling animation used for square repeating grid effect used in bg.scss */
 @keyframes bg-scrolling {
   0% {
     background-position: 50px 50px;
   }
 }
 
-@keyframes show {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-20%);
-  }
-}
-
+/* animation for dutch colors  overlay on text for homepage */
 @keyframes dutchFlagGradient {
   0% {
     background-position: 0% 50%;
@@ -213,12 +111,14 @@
   }
 }
 
+/* loader spinner animation used in loading.scss */
 @keyframes loaderSpinner {
   to {
     transform: rotate(360deg);
   }
 }
 
+/* loader spinner animation used in loading.scss */
 @keyframes loaderRotate {
   from {
     transform: translate(-50%, -50%) rotate(0deg);

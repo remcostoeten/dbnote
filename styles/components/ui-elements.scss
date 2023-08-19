@@ -33,6 +33,10 @@ select {
   border-radius: 1.5rem;
   padding: 1rem;
 
+  &.expense {
+    width: 100%;
+  }
+
   &:after {
     content: "";
     height: 70px;
