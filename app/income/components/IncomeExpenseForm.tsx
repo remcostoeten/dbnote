@@ -1,10 +1,17 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { addDoc, collection, deleteDoc, getDocs } from "firebase/firestore"
+import {
+  QueryDocumentSnapshot,
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+} from "firebase/firestore"
 import { motion } from "framer-motion"
 
 import { auth, db } from "@/lib/firebase"
+import { Income } from "@/lib/types"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
@@ -34,9 +41,13 @@ const AddIncomeExpenseForm: React.FC = () => {
   const [netWorth, setNetWorth] = useState<number>(0)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const user = auth?.currentUser
-  const [expenses, setExpenses] = useState<Expense[]>([])
-  const [income, setIncome] = useState([])
-  const [incomes, setIncomes] = useState<Income[]>([])
+  const [expenses, setExpenses] = useState([
+    { id: 1, name: "Dinner", amount: 50, category: "Food" },
+  ])
+  const [incomes, setIncomes] = useState([
+    { id: 1, name: "Dinner", amount: 50, category: "Food" },
+  ])
+  const [selectedCategory, setSelectedCategory] = useState("")
 
   const expenseQuerySnapshot = getDocs(collection(db, "expenses"))
   useEffect(() => {
@@ -47,7 +58,7 @@ const AddIncomeExpenseForm: React.FC = () => {
         name: doc.data().name,
         expenseAmount: doc.data().expenseAmount,
       }))
-      setExpenses(fetchedExpenses)
+      setExpenses(fetchedExpenses as any)
 
       const incomeQuerySnapshot = await getDocs(collection(db, "incomes"))
       const fetchedIncomes = incomeQuerySnapshot.docs.map((doc) => ({
@@ -55,7 +66,7 @@ const AddIncomeExpenseForm: React.FC = () => {
         name: doc.data().name,
         incomeAmount: doc.data().incomeAmount,
       }))
-      setIncomes(fetchedIncomes)
+      setIncomes(fetchedIncomes as any)
 
       await calculateTotalIncome()
       await calculateTotalExpense()
@@ -162,16 +173,18 @@ const AddIncomeExpenseForm: React.FC = () => {
       console.error("Error calculating total income:", error)
     }
   }
-
   const calculateTotalExpense = async () => {
     try {
-      const userExpenses = expenseQuerySnapshot.docs.filter(
+      const userExpenses = (await expenseQuerySnapshot).docs.filter(
         (doc) => doc.data().userId === (user ? user.uid : null)
       )
+
       const total = userExpenses.reduce(
-        (acc, doc) => acc + doc.data().expenseAmount,
+        (acc: number, doc: QueryDocumentSnapshot) =>
+          acc + doc.data().expenseAmount,
         0
       )
+
       setTotalExpense(total)
     } catch (error) {
       console.error("Error calculating total expense:", error)
@@ -183,66 +196,127 @@ const AddIncomeExpenseForm: React.FC = () => {
     setNetWorth(netWorth)
   }
 
+  function sortByCategory(a, b) {
+    if (a.category < b.category) return -1
+    if (a.category > b.category) return 1
+    return 0
+  }
+
   return (
     <>
       {isLoading ? (
         <LoadingSkeleton />
       ) : (
         <div className="flex flex-col gap-4">
-          {/* Income, Expense, and Savings Input Fields */}
-          <div className="flex gap-4">
-            {/* Income Input */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
-            >
-              <Card className="card expense p-8 ">
-                <h2 className="text-2xl font-bold mb-4">Add Income</h2>
-                <div className="flex items-center mb-4 gap-4">
-                  <Input
-                    type="number"
-                    placeholder="€ ,-"
-                    value={incomeAmount}
-                    onChange={(e) => setIncomeAmount(Number(e.target.value))}
-                  />
-                  <Input
-                    type="text"
-                    value={incomeName}
-                    onChange={(e) => setIncomeName(e.target.value)}
-                    placeholder="Income Name"
-                  />
-                </div>
-                <BorderButton onClick={handleAddIncome} text="Add Income" />
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+              >
+                <Card className="card expense p-8 ">
+                  <h2 className="text-2xl font-bold mb-4">Add Income</h2>
+                  <div className="flex items-center mb-4 gap-4">
+                    <Input
+                      type="number"
+                      placeholder="€ ,-"
+                      value={incomeAmount}
+                      onChange={(e) => setIncomeAmount(Number(e.target.value))}
+                    />
+                    <Input
+                      type="text"
+                      value={incomeName}
+                      onChange={(e) => setIncomeName(e.target.value)}
+                      placeholder="Income Name"
+                    />
+                  </div>
+                  <BorderButton onClick={handleAddIncome} text="Add Income" />
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+              >
+                <Card className="card expense p-8 ">
+                  <h2 className="text-2xl font-bold mb-4">Add Expense</h2>
+                  <div className="flex items-center mb-4 gap-4">
+                    <Input
+                      type="number"
+                      value={expenseAmount}
+                      placeholder="€ ,-"
+                      onChange={(e) => setExpenseAmount(Number(e.target.value))}
+                    />
+                    <Input
+                      type="text"
+                      value={expenseName}
+                      onChange={(e) => setExpenseName(e.target.value)}
+                      placeholder="Expense Name"
+                    />
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                    >
+                      <option value="Food">Food</option>
+                      <option value="Transport">Transport</option>
+                      <option value="Utilities">Utilities</option>
+                      {/* ... Other categories ... */}
+                    </select>
+                  </div>
+                  <BorderButton onClick={handleAddExpense} text="Add Expense" />
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="flex flex-col gap-4"
+              >
+                <Card className="card expense p-8 ">
+                  <h2 className="text-2xl font-bold mb-4">Add Savings</h2>
+                  <div className="flex items-center mb-4">
+                    <Input
+                      type="number"
+                      value={savingsAmount}
+                      placeholder="€ ,-"
+                      onChange={(e) => setSavingsAmount(Number(e.target.value))}
+                      className="w-1/2 p-2 border border-gray-300 rounded-md mr-2"
+                    />
+                    <Input
+                      type="text"
+                      value={savingsName}
+                      onChange={(e) => setSavingsName(e.target.value)}
+                      placeholder="Savings Name"
+                      className="w-1/2 p-2 border border-gray-300 rounded-md"
+                    />
+                  </div>
+                  <BorderButton onClick={handleAddSavings} text="Add Savings" />
+                </Card>
+              </motion.div>
+            </div>
+            <div className="flex gap-4 w-full ">
+              <Card className="card flex-col flex flex-1 expense p-8 ">
+                <dl className="text-2xl font-bold mb-4">Expenses List:</dl>
+                {expenses.map((expense) => (
+                  <dl className="flex justify-between w-full" key={expense.id}>
+                    <dd>Name: {expense.name}</dd>
+                    <dt>Amount: €{expense.amount},-</dt>
+                  </dl>
+                ))}
               </Card>
-            </motion.div>
-
-            {/* Expense Input */}
-            {/* ... Similar for expense input ... */}
-
-            {/* Savings Input */}
-            {/* ... Similar for savings input ... */}
-          </div>
-
-          {/* List of Individual Incomes and Expenses */}
-          <div>
-            {/* Expenses List */}
-            <h2 className="text-2xl font-bold mb-4">Expenses List:</h2>
-            {expenses.map((expense) => (
-              <div key={expense.id}>
-                <p>Name: {expense.name}</p>
-                <p>Amount: €{expense.expenseAmount},-</p>
-              </div>
-            ))}
-
-            {/* Incomes List */}
-            <h2 className="text-2xl font-bold mb-4">Income List:</h2>
-            {incomes.map((income) => (
-              <div key={income.id}>
-                <p>Name: {income.name}</p>
-                <p>Amount: €{income.incomeAmount},-</p>
-              </div>
-            ))}
+              <Card className="card flex-col flex flex-1 expense p-8 ">
+                <h2 className="text-2xl font-bold mb-4">Income List:</h2>
+                {incomes.map((income) => (
+                  <dl className="flex justify-between w-full" key={income.id}>
+                    <p>Name: {income.name}</p>
+                    <p>Amount: €{income.amount},-</p>
+                  </dl>
+                ))}
+              </Card>
+            </div>
           </div>
 
           {/* Summary of Total Income, Expense, and Net Worth */}

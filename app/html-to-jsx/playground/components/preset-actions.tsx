@@ -64,39 +64,6 @@ export function PresetActions() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={open} onOpenChange={setIsOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Some menu with ???</DialogTitle>
-            <DialogDescription>
-              Did u know the 404 page on this site plays Abba - dancing queen?
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-6">
-            <h4 className="text-sm text-muted-foreground">For real</h4>
-            <div
-              onClick={goToErrorPage}
-              className="flex items-start justify-between space-x-4 pt-3"
-            >
-              <Switch
-                name="show"
-                id="show"
-                defaultChecked={true}
-                onClick={error}
-              />
-              <Label className="grid gap-1 font-normal" htmlFor="show">
-                <span className="font-semibold">Toggle to see yourself</span>
-                <span className="text-sm text-muted-foreground"></span>
-              </Label>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="secondary" onClick={error}>
-              Close
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
