@@ -3,14 +3,9 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BorderBottomIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
 
-import {
-  BlobButton,
-  BorderButton,
-  GlowButton,
-} from "@/components/buttons/CustomButtons"
+import { BorderButton } from "@/components/buttons/CustomButtons"
 import { examples } from "@/components/ui-dashboard/example-nav"
 
 export default function UiLinks() {

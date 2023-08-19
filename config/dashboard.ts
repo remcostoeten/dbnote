@@ -1,5 +1,4 @@
 import { DashboardConfig } from "types"
-import TailwindIcon from './../components/icons/TailwindIcon';
 
 export const dashboardConfig: DashboardConfig = {
   mainNav: [
