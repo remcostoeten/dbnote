@@ -5,12 +5,12 @@ import { collection, onSnapshot } from "firebase/firestore"
 
 import { db } from "@/lib/firebase"
 
-import AddIncomeExpenseForm from "./components/a"
+import AddIncomeExpenseForm from "./components/IncomeExpenseForm"
 
 interface Income {
   id: string
   amount: number
-  // Add other properties as needed
+  name: string
 }
 
 const IncomePage: React.FC = () => {
@@ -21,7 +21,7 @@ const IncomePage: React.FC = () => {
       const incomeData: Income[] = snapshot.docs.map((doc) => ({
         id: doc.id,
         amount: doc.data().amount,
-        // Map other properties as needed
+        name: doc.data().name,
       }))
       setIncomes(incomeData)
     })
@@ -33,11 +33,12 @@ const IncomePage: React.FC = () => {
     <div>
       <h1>Income Page</h1>
       <AddIncomeExpenseForm />
-      <ul>
-        {incomes.map((income) => (
-          <li key={income.id}>{income.amount}</li>
-        ))}
-      </ul>
+      {incomes.map((income) => (
+        <dl key={income.id}>
+          <dd>{income.name}</dd>
+          <dt>{income.amount}</dt>
+        </dl>
+      ))}
     </div>
   )
 }

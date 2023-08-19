@@ -25,7 +25,7 @@ interface UiShowcaseLayoutProps {
 export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   return (
     <>
-      <div className="container relative flex flex-col">
+      <div className="expenses-tracker container relative flex flex-col">
         <PageHeader className="page-header pb-8"></PageHeader>
         <section>
           <motion.div

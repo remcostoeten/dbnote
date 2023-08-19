@@ -8,7 +8,7 @@ import { db } from "@/lib/firebase"
 interface Expense {
   id: string
   amount: number
-  // Add other properties as needed
+  name: string
 }
 
 const ExpenseList: React.FC = () => {
@@ -19,7 +19,7 @@ const ExpenseList: React.FC = () => {
       const expenseData: Expense[] = snapshot.docs.map((doc) => ({
         id: doc.id,
         amount: doc.data().amount,
-        // Map other properties as needed
+        name: doc.data().name,
       }))
       setExpenses(expenseData)
     })
@@ -28,14 +28,15 @@ const ExpenseList: React.FC = () => {
   }, [])
 
   return (
-    <div>
+    <>
       <h2>Expense List</h2>
-      <ul>
-        {expenses.map((expense) => (
-          <li key={expense.id}>{expense.amount}</li>
-        ))}
-      </ul>
-    </div>
+      {expenses.map((expense) => (
+        <dl key={expense.id}>
+          <dt>{expense.title}</dt>
+          <dd>{expense.amount}</dd>
+        </dl>
+      ))}
+    </>
   )
 }
 

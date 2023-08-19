@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { collection, onSnapshot } from "firebase/firestore"
 
 import { db } from "@/lib/firebase"
+import { Label } from "@/components/ui/label"
 
 interface Income {
   id: string
   amount: number
-  // Add other properties as needed
+  name: string
 }
 
 const IncomeList: React.FC = () => {
@@ -17,7 +18,7 @@ const IncomeList: React.FC = () => {
       const incomeData: Income[] = snapshot.docs.map((doc) => ({
         id: doc.id,
         amount: doc.data().amount,
-        // Map other properties as needed
+        name: doc.data().namae,
       }))
       setIncomes(incomeData)
     })
@@ -30,7 +31,12 @@ const IncomeList: React.FC = () => {
       <h2>Income List</h2>
       <ul>
         {incomes.map((income) => (
-          <li key={income.id}>{income.amount}</li>
+          <dl className="flex" key={income.id}>
+            <Label>
+              <dt>{income.namae}</dt>
+            </Label>
+            <dt>{income.amount}</dt>
+          </dl>
         ))}
       </ul>
     </div>

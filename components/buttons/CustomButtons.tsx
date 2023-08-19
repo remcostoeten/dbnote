@@ -31,9 +31,13 @@ export const GlowButton = ({
   )
 }
 
-export const WeakGlowButton = ({ text, link }) => {
+export const WeakGlowButton = ({ onClick, text, link }) => {
   return (
-    <button className="button button--glow weak" type="button">
+    <button
+      onClick={onClick}
+      className="button button--glow weak"
+      type="button"
+    >
       {link ? <Link href={link}>{text}</Link> : text}
     </button>
   )
@@ -111,17 +115,22 @@ export const BlobButton = ({ text, icon }: BlobButtonProps) => {
 export const RoundedGlowButton = ({ text }) => {
   return (
     <div className="relative button-rounded-glow">
-      <button className="button-rounded-glow__inner " type="button">{text}</button>
+      <button className="button-rounded-glow__inner " type="button">
+        {text}
+      </button>
       <div className="button-rounded-glow__bg"></div>
     </div>
   )
 }
 
-export const BorderButton = ({ text, variant = "" }) => {
+export const BorderButton = ({ text, onClick, variant = "" }) => {
   return (
     <div className="border-btn h-[60px]">
       <div className="absolute h-[60px] w-[155px]">
-        <button className={`button button--border ${variant}`}>
+        <button
+          onClick={onClick}
+          className={`button button--border ${variant}`}
+        >
           <svg
             width="180px"
             height="60px"
