@@ -29,18 +29,7 @@ const IncomePage: React.FC = () => {
     return () => unsubscribe()
   }, [])
 
-  return (
-    <div>
-      <h1>Income Page</h1>
-      <AddIncomeExpenseForm />
-      {incomes.map((income) => (
-        <dl key={income.id}>
-          <dd>{income.name}</dd>
-          <dt>{income.amount}</dt>
-        </dl>
-      ))}
-    </div>
-  )
+  return <AddIncomeExpenseForm />
 }
 
 export default IncomePage
