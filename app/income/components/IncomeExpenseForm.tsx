@@ -57,7 +57,7 @@ const AddIncomeExpenseForm: React.FC = () => {
     }
 
     fetchData()
-  }, [])import useBezierAnimation
+  }, [])
   const handleAddIncome = async () => {
     try {
       const docRef = await addDoc(collection(db, "incomes"), {
@@ -274,17 +274,12 @@ const AddIncomeExpenseForm: React.FC = () => {
                 </dd>
                 <dt className="font-normal">€{totalIncome},-</dt>
               </dl>
-
-              {expenses.map((expense) => (
-                <React.Fragment key={expense.id}>
-                  <dl className="flex justify-between text-2xl font-bold">
-                    <dd>
-                      <h2>{expense.name}:</h2>
-                    </dd>
-                    <dt className="font-normal">€{expense.expenseAmount},-</dt>
-                  </dl>
-                </React.Fragment>
-              ))}
+              <dl className="flex justify-between text-2xl font-bold">
+                <dd>
+                  <h2>Total expense:</h2>
+                </dd>
+                <dt className="font-normal">€{totalExpense},-</dt>
+              </dl>
 
               <dl className="flex justify-between text-2xl font-bold">
                 <dd>

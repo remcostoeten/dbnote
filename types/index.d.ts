@@ -6,6 +6,7 @@ import { Icons } from "@/components/icons"
 export type NavItem = {
   title: string;
   href: string;
+  label?: string;
   disabled?: boolean;
   done?: boolean;
   dropdown?: NavItem[];

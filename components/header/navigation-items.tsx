@@ -2,24 +2,19 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { NavigationMenu } from "@radix-ui/react-navigation-menu"
 import { onAuthStateChanged } from "firebase/auth"
 import { motion } from "framer-motion"
 
 import { MainNavItem } from "types"
-import { siteConfig } from "@/config/site"
 import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { MobileNav } from "@/components/mobile-nav"
 
-import AnimatedTextCharacter from "../AnimateText"
-import AnimatedTextWord from "../AnimateTextWord"
 import LogoIconOnly from "../LogoIconOnly"
 import Megamenu from "../Megamenu"
-import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
-import TextRevealSkew from "../core/animations/TextRevealSkew"
+import { WeakGlowButton } from "../buttons/CustomButtons"
 
 interface MainNavProps {
   items?: MainNavItem[]

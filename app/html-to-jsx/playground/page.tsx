@@ -272,7 +272,7 @@ export default function PlaygroundPage() {
             variant="default"
             className="transform-translate-x-3 absolute  right-0 -translate-x-12 translate-y-3"
           >
-            Beta
+            Beta 🚀
           </Badge>
           <div className="md:hidden">
             <Image
@@ -495,9 +495,6 @@ export default function PlaygroundPage() {
                     </TabsContent>
                   </div>
                 </div>
-                <h2 className="absolute right-0  top-0 w-full text-lg font-semibold">
-                  Still in beta 🚀
-                </h2>
               </div>
             </Tabs>
             <div className="m-3 flex gap-2 p-3">
