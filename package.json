@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "d": "next dev",
     "dev-old": "concurrently \"contentlayer dev\" \"next dev\"",
     "build": "contentlayer build && next build",
     "bx": "contentlayer build && next build && rsync -a --exclude=app/thoughts/ app/ dist/",
