@@ -10,12 +10,12 @@
     "dev": "next dev",
     "dev-old": "concurrently \"contentlayer dev\" \"next dev\"",
     "build": "contentlayer build && next build",
+    "bx": "contentlayer build && next build && rsync -a --exclude=app/thoughts/ app/ dist/",
     "nextbuild": "next build",
     "turbo": "next dev --turbo",
     "start": "next dev",
     "lint": "next lint",
-    "preview": "next build && next start",
-    "postinstall": "prisma generate"
+    "preview": "next build && next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",

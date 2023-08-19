@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react"
 import Slider from "react-slick"
 
-import FirebaseLogo from "../icons/FirebaseLogo"
-import NextIcon from "../icons/NextIcon"
-import ReactIcon from "../icons/ReactIcon"
-import ShadCn from "../icons/ShadCn"
-import TailwindIcon from "../icons/TailwindIcon"
-import TypescriptIcon from "../icons/TypescriptIcon"
+import FirebaseLogo from "../../icons/FirebaseLogo"
+import NextIcon from "../../icons/NextIcon"
+import ReactIcon from "../../icons/ReactIcon"
+import ShadCn from "../../icons/ShadCn"
+import TailwindIcon from "../../icons/TailwindIcon"
+import TypescriptIcon from "../../icons/TypescriptIcon"
 import ToolCard from "./CardComponent"
 
 const banners = [

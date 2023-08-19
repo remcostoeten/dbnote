@@ -21,7 +21,7 @@ export const HomeIntroduction = ({ title }) => {
         <motion.h1
           className=" z-10 font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           data-type="cursor"
-          initial={{ skewX: -4, opacity: 0, y: -20 }}
+          initial={{ skewX: -4, opacity: 0, y: 20 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
@@ -31,7 +31,7 @@ export const HomeIntroduction = ({ title }) => {
         <motion.p
           data-type="cursor"
           className="cursor-hover w-full max-w-[48rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8"
-          initial={{ skewX: 4, opacity: 0, y: -40 }}
+          initial={{ skewX: 4, opacity: 0, y: 40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
@@ -44,7 +44,7 @@ export const HomeIntroduction = ({ title }) => {
 
         <motion.div
           className="z-10 flex items-center space-x-6 align-middle"
-          initial={{ skewX: 4, opacity: 0, y: -40 }}
+          initial={{ skewX: 4, opacity: 0, y: 40 }}
           animate={{ skewX: 0, opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
         >

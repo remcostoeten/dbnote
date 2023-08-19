@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
-import ToolCard from "@/components/homepage/CardComponent"
-import { Carousel, banners } from "@/components/homepage/Carousel"
+import ToolCard from "@/components/core/Carousel/CardComponent"
+import { banners } from "@/components/core/Carousel/Carousel"
 
 export const HomeBanners = () => {
   const [scrollPosition, setScrollPosition] = useState(100)
@@ -31,7 +31,7 @@ export const HomeBanners = () => {
             <motion.div
               className="w-full icon-hover"
               key={index}
-              initial={{ scale: 0.8, opacity: 0, y: -40 }}
+              initial={{ scale: 0.8, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               whileHover={{ scale: 1.03, transition: { duration: 0.6 } }}
               transition={{

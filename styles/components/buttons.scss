@@ -253,6 +253,7 @@ a {
     border: 0px;
     cursor: pointer;
   }
+
   &--border {
     display: flex;
     align-items: center;
@@ -264,6 +265,7 @@ a {
     outline: none;
     transition: 1s ease-in-out;
     font-weight: 600;
+
     &.teal {
       border: 1px solid $teal;
 
@@ -379,7 +381,10 @@ a {
     position: relative;
     z-index: 0;
     border-radius: 10px;
-
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
     &.prominent {
       &::before {
         opacity: 0.5;
