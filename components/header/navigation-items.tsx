@@ -14,9 +14,12 @@ import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 import { MobileNav } from "@/components/mobile-nav"
 
+import AnimatedTextCharacter from "../AnimateText"
+import AnimatedTextWord from "../AnimateTextWord"
 import LogoIconOnly from "../LogoIconOnly"
 import Megamenu from "../Megamenu"
 import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
+import TextRevealSkew from "../core/animations/TextRevealSkew"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -104,9 +107,6 @@ export function MainNav({ items, children }: MainNavProps) {
       >
         <Link href="/" className="hidden items-center space-x-2 md:flex">
           <LogoIconOnly />
-          <span className="hidden font-bold sm:inline-block">
-            {siteConfig.name}
-          </span>
         </Link>
       </motion.div>
       {items.map((item, index) => (

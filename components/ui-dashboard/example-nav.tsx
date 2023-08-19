@@ -1,10 +1,12 @@
 "use client"
-import { motion } from "framer-motion"
+
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { ArrowRightIcon } from "@radix-ui/react-icons"
+import { motion } from "framer-motion"
+
 import { cn } from "@/lib/utils"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { ArrowRightIcon } from "@radix-ui/react-icons"
 
 export const examples = [
   {
@@ -32,6 +34,11 @@ export const examples = [
     name: "Cursor trailer",
     href: "/ui-elements/mouse-trailer",
     code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/Cursor/MouseTrailer.tsx",
+  },
+  {
+    name: "Text reveal animation",
+    href: "/ui-elements/reveal-animations",
+    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/animations/TextRevealSkew.jsA",
   },
 ]
 
