@@ -1,55 +1,3 @@
-.drawer-closed {
-  div#radix-\:r0\: {
-    animation: bottomOut 0.3s ease-in-out forwards;
-  }
-
-  .fixed.inset-0.bg-black\/40 {
-    animation: bottomOutOverlay 0.3s ease-in-out forwards;
-  }
-}
-
-@keyframes bottomOut {
-  0% {
-    transform: translateY(0);
-  }
-
-  90% {
-    visibility: visible;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hiden;
-    transform: translateY(100%);
-  }
-}
-
-@keyframes bottomOutOverlay {
-  90% {
-    visibility: visible;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hiden;
-  }
-}
-.z-max {
-  z-index: 999;
-}
-
-.big-container {
-  max-width: 1600px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
-}
-
-.ql-editor p {
-  color: #000;
-}
-
 // // Utils
 @import "./utils/animations.scss";
 @import "./utils/variables.scss";
@@ -79,10 +27,49 @@
 @import "./components/carousel.scss";
 @import "./components/notes.scss";
 @import "./components/editor.scss";
-// Tailwind
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes bottomOut {
+  0% {
+    transform: translateY(0);
+  }
+
+  90% {
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hiden;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes bottomOutOverlay {
+  90% {
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hiden;
+  }
+}
+
+.big-container {
+  max-width: 1600px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.ql-editor p {
+  color: #000;
+}
 
 .translate-y-1px {
   transform: translateY(1px);
@@ -95,9 +82,6 @@
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
-    --popover: red;
-    --popover-foreground: red;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
@@ -121,8 +105,16 @@
     --offblack: #101010;
 
     --radius: 0.5rem;
+
+    $pink: #ff7597;
+    --theme-pink: $pink;
+    --pink: $pink;
+    --theme-primary: $pink;
   }
 
+  .z-max {
+    z-index: 999;
+  }
   .dark {
     --background: $black;
     --foreground: 213 31% 91%;
@@ -132,9 +124,6 @@
 
     --accent: 216 34% 17%;
     --accent-foreground: 210 40% 98%;
-
-    --popover: red;
-    --popover-foreground: red;
 
     --border: 216 34% 17%;
     --input: 216 34% 17%;

@@ -1,18 +1,29 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-
-import styles from "@/styles/modules/cursor.module.scss"
-import PageSetting from "@/components/ui-dashboard/PageSetting"
-import { Switch } from "@radix-ui/react-switch"
 import { Checkbox } from "@radix-ui/react-checkbox"
+import { Switch } from "@radix-ui/react-switch"
+
+import { toast } from "@/components/ui/use-toast"
+import PageSetting from "@/components/ui-dashboard/PageSetting"
+import styles from "@/styles/modules/cursor.module.scss"
 
 const Trailer: React.FC = () => {
   const trailer = useRef<HTMLDivElement>(null)
   const trailerIcon = useRef<HTMLSpanElement>(null)
   const [showSVG, setShowSVG] = useState(false)
   const [showCircle, setShowCircle] = useState(true)
-  const [useClientCursor, setUseClientCursor] = useState(true) // Add state for the checkbox
+  const [useClientCursor, setUseClientCursor] = useState(() => {
+    const storedValue = localStorage.getItem("useClientCursor")
+    return storedValue ? JSON.parse(storedValue) : true
+  })
+
+  useEffect(() => {
+    localStorage.setItem("useClientCursor", JSON.stringify(useClientCursor))
+    toast({
+      title: `Cursor ${useClientCursor ? "enabled" : "disabled"}`,
+    })
+  }, [useClientCursor])
 
   const getTrailerClass = (type: string) => {
     switch (type) {
@@ -81,10 +92,19 @@ const Trailer: React.FC = () => {
 
   return (
     <>
-      <input
-        className="z-max absolute left-2 top-2 h-[10px] w-[10px] "
-        onClick={() => setUseClientCursor(!useClientCursor)}
-      ></input>{" "}
+      <div className="gap-2 m-2 p-2 w-full flex">
+        <label className="switch flex items-center relative w-max cursor-pointer select-none">
+          <input
+            type="checkbox"
+            onChange={() => setUseClientCursor(!useClientCursor)}
+            checked={useClientCursor}
+            className="appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-blue-500 bg-pink"
+          />
+          <span className="w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-white" />
+        </label>
+        <span className="">Turn {useClientCursor ? "off" : "on"} cursor</span>
+      </div>
+
       <div
         ref={trailer}
         id={styles.trailer}

@@ -67,7 +67,7 @@ const IconCarousel = () => {
     swipeToSlide: false,
     touchThreshold: 10,
     responsive: [],
-    rtl: scrollPosition > 400 ? false : true,
+    rtl: scrollPosition > 600 ? false : true,
   }
 
   return (

@@ -60,17 +60,16 @@
 .icon-card {
   position: relative;
   border-radius: 1.5rem;
-  background-color: rgb(1, 1, 1);
 
   &__inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    // background-image: radial-gradient(
-    //   rgba(255, 255, 255, 0.1) 1px,
-    //   transparent 1px
-    // );
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
     padding: $spacing;

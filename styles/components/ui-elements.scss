@@ -1,3 +1,23 @@
+.switch {
+  input:checked {
+    background-color: $pink;
+  }
+
+  input:checked ~ span:last-child {
+    --tw-translate-x: 1.75rem;
+  }
+}
+
+.drawer-closed {
+  div#radix-\:r0\: {
+    animation: bottomOut 0.3s ease-in-out forwards;
+  }
+
+  .fixed.inset-0.bg-black\/40 {
+    animation: bottomOutOverlay 0.3s ease-in-out forwards;
+  }
+}
+
 input,
 select {
   &:hover {

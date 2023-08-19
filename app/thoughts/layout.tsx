@@ -4,6 +4,7 @@ import withAuth from "@/lib/withAuth"
 
 import AllThoughts from "./components/AllThoughts"
 import { ThoughtProvider } from "./components/ThoughtContext"
+import { ThoughtsAside } from "./components/ThoughtsAside."
 
 const sidebarNavItems = [
   {
@@ -37,8 +38,8 @@ export default function RootLayout({}: RootLayoutProps) {
     <>
       <ThoughtProvider>
         <div className="flex relative container  flex-col">
-          {/* <ThoughtsAside /> */}
-          {/* <AllThoughts÷ /> */}
+          <ThoughtsAside />
+          <AllThoughts />
         </div>
       </ThoughtProvider>
     </>

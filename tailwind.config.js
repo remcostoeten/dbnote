@@ -34,6 +34,7 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        pink: "var(--theme-pink)",
         "notes-secondary": "#5D5C63",
         background: "var(--offblack)",
         foreground: "hsl(var(--foreground))",
@@ -89,6 +90,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      backgroundColor: {
+        pink: "var(--theme-pink)",
       },
     },
   },
