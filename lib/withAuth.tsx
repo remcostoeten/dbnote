@@ -1,26 +1,27 @@
-'use client';
-// withAuth.tsx
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+"use client"
 
-const withAuth = (WrappedComponent) => {
-  return (props) => {
-    const Router = useRouter();
+// withAuth.tsx
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { Unsubscribe, getAuth, onAuthStateChanged } from "firebase/auth"
+
+const withAuth = (WrappedComponent: React.FC) => {
+  return (props: React.ComponentProps<typeof WrappedComponent>) => {
+    const Router = useRouter()
 
     useEffect(() => {
-      const auth = getAuth();
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
+      const auth = getAuth()
+      const unsubscribe: Unsubscribe = onAuthStateChanged(auth, (user) => {
         if (!user) {
-          Router.push('/login');
+          Router.push("/login")
         }
-      });
+      })
 
-      return () => unsubscribe();
-    }, []);
+      return () => unsubscribe()
+    }, [])
 
-    return <WrappedComponent {...props} />;
-  };
-};
+    return <WrappedComponent {...props} />
+  }
+}
 
-export default withAuth;
+export default withAuth

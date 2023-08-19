@@ -1,28 +1,6 @@
-import { title } from "process"
+"use client"
+
 import { useEffect, useState } from "react"
-import { cn } from "@/lib"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu"
-import {
-  BellIcon,
-  CheckIcon,
-  MixerHorizontalIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@radix-ui/react-popover"
-import { Separator } from "@radix-ui/react-select"
-import { Switch } from "@radix-ui/react-switch"
 import {
   collection,
   deleteDoc,
@@ -40,24 +18,6 @@ import rehypeRaw from "rehype-raw"
 
 import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
-import { Badge } from "@/components/ui/badge"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command"
 import {
   ContextMenu,
   ContextMenuContent,
@@ -65,8 +25,6 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import { DataTableViewOptions } from "@/components/ui/data-table-view-options"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import TrashIcon from "@/components/icons/TrashIcon"
 
@@ -80,7 +38,6 @@ export default function ThoughtCard() {
   const [selectedLabel, setSelectedLabel] = useState<string>("")
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
   const labelOptions = useThoughtContext()
-  const [selectedValues, setSelectedValues] = useState(new Set())
 
   const [filterValue, setFilterValue] = useState([])
 

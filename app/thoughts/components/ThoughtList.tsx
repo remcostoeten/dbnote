@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { collection } from "@firebase/firestore"
-import { getDocs } from "firebase/firestore"
+import { collection, getDocs } from "firebase/firestore"
 
 import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"

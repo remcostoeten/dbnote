@@ -1,9 +1,3 @@
-"use client"
-
-import React from "react"
-
-import NotesIcon from "@/components/icons/NotesIcon"
-
 import { NewThought } from "./NewThought"
 import ThoughtCard from "./ThoughtCard"
 

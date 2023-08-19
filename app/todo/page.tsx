@@ -1,13 +1,14 @@
 import { Metadata } from "next"
 import Image from "next/image"
+import { collection, getDocs } from "firebase/firestore"
 import { z } from "zod"
 
-import { UserNav } from "@/components/data-tables/user-nav"
-import { taskSchema } from "@/components/data-tables/data/schema"
 import { db } from "@/lib/firebase"
-import { getDocs, collection } from "firebase/firestore"
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "@/components/columns"
+import { taskSchema } from "@/components/data-tables/data/schema"
+import { UserNav } from "@/components/data-tables/user-nav"
+
 export const metadata: Metadata = {
   title: "Tasks",
   description: "A task and issue tracker built using Tanstack Table.",
@@ -58,7 +59,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks as unknown[]} columns={[]} />
+        {/* <DataTable data={tasks as unknown[]} columns={[]} /> */}
       </div>
     </>
   )
