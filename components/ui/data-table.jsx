@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useState } from "react"
 import {
   ColumnDef,
@@ -114,7 +112,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {/* <DataTablePagination table={table} /> */}
     </div>
   )
 }

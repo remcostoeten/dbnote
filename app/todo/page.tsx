@@ -59,7 +59,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        {/* <DataTable data={tasks as unknown[]} columns={[]} /> */}
+        <DataTable data={tasks as unknown[]} columns={[]} />
       </div>
     </>
   )
