@@ -13,14 +13,14 @@ import {
 } from "@/components/buttons/CustomButtons"
 
 const AddIncomeExpenseForm: React.FC = () => {
-  const [expenseAmount, setExpenseAmount] = useState<number>(0)
-  const [incomeAmount, setIncomeAmount] = useState<number>(0)
+  const [expenseAmount, setExpenseAmount] = useState<number>("")
+  const [incomeAmount, setIncomeAmount] = useState<number>("")
   const [expenseName, setExpenseName] = useState<string>("")
   const [savingsName, setSavingsName] = useState<string>("")
-  const [savingsAmount, setSavingsAmount] = useState<number>(0)
+  const [savingsAmount, setSavingsAmount] = useState<string>("")
   const [incomeName, setIncomeName] = useState<string>("")
-  const [totalIncome, setTotalIncome] = useState<number>(0)
-  const [totalExpense, setTotalExpense] = useState<number>(0)
+  const [totalIncome, setTotalIncome] = useState<number>("")
+  const [totalExpense, setTotalExpense] = useState<number>("")
   const [netWorth, setNetWorth] = useState<number>(0)
 
   const handleAddIncome = async () => {
@@ -93,14 +93,14 @@ const AddIncomeExpenseForm: React.FC = () => {
         await deleteDoc(doc.ref)
       })
 
-      setSavingsAmount(0)
-      setIncomeAmount(0)
-      setExpenseAmount(0)
+      setSavingsAmount("")
+      setIncomeAmount("")
+      setExpenseAmount("")
       setIncomeName("")
       setExpenseName("")
-      setTotalIncome(0)
-      setTotalExpense(0)
-      setNetWorth(0)
+      setTotalIncome("")
+      setTotalExpense("")
+      setNetWorth("")
     } catch (error) {
       console.error("Error clearing all data:", error)
     }
@@ -123,7 +123,6 @@ const AddIncomeExpenseForm: React.FC = () => {
   const calculateTotalExpense = async () => {
     try {
       const expenseQuerySnapshot = await getDocs(collection(db, "expenses"))
-      const savingsQuerySnapshot = await getDocs(collection(db, "savings"))
       const total =
         savingsQuerySnapshot.docs.reduce +
         expenseQuerySnapshot.docs.reduce(
@@ -255,7 +254,11 @@ const AddIncomeExpenseForm: React.FC = () => {
               <dt className="font-normal">€{netWorth},-</dt>
             </dl>
             <div className="flex mt-4 justify-end">
-              <WeakGlowButton onClick={handleClearAll} text="Clear All" />
+              <WeakGlowButton
+                onClick={handleClearAll}
+                text="Clear All"
+                link={false}
+              />
             </div>
           </Card>
         </motion.div>

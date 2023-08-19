@@ -8,9 +8,7 @@ interface ButtonProps {
   className?: string
   link?: string
   onClick?: () => void
-  variant?: string
   disabled?: boolean
-  icon?: string
   children?: React.ReactNode
 }
 
@@ -33,7 +31,7 @@ export const GlowButton = ({
   )
 }
 
-export const WeakGlowButton = ({ onClick, text, link }: ButtonProps) => {
+export const WeakGlowButton = ({ onClick, text, link }) => {
   return (
     <button
       onClick={onClick}
@@ -45,7 +43,7 @@ export const WeakGlowButton = ({ onClick, text, link }: ButtonProps) => {
   )
 }
 
-export const ProminentGlowButton = ({ text, link }: ButtonProps) => {
+export const ProminentGlowButton = ({ text, link }) => {
   return (
     <button className="button button--glow prominent" type="button">
       {link ? <Link href={link}>{text}</Link> : text}
@@ -53,7 +51,7 @@ export const ProminentGlowButton = ({ text, link }: ButtonProps) => {
   )
 }
 
-export const SwapButton = ({ text }: ButtonProps) => {
+export const SwapButton = ({ text }) => {
   return (
     <button
       aria-label={text}
@@ -71,7 +69,12 @@ export const SwapButton = ({ text }: ButtonProps) => {
   )
 }
 
-export const BlobButton = ({ text, icon }: ButtonProps) => {
+interface BlobButtonProps {
+  text: string
+  icon?: string
+}
+
+export const BlobButton = ({ text, icon }: BlobButtonProps) => {
   return (
     <>
       <button className="blob-btn">
@@ -120,7 +123,7 @@ export const RoundedGlowButton = ({ text }) => {
   )
 }
 
-export const BorderButton = ({ text, onClick, variant = "" }: ButtonProps) => {
+export const BorderButton = ({ text, onClick, variant = "" }) => {
   return (
     <div className="border-btn h-[60px]">
       <div className="absolute h-[60px] w-[155px]">
@@ -166,11 +169,7 @@ export default function CustomButtons() {
         Click here
       </Link>
       <h2 className="font-semibold">Weak Glow</h2>
-      <WeakGlowButton
-        text="Weak Glow on hover"
-        link={undefined}
-        onClick={undefined}
-      />
+      <WeakGlowButton text="Weak Glow on hover" link={undefined} />
       <h2 className="font-semibold">Glow on hover</h2>
       <GlowButton text="Glow on hover" link={undefined} />
       <h2 className="font-semibold">Rounded glow</h2>
