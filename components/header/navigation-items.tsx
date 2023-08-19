@@ -2,12 +2,10 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { NavigationMenu } from "@radix-ui/react-navigation-menu"
 import { onAuthStateChanged } from "firebase/auth"
 import { motion } from "framer-motion"
 
 import { MainNavItem } from "types"
-import { siteConfig } from "@/config/site"
 import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
 import { toast } from "@/components/ui/use-toast"
@@ -16,7 +14,7 @@ import { MobileNav } from "@/components/mobile-nav"
 
 import LogoIconOnly from "../LogoIconOnly"
 import Megamenu from "../Megamenu"
-import { GlowButton, WeakGlowButton } from "../buttons/CustomButtons"
+import { WeakGlowButton } from "../buttons/CustomButtons"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -104,9 +102,6 @@ export function MainNav({ items, children }: MainNavProps) {
       >
         <Link href="/" className="hidden items-center space-x-2 md:flex">
           <LogoIconOnly />
-          <span className="hidden font-bold sm:inline-block">
-            {siteConfig.name}
-          </span>
         </Link>
       </motion.div>
       {items.map((item, index) => (

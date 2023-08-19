@@ -8,14 +8,15 @@
   },
   "scripts": {
     "dev": "next dev",
+    "d": "next dev",
     "dev-old": "concurrently \"contentlayer dev\" \"next dev\"",
     "build": "contentlayer build && next build",
+    "bx": "contentlayer build && next build && rsync -a --exclude=app/thoughts/ app/ dist/",
     "nextbuild": "next build",
     "turbo": "next dev --turbo",
     "start": "next dev",
     "lint": "next lint",
-    "preview": "next build && next start",
-    "postinstall": "prisma generate"
+    "preview": "next build && next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",
@@ -69,6 +70,7 @@
     "gsap": "^3.12.2",
     "lucide-react": "^0.92.0",
     "next": "13.3.2-canary.13",
+    "next-auth": "^4.23.1",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "prop-types": "^15.8.1",
@@ -94,6 +96,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
     "typed.js": "^2.0.16",
+    "unist-util-visit": "^5.0.0",
     "vaul": "^0.1.2",
     "zod": "^3.22.1"
   },

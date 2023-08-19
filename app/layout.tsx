@@ -1,7 +1,6 @@
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 
-import "@/styles/globals.scss"
 import { marketingConfig } from "@/config/marketing"
 import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
@@ -9,9 +8,9 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { MainNav } from "@/components/header/navigation-items"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
+import "@/styles/globals.scss"
 import Trailer from "./../components/core/Cursor/MouseTrailer"
 
 const fontSans = FontSans({
@@ -93,7 +92,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
             <Analytics />
             <Toaster />
-            <TailwindIndicator />
           </ThemeProvider>
         </CursorProvider>
       </body>

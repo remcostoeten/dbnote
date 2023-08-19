@@ -28,6 +28,12 @@
   }
 }
 
+.card {
+  &.expense {
+    width: auto;
+  }
+}
+
 @keyframes cardHoverBg {
   50% {
     opacity: 0.25;

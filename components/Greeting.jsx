@@ -1,11 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import Link from "next/link"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 
 export default function Greeting() {

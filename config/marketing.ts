@@ -17,11 +17,16 @@ export const marketingConfig: MarketingConfig = {
     },
     {
       title: "Docs",
+       label: "WiP",
       href: "/docs/docs",
     },
     {
       title: "Todos",
       href: "/todo"
+    }, 
+    { 
+      title: "Expenses",
+      href: "/income"
     },
     {
       title: "Thoughts",

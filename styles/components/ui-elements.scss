@@ -25,6 +25,12 @@ select {
   }
 }
 
+.expenses-tracker {
+  .card {
+    width: fit-content;
+  }
+}
+
 .card {
   width: 640px;
   position: relative;
@@ -32,10 +38,6 @@ select {
   border: 1px solid rgb(255 255 255 / 5%);
   border-radius: 1.5rem;
   padding: 1rem;
-
-  &.expense {
-    width: 100%;
-  }
 
   &:after {
     content: "";

@@ -1,25 +1,24 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { cubicBezier, motion } from "framer-motion"
 import Slider from "react-slick"
 
 import BootstrapIcon from "@/components/icons/BootstrapIcon"
+import FirebaseLogo from "@/components/icons/FirebaseLogo"
 import GitICon from "@/components/icons/GitICon"
 import LinkedIn from "@/components/icons/LinkedIn"
 import Magento from "@/components/icons/Magento"
 import Mui from "@/components/icons/Mui"
+import NextIcon from "@/components/icons/NextIcon"
 import Photoshop from "@/components/icons/PhotoshopIcon"
+import ReactIcon from "@/components/icons/ReactIcon"
 import Sass from "@/components/icons/Sass"
+import ShadCn from "@/components/icons/ShadCn"
 import Sketch from "@/components/icons/Sketch"
+import TailwindIcon from "@/components/icons/TailwindIcon"
 import Vim from "@/components/icons/Vim"
 import Vue from "@/components/icons/Vue"
-
-import FirebaseLogo from "../icons/FirebaseLogo"
-import NextIcon from "../icons/NextIcon"
-import ReactIcon from "../icons/ReactIcon"
-import ShadCn from "../icons/ShadCn"
-import TailwindIcon from "../icons/TailwindIcon"
 
 const banners = [
   { icon: <BootstrapIcon /> },
@@ -76,7 +75,7 @@ const IconCarousel = () => {
         <motion.div
           initial={{
             opacity: 0,
-            y: -5,
+            y: 5,
             scale: 0.2,
             transformOrigin: "left",
             translateX: -50,

@@ -1,11 +1,8 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-import { Checkbox } from "@radix-ui/react-checkbox"
-import { Switch } from "@radix-ui/react-switch"
 
 import { toast } from "@/components/ui/use-toast"
-import PageSetting from "@/components/ui-dashboard/PageSetting"
 import styles from "@/styles/modules/cursor.module.scss"
 
 const Trailer: React.FC = () => {
@@ -13,12 +10,16 @@ const Trailer: React.FC = () => {
   const trailerIcon = useRef<HTMLSpanElement>(null)
   const [showSVG, setShowSVG] = useState(false)
   const [showCircle, setShowCircle] = useState(true)
-  const [useClientCursor, setUseClientCursor] = useState(() => {
-    const storedValue = localStorage.getItem("useClientCursor")
-    return storedValue ? JSON.parse(storedValue) : true
-  })
+  const [useClientCursor, setUseClientCursor] = useState(true)
 
   useEffect(() => {
+    const storedValue = localStorage.getItem("useClientCursor")
+    console.log("Read from localStorage:", storedValue)
+    setUseClientCursor(storedValue ? JSON.parse(storedValue) : true)
+  }, [])
+
+  useEffect(() => {
+    console.log("Writing to localStorage:", useClientCursor)
     localStorage.setItem("useClientCursor", JSON.stringify(useClientCursor))
     toast({
       title: `Cursor ${useClientCursor ? "enabled" : "disabled"}`,
@@ -96,7 +97,10 @@ const Trailer: React.FC = () => {
         <label className="switch flex items-center relative w-max cursor-pointer select-none">
           <input
             type="checkbox"
-            onChange={() => setUseClientCursor(!useClientCursor)}
+            onChange={() => {
+              console.log("Toggling cursor state:", !useClientCursor)
+              setUseClientCursor(!useClientCursor)
+            }}
             checked={useClientCursor}
             className="appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-blue-500 bg-pink"
           />
