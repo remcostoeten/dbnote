@@ -13,10 +13,12 @@ const Trailer: React.FC = () => {
   const trailerIcon = useRef<HTMLSpanElement>(null)
   const [showSVG, setShowSVG] = useState(false)
   const [showCircle, setShowCircle] = useState(true)
-  const [useClientCursor, setUseClientCursor] = useState(() => {
+  const [useClientCursor, setUseClientCursor] = useState(true)
+
+  useEffect(() => {
     const storedValue = localStorage.getItem("useClientCursor")
-    return storedValue ? JSON.parse(storedValue) : true
-  })
+    setUseClientCursor(storedValue ? JSON.parse(storedValue) : true)
+  }, [])
 
   useEffect(() => {
     localStorage.setItem("useClientCursor", JSON.stringify(useClientCursor))
