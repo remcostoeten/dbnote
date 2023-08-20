@@ -2,11 +2,14 @@
 
 import React, { useState } from "react"
 
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import { BorderButton } from "@/components/buttons/CustomButtons"
+
+import GooglePlacesAutocomplete from "./components/GooglePlacesAutocomplete"
 
 const AddressConverter: React.FC = () => {
   const [latitude, setLatitude] = useState<string>("")
@@ -14,7 +17,7 @@ const AddressConverter: React.FC = () => {
   const [address, setAddress] = useState<string>("")
 
   const convertToLatLong = () => {
-    const apiKey = process.env.NEXT_PUBLIC_GEO_API
+    const apiKey = "AIzaSyDj4mkVMrmeVHKohAW9ulDpc9dUvABwGgM"
     const endpoint = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       address
     )}&key=${apiKey}`
@@ -45,34 +48,38 @@ const AddressConverter: React.FC = () => {
 
   return (
     <>
-      <Card>
-        <Label htmlFor="adres">Adres:</Label>
-        <Input
-          type="text"
-          id="adres"
-          placeholder="Vul het adres in"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <BorderButton onClick={convertToLatLong} text={""}>
-          Converteren
-        </BorderButton>
-      </Card>
-      <Card>
-        <Label>Latitude:</Label>
-        <Input type="text" id="latitude" readOnly value={latitude} />
-        <BorderButton onClick={() => copyToClipboard("latitude")} text={""}>
-          Kopiëren
-        </BorderButton>
-      </Card>
+      <div className="flex gap-4 ">
+        <Card className="p-4 flex flex-col gap-4">
+          <Label htmlFor="adres">Adres:</Label>
+          <Input
+            type="text"
+            id="adres"
+            placeholder="Vul het adres in"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <Button onClick={convertToLatLong} text={""}>
+            Converteren
+          </Button>
+        </Card>
 
-      <Card>
-        <Label>Longitude:</Label>
-        <Input type="text" id="longitude" readOnly value={longitude} />
-        <BorderButton onClick={() => copyToClipboard("longitude")} text={""}>
-          Kopiëren
-        </BorderButton>
-      </Card>
+        <Card className="p-4 flex flex-col gap-4">
+          <Label>Latitude:</Label>
+          <Input type="text" id="latitude" readOnly value={latitude} />
+          <Button onClick={() => copyToClipboard("latitude")} text={""}>
+            Kopiëren
+          </Button>
+        </Card>
+
+        <Card className="p-4 flex flex-col gap-4">
+          <Label>Longitude:</Label>
+          <Input type="text" id="longitude" readOnly value={longitude} />
+          <Button onClick={() => copyToClipboard("longitude")} text={""}>
+            Kopiëren
+          </Button>
+        </Card>
+      </div>
+      <GooglePlacesAutocomplete />
     </>
   )
 }
