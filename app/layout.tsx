@@ -11,6 +11,7 @@ import { MainNav } from "@/components/header/navigation-items"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.scss"
+import { type } from "../types/index.d"
 import Trailer from "./../components/core/Cursor/MouseTrailer"
 
 const fontSans = FontSans({
@@ -81,13 +82,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Trailer />
-            <div className="page-wrapper">
-              <header className="header ">
-                <div className="container z-40 flex h-20 items-center justify-between py-6">
+            <div className="page-wrapper cursor-hover" data-type="showsvg">
+              <header className="header cursor-hover" data-type="showsvg">
+                <div
+                  className="container z-40 flex h-20 items-center justify-between py-6 cursor-hover"
+                  data-type="showsvg"
+                >
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>
-              <div className="page-wrapper__inner">{children}</div>
+              <div className="page-wrapper__inner ">{children}</div>
             </div>
             <Analytics />
             <Toaster />

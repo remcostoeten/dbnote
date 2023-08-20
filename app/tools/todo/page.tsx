@@ -1,11 +1,13 @@
+import { promises as fs } from "fs"
+import path from "path"
 import { Metadata } from "next"
 import Image from "next/image"
 import { collection, getDocs } from "firebase/firestore"
 import { z } from "zod"
 
 import { db } from "@/lib/firebase"
-import { DataTable } from "@/components/ui/data-table"
-import { columns } from "@/components/columns"
+import { columns } from "@/components/data-tables/columns"
+import { DataTable } from "@/components/data-tables/data-table"
 import { taskSchema } from "@/components/data-tables/data/schema"
 import { UserNav } from "@/components/data-tables/user-nav"
 
@@ -59,7 +61,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks as unknown[]} columns={[]} />
+        <DataTable data={tasks} columns={columns} />
       </div>
     </>
   )
