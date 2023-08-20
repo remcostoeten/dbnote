@@ -1,7 +1,8 @@
 import { Metadata } from "next"
-import { LayoutIntroHeaderDescription } from "@/dist/ui-elements/LayoutIntroHeaderDescription"
 
 import { PageHeader } from "@/components/ui-dashboard/page-nav"
+
+import { LayoutIntroHeaderDescription } from "../ui-elements/LayoutIntroHeaderDescription"
 
 export const metadata: Metadata = {
   title: "Remcostoeten feature showcase",
