@@ -1,14 +1,13 @@
 export interface Task {
-    id: string;
-    title: string;
-    label: string;
-    priority: string;
-    task: string;
-    description: string;
-    createdAt: string;  
-       status: string;
+  id: string;
+  title: string;
+  label: string;
+  priority: string;
+  task: string;
+  description: string;
+  createdAt: string;  
+     status: string;
 }
-
 
 export interface Income {
 

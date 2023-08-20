@@ -37,6 +37,7 @@ export function MainNav({ items, children }: MainNavProps) {
   const signOut = async () => {
     await auth.signOut()
     setIsLoggedIn(false)
+    setIsLoggedIn(false)
     setUserEmail("")
     toast({
       title: "Goodbye " + userEmail,
@@ -94,104 +95,120 @@ export function MainNav({ items, children }: MainNavProps) {
   }
 
   return (
-    <div className="flex w-full gap-6 md:gap-10  items-center" data-type="hand">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
+    <div className="cursor-hover" data-type="showsvg">
+      <div
+        className="flex w-full gap-6 md:gap-10  items-center"
+        data-type="showsvg"
       >
-        <Link href="/" className="hidden items-center space-x-2 md:flex">
-          <LogoIconOnly />
-        </Link>
-      </motion.div>
-      {items.map((item, index) => (
         <motion.div
-          key={index}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          data-type="showsvg"
+          className="cursor-hover"
         >
-          {item.target === "_blank" ? (
-            <a
-              href={item.href}
-              className={cn(
-                "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                "text-white ",
-                item.done === false && "cursor-not-allowed opacity-80"
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.title}
-            </a>
-          ) : (
-            <Link
-              href={item.done ? item.href : item.href}
-              className={cn(
-                "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                "text-white ",
-                item.done === false && "cursor-not-allowed opacity-80"
-              )}
-            >
-              {item.title}
-            </Link>
-          )}
+          <Link
+            data-type="showsvg"
+            href="/"
+            className="cursor-hover hidden items-center space-x-2 md:flex"
+          >
+            <LogoIconOnly />
+          </Link>
         </motion.div>
-      ))}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}
-      >
-        <Megamenu />
-      </motion.div>
-
-      <span className="flex-end flex w-max flex-1 items-center justify-end">
-        {userProfilePicture && (
-          <motion.img
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * (items.length + 2), duration: 0.5 }}
-            src={userProfilePicture}
-            alt="Profile Picture"
-            className="h-10 w-10 rounded-full object-cover"
-          />
-        )}
-
-        {isLoggedIn ? (
-          <motion.span
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
-            onClick={signOut}
-            data-type="cursor"
-            className="cursor-hover"
-          >
-            <WeakGlowButton text="Sign Out" link="#" />
-          </motion.span>
-        ) : (
+        {items.map((item, index) => (
           <motion.div
+            key={index}
+            data-type="showsvg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
+            transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
           >
-            <WeakGlowButton text="Login" link="/login" />
+            {item.target === "_blank" ? (
+              <a
+                data-type="showsvg"
+                href={item.href}
+                className={cn(
+                  "flex cursor-hover w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                  "text-white ",
+                  item.done === false && "cursor-not-allowed opacity-80"
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.title}
+              </a>
+            ) : (
+              <Link
+                data-type="showsvg"
+                href={item.done ? item.href : item.href}
+                className={cn(
+                  "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                  "text-white ",
+                  item.done === false && "cursor-not-allowed opacity-80"
+                )}
+              >
+                {item.title}
+              </Link>
+            )}
           </motion.div>
+        ))}
+        <motion.div
+          data-type="showsvg"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}
+        >
+          <Megamenu />
+        </motion.div>
+
+        <span className="flex-end flex w-max flex-1 items-center justify-end">
+          {userProfilePicture && (
+            <motion.img
+              data-type="showsvg"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * (items.length + 2), duration: 0.5 }}
+              src={userProfilePicture}
+              alt="Profile Picture"
+              className="h-10 w-10 rounded-full object-cover"
+            />
+          )}
+
+          {isLoggedIn ? (
+            <motion.span
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
+              onClick={signOut}
+              data-type="cursor"
+              className="cursor-hover"
+            >
+              <WeakGlowButton text="Sign Out" link="#" />
+            </motion.span>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * (items.length + 3), duration: 0.5 }}
+            >
+              <WeakGlowButton text="Login" link="/login" />
+            </motion.div>
+          )}
+        </span>
+        <motion.button
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 * (items.length + 4), duration: 0.5 }}
+          className="flex items-center space-x-2 md:hidden"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
+          <span className="font-bold">Menu</span>
+        </motion.button>
+        {showMobileMenu && items && (
+          <MobileNav items={items}>{children}</MobileNav>
         )}
-      </span>
-      <motion.button
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 * (items.length + 4), duration: 0.5 }}
-        className="flex items-center space-x-2 md:hidden"
-        onClick={() => setShowMobileMenu(!showMobileMenu)}
-      >
-        {showMobileMenu ? <Icons.close /> : <LogoIconOnly />}
-        <span className="font-bold">Menu</span>
-      </motion.button>
-      {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
-      )}
+      </div>
     </div>
   )
 }

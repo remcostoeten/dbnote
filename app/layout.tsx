@@ -47,10 +47,7 @@ export const metadata = {
     },
   ],
   creator: "remcostoeten",
-  themeColor: [
-    // { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "black" }],
   openGraph: {
     type: "website",
     locale: "nl_NL",
@@ -81,14 +78,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Trailer />
-            <div className="page-wrapper">
-              <header className="header ">
-                <div className="container z-40 flex h-20 items-center justify-between py-6">
-                  {/* <Megamenu /> */}
+            <div className="page-wrapper cursor-hover" data-type="showsvg">
+              <header className="header cursor-hover" data-type="showsvg">
+                <div
+                  className="container z-40 flex h-20 items-center justify-between py-6 cursor-hover"
+                  data-type="showsvg"
+                >
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>
-              <div className="page-wrapper__inner">{children}</div>
+              <div className="page-wrapper__inner ">{children}</div>
             </div>
             <Analytics />
             <Toaster />

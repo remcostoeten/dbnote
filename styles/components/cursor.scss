@@ -50,6 +50,26 @@ body:hover > #trailer {
   opacity: 0;
   transition: opacity 400ms ease;
 }
+.wrapper {
+  cursor: none;
+}
+.no-cursor {
+  * {
+    cursor: none !important;
+  }
+  cursor: none !important;
+  .customSvg {
+    transition: 500ms ease opacity;
+    opacity: 1;
+    transition-delay: 500ms;
+  }
+}
+
+.customSvg {
+  opacity: 0;
+
+  transition: 500ms ease opacity;
+}
 
 // .cursor {
 //   height: 20px;

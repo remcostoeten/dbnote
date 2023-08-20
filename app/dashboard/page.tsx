@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-// corrected import name
+import { cn } from "@/lib"
 import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
@@ -11,16 +9,13 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  orderBy,
-  query,
   serverTimestamp,
   updateDoc,
-  where,
 } from "firebase/firestore"
 
 import { auth, db } from "@/lib/firebase"
+import { categories } from "@/lib/selectArrays"
 import { Note } from "@/lib/types"
-import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -39,6 +34,9 @@ export default function Dashboard() {
   const [category, setCategory] = useState<string>("")
   const [content, setContent] = useState<string>("")
   const [notes, setNotes] = useState<Note[]>([])
+  const [label, setLabel] = useState<string[]>([])
+  const [status, setStatus] = useState<string[]>([])
+  const [priority, setPriority] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({})
   const user = auth?.currentUser
@@ -56,13 +54,6 @@ export default function Dashboard() {
   useEffect(() => {
     fetchNotes()
   }, [])
-  // Firebase Security Rules
-
-  const categories = [
-    { id: "1", name: "Pleio" },
-    { id: "2", name: "Softhouse" },
-    { id: "3", name: "Prive" },
-  ]
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -117,10 +108,10 @@ export default function Dashboard() {
         category,
         createdAt: serverTimestamp(),
         id: "",
-        status: "",
-        label: "",
+        status: status.join(", "),
+        label: label.join(", "),
+        priority: priority.join(", "),
         subject: "",
-        priority: "",
         task: "",
       }
 
@@ -131,6 +122,9 @@ export default function Dashboard() {
       setCategory("")
       setTitle("")
       setContent("")
+      setStatus([])
+      setPriority([])
+      setLabel([])
       toast({
         title: "Note created successfully.",
         description: `In the category ${category} with title ${title}`,
@@ -144,7 +138,6 @@ export default function Dashboard() {
       console.error(error)
     }
   }
-
   const handleRemove = async (userId: string) => {
     try {
       await deleteDoc(doc(db, "notes", userId))
@@ -159,7 +152,6 @@ export default function Dashboard() {
       console.error(error)
     }
   }
-
   const form = (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <Input
@@ -168,9 +160,29 @@ export default function Dashboard() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      <Input
+        type="text"
+        placeholder="Status"
+        value={status.join(", ")}
+        onChange={(e) => setStatus([e.target.value])}
+      />
+
+      <Input
+        type="text"
+        placeholder="Priority"
+        value={priority.join(", ")}
+        onChange={(e) => setPriority([e.target.value])}
+      />
+
+      <Input
+        type="text"
+        placeholder="Label"
+        value={label.join(", ")}
+        onChange={(e) => setLabel([e.target.value])}
+      />
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
-          <SelectValue placeholder="Select a verified email to display" />
+          <SelectValue placeholder="Select a category" />{" "}
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -180,7 +192,6 @@ export default function Dashboard() {
           ))}
         </SelectContent>
       </Select>
-
       <Textarea
         placeholder="Note content"
         value={content}
@@ -206,9 +217,23 @@ export default function Dashboard() {
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <Input
               type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Status"
+              value={status.join(", ")}
+              onChange={(e) => setStatus([e.target.value])}
+            />
+
+            <Input
+              type="text"
+              placeholder="Priority"
+              value={priority.join(", ")}
+              onChange={(e) => setPriority([e.target.value])}
+            />
+
+            <Input
+              type="text"
+              placeholder="Label"
+              value={label.join(", ")}
+              onChange={(e) => setLabel([e.target.value])}
             />
             <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>

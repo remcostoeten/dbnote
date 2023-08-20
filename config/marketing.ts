@@ -11,14 +11,13 @@ export const marketingConfig: MarketingConfig = {
       href: "/html-to-jsx/playground",
     },
     {
+      title: "Geolocation",
+      href: "/geolocation",
+    },
+    {
       title: "Url extractor",
       href: "https://vsc.remcostoeten.com/url",
       target: "_blank",
-    },
-    {
-      title: "Docs",
-       label: "WiP",
-      href: "/docs/docs",
     },
     {
       title: "Todos",
@@ -31,6 +30,11 @@ export const marketingConfig: MarketingConfig = {
     {
       title: "Thoughts",
       href: "/thoughts",
+    },
+    {    
+      title: "Docs",
+       label: "WiP",
+      href: "/docs/docs",
     }
   ],
 }

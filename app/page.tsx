@@ -1,7 +1,7 @@
 import { HomeBanners } from "@/components/HomeBanners"
 import { HomeFeatures } from "@/components/HomeFeatures"
-import { HomeIntroduction } from "@/components/HomeIntroduction"
 import { IconCarousel } from "@/components/core/Carousel/IconCarousel"
+import HomeIntroduction from "@/components/core/home/HomeIntroduction"
 
 export default async function IndexPage() {
   return (

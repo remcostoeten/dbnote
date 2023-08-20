@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useEffect } from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,7 +16,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { collection, onSnapshot } from "firebase/firestore"
 
+import { db } from "@/lib/firebase"
+import { Task } from "@/lib/types"
 import {
   Table,
   TableBody,
@@ -28,14 +32,9 @@ import {
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
 
-import { collection, onSnapshot } from "firebase/firestore"
-import { db } from "@/lib/firebase"
-
-import { Task } from "@/lib/types"
-import { useEffect } from "react"
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 export function DataTable<TData, TValue>({

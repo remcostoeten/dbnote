@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { Link } from "lucide-react"
 
 import MsgBar from "@/components/MsgBar"
@@ -9,12 +10,7 @@ import {
   PageHeaderDescription,
 } from "@/components/ui-dashboard/page-nav"
 
-import { LayoutIntroHeaderDescription } from "../ui-elements/LayoutIntroHeaderDescription"
-import UiLinks from "../ui-elements/ui-links"
-import TypingEffect from "./playground/components/alternating-text"
-import TypeSwap from "./playground/components/alternating-text"
 import Typewriter from "./playground/components/alternating-text"
-import { motion } from "framer-motion"
 
 export default function ConverterLayout({ children }) {
   return (
