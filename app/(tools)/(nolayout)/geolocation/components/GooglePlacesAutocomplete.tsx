@@ -81,9 +81,9 @@ const GoogleMapAutocomplete: React.FC<IProps> = ({ apiKey }) => {
     window.initMap = initMap
   }, [])
   return (
-    <div>
-      <div className="pac-card" id="pac-card">
-        <Card>
+    <>
+      <Card className="pp-4 flex flex-col gap-4" id="pac-card">
+        <Card className="p-4 flex flex-col gap-4">
           <div id="title">Autocomplete search</div>
           <Card id="type-selector" className="pac-controls">
             <Input
@@ -126,7 +126,7 @@ const GoogleMapAutocomplete: React.FC<IProps> = ({ apiKey }) => {
             placeholder="Enter a location"
           />
         </div>
-      </div>
+      </Card>
       <Card
         ref={mapRef}
         id="map"
@@ -139,7 +139,7 @@ const GoogleMapAutocomplete: React.FC<IProps> = ({ apiKey }) => {
         <br />
         <span id="place-address">{placeAddress}</span>
       </Card>
-    </div>
+    </>
   )
 }
 

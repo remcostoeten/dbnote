@@ -1,5 +1,6 @@
-"use client"
+"use client "
 
+import { title } from "process"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Editor } from "@monaco-editor/react"
@@ -15,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Toggle } from "@/components/ui/toggle"
 
+import { StatusBadge } from "../../../../components/core/StatusBadge"
 import { AppContext } from "./AppContext"
 import PropsEditor from "./components/ props-editor"
 import { CodeViewer } from "./components/code-viewer"
@@ -176,7 +178,7 @@ export default function PlaygroundPage() {
         if (isTypescript && hasProps) {
           const interfaceProps = `
     interface ${componentName}Props {
-        ${propsString.split(",").join("?: any;\n  ")}?: any;
+        ${funcProps}"?: any;
     }`
 
           const propsType = hasProps ? `<${componentName}Props>` : ""
@@ -268,12 +270,7 @@ export default function PlaygroundPage() {
           }}
           className="overflow-hidden rounded-[0.5rem] border bg-background shadow"
         >
-          <Badge
-            variant="default"
-            className="transform-translate-x-3 absolute  right-0 -translate-x-12 translate-y-3"
-          >
-            Beta 🚀
-          </Badge>
+          <StatusBadge title="beta" emoji={emojis.rocket} />
           <div className="md:hidden">
             <Image
               src="/examples/playground-light.png"
