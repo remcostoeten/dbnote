@@ -8,12 +8,14 @@ import { priorities } from "./data"
 import { DataTableRowActions } from "./data-table-row-actions"
 import { DataTableColumnHeader } from "./ui/data-table-column-header"
 
-interface Task {
+interface Task<TData, TValue> {
   id: string
   title: string
   status: string
   label: string
   priority: string
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 export const columns: ColumnDef<Task>[] = [
