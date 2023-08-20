@@ -1,14 +1,10 @@
 "use client"
 
-import React from "react"
-import Link from "next/link"
 import { motion } from "framer-motion"
 
 import {
   GlowButton,
   ProminentGlowButton,
-  SwapButton,
-  WeakGlowButton,
 } from "@/components/buttons/CustomButtons"
 
 export const HomeIntroduction = ({ title }) => {
@@ -43,12 +39,14 @@ export const HomeIntroduction = ({ title }) => {
         <div className="absolute h-[20vh] w-[50vw]"></div>
 
         <motion.div
-          className="z-10 flex items-center space-x-6 align-middle"
+          className="z-10 flex cursor-hover items-center space-x-6 align-middle"
           initial={{ skewX: 4, opacity: 0, y: 40 }}
+          link="/dashboard"
           animate={{ skewX: 0, opacity: 1, y: 0 }}
+          data-type="showsvg"
           transition={{ delay: 0.7, duration: 0.5 }}
         >
-          <ProminentGlowButton link="/dashboard" text="Go to dashboard" />
+          <ProminentGlowButton data-type="showsvg" text="Go to dashboard" />
           <GlowButton link="https://github.com/remcostoeten" text="Github" />
         </motion.div>
       </div>

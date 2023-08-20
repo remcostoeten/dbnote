@@ -84,7 +84,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="page-wrapper">
               <header className="header ">
                 <div className="container z-40 flex h-20 items-center justify-between py-6">
-                  {/* <Megamenu /> */}
                   <MainNav items={marketingConfig.mainNav} />
                 </div>
               </header>

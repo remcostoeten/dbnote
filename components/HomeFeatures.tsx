@@ -8,7 +8,10 @@ export const HomeFeatures = () => (
     id="features"
     className="  bg-slate-50  dark:bg-transparent git"
   >
-    <div className="flex items-center flex-col bigContainer space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12  text-center">
+    <div
+      data-type="showsvg"
+      className="cursor-hover flex items-center flex-col bigContainer space-y-6 pb-2 pt-2 md:pb-12 md:pt-10 lg:py-12  text-center"
+    >
       <motion.h2
         className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl"
         initial={{ skewX: -9, opacity: 0, y: 20 }}
@@ -18,7 +21,8 @@ export const HomeFeatures = () => (
         Features
       </motion.h2>
       <motion.p
-        className="container w-7/12 leading-normal text-muted-foreground sm:text-lg sm:leading-7"
+        className="cursor-hover container w-7/12 leading-normal text-muted-foreground sm:text-lg sm:leading-7"
+        data-type="showsvg"
         initial={{ skewX: -9, opacity: 0, y: 20 }}
         animate={{ skewX: 0, opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.5 }}

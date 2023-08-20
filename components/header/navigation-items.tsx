@@ -100,7 +100,11 @@ export function MainNav({ items, children }: MainNavProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.5 }}
       >
-        <Link href="/" className="hidden items-center space-x-2 md:flex">
+        <Link
+          data-type="showsvg"
+          href="/"
+          className="cursor-hover hidden items-center space-x-2 md:flex"
+        >
           <LogoIconOnly />
         </Link>
       </motion.div>
@@ -113,9 +117,10 @@ export function MainNav({ items, children }: MainNavProps) {
         >
           {item.target === "_blank" ? (
             <a
+              data-type="showsvg"
               href={item.href}
               className={cn(
-                "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                "flex cursor-hover w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
                 "text-white ",
                 item.done === false && "cursor-not-allowed opacity-80"
               )}
