@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import { Label } from "@radix-ui/react-label"
 import {
   QueryDocumentSnapshot,
   addDoc,
@@ -58,6 +59,29 @@ const AddIncomeExpenseForm: React.FC = () => {
   ])
   const [selectedCategory, setSelectedCategory] = useState("")
 
+  const fetchData = async () => {
+    const expenseQuerySnapshot = await getDocs(collection(db, "expenses"))
+    const fetchedExpenses = expenseQuerySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      name: doc.data().name,
+      expenseAmount: doc.data().expenseAmount,
+    }))
+    setExpenses(fetchedExpenses as any)
+
+    const incomeQuerySnapshot = await getDocs(collection(db, "incomes"))
+    const fetchedIncomes = incomeQuerySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      name: doc.data().name,
+      incomeAmount: doc.data().incomeAmount,
+    }))
+    setIncomes(fetchedIncomes as any)
+
+    await calculateTotalIncome()
+    await calculateTotalExpense()
+
+    setIsLoading(false)
+  }
+
   const expenseQuerySnapshot = getDocs(collection(db, "expenses"))
   useEffect(() => {
     const fetchData = async () => {
@@ -98,6 +122,7 @@ const AddIncomeExpenseForm: React.FC = () => {
       toast({
         title: incomeAmount + " for " + incomeName + " added!",
       })
+      fetchData()
     } catch (error) {
       console.error("Error adding income:", error)
     }
@@ -108,15 +133,18 @@ const AddIncomeExpenseForm: React.FC = () => {
       const docRef = await addDoc(collection(db, "expenses"), {
         expenseAmount,
         name: expenseName,
+        category: selectedCategory,
         userId: user ? user.uid : null,
       })
       console.log("Expense added with ID:", docRef.id)
       setExpenseAmount(0)
       setExpenseName("")
+      setSelectedCategory("")
       calculateTotalExpense()
       toast({
         title: expenseAmount + " for " + expenseName + " added!",
       })
+      fetchData()
     } catch (error) {
       console.error("Error adding expense:", error)
     }
@@ -134,6 +162,7 @@ const AddIncomeExpenseForm: React.FC = () => {
       toast({
         title: savingsAmount + " saving added!",
       })
+      fetchData()
     } catch (error) {
       console.error("Error adding Savings:", error)
     }
@@ -312,32 +341,19 @@ const AddIncomeExpenseForm: React.FC = () => {
                 {expenses.map((expense) => (
                   <dl className="flex justify-between w-full" key={expense.id}>
                     <dd>Name: {expense.name}</dd>
+                    <Label>{expense.category}</Label>
                     <dt>Amount: €{expense.amount},-</dt>
                   </dl>
                 ))}
               </Card>
               <Card className="card flex-col flex flex-1 expense p-8 ">
-                <Table>
-                  <TableCaption>A list of your income.</TableCaption>
-                  <TableHeader>
-                    {incomes.map((income) => (
-                      <TableRow>
-                        <TableHead className="w-[100px]" key={income.id}>
-                          {income.name}{" "}
-                        </TableHead>
-                      </TableRow>
-                    ))}
-                  </TableHeader>
-                  <TableBody>
-                    {incomes.map((income) => (
-                      <TableRow>
-                        <TableCell className="text-right">
-                          €{income.amount}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>{" "}
+                <dl className="text-2xl font-bold mb-4">Income List:</dl>
+                {incomes.map((income) => (
+                  <dl className="flex justify-between w-full" key={income.id}>
+                    <dd>Name: {income.name}</dd>
+                    <dt>Amount: €{income.amount},-</dt>
+                  </dl>
+                ))}
               </Card>
             </div>
           </div>

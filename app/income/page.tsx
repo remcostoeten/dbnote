@@ -5,6 +5,8 @@ import { collection, onSnapshot } from "firebase/firestore"
 
 import { db } from "@/lib/firebase"
 
+import AddIncomeExpenseForm from "./components/IncomeExpenseForm"
+
 interface Income {
   id: string
   amount: number
