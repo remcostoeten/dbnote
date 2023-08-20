@@ -9,11 +9,20 @@ import {
   getDocs,
 } from "firebase/firestore"
 import { motion } from "framer-motion"
+import { Table } from "lucide-react"
 
 import { auth, db } from "@/lib/firebase"
 import { Income } from "@/lib/types"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import {
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { toast } from "@/components/ui/use-toast"
 import {
   BorderButton,
@@ -308,13 +317,27 @@ const AddIncomeExpenseForm: React.FC = () => {
                 ))}
               </Card>
               <Card className="card flex-col flex flex-1 expense p-8 ">
-                <h2 className="text-2xl font-bold mb-4">Income List:</h2>
-                {incomes.map((income) => (
-                  <dl className="flex justify-between w-full" key={income.id}>
-                    <p>Name: {income.name}</p>
-                    <p>Amount: €{income.amount},-</p>
-                  </dl>
-                ))}
+                <Table>
+                  <TableCaption>A list of your income.</TableCaption>
+                  <TableHeader>
+                    {incomes.map((income) => (
+                      <TableRow>
+                        <TableHead className="w-[100px]" key={income.id}>
+                          {income.name}{" "}
+                        </TableHead>
+                      </TableRow>
+                    ))}
+                  </TableHeader>
+                  <TableBody>
+                    {incomes.map((income) => (
+                      <TableRow>
+                        <TableCell className="text-right">
+                          €{income.amount}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>{" "}
               </Card>
             </div>
           </div>
