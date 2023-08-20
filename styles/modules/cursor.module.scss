@@ -12,6 +12,8 @@
 }
 
 .cursor-hover {
+  cursor: none;
+  transition-delay: 200ms;
   &:hover {
     cursor: none;
   }
