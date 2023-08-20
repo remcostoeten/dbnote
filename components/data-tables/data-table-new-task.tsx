@@ -29,7 +29,7 @@ import { toast } from "../ui/use-toast"
 
 interface DataTableNewTask<TData, TValue> {
   column?: Column<TData, TValue>
-  titlee?: string
+  title?: string
   options: {
     label: string
     value: string
@@ -39,7 +39,6 @@ interface DataTableNewTask<TData, TValue> {
 
 export function DataTableNewTask<TData, TValue>({
   column,
-  titlee,
   options,
 }: DataTableNewTask<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues()

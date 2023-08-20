@@ -20,12 +20,9 @@ import { auth, db } from "@/lib/firebase"
 import { Thought } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
+import { ProminentGlowButton } from "@/components/buttons/CustomButtons"
 import NotesIcon from "@/components/icons/NotesIcon"
 
-import {
-  GlowButton,
-  ProminentGlowButton,
-} from "./../../../components/buttons/CustomButtons"
 import { useThoughtContext } from "./ThoughtContext"
 
 interface NewThoughtProps {
