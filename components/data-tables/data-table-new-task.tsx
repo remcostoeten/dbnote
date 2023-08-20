@@ -1,31 +1,32 @@
 import * as React from "react"
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 import { Column } from "@tanstack/react-table"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { motion } from "framer-motion"
 
+import { auth, db } from "@/lib/firebase"
+import { Task } from "@/lib/types"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import lowPriority from "@/components/icons/lowPriority.svg"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { Task } from "@/lib/types"
-import { auth, db } from "@/lib/firebase"
-import { toast } from "../ui/use-toast"
+import lowPriority from "@/components/icons/lowPriority.svg"
 
 import { Input } from "../ui/input"
-import { Textarea } from "../ui/textarea"
-import { motion } from "framer-motion"
 import {
   Select,
   SelectContent,
-  SelectTrigger,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "../ui/select"
+import { Textarea } from "../ui/textarea"
+import { toast } from "../ui/use-toast"
+
 interface DataTableNewTask<TData, TValue> {
   column?: Column<TData, TValue>
   titlee?: string
@@ -53,12 +54,6 @@ export function DataTableNewTask<TData, TValue>({
   const [posts, setPosts] = React.useState<Task[]>([])
   const user = auth?.currentUser
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
-
-  const priorities = [
-    { id: "1", name: "low", icon: ">" },
-    { id: "2", name: "medium", icon: "<" },
-    { id: "3", name: "high ", icon: "v" },
-  ]
 
   const addTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

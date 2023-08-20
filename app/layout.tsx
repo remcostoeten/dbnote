@@ -11,7 +11,6 @@ import { MainNav } from "@/components/header/navigation-items"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "@/styles/globals.scss"
-import { type } from "../types/index.d"
 import Trailer from "./../components/core/Cursor/MouseTrailer"
 
 const fontSans = FontSans({
@@ -48,10 +47,7 @@ export const metadata = {
     },
   ],
   creator: "remcostoeten",
-  themeColor: [
-    // { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "black" }],
   openGraph: {
     type: "website",
     locale: "nl_NL",

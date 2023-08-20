@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-// corrected import name
+import { cn } from "@/lib"
 import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
@@ -11,16 +9,13 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  orderBy,
-  query,
   serverTimestamp,
   updateDoc,
-  where,
 } from "firebase/firestore"
 
 import { auth, db } from "@/lib/firebase"
+import { categories } from "@/lib/selectArrays"
 import { Note } from "@/lib/types"
-import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -39,9 +34,9 @@ export default function Dashboard() {
   const [category, setCategory] = useState<string>("")
   const [content, setContent] = useState<string>("")
   const [notes, setNotes] = useState<Note[]>([])
-  const [status, setStatus] = useState<Note[]>([])
-  const [label, setLabel] = useState<Note[]>([])
-  const [priority, setPriority] = useState<Note[]>([])
+  const [label, setLabel] = useState<string[]>([])
+  const [status, setStatus] = useState<string[]>([])
+  const [priority, setPriority] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [editModeMap, setEditModeMap] = useState<{ [key: string]: boolean }>({})
   const user = auth?.currentUser
@@ -59,12 +54,6 @@ export default function Dashboard() {
   useEffect(() => {
     fetchNotes()
   }, [])
-
-  const categories = [
-    { id: "1", name: "Pleio" },
-    { id: "2", name: "Softhouse" },
-    { id: "3", name: "Prive" },
-  ]
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -119,10 +108,10 @@ export default function Dashboard() {
         category,
         createdAt: serverTimestamp(),
         id: "",
-        status: "",
-        label: "",
+        status: status.join(", "),
+        label: label.join(", "),
+        priority: priority.join(", "),
         subject: "",
-        priority: "",
         task: "",
       }
 
@@ -135,6 +124,7 @@ export default function Dashboard() {
       setContent("")
       setStatus([])
       setPriority([])
+      setLabel([])
       toast({
         title: "Note created successfully.",
         description: `In the category ${category} with title ${title}`,
@@ -148,7 +138,6 @@ export default function Dashboard() {
       console.error(error)
     }
   }
-
   const handleRemove = async (userId: string) => {
     try {
       await deleteDoc(doc(db, "notes", userId))
@@ -163,7 +152,6 @@ export default function Dashboard() {
       console.error(error)
     }
   }
-
   const form = (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
       <Input
@@ -175,25 +163,26 @@ export default function Dashboard() {
       <Input
         type="text"
         placeholder="Status"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
+        value={status.join(", ")}
+        onChange={(e) => setStatus([e.target.value])}
       />
+
       <Input
         type="text"
         placeholder="Priority"
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)} // Fixed missing closing parenthesis
+        value={priority.join(", ")}
+        onChange={(e) => setPriority([e.target.value])}
       />
+
       <Input
         type="text"
         placeholder="Label"
         value={label.join(", ")}
-        onChange={(e) => setLabel(e.target.value.split(", "))} // Adjusted the setLabel call
+        onChange={(e) => setLabel([e.target.value])}
       />
       <Select onValueChange={setCategory} value={category}>
         <SelectTrigger>
           <SelectValue placeholder="Select a category" />{" "}
-          {/* Updated placeholder */}
         </SelectTrigger>
         <SelectContent>
           {categories.map((category) => (
@@ -211,7 +200,7 @@ export default function Dashboard() {
       <Button
         onClick={(e) => {
           e.preventDefault()
-          handleSubmit(e)
+          handleSubmit(e as any)
         }}
         className="inline-flex w-fit"
       >
@@ -229,22 +218,22 @@ export default function Dashboard() {
             <Input
               type="text"
               placeholder="Status"
-              value={status.map((note) => note.title).join(", ")}
-              onChange={(e) => setStatus([{ title: e.target.value }])}
+              value={status.join(", ")}
+              onChange={(e) => setStatus([e.target.value])}
             />
 
             <Input
               type="text"
               placeholder="Priority"
-              value={priority.map((note) => note.title).join(", ")}
-              onChange={(e) => setPriority([{ title: e.target.value }])}
+              value={priority.join(", ")}
+              onChange={(e) => setPriority([e.target.value])}
             />
 
             <Input
               type="text"
               placeholder="Label"
-              value={label.map((note) => note.title).join(", ")}
-              onChange={(e) => setLabel([{ title: e.target.value }])}
+              value={label.join(", ")}
+              onChange={(e) => setLabel([e.target.value])}
             />
             <Select onValueChange={setCategory} value={category}>
               <SelectTrigger>
