@@ -1,5 +1,3 @@
-import { promises as fs } from "fs"
-import path from "path"
 import { Metadata } from "next"
 import Image from "next/image"
 import { collection, getDocs } from "firebase/firestore"
@@ -61,7 +59,7 @@ export default async function TaskPage() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks} columns={columns} />
+        <DataTable columns={[]} />
       </div>
     </>
   )

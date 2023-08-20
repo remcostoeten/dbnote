@@ -95,10 +95,7 @@ export function MainNav({ items, children }: MainNavProps) {
   }
 
   return (
-    <div
-      className="wrapper w-full h-[100px] bg-red opacity-50 cursor-hover"
-      data-type="showsvg"
-    >
+    <div className="cursor-hover" data-type="showsvg">
       <div
         className="flex w-full gap-6 md:gap-10  items-center"
         data-type="showsvg"
@@ -114,7 +111,6 @@ export function MainNav({ items, children }: MainNavProps) {
             data-type="showsvg"
             href="/"
             className="cursor-hover hidden items-center space-x-2 md:flex"
-            data-type="showsvg"
           >
             <LogoIconOnly />
           </Link>

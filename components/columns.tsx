@@ -2,13 +2,19 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
-import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 
-import { Task, taskSchema } from "./data-schema"
-import { DataTableColumnHeader } from "./ui/data-table-column-header"
+import { priorities } from "./data"
 import { DataTableRowActions } from "./data-table-row-actions"
-import { labels, priorities, statuses } from "./data"
+import { DataTableColumnHeader } from "./ui/data-table-column-header"
+
+interface Task {
+  id: string
+  title: string
+  status: string
+  label: string
+  priority: string
+}
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -34,12 +40,13 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "id",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="d" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="ID" />
+    ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
-
   {
     accessorKey: "priority",
     header: ({ column }) => (
