@@ -1,13 +1,5 @@
-interface cartProps {
-  bb: stringh
-}
+import React from "react"
 
-const cart: React.FC<cartProps> = (bb: stringh) => {
-  return (
-    <>
-      <h1>test</h1>t
-    </>
-  )
+export default function page() {
+  return <div>page</div>
 }
-
-export default cart
