@@ -10,7 +10,7 @@ import {
   PageHeaderDescription,
 } from "@/components/ui-dashboard/page-nav"
 
-import Typewriter from "./playground/components/alternating-text"
+import Typewriter from "./components/alternating-text"
 
 export default function ConverterLayout({ children }) {
   return (

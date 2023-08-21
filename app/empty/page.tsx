@@ -1,11 +1,13 @@
-"use client"
+interface cartProps {
+  bb: stringh
+}
 
-export default function discord() {
+const cart: React.FC<cartProps> = (bb: stringh) => {
   return (
     <>
-      <div className="discord">
-        <h2 className="someclass">sometext</h2>
-      </div>
+      <h1>test</h1>t
     </>
   )
 }
+
+export default cart

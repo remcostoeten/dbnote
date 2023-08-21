@@ -1,33 +1,13 @@
-// @ts-nocheck ! Dont forget to remove this, if you can solve ?!
 "use client"
 
-import React, { useContext, useState } from "react"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@radix-ui/react-collapsible"
-import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
-import { PopoverProps } from "@radix-ui/react-popover"
-import { is } from "date-fns/locale"
+import { useContext, useState } from "react"
+import { Collapsible, CollapsibleContent } from "@radix-ui/react-collapsible"
 import { AnimatePresence, motion } from "framer-motion"
 
-import { cn } from "@/lib/utils"
-import { useMutationObserver } from "@/hooks/use-mutation-observer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import TypescriptIcon from "@/components/icons/TypescriptIcon"
 
-import { Model, ModelType } from "../data/models"
-import { AppContext } from "./../AppContext"
+import { AppContext } from "../AppContext"
 
 function ModelSelector({ models, types, ...props }) {
   const [open, setOpen] = useState(false)
@@ -42,7 +22,6 @@ function ModelSelector({ models, types, ...props }) {
     setWrapInFunctionComponent,
   } = useContext(AppContext as any)
 
-  // State to control the collapsible trigger
   const [collapsibleOpen, setCollapsibleOpen] = useState(false)
 
   return (
@@ -94,7 +73,6 @@ function ModelSelector({ models, types, ...props }) {
           </div>
         </motion.div>
       </div>
-      {/* // @ts-ignore */}
       <Collapsible open={collapsibleOpen} onOpenChange={setCollapsibleOpen}>
         <AnimatePresence>
           {collapsibleOpen && (

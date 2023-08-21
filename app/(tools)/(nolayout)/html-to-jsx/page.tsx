@@ -1,22 +1,17 @@
 "use client"
 
-import { title } from "process"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { Editor } from "@monaco-editor/react"
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
-import { Toggle } from "@/components/ui/toggle"
 
-import { emojis } from "../../../../components/core/StatusBadge"
 import { AppContext } from "./AppContext"
 import PropsEditor from "./components/ props-editor"
 import { CodeViewer } from "./components/code-viewer"
@@ -29,11 +24,6 @@ import { PresetShare } from "./components/preset-share"
 import { models, types } from "./data/models"
 import { presets } from "./data/presets"
 
-type PropObject = {
-  name: string
-  type: string
-}
-
 export default function PlaygroundPage() {
   const [code, setCode] = useState<string | undefined>("// Enter HTML here")
   const [jsx, setJSX] = useState<string>("")
@@ -44,6 +34,7 @@ export default function PlaygroundPage() {
   const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
   const [propsInput, setPropsInput] = useState("")
+  const [optional, setOptional] = useState(true)
   const [propsArray, setPropsArray] = useState<
     Array<{ name: string; type: string }>
   >([{ name: "", type: "" }])
@@ -171,19 +162,19 @@ export default function PlaygroundPage() {
         .join(", ")
 
       const propsType = hasProps ? `<${componentName}Props>` : ""
-      const funcProps = hasProps ? `({ ${propsString} })` : "()"
+      const funcProps = hasProps ? ` ${propsString} ` : "()"
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
           const interfaceProps = `
     interface ${componentName}Props {
-        ${funcProps}"?: any;
+        ${funcProps}
     }`
 
           renderedJSX = `
     ${clientPrefix}
     ${interfaceProps}
     
-    const ${componentName}: React.FC${propsType} = ${funcProps} => {
+    const ${componentName}: React.FC${propsType} = (${propsString}) => {
         return (<>\n${jsxCode}\n</>);
     };
     
@@ -241,6 +232,10 @@ export default function PlaygroundPage() {
     setPropsArray(updatedProps)
   }
 
+  function isOptional() {
+    setOptional(!optional)
+  }
+
   return (
     <>
       <AppContext.Provider
@@ -287,7 +282,6 @@ export default function PlaygroundPage() {
           </div>
           <div className="hidden h-full flex-col md:flex ">
             <div className="container relative mb-1.5 mt-8 flex items-start justify-between space-y-2 pb-4 pt-0 sm:flex-row sm:items-end sm:space-y-0.5 md:h-16">
-              <PresetActions />
               <div className="flex w-min  flex-col gap-2">
                 <Label className="translate-x-2.5">
                   What is the component name?
@@ -305,8 +299,8 @@ export default function PlaygroundPage() {
                 handlePropChange={handlePropChange}
                 addNewProp={addNewProp}
                 removeProp={removeProp}
+                isOptnial={isOptional}
               />
-              <PresetActions />
 
               <div className="ml-auto flex w-full space-x-2 sm:justify-end"></div>
             </div>
@@ -493,8 +487,6 @@ export default function PlaygroundPage() {
               </div>
             </Tabs>
             <div className="m-3 flex gap-2 p-3">
-              <PresetSelector presets={presets} />
-
               <PresetSave />
               <CodeViewer />
               <PresetShare />

@@ -8,7 +8,7 @@ export const marketingConfig: MarketingConfig = {
     },
     {
       title: "HTML to JSX",
-      href: "/html-to-jsx/playground",
+      href: "/html-to-jsx",
     },
     {
       title: "Geolocation",
