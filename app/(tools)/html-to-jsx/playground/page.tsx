@@ -1,4 +1,4 @@
-"use client "
+"use client"
 
 import { title } from "process"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -16,7 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Toggle } from "@/components/ui/toggle"
 
-import { StatusBadge } from "../../../../components/core/StatusBadge"
+import { emojis } from "../../../../components/core/StatusBadge"
 import { AppContext } from "./AppContext"
 import PropsEditor from "./components/ props-editor"
 import { CodeViewer } from "./components/code-viewer"
@@ -174,15 +174,14 @@ export default function PlaygroundPage() {
         .map((prop) => `${prop.name}: ${prop.type}`)
         .join(", ")
 
+      const propsType = hasProps ? `<${componentName}Props>` : ""
+      const funcProps = hasProps ? `({ ${propsString} })` : "()"
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
           const interfaceProps = `
     interface ${componentName}Props {
         ${funcProps}"?: any;
     }`
-
-          const propsType = hasProps ? `<${componentName}Props>` : ""
-          const funcProps = hasProps ? `({ ${propsString} })` : "()"
 
           renderedJSX = `
     ${clientPrefix}
@@ -270,7 +269,6 @@ export default function PlaygroundPage() {
           }}
           className="overflow-hidden rounded-[0.5rem] border bg-background shadow"
         >
-          <StatusBadge title="beta" emoji={emojis.rocket} />
           <div className="md:hidden">
             <Image
               src="/examples/playground-light.png"

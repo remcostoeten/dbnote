@@ -23,7 +23,7 @@ export default function CustomStatusBadge({
 
   return (
     <Badge variant="default" className="absolute right-0" style={style}>
-      {title} {emojis[emoji]}
+      {title} {emojis[emoji as any]}
     </Badge>
   )
 }
