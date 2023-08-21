@@ -58,7 +58,8 @@
     "components/header/custom-menu.tsx",
     "app/thoughts/layout.tsx",
     "app/html-to-jsx/playground/AppContext.tsx",
-    "components/icons/TrashIcon.js"
+    "components/icons/TrashIcon.js",
+    "components/core/Cursor/GreenTrailer"
   ],
   "exclude": [
     "node_modules"

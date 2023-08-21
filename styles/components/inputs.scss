@@ -8,9 +8,9 @@
 
   &__inner {
     position: relative;
-    cursor: pointer;
     transition: transform 0.4s;
     transform-style: preserve-3d;
+
     p {
       font-size: 8vw;
       font-weight: 700;

@@ -10,7 +10,7 @@ import GreenCursor from "./GreenCursor"
 const Trailer: React.FC = () => {
   const trailer = useRef<HTMLDivElement>(null)
   const trailerIcon = useRef<HTMLSpanElement>(null)
-  const [showSVG, setShowSVG] = useState(false)
+  const [showSVG, setShowSVG] = useState(true)
   const [showCircle, setShowCircle] = useState(true)
   const [useClientCursor, setUseClientCursor] = useState(true)
   const [isTop2, setIsTop2] = useState(false)
@@ -56,11 +56,11 @@ const Trailer: React.FC = () => {
         } else {
           setShowSVG(false)
           setShowCircle(true)
+          trailer.current.animate([keyframes], {
+            duration: 1000,
+            fill: "forwards",
+          })
         }
-        trailer.current.animate([keyframes], {
-          duration: 1000,
-          fill: "forwards",
-        })
       }
 
       if (trailer.current) {

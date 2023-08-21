@@ -107,13 +107,6 @@ const Home: React.FC = () => {
       })
   }, [jsx])
 
-  const setComponentNamde = useCallback(() => {
-    const name = prompt("Enter component name")
-    if (name) {
-      setComponentName(name)
-    }
-  }, [])
-
   function handleEditorChange(value: string | undefined) {
     if (value !== undefined) {
       setCode(value)

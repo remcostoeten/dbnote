@@ -1,7 +1,6 @@
 "use client"
+
 import { useEffect, useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Button, buttonVariants } from "@/components/ui/button"
 import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
@@ -9,26 +8,16 @@ import {
   deleteDoc,
   doc,
   getDocs,
-  orderBy,
-  query,
   serverTimestamp,
   updateDoc,
   where,
 } from "firebase/firestore"
+
 import { auth, db } from "@/lib/firebase"
 import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-
-function generateRandomPassword(length) {
-  const charset =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-  let password = ""
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charset.length)
-    password += charset[randomIndex]
-  }
-  return password
-}
 
 export default function Dashboard() {
   const [title, setTitle] = useState("")
@@ -170,41 +159,38 @@ export default function Dashboard() {
     <div className="max-w-3xl">
       {enteredPassword === password ? (
         <div className="grid items-start gap-8">
-            <div className="grid gap-1">
-              <h1 className="font-heading text-3xl md:text-4xl">messages</h1>
-              <p className="text-lg text-muted-foreground">
-                Create and manage messages.
-              </p>
-            </div>
-            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <Select onValueChange={setCategory} defaultValue={category}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a verified email to display" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem value={category.name}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Textarea
-                placeholder="message content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              <Button onClick={handleSubmit} className="inline-flex w-fit">
-                New message
-              </Button>
-            </form>
-   
+          <div className="grid gap-1">
+            <h1 className="font-heading text-3xl md:text-4xl">messages</h1>
+            <p className="text-lg text-muted-foreground">
+              Create and manage messages.
+            </p>
+          </div>
+          <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <Select onValueChange={setCategory} defaultValue={category}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a verified email to display" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem value={category.name}>{category.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Textarea
+              placeholder="message content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <Button onClick={handleSubmit} className="inline-flex w-fit">
+              New message
+            </Button>
+          </form>
 
           <div className="pb-2 ">
             {messages.map((message) => (

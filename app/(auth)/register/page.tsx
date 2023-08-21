@@ -1,17 +1,13 @@
 "use client"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { toast } from "@/components/ui/use-toast"
+
 import React, { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Auth } from "firebase/auth"
-import { ClassValue } from "clsx"
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth"
-import { signUp } from "@/lib/firebase"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+
+import { signUp } from "@/lib/firebase"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 export default function RegisterPage() {
   const [name, setName] = useState("")
@@ -36,7 +32,7 @@ export default function RegisterPage() {
     })
 
     console.log(result)
-    return router.push("/dashboard/")
+    return router.push("/dashboard")
   }
 
   return (
@@ -46,7 +42,6 @@ export default function RegisterPage() {
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <Icons.logo className="mx-auto h-6 w-6" />
             <h1 className="text-2xl font-semibold tracking-tight">
               Create an account
             </h1>
@@ -100,7 +95,10 @@ export default function RegisterPage() {
               Sign up
             </button>
           </form>
-          <p className="px-8 text-center text-sm text-muted-foreground">
+          <p
+            className="px-8 text           
+-center text-sm text-muted-foreground"
+          >
             By clicking continue, you agree to our{" "}
             <Link
               href="/terms"

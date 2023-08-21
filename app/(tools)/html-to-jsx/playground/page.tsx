@@ -44,7 +44,9 @@ export default function PlaygroundPage() {
   const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
   const [propsInput, setPropsInput] = useState("")
-  const [propsArray, setPropsArray] = useState<string[]>([""])
+  const [propsArray, setPropsArray] = useState<
+    Array<{ name: string; type: string }>
+  >([{ name: "", type: "" }])
 
   useEffect(() => {
     const editorInstance = editorRef.current
@@ -55,11 +57,6 @@ export default function PlaygroundPage() {
 
     return () => clearTimeout(timeoutId)
   }, [])
-
-  // useEffect(() => {
-  //   document.body.classList.add("html-to-jsx")
-  //   return () => document.body.classList.remove("html-to-jsx")
-  // }, [])
 
   function convertHtmlToJSX(html: string): string {
     let jsx = html.replace(/\bclass=/g, "className=")
@@ -160,17 +157,16 @@ export default function PlaygroundPage() {
 
       const clientPrefix = isClientComponent ? "'use client';\n" : ""
 
-      const trimmedPropsArray = propsArray.map((prop) => prop.trim())
-      const hasProps = trimmedPropsArray.some((prop) => prop.length > 0)
+      const trimmedPropsArray = propsArray.map((prop) => ({
+        name: prop.name.trim(),
+        type: prop.type.trim(),
+      }))
+      const hasProps = trimmedPropsArray.some(
+        (prop) => prop.name.length > 0 || prop.type.length > 0
+      )
       let renderedJSX
 
       const propsString = trimmedPropsArray
-        .filter(
-          // @ts-ignore
-          (prop): prop is PropObject =>
-            typeof prop === "object" && "name" in prop && "type" in prop
-        )
-        // @ts-ignore
         .map((prop) => `${prop.name}: ${prop.type}`)
         .join(", ")
 
@@ -224,15 +220,19 @@ export default function PlaygroundPage() {
 
   function handlePropChange(
     event: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
+    propKey: "name" | "type"
   ) {
     const updatedProps = [...propsArray]
-    updatedProps[index] = event.target.value
+    updatedProps[index] = {
+      ...updatedProps[index],
+      [propKey]: event.target.value,
+    }
     setPropsArray(updatedProps)
   }
 
   function addNewProp() {
-    setPropsArray([...propsArray, ""])
+    setPropsArray([...propsArray, { name: "", type: "" }])
   }
 
   function removeProp(index: number) {

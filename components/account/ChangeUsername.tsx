@@ -1,67 +1,67 @@
-'use client';
-import React, { useState, useEffect } from "react";
-import { getAuth, updateProfile } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { toast } from "@/components/ui/use-toast";
-import { string } from "prop-types";
+"use client"
+
+import React, { useEffect, useState } from "react"
+import { getAuth, updateProfile } from "firebase/auth"
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
+import { string } from "prop-types"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { toast } from "@/components/ui/use-toast"
 
 interface ChangeUsernameProps {
-  buttontext: string;
-  title: string;
-  label: string;
+  buttontext: string
+  title: string
+  label: string
 }
 
-
 export default function ChangeUsername({ buttontext, title, label }) {
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState<File | null>(null);
-  const [userProfilePicture, setUserProfilePicture] = useState(null); // State to hold the user's profile picture
-  const auth = getAuth();
-  const storage = getStorage();
+  const [name, setName] = useState("")
+  const [avatar, setAvatar] = useState<File | null>(null)
+  const auth = getAuth()
+  const storage = getStorage()
 
   useEffect(() => {
     if (auth.currentUser) {
-      setUserProfilePicture(auth.currentUser?.photoURL as any);
-      setName(auth.currentUser?.displayName || "");
+      setUserProfilePicture(auth.currentUser?.photoURL as any)
+      setName(auth.currentUser?.displayName || "")
     }
-  }, [auth.currentUser]);
+  }, [auth.currentUser])
 
   const handleForm = async (event: React.FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (auth.currentUser) {
       if (avatar) {
-        const avatarRef = ref(storage, `avatars/${auth.currentUser.uid}`);
-        await uploadBytes(avatarRef, avatar);
-        const downloadURL = await getDownloadURL(avatarRef);
+        const avatarRef = ref(storage, `avatars/${auth.currentUser.uid}`)
+        await uploadBytes(avatarRef, avatar)
+        const downloadURL = await getDownloadURL(avatarRef)
 
         await updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: downloadURL,
-        });
+        })
       } else {
         await updateProfile(auth.currentUser, {
           displayName: name,
-        });
+        })
       }
 
       toast({
         title: "Profile updated!",
-      });
+      })
 
-      const updatedUser = getAuth().currentUser;
+      const updatedUser = getAuth().currentUser
       if (updatedUser) {
-        setName(updatedUser.displayName || "");
-        setUserProfilePicture(updatedUser.photoURL as any);
+        setName(updatedUser.displayName || "")
+        setUserProfilePicture(updatedUser.photoURL as any)
       }
-      document.dispatchEvent(new CustomEvent("userUpdated"));
+      document.dispatchEvent(new CustomEvent("userUpdated"))
     }
-  };
+  }
 
-  const username = name || auth.currentUser?.displayName || "";
+  const username = name || auth.currentUser?.displayName || ""
 
   return (
     <>
@@ -88,7 +88,7 @@ export default function ChangeUsername({ buttontext, title, label }) {
               if (e.target.files && e.target.files.length > 0) {
                 setAvatar(e.target.files[0])
               } else {
-                setAvatar(null);
+                setAvatar(null)
               }
             }}
           />
@@ -101,5 +101,8 @@ export default function ChangeUsername({ buttontext, title, label }) {
         </form>
       </div>
     </>
-  );
+  )
+}
+function setUserProfilePicture(arg0: any) {
+  throw new Error("Function not implemented.")
 }
