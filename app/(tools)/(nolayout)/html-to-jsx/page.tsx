@@ -22,7 +22,6 @@ import { PresetSave } from "./components/preset-save"
 import { PresetSelector } from "./components/preset-selector"
 import { PresetShare } from "./components/preset-share"
 import { models, types } from "./data/models"
-import { presets } from "./data/presets"
 
 export default function PlaygroundPage() {
   const [code, setCode] = useState<string | undefined>("// Enter HTML here")
@@ -34,6 +33,7 @@ export default function PlaygroundPage() {
   const [isClientComponent, setIsClientComponent] = useState<boolean>(false)
   const [wrapInFunctionComponent, setWrapInFunctionComponent] = useState(false)
   const [propsInput, setPropsInput] = useState("")
+  const [typeOrInterface, setTypeOrInterface] = useState(false)
   const [optional, setOptional] = useState(true)
   const [propsArray, setPropsArray] = useState<
     Array<{ name: string; type: string }>
@@ -162,11 +162,11 @@ export default function PlaygroundPage() {
         .join(", ")
 
       const propsType = hasProps ? `<${componentName}Props>` : ""
-      const funcProps = hasProps ? ` ${propsString} ` : "()"
+      const funcProps = hasProps ? ` ${propsString}() ` : ""
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
           const interfaceProps = `
-    interface ${componentName}Props {
+    ${componentName}Props {
         ${funcProps}
     }`
 
@@ -250,6 +250,8 @@ export default function PlaygroundPage() {
           setIsClientComponent,
           wrapInFunctionComponent,
           setWrapInFunctionComponent,
+          typeOrInterface,
+          setTypeOrInterface,
         }}
       >
         <motion.div
@@ -259,27 +261,11 @@ export default function PlaygroundPage() {
           transition={{
             type: "spring",
             stiffness: 150,
-            damping: 15,
-            delay: 0.5,
+            damping: 155,
+            delay: 1.5,
           }}
           className="overflow-hidden rounded-[0.5rem] border bg-background shadow"
         >
-          <div className="md:hidden">
-            <Image
-              src="/examples/playground-light.png"
-              width={1280}
-              height={916}
-              alt="Playground"
-              className="block dark:hidden"
-            />
-            <Image
-              src="/example s/playground-dark.png"
-              width={1280}
-              height={916}
-              alt="Playground"
-              className="hidden dark:block"
-            />
-          </div>
           <div className="hidden h-full flex-col md:flex ">
             <div className="container relative mb-1.5 mt-8 flex items-start justify-between space-y-2 pb-4 pt-0 sm:flex-row sm:items-end sm:space-y-0.5 md:h-16">
               <div className="flex w-min  flex-col gap-2">
@@ -299,7 +285,7 @@ export default function PlaygroundPage() {
                 handlePropChange={handlePropChange}
                 addNewProp={addNewProp}
                 removeProp={removeProp}
-                isOptnial={isOptional}
+                isOptional={isOptional}
               />
 
               <div className="ml-auto flex w-full space-x-2 sm:justify-end"></div>

@@ -20,6 +20,8 @@ function ModelSelector({ models, types, ...props }) {
     setIsClientComponent,
     wrapInFunctionComponent,
     setWrapInFunctionComponent,
+    typeOrInterface,
+    setTypeOrInterface,
   } = useContext(AppContext as any)
 
   const [collapsibleOpen, setCollapsibleOpen] = useState(false)
@@ -104,6 +106,30 @@ function ModelSelector({ models, types, ...props }) {
                         checked={isTypescript}
                         onCheckedChange={(isChecked) => {
                           setIsTypescript(isChecked)
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -10, scale: 0.5 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -15, scale: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div className="flex w-full items-center justify-between space-x-2">
+                      <Label
+                        htmlFor="typeOrInterface"
+                        className="flex flex-col space-y-1"
+                      >
+                        <span className="flex flex-col space-y-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ">
+                          Type or Interface?
+                        </span>
+                      </Label>
+                      <Switch
+                        id="typeOrInterface"
+                        checked={typeOrInterface}
+                        onCheckedChange={(isChecked) => {
+                          setTypeOrInterface(isChecked)
                         }}
                       />
                     </div>

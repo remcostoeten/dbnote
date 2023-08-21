@@ -2,10 +2,10 @@ export default function GreenCursor() {
   return (
     <>
       <svg
-        width="24"
-        height="24"
+        width="3"
+        height="3"
         viewBox="0 0 511.997 511.997"
-        className="customSvg absolute "
+        className="customSvg absolute scale-[.2]"
       >
         <path
           fill="#31b970"

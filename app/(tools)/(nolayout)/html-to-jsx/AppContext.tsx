@@ -11,6 +11,8 @@ interface AppContextProps {
   setIsClientComponent: (val: boolean) => void
   wrapInFunctionComponent: boolean
   setWrapInFunctionComponent: (val: boolean) => void
+  typeOrInterface: boolean
+  setTypeOrInterface: (val: boolean) => void
 }
 
 export const AppContext = createContext<AppContextProps | undefined>(undefined)

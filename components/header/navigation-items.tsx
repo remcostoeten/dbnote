@@ -95,20 +95,15 @@ export function MainNav({ items, children }: MainNavProps) {
   }
 
   return (
-    <div className="cursor-hover" data-type="showsvg">
-      <div
-        className="flex w-full gap-6 md:gap-10  items-center"
-        data-type="showsvg"
-      >
+    <div className="cursor-hover">
+      <div className="flex w-full gap-6 md:gap-10  items-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.5 }}
-          data-type="showsvg"
           className="cursor-hover"
         >
           <Link
-            data-type="showsvg"
             href="/"
             className="cursor-hover hidden items-center space-x-2 md:flex"
           >
@@ -118,14 +113,12 @@ export function MainNav({ items, children }: MainNavProps) {
         {items.map((item, index) => (
           <motion.div
             key={index}
-            data-type="showsvg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * (index + 1), duration: 0.5 }}
           >
             {item.target === "_blank" ? (
               <a
-                data-type="showsvg"
                 href={item.href}
                 className={cn(
                   "flex cursor-hover w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
@@ -139,7 +132,6 @@ export function MainNav({ items, children }: MainNavProps) {
               </a>
             ) : (
               <Link
-                data-type="showsvg"
                 href={item.done ? item.href : item.href}
                 className={cn(
                   "flex w-fit items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
@@ -153,7 +145,6 @@ export function MainNav({ items, children }: MainNavProps) {
           </motion.div>
         ))}
         <motion.div
-          data-type="showsvg"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}
@@ -164,7 +155,6 @@ export function MainNav({ items, children }: MainNavProps) {
         <span className="flex-end flex w-max flex-1 items-center justify-end">
           {userProfilePicture && (
             <motion.img
-              data-type="showsvg"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 * (items.length + 2), duration: 0.5 }}

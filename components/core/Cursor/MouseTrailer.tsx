@@ -10,7 +10,7 @@ import GreenCursor from "./GreenCursor"
 const Trailer: React.FC = () => {
   const trailer = useRef<HTMLDivElement>(null)
   const trailerIcon = useRef<HTMLSpanElement>(null)
-  const [showSVG, setShowSVG] = useState(true)
+  const [showSVG, setShowSVG] = useState(false)
   const [showCircle, setShowCircle] = useState(true)
   const [useClientCursor, setUseClientCursor] = useState(true)
   const [isTop2, setIsTop2] = useState(false)
@@ -50,17 +50,11 @@ const Trailer: React.FC = () => {
         const keyframes = {
           transform: `translate(${x}px, ${y}px) scale(${scaleValue})`,
         }
-        if (y < 160 && useClientCursor) {
-          setShowSVG(true)
-          setShowCircle(false)
-        } else {
-          setShowSVG(false)
-          setShowCircle(true)
-          trailer.current.animate([keyframes], {
-            duration: 1000,
-            fill: "forwards",
-          })
-        }
+
+        trailer.current.animate(keyframes, {
+          duration: 1000,
+          fill: "forwards",
+        })
       }
 
       if (trailer.current) {
@@ -98,25 +92,17 @@ const Trailer: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    document.body.classList.toggle("cursor-pointer", useClientCursor)
-  }, [useClientCursor])
-
-  const handleInputChange = () => {
-    setUseClientCursor((prevState) => !prevState)
-  }
-
   return (
     <>
       <div className="gap-2 m-2 p-2 w-full flex">
         <label className="switch flex items-center relative w-max cursor-pointer select-none">
           <input
             type="checkbox"
-            onChange={handleInputChange}
+            onChange={() => setUseClientCursor((prevState) => !prevState)}
             checked={useClientCursor}
             className="appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-blue-500 bg-pink"
           />
-          <span className="w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-white pointer-events-none"></span>{" "}
+          <span className="w-7 h-7 right-7 absolute rounded-full transform transition-transform bg-white" />
         </label>
         <span className="">Turn {useClientCursor ? "off" : "on"} cursor</span>
       </div>
