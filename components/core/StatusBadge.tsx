@@ -6,9 +6,9 @@ export const emojis = {
 }
 
 type StatusBadgeProps = {
-  title?: string
-  emoji?: keyof typeof emojis
-  index: number
+  title?: any
+  emoji?: any
+  index: any
 }
 
 export default function CustomStatusBadge({
