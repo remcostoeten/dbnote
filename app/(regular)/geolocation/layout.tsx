@@ -15,7 +15,7 @@ interface UiShowcaseLayoutProps {
 export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   const badges = [
     { title: "Beta", emoji: "rocket" },
-    { title: "Hot", emoji: "fire" },
+    { title: "Experiment", emoji: "fire" },
   ]
 
   return (

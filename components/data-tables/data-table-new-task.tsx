@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons"
+import { PlusCircledIcon } from "@radix-ui/react-icons"
 import { Column } from "@tanstack/react-table"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { motion } from "framer-motion"
