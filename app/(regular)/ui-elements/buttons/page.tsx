@@ -1,4 +1,4 @@
-import CustomButtons from "../../../components/buttons/CustomButtons"
+import CustomButtons from "@/components/buttons/CustomButtons"
 
 export default function page() {
   return (

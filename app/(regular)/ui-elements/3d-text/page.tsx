@@ -14,7 +14,7 @@ export default function Home() {
     };
   }, []);
 
-  const manageMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+       const manageMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (plane.current) {
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
@@ -45,9 +45,6 @@ export default function Home() {
         ]} description={""} />
       <div className="perspective-text">
         <div
-          onMouseMove={(e) => {
-            manageMouseMove(e);
-          }}
           className="perspective-text__inner "
         >
           <div

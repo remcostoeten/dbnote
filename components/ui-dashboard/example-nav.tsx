@@ -12,33 +12,38 @@ export const examples = [
   {
     name: "Buttons",
     href: "/ui-elements/buttons",
-    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/buttons/CustomButtons.tsx",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/components/buttons/CustomButtons.tsx",
   },
   {
     name: "Forms",
     href: "/ui-elements/forms",
-    code: "https://github.com/remcostoeten/dbnote/tree/develop/app/ui-elements/forms",
+    code: "https://github.com/remcostoeten/dbnote/tree/master/app/ui-elements/forms",
   },
   {
     name: "3d text effect",
     href: "/ui-elements/3d-text",
-    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/Text3d.jsx",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/components/Text3d.tsx",
+  },
+  {
+    name: "Perspective panning effect",
+    href: "/ui-elements/perspective-panning",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/app/(regular)/ui-elements/perspective-panning/page.tsx",
   },
   {
     name: "Data table tasks",
     href: "/ui-elements/data-todos",
-    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/data-todos.jsx",
-    page: "https://github.com/remcostoeten/dbnote/blob/develop/pages/ui-elements/data-tables/page.tsx",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/components/data-todos.jsx",
+    page: "https://github.com/remcostoeten/dbnote/blob/master/pages/ui-elements/data-tables/page.tsx",
   },
   {
     name: "Cursor trailer",
     href: "/ui-elements/mouse-trailer",
-    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/Cursor/MouseTrailer.tsx",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/components/core/Cursor/MouseTrailer.tsx",
   },
   {
     name: "Text reveal animation",
     href: "/ui-elements/reveal-animations",
-    code: "https://github.com/remcostoeten/dbnote/blob/develop/components/core/animations/TextRevealSkew.jsA",
+    code: "https://github.com/remcostoeten/dbnote/blob/master/components/core/animations/TextRevealSkew.jsA",
   },
 ]
 
