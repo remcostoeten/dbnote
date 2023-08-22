@@ -54,7 +54,6 @@ const PropsEditor = ({
                       onChange={(e) => handlePropChange(e, index, "type")}
                       placeholder="Enter prop type (e.g. string)"
                     />
-                    <label htmlFor="optional">Optional</label>
                     <svg
                       className="
                         absolute 

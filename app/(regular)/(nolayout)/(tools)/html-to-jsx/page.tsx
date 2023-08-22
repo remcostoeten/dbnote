@@ -162,7 +162,7 @@ export default function PlaygroundPage() {
         .join(", ")
 
       const propsType = hasProps ? `<${componentName}Props>` : ""
-      const funcProps = hasProps ? ` ${propsString}() ` : ""
+      const funcProps = hasProps ? ` ${propsString} ` : ""
       if (wrapInFunctionComponent) {
         if (isTypescript && hasProps) {
           const interfaceProps = `
