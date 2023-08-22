@@ -20,7 +20,7 @@ import { toast } from "@/components/ui/use-toast"
 import Google from "@/components/icons/Google"
 import LogoIconOnly from "@/components/LogoIconOnly"
 import { Icons } from "@/components/icons"
-import { GlowButton } from './../../components/buttons/CustomButtons';
+import { GlowButton } from '@/components/buttons/CustomButtons';
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")

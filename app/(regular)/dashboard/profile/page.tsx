@@ -19,13 +19,13 @@ export default function page() {
             <div className="profile__contact-info">
               <div className="contact-info__photo-profile">
                 <div className="photo-profile__group">
-                  <Image
+                  {/* <Image
                     src="../assets/media/images/profile-photo.png"
                     alt=""
                     width={80}
                     height={80}
                     className="photo-profile__group-photo"
-                  />
+                  /> */}
                   <div className="photo-profile__group-text">
                     <p className="fd-sm fd-sm--bold photo-profile__group-text-name">
                       John Doe

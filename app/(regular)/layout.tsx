@@ -1,26 +1,18 @@
 import { Inter as FontSans } from "next/font/google"
-import localFont from "next/font/local"
 
-import { marketingConfig } from "@/config/marketing"
 import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
-import { MainNav } from "@/components/header/navigation-items"
 import { ThemeProvider } from "@/components/theme-provider"
-
 import "@/styles/globals.scss"
-import Trailer from "./../components/core/Cursor/MouseTrailer"
+import Trailer from "@/components/core/Cursor/MouseTrailer"
+import Header from "@/components/core/Header"
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
-
-const fontHeading = localFont({
-  src: "../assets/fonts/CalSans-SemiBold.woff2",
-  variable: "--font-heading",
 })
 
 interface RootLayoutProps {
@@ -46,7 +38,6 @@ export const metadata = {
       url: "https://remcostoeten.com",
     },
   ],
-  creator: "remcostoeten",
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "black" }],
   openGraph: {
     type: "website",
@@ -65,25 +56,20 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  return (
+return (
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
         className={cn(
           " font-sans antialiased",
           fontSans.variable,
-          fontHeading.variable
         )}
       >
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Trailer />
             <div className="page-wrapper cursor-hover">
-              <header className="header cursor-hover">
-                <div className="container z-40 flex h-20 items-center justify-between py-6 cursor-hover">
-                  <MainNav items={marketingConfig.mainNav} />
-                </div>
-              </header>
+           <Header/>
               <div className="page-wrapper__inner ">{children}</div>
             </div>
             <Analytics />
