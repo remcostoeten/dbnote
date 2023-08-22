@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { cn } from "@/lib"
-import { Select, SelectValue } from "@radix-ui/react-select"
 import {
   addDoc,
   collection,
@@ -19,15 +18,17 @@ import { Note } from "@/lib/types"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
+  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 
-import { MyDrawer } from "../../components/Drawer"
-import PostIntro from "../../components/ui-dashboard/PostIntro"
+import { MyDrawer } from "@/components/Drawer"
+import PostIntro from "@/components/ui-dashboard/PostIntro"
 
 export default function Dashboard() {
   const [title, setTitle] = useState<string>("")

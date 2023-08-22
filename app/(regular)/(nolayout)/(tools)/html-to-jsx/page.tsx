@@ -262,7 +262,7 @@ export default function PlaygroundPage() {
             type: "spring",
             stiffness: 150,
             damping: 155,
-            delay: 1.5,
+            delay: .47,
           }}
           className="overflow-hidden rounded-[0.5rem] border bg-background shadow"
         >

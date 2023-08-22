@@ -71,7 +71,7 @@ export function DataTableNewTask<TData, TValue>({
         createdAt,
         id: "",
       }
-      const docRef = await addDoc(collection(db, "tasks"), newTask)
+      const docRef = await addDoc(collection(db, "notes"), newTask)
       newTask.id = docRef.id
 
       setPosts([...posts, newTask])

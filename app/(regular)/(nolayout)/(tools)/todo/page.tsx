@@ -1,5 +1,3 @@
-import { promises as fs } from "fs"
-import path from "path"
 import { Metadata } from "next"
 import Image from "next/image"
 import { collection, getDocs } from "firebase/firestore"
@@ -17,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 async function getTasks() {
-  const querySnapshot = await getDocs(collection(db, "tasks"))
+  const querySnapshot = await getDocs(collection(db, "notes"))
   const tasks = []
   querySnapshot.forEach((doc) => {
     const taskData = doc.data() as any
