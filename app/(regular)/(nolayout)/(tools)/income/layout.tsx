@@ -5,6 +5,7 @@ import {
   PageHeader,
   PageHeaderDescription,
 } from "@/components/ui-dashboard/page-nav"
+import CustomStatusBadge from "@/components/core/StatusBadge"
 
 export const metadata: Metadata = {
   title: "Expense Tracker",
@@ -16,11 +17,18 @@ interface UiShowcaseLayoutProps {
   children: React.ReactNode
 }
 
+const badges = [
+  { title: "Beta", emoji: "rocket" },
+  { title: "Bugs", emoji: "fire" },
+]
+
 export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   return (
     <>
-      <div className="container flex flex-col gap-2">
-        <header className="expenses-tracker  relative flex flex-col">
+      <div className="container relative flex-1 flex-col space-y-4 p-8 pt-6">
+       {badges.map((badge, index) => (
+      <CustomStatusBadge as any key={index} {...badge} index={index} />
+    ))}<header className="expenses-tracker  relative flex flex-col">
           <PageHeader className="page-header pb-8">
             <h1 className="mb-2 inline-block font-heading text-4xl sm:mb-0 lg:text-5xl">
               Expenses and income tracker

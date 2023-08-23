@@ -1,6 +1,4 @@
-"use client"
-React
-import { ColumnDef } from "@tanstack/react-table"
+ import { ColumnDef } from "@tanstack/react-table"
 
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
