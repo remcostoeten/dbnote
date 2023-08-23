@@ -1,59 +1,31 @@
-'use client ';
-import React, { useEffect, useState } from 'react';
-import { toast } from '@/components/ui/use-toast';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import React from 'react';
+import CustomStatusBadge from '@/components/core/StatusBadge';
+import { WeakGlowButton } from '@/components/buttons/CustomButtons';
+import { useUserLocation } from '../../../../lib/useUserLocation';
 
 const MyLongLat: React.FC = () => {
-	const [lat, setLat] = useState<number | null>(null);
-	const [long, setLong] = useState<number | null>(null);
-	const [error, setError] = useState<string>('');
-	const [showCoords, setShowCoords] = useState<boolean>(false);
+  const {
+    lat,
+    long,
+    showCoords,
+    getUserLocation,
+    hideUserLocation,
+  } = useUserLocation();
 
-	const getUserLocation = () => {
-		const geolocationAPI = navigator.geolocation;
-		if (!geolocationAPI) {
-			setError('Geolocation API is not available in your browser');
-            toast({ title: "Geolocation API is not available in your browser" });
+  return (
+    <div className="pl-6 pt-6 pr-6 flex flex-row items-center justify-between space-y-0 pb-2">
+      <button onClick={hideUserLocation} className="text-sm font-medium">
+        Hide my location
+      </button>
+      <span className="text-sm font-medium" onClick={getUserLocation}>
+        Show my location
+      </span>
 
-		} else {
-			geolocationAPI.getCurrentPosition(
-				(position) => {
-					const { coords } = position;
-					console.log(coords);
-					setLat(coords.latitude);
-					setLong(coords.longitude);
-					setShowCoords(true);
-                    toast({ title: "Found your location" });
-				},
-				(error) => {
-					console.log(error);
-                    toast({ title: "omething went wrong getting your position" });
-				}
-			);
-		}
-	};
-
-	const hideUserLocation = () => {
-		setShowCoords(false);
-		setLat(null);
-		setLong(null);
-	};
-
-	return (
-		<Card className="m-5 w-full text-center">
-			{showCoords ? (
-				<><div className="flex gap-8 w-full">
-					<p>Latitude: {lat}</p>
-					<p>Longitude: {long}</p>
-<span onClick={hideUserLocation} className="flex w-full justify-end text-sm font-medium">Hide my location</span>			</div>	
-				</>
-			) : (
-				<span onClick={getUserLocation} className="text-sm font-medium">My longitude and latitude is..</span>
-
-			)}
-		</Card>
-	);
+      {showCoords && (
+        <CustomStatusBadge position="top" title={`Longitude: ${long} Latitude: ${lat}`} />
+      )}
+    </div>
+  );
 };
 
 export default MyLongLat;

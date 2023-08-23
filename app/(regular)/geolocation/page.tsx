@@ -83,8 +83,6 @@ const AddressConverter: React.FC = () => {
 
   return (
     <>
-
-  
   
       <div className="grid my-[80px] gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="flex flex-col gap-2">
@@ -159,12 +157,13 @@ const AddressConverter: React.FC = () => {
               Clear storage
             </span>
           </CardContent>
-        </Card>     
-      </div>
-      <Card className="flex pb-0 p-0 flex-col gap-2">
-            <MyLongLat/>
-        </Card> </>
-  )
-   };
+        </Card>    
+        <Card className="flex flex-col gap-2">
 
-export default AddressConverter;        
+        
+
+          </Card> 
+      </div>
+</>            )
+            }
+            export default AddressConverter;

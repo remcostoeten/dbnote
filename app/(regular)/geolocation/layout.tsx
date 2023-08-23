@@ -21,7 +21,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   return (
     <div className="container relative flex flex-col">
        {badges.map((badge, index) => (
-      <CustomStatusBadge key={index} {...badge} index={index} />
+      <CustomStatusBadge as any key={index} {...badge} index={index} />
     ))}
       <main>{children}</main>
     </div>
