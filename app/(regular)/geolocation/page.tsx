@@ -5,8 +5,17 @@ import {toast} from "@/components/ui/use-toast";
 import AddressesList from "./components/AddressesList";
 import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
 import MapDisplay from "./components/Map";
-import { doc, setDoc } from "firebase/firestore";
-import { auth } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    serverTimestamp,
+    setDoc,
+    updateDoc,
+  } from "firebase/firestore"
 
 interface Location {
     name : string;
@@ -70,7 +79,6 @@ const AddressConverter : React.FC = () => {
       setShowLocations(true);
       setShowMap(true);
     
-      // Save to Firestore
       if (auth.currentUser) {
         const userId = auth.currentUser.uid;
         await setDoc(doc(db, "locations", userId), location);

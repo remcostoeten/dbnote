@@ -30,7 +30,7 @@ import {
   WeakGlowButton,
 } from "@/components/buttons/CustomButtons"
 
-import LoadingSkeleton from "./IncomeSkeleton"
+import  Spinner from '@/components/core/Spinner';
 
 interface Expense {
   id: string
@@ -242,9 +242,7 @@ const AddIncomeExpenseForm: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingSkeleton />
-      ) : (
+  
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
@@ -334,7 +332,13 @@ const AddIncomeExpenseForm: React.FC = () => {
                   <BorderButton onClick={handleAddSavings} text="Add Savings" />
                 </Card>
               </motion.div>
-            </div>
+            </div>                  
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="flex flex-col gap-4"
+              >
             <div className="flex gap-4 w-full ">
               <Card className="card flex-col flex flex-1 expense p-8 ">
                 <dl className="text-2xl font-bold mb-4">Expenses List:</dl>
@@ -355,7 +359,9 @@ const AddIncomeExpenseForm: React.FC = () => {
                   </dl>
                 ))}
               </Card>
+
             </div>
+            </motion.div>
           </div>
 
           {/* Summary of Total Income, Expense, and Net Worth */}
@@ -366,7 +372,7 @@ const AddIncomeExpenseForm: React.FC = () => {
             className="flex flex-col justify-between  w-full gap-4"
           >
             <Card className="card expense p-8 ">
-              <dl className="flex justify-between text-2xl font-bold">
+       <dl className="flex justify-between text-2xl font-bold">
                 <dd>
                   <h2>Total Income:</h2>
                 </dd>
@@ -376,13 +382,20 @@ const AddIncomeExpenseForm: React.FC = () => {
                 <dd>
                   <h2>Total expense:</h2>
                 </dd>
+                {isLoading ? (
+        <Spinner />
+      ) : ( 
                 <dt className="font-normal">€{totalExpense},-</dt>
-              </dl>
+                )}              </dl>
               <dl className="flex justify-between text-2xl font-bold">
                 <dd>
                   <h2>Net Worth:</h2>
-                </dd>
+                </dd> 
+                {isLoading ? (
+        <Spinner />
+      ) : ( 
                 <dt className="font-normal">€{netWorth},-</dt>
+                )}
               </dl>
               <div className="flex mt-4 justify-end">
                 <WeakGlowButton onClick={handleClearAll} text="Clear All" />
@@ -390,7 +403,6 @@ const AddIncomeExpenseForm: React.FC = () => {
             </Card>
           </motion.div>
         </div>
-      )}
     </>
   )
 }

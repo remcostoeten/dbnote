@@ -9,7 +9,7 @@ type EmojiType = keyof typeof emojis;
 
 type StatusBadgeProps = {
   title?: string;
-  emoji?: EmojiType;
+  emoji?: any;
   index?: number;
   position?: "right" | "left" | "top" | "bottom";
   className?: string;

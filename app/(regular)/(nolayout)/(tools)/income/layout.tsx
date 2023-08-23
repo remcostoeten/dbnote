@@ -27,7 +27,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
     <>
       <div className="container relative flex-1 flex-col space-y-4 p-8 pt-6">
        {badges.map((badge, index) => (
-      <CustomStatusBadge as any key={index} {...badge} index={index} />
+      <CustomStatusBadge key={index} {...badge} index={index} />
     ))}<header className="expenses-tracker  relative flex flex-col">
           <PageHeader className="page-header pb-8">
             <h1 className="mb-2 inline-block font-heading text-4xl sm:mb-0 lg:text-5xl">
