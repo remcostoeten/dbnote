@@ -11,6 +11,7 @@ interface ButtonProps {
   variant?: string
   disabled?: boolean
   icon?: string
+  type?: string
   children?: React.ReactNode
 }
 
@@ -109,10 +110,10 @@ export const BlobButton = ({ text, icon }: ButtonProps) => {
   )
 }
 
-export const RoundedGlowButton = ({ text }) => {
+export const RoundedGlowButton = ({ text, type }) => {
   return (
     <div className="relative button-rounded-glow">
-      <button className="button-rounded-glow__inner " type="button">
+      <button className="button-rounded-glow__inner " type={type}>
         {text}
       </button>
       <div className="button-rounded-glow__bg"></div>

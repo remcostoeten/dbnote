@@ -10,7 +10,6 @@ import {
   getDocs,
   serverTimestamp,
   updateDoc,
-  where,
 } from "firebase/firestore"
 
 import { auth, db } from "@/lib/firebase"

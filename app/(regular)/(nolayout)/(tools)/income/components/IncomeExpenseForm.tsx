@@ -10,20 +10,10 @@ import {
   getDocs,
 } from "firebase/firestore"
 import { motion } from "framer-motion"
-import { Table } from "lucide-react"
 
 import { auth, db } from "@/lib/firebase"
-import { Income } from "@/lib/types"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import {
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
 import { toast } from "@/components/ui/use-toast"
 import {
   BorderButton,
@@ -37,6 +27,7 @@ interface Expense {
   name: string
   isLoading: boolean
   expenseAmount: number
+  incomeAmount: any
 }
 
 const AddIncomeExpenseForm: React.FC = () => {
@@ -242,7 +233,6 @@ const AddIncomeExpenseForm: React.FC = () => {
 
   return (
     <>
-  
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
@@ -298,7 +288,6 @@ const AddIncomeExpenseForm: React.FC = () => {
                       <option value="Food">Food</option>
                       <option value="Transport">Transport</option>
                       <option value="Utilities">Utilities</option>
-                      {/* ... Other categories ... */}
                     </select>
                   </div>
                   <BorderButton onClick={handleAddExpense} text="Add Expense" />
@@ -343,21 +332,23 @@ const AddIncomeExpenseForm: React.FC = () => {
               <Card className="card flex-col flex flex-1 expense p-8 ">
                 <dl className="text-2xl font-bold mb-4">Expenses List:</dl>
                 {expenses.map((expense) => (
-                  <dl className="flex justify-between w-full" key={expense.id}>
-                    <dd>Name: {expense.name}</dd>
-                    <Label>{expense.category}</Label>
-                    <dt>Amount: €{expense.amount},-</dt>
-                  </dl>
-                ))}
+  <dl className="flex justify-between w-full" key={expense.id}>
+    <dd>Name: {expense.name}</dd>
+    <Label>{expense.category}</Label>
+    <dt>Amount: €{expense.expenseAmount},-</dt>
+  </dl>
+))}
+
               </Card>
               <Card className="card flex-col flex flex-1 expense p-8 ">
                 <dl className="text-2xl font-bold mb-4">Income List:</dl>
                 {incomes.map((income) => (
-                  <dl className="flex justify-between w-full" key={income.id}>
-                    <dd>Name: {income.name}</dd>
-                    <dt>Amount: €{income.amount},-</dt>
-                  </dl>
-                ))}
+  <dl className="flex justify-between w-full" key={income.id}>
+    <dd>Name: {income.name}</dd>
+    <dt>Amount: €{income.incomeAmount},-</dt>
+  </dl>
+))}
+
               </Card>
 
             </div>

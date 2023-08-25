@@ -29,7 +29,7 @@ interface NewThoughtProps {
   content?: string
 }
 
-export function NewThought({ content }: NewThoughtProps) {
+export function  NewThought({ content }: NewThoughtProps) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState("")
   const [date, setDate] = useState<Date | null>(null)

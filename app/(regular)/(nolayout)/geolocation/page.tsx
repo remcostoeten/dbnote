@@ -16,6 +16,7 @@ import {
     setDoc,
     updateDoc,
   } from "firebase/firestore"
+import DistanceCalculator from "./components/DistanceCalculator";
 
 interface Location {
     name : string;
@@ -24,6 +25,7 @@ interface Location {
 }
 
 const AddressConverter : React.FC = () => {
+    const apiKey = "AIzaSyDj4mkVMrmeVHKohAW9ulDpc9dUvABwGgM"; // Remember to keep this secret in production
     const [latitude,
         setLatitude] = useState < string > ("");
     const [longitude,
@@ -195,6 +197,7 @@ const AddressConverter : React.FC = () => {
                         </span>
                     </CardContent>
                 </Card>
+                <DistanceCalculator apiKey={apiKey} />
 
             </div>
             {/* {showMap && (
