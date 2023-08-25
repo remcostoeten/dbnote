@@ -18,7 +18,7 @@ const SvgConvert = () => {
         <Label htmlFor="beforeContent">Before Content:</Label>
         <Input type="text" id="beforeContent" value={beforeContent} onChange={(e) => setBeforeContent(e.target.value)} />
         </div>
-      <CssOutput svg={svg} beforeContent={beforeContent} />
+      <CssOutput svg={svg}  />
       </Card></>
   );
 };

@@ -184,10 +184,12 @@ const AddressConverter : React.FC = () => {
                         {showLocations && (<AddressesList
                             locations={locations}
                             onSelect={(selectedLocation) => {
-                            setLatitude(selectedLocation.latitude);
-                            setLongitude(selectedLocation.longitude);
-                            setAddress(selectedLocation.name);
-                        }}/>)}
+                                setLatitude(selectedLocation.latitude);
+                                setLongitude(selectedLocation.longitude);
+                                setAddress(selectedLocation.name);
+                                setShowMap(true);  // Ensure that the map is displayed when a location is selected
+                            }}
+                            />)}
                         <span className="text-xs text-muted-foreground" onClick={clearStorage}>
                             Clear storage
                         </span>
@@ -195,11 +197,18 @@ const AddressConverter : React.FC = () => {
                 </Card>
 
             </div>
-            {showMap && (
+            {/* {showMap && (
                 < >
                             {typeof window !== 'undefined' && latitude && longitude && (<MapDisplay latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>)}
                 </>
-            )}
+            )} */}
+{showMap && latitude && longitude && (
+    <MapDisplay 
+        latitude={parseFloat(latitude)} 
+        longitude={parseFloat(longitude)}
+    />
+)}
+
         </div>
     );
 }
