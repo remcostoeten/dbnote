@@ -55,6 +55,7 @@ export const ProminentGlowButton = ({ text, link }: ButtonProps) => {
 }
 
 export const SwapButton = ({ text }: ButtonProps) => {
+  // TODO: Fix swap animation.
   return (
     <button
       aria-label={text}
@@ -154,10 +155,6 @@ export const BorderButton = ({ text, onClick, variant = "" }: ButtonProps) => {
 export default function CustomButtons() {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="font-semibold">
-        Swap button (hover to see effect) === bugged
-      </h2>
-      <SwapButton text="Swap on hover" />
       <h2 className="font-semibold">Stock remcostoeten/ui</h2>
       <Button className={buttonVariants({ variant: "outline" })}>
         Click here
