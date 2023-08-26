@@ -59,7 +59,8 @@
     "app/thoughts/layout.tsx",
     "app/html-to-jsx/playground/AppContext.tsx",
     "components/icons/TrashIcon.js",
-    "components/core/Cursor/GreenTrailer"
+    "components/core/Cursor/GreenTrailer",
+    "app/thoughts/components/ThoughtCard.jsx"
   ],
   "exclude": [
     "node_modules"

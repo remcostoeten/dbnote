@@ -16,6 +16,8 @@ $dot-size: 1px;
 $dot-space: 22px;
 
 body {
+  overflow-x: hidden;
+  position: relative !important;
   background: linear-gradient(
         90deg,
         $bg-color ($dot-space - $dot-size),
