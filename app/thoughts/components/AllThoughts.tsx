@@ -1,7 +1,7 @@
 import { NewThought } from "./NewThought"
 import ThoughtCard from "./ThoughtCard"
 
-export default function    AllThoughts() {
+export default function AllThoughts() {
   return (
     <>
       <div className="flex-col px-4 py-6  ">

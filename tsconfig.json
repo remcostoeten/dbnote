@@ -60,7 +60,7 @@
     "app/html-to-jsx/playground/AppContext.tsx",
     "components/icons/TrashIcon.js",
     "components/core/Cursor/GreenTrailer",
-    "app/thoughts/components/ThoughtCard.jsx"
+    "app/thoughts/components/ThoughtCard.tsx"
   ],
   "exclude": [
     "node_modules"

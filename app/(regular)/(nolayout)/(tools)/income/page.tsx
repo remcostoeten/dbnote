@@ -13,7 +13,7 @@ import AddIncomeExpenseForm from "./components/IncomeExpenseForm";
 interface Income {
   id: string
   amount: number
-  name: string
+  name: stringst
 }
 
 const IncomePage: React.FC = () => {

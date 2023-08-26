@@ -36,7 +36,8 @@ export function  NewThought({ content }: NewThoughtProps) {
   const [description, setDescription] = useState("")
   const [subject, setSubject] = useState("")
   const [label, setLabel] = useState("") // Added label state
-  const [thoughts, setThoughts] = useState<Thought[]>([])
+  // @ts-ignore
+  const [thoughts, setThoughts] = useState([])
   const [loading, setLoading] = useState(false)
   const user = auth?.currentUser
   const [markdownContent, setMarkdownContent] = useState("")
@@ -67,13 +68,13 @@ export function  NewThought({ content }: NewThoughtProps) {
         id: "",
         subject,
         selectedDate: date,
-        label, // Added label
+        label, 
       }
 
       const docRef = await addDoc(collection(db, "thoughts"), newThought)
       newThought.id = docRef.id
 
-      setThoughts((prevThoughts: Thought[]) => [newThought, ...prevThoughts])
+      setThoughts([newThought, ...thoughts] as any)
       setDescription("")
       setTitle("")
       setDate(null)
@@ -84,7 +85,6 @@ export function  NewThought({ content }: NewThoughtProps) {
         title: "Thought created successfully.",
         description: `with title ${title}`,
       })
-      // console.log("Document written with ID: ", docRef.id)
     } catch (error) {
       toast({
         title: "Something went wrong.",
@@ -164,7 +164,7 @@ export function  NewThought({ content }: NewThoughtProps) {
         className="wysiwyg-input"
         placeholder="Label"
         value={label}
-        onChange={(e) => setLabel(e.target.value)} // add the label input
+        onChange={(e) => setLabel(e.target.value)}
       />
       <motion.div
         initial={{ opacity: 0, y: 150 }}

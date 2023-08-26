@@ -24,7 +24,7 @@ export default function UiLinks() {
   return (
     <motion.section
       className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10"
-      initial={{ opacity: 0, y: -20 }}
+      initialst={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7, duration: 0.5 }}
     >
