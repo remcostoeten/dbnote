@@ -1,15 +1,14 @@
-'use client';import { Fragment, useEffect, useState } from "react"
+'use client';import { useEffect, useState } from "react";
 
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot } from "firebase/firestore";
 
-import { db } from "@/lib/firebase"
+import { db } from "@/lib/firebase";
 
-import AddIncomeExpenseForm from "./components/IncomeExpenseForm"
-import { usePasswordProtection } from "@/lib/usePasswordProtection"
-import { Form } from "@/components/ui/form";
-import { RoundedGlowButton, WeakGlowButton } from "@/components/buttons/CustomButtons";
+import { RoundedGlowButton } from "@/components/buttons/CustomButtons";
 import { Input } from "@/components/ui/input";
+import { usePasswordProtection } from "@/lib/usePasswordProtection";
 import React from "react";
+import AddIncomeExpenseForm from "./components/IncomeExpenseForm";
 
 interface Income {
   id: string

@@ -1,26 +1,24 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
 import { Label } from "@radix-ui/react-label"
 import {
-  QueryDocumentSnapshot,
   addDoc,
   collection,
   deleteDoc,
-  getDocs,
+  getDocs, QueryDocumentSnapshot
 } from "firebase/firestore"
 import { motion } from "framer-motion"
+import React, { useEffect, useState } from "react"
 
-import { auth, db } from "@/lib/firebase"
+import {
+  BorderButton, RoundedGlowButton
+} from "@/components/buttons/CustomButtons"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
-import {
-  BorderButton,
-  WeakGlowButton,
-} from "@/components/buttons/CustomButtons"
+import { auth, db } from "@/lib/firebase"
 
-import  Spinner from '@/components/core/Spinner';
+import Spinner from '@/components/core/Spinner'
 
 interface Expense {
   id: string
@@ -335,7 +333,7 @@ const AddIncomeExpenseForm: React.FC = () => {
   <dl className="flex justify-between w-full" key={expense.id}>
     <dd>Name: {expense.name}</dd>
     <Label>{expense.category}</Label>
-    <dt>Amount: €{expense.expenseAmount},-</dt>
+    <dt>Amount: €{expenseAmount},-</dt>
   </dl>
 ))}
 
@@ -345,7 +343,7 @@ const AddIncomeExpenseForm: React.FC = () => {
                 {incomes.map((income) => (
   <dl className="flex justify-between w-full" key={income.id}>
     <dd>Name: {income.name}</dd>
-    <dt>Amount: €{income.incomeAmount},-</dt>
+    <dt>Amount: €{incomeAmount},-</dt>
   </dl>
 ))}
 
@@ -355,7 +353,6 @@ const AddIncomeExpenseForm: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Summary of Total Income, Expense, and Net Worth */}
           <motion.div
             initial={{ opacity: 0, y: 40, height: 0 }}
             animate={{ opacity: 1, y: 0, height: "auto" }}
@@ -389,7 +386,7 @@ const AddIncomeExpenseForm: React.FC = () => {
                 )}
               </dl>
               <div className="flex mt-4 justify-end">
-                <WeakGlowButton onClick={handleClearAll} text="Clear All" />
+                <RoundedGlowButton  onClick={handleClearAll} text="Clear All"/>
               </div>
             </Card>
           </motion.div>

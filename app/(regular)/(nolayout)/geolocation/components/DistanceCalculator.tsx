@@ -1,8 +1,8 @@
 'use client';
-import React, { useState } from "react";
-import { toast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
+import React, { useState } from "react";
 
 interface DistanceCalculatorProps {
     apiKey: string;

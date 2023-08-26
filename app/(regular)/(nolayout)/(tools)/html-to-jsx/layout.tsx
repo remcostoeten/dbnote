@@ -1,13 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Link } from "lucide-react"
 
-import MsgBar from "@/components/MsgBar"
-import { ExamplesNav } from "@/components/ui-dashboard/example-nav"
 import {
   PageHeader,
-  PageHeaderDescription,
+  PageHeaderDescription
 } from "@/components/ui-dashboard/page-nav"
 
 import Typewriter from "./components/alternating-text"

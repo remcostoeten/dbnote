@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import { Card } from '@/components/ui/card';
-import { CodeViewer } from '../../(nolayout)/(tools)/html-to-jsx/components/code-viewer';
-import { Input } from '@/components/ui/input';
-import { Label } from '@radix-ui/react-label';
+import { useState } from 'react';
 
 interface CssOutputProps {
   svg: string;

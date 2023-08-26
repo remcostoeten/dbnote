@@ -1,15 +1,14 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import { Editor } from "@monaco-editor/react"
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 
 import { AppContext } from "./AppContext"
@@ -19,7 +18,6 @@ import { MaxLengthSelector } from "./components/maxlength-selector"
 import ModelSelector from "./components/model-selector"
 import { PresetActions } from "./components/preset-actions"
 import { PresetSave } from "./components/preset-save"
-import { PresetSelector } from "./components/preset-selector"
 import { PresetShare } from "./components/preset-share"
 import { models, types } from "./data/models"
 

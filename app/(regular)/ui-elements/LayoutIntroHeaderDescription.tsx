@@ -1,11 +1,9 @@
 "use client"
-import React from "react"
-import Link from "next/link"
 import {
-  PageHeaderDescription,
-  PageHeaderHeading,
+  PageHeaderDescription
 } from "@/components/ui-dashboard/page-nav"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export const LayoutIntroHeaderDescription = () => (
   <>

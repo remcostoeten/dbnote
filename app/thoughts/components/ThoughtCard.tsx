@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import {
   collection,
   deleteDoc,
@@ -9,24 +8,24 @@ import {
   onSnapshot,
   orderBy,
   query,
-  where,
+  where
 } from "firebase/firestore"
 import { motion } from "framer-motion"
-import { Button } from "react-day-picker"
+import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 
-import { auth, db } from "@/lib/firebase"
-import { Thought } from "@/lib/types"
+import TrashIcon from "@/components/icons/TrashIcon"
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuTrigger,
+  ContextMenuTrigger
 } from "@/components/ui/context-menu"
 import { DataTableViewOptions } from "@/components/ui/data-table-view-options"
 import { toast } from "@/components/ui/use-toast"
-import TrashIcon from "@/components/icons/TrashIcon"
+import { auth, db } from "@/lib/firebase"
+import { Thought } from "@/lib/types"
 
 import { useThoughtContext } from "./ThoughtContext"
 import ThoughtDetail from "./ThoughtSingle"
@@ -44,7 +43,9 @@ export default function ThoughtCard() {
   const updateFilterValue = (values) => {
     setFilterValue(values)
   }
+  
   const fetchThoughts = () => {
+    useEffect(() => {
     const thoughtsCollection = collection(db, "thoughts")
     let q = query(thoughtsCollection, orderBy("selectedDate", sortOrder))
 
@@ -65,11 +66,11 @@ export default function ThoughtCard() {
     })
 
     return unsubscribe
+  }, [selectedLabel, sortOrder])
   }
 
   useEffect(() => {
     const unsubscribe = fetchThoughts()
-    return () => unsubscribe()
   }, [selectedLabel, sortOrder])
 
   useEffect(() => {

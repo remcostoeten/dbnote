@@ -1,4 +1,3 @@
-import { ReactNode } from "react"
 import Link from "next/link"
 
 import { Button, buttonVariants } from "../ui/button"
@@ -21,6 +20,7 @@ export const GlowButton = ({
   link,
   onClick,
   disabled,
+  type,
 }: ButtonProps) => {
   return (
     <button
@@ -33,7 +33,6 @@ export const GlowButton = ({
     </button>
   )
 }
-
 export const WeakGlowButton = ({ onClick, text, link }: ButtonProps) => {
   return (
     <button
@@ -45,6 +44,7 @@ export const WeakGlowButton = ({ onClick, text, link }: ButtonProps) => {
     </button>
   )
 }
+
 
 export const ProminentGlowButton = ({ text, link }: ButtonProps) => {
   return (
@@ -110,10 +110,10 @@ export const BlobButton = ({ text, icon }: ButtonProps) => {
   )
 }
 
-export const RoundedGlowButton = ({ text, type }) => {
+export const RoundedGlowButton = ({ text, onClick }: ButtonProps) => {
   return (
     <div className="relative button-rounded-glow">
-      <button className="button-rounded-glow__inner " type={type}>
+      <button onClick={onClick} className="button-rounded-glow__inner">
         {text}
       </button>
       <div className="button-rounded-glow__bg"></div>
@@ -175,7 +175,7 @@ export default function CustomButtons() {
       <h2 className="font-semibold">Glow on hover</h2>
       <GlowButton text="Glow on hover" link={undefined} />
       <h2 className="font-semibold">Rounded glow</h2>
-      <RoundedGlowButton text="Glow rounded" />
+      <RoundedGlowButton text="Glow rounded" type={undefined} />
       <h2 className="font-semibold">Prominent Glow</h2>
       <ProminentGlowButton text="Prominent Glow on hover" link={undefined} />
       <h2 className="font-semibold">Blob button</h2>

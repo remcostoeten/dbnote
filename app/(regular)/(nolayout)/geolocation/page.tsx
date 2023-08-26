@@ -1,22 +1,15 @@
 'use client'
-import React, {useEffect, useState} from "react";
-import {Input} from "@/components/ui/input";
-import {toast} from "@/components/ui/use-toast";
-import AddressesList from "./components/AddressesList";
-import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import MapDisplay from "./components/Map";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { auth, db } from "@/lib/firebase";
 import {
-    addDoc,
-    collection,
-    deleteDoc,
-    doc,
-    getDocs,
-    serverTimestamp,
-    setDoc,
-    updateDoc,
-  } from "firebase/firestore"
+    doc, setDoc
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import AddressesList from "./components/AddressesList";
 import DistanceCalculator from "./components/DistanceCalculator";
+import MapDisplay from "./components/Map";
 
 interface Location {
     name : string;
@@ -24,8 +17,8 @@ interface Location {
     longitude : string;
 }
 
-const AddressConverter : React.FC = () => {
-    const apiKey = "AIzaSyDj4mkVMrmeVHKohAW9ulDpc9dUvABwGgM"; // Remember to keep this secret in production
+export default function AddressConverter() {
+        const apiKey = "AIzaSyDj4mkVMrmeVHKohAW9ulDpc9dUvABwGgM"; // Remember to keep this secret in production
     const [latitude,
         setLatitude] = useState < string > ("");
     const [longitude,
@@ -38,6 +31,7 @@ const AddressConverter : React.FC = () => {
         setShowLocations] = useState < boolean > (false);
     const [showMap,
         setShowMap] = useState < boolean > (false);
+        useEffect(() => {
 
     const convertToLatLong = () => {
         const apiKey = "AIzaSyDj4mkVMrmeVHKohAW9ulDpc9dUvABwGgM"
@@ -62,6 +56,7 @@ const AddressConverter : React.FC = () => {
             toast({title: "An error occurred."});
         });
     };
+}, [address]);
 
     const saveLocation = async () => {
       const location : Location = {
@@ -102,10 +97,8 @@ const AddressConverter : React.FC = () => {
         }
     };
 
-    useEffect(() => {
         const storedLocations = JSON.parse(localStorage.getItem("locations") || "[]");
         setLocations(storedLocations);
-    }, []);
 
     const clearStorage = () => {
         localStorage.clear();
@@ -113,6 +106,8 @@ const AddressConverter : React.FC = () => {
         setShowLocations(false);
         setShowMap(false);
     };
+
+
 
     return (
         <div className="flex flex-col">
@@ -189,7 +184,7 @@ const AddressConverter : React.FC = () => {
                                 setLatitude(selectedLocation.latitude);
                                 setLongitude(selectedLocation.longitude);
                                 setAddress(selectedLocation.name);
-                                setShowMap(true);  // Ensure that the map is displayed when a location is selected
+                                setShowMap(true);  /
                             }}
                             />)}
                         <span className="text-xs text-muted-foreground" onClick={clearStorage}>
@@ -198,22 +193,13 @@ const AddressConverter : React.FC = () => {
                     </CardContent>
                 </Card>
                 <DistanceCalculator apiKey={apiKey} />
-
             </div>
-            {/* {showMap && (
-                < >
-                            {typeof window !== 'undefined' && latitude && longitude && (<MapDisplay latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>)}
-                </>
-            )} */}
-{showMap && latitude && longitude && (
-    <MapDisplay 
-        latitude={parseFloat(latitude)} 
-        longitude={parseFloat(longitude)}
-    />
-)}
-
+            {showMap && latitude && longitude && (
+                <MapDisplay 
+                    latitude={parseFloat(latitude)} 
+                    longitude={parseFloat(longitude)}
+                />
+            )}
         </div>
     );
 }
-
-export default AddressConverter;

@@ -1,9 +1,8 @@
 'use client'
-import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
 interface Location {
   name: string;
@@ -24,7 +23,6 @@ const AddressesList: React.FC<AddressesListProps> = (props) => {
     navigator.clipboard.writeText(value);
   };
   
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

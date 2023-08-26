@@ -1,9 +1,9 @@
 import { Metadata } from "next"
 
-import {
-  PageHeader,
-} from "@/components/ui-dashboard/page-nav"
 import CustomStatusBadge from "@/components/core/StatusBadge"
+import {
+  PageHeader
+} from "@/components/ui-dashboard/page-nav"
 
 export const metadata: Metadata = {
   title: "Expense Tracker",
