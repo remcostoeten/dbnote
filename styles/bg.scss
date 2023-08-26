@@ -195,9 +195,9 @@
 //   }
 // }
 
-// body {
-//   overflow-x: hidden;
-//   position: relative;
+body {
+  overflow-x: hidden;
+  position: relative;
 
 //   &::after {
 //     content: "";
@@ -213,4 +213,4 @@
 //     width: 100vw;
 //     height: 100vh;
 //   }
-// }
+}

@@ -335,7 +335,7 @@ const AddIncomeExpenseForm: React.FC = () => {
   <dl className="flex justify-between w-full" key={expense.id}>
     <dd>Name: {expense.name}</dd>
     <Label>{expense.category}</Label>
-    <dt>Amount: €{expense.expenseAmount},-</dt>
+    <dt>Amount: €{expenseAmount},-</dt>
   </dl>
 ))}
 
@@ -345,7 +345,7 @@ const AddIncomeExpenseForm: React.FC = () => {
                 {incomes.map((income) => (
   <dl className="flex justify-between w-full" key={income.id}>
     <dd>Name: {income.name}</dd>
-    <dt>Amount: €{income.incomeAmount},-</dt>
+    <dt>Amount: €{incomeAmount},-</dt>
   </dl>
 ))}
 
@@ -355,7 +355,6 @@ const AddIncomeExpenseForm: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Summary of Total Income, Expense, and Net Worth */}
           <motion.div
             initial={{ opacity: 0, y: 40, height: 0 }}
             animate={{ opacity: 1, y: 0, height: "auto" }}

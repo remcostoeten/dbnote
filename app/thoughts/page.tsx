@@ -28,12 +28,7 @@ const sidebarNavItems = [
     href: "/examples/forms/display",
   },
 ]
-
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
-export default function RootLayout({}: RootLayoutProps) {
+export default function ThoughtsPage() {
   return (
     <>
       <ThoughtProvider>
