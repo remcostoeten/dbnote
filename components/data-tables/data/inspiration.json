@@ -1,0 +1,61 @@
+[
+    {
+        "name": "Dribble",
+        "projects": [
+            {
+                "sort": "Agency landing",
+                "colors": ["black", "armygreen"],
+                "colors-scheme": "dark",
+                "style": ["minimalistic", "rounded blocks"],
+                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/"
+            },
+            {
+                "sort": "Portfolio",
+                "colors": ["black", "white", "grey"],
+                "colors-scheme": "dark",
+                "style": ["minimalistic", "Awwwards style"],
+                "url": "https://dribbble.com/shots/22240691-Infinite-Creative-Agency-Website"
+            },
+            {
+                "sort": "SaaS landing",
+                "colors": ["white", "blue", "pink"],
+                "colors-scheme": "light",
+                "style": ["minimalistic", "rounded blocks"],
+                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/"
+            },
+            {
+                "sort": "dashboard",
+                "colors-scheme": "dark",
+                "preview": "live preview",
+                "url": "https://smartvaults.extej.com/"
+            },
+            {
+                "sort": "Dashboard / portfolio combi",
+                "colors-scheme": "light",
+                "colors": ["white", "orange"],
+                "preview": "live",
+                "url": "https://www.postman.com/",
+                "has_mobile_device": true
+            },
+            {
+                "sort": "Dashboard",
+                "colors-scheme": "light",
+                "colors": ["white", "orange", "green"],
+                "style": "minimalistic / rounded blocks",
+                "url": "https://dribbble.com/shots/21434301-Project-Management-Tool-design"
+            }
+        ]
+    },
+    {
+        "name": "Airtable API",
+        "projects": [
+            {
+                "sort": "SaaS site",
+                "colors": ["white", "blue"],
+                "url": "https://www.airtable.com/",
+                "animations": "true",
+                "component inspiration": "Carousel"
+            }
+        ]
+    }
+]
