@@ -3,46 +3,70 @@
         "name": "Dribble",
         "projects": [
             {
-                "sort": "Agency landing",
+                "projectType": "Agency landing",
                 "colors": ["black", "armygreen"],
-                "colors-scheme": "dark",
+                "colorScheme": "dark",
                 "style": ["minimalistic", "rounded blocks"],
-                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/"
+                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/",
+                "preview": null,
+                "hasMobileDevice": null,
+                "animations": null,
+                "componentInspiration": null
             },
             {
-                "sort": "Portfolio",
+                "projectType": "Portfolio",
                 "colors": ["black", "white", "grey"],
-                "colors-scheme": "dark",
+                "colorScheme": "dark",
                 "style": ["minimalistic", "Awwwards style"],
-                "url": "https://dribbble.com/shots/22240691-Infinite-Creative-Agency-Website"
+                "url": "https://dribbble.com/shots/22240691-Infinite-Creative-Agency-Website",
+                "preview": null,
+                "hasMobileDevice": null,
+                "animations": null,
+                "componentInspiration": null
             },
             {
-                "sort": "SaaS landing",
+                "projectType": "SaaS landing",
                 "colors": ["white", "blue", "pink"],
-                "colors-scheme": "light",
+                "colorScheme": "light",
                 "style": ["minimalistic", "rounded blocks"],
-                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/"
+                "url": "https://dribbble.com/shots/20971182-Creative-Ai-Website-UI/",
+                "preview": null,
+                "hasMobileDevice": null,
+                "animations": null,
+                "componentInspiration": null
             },
             {
-                "sort": "dashboard",
-                "colors-scheme": "dark",
+                "projectType": "dashboard",
+                "colors": [],
+                "colorScheme": "dark",
+                "style": [],
+                "url": "https://smartvaults.extej.com/",
                 "preview": "live preview",
-                "url": "https://smartvaults.extej.com/"
+                "hasMobileDevice": null,
+                "animations": null,
+                "componentInspiration": null
             },
             {
-                "sort": "Dashboard / portfolio combi",
-                "colors-scheme": "light",
+                "projectType": "Dashboard / portfolio combi",
                 "colors": ["white", "orange"],
-                "preview": "live",
+                "colorScheme": "light",
+                "style": [],
                 "url": "https://www.postman.com/",
-                "has_mobile_device": true
+                "preview": "live",
+                "hasMobileDevice": true,
+                "animations": null,
+                "componentInspiration": null
             },
             {
-                "sort": "Dashboard",
-                "colors-scheme": "light",
+                "projectType": "Dashboard",
                 "colors": ["white", "orange", "green"],
-                "style": "minimalistic / rounded blocks",
-                "url": "https://dribbble.com/shots/21434301-Project-Management-Tool-design"
+                "colorScheme": "light",
+                "style": ["minimalistic", "rounded blocks"],
+                "url": "https://dribbble.com/shots/21434301-Project-Management-Tool-design",
+                "preview": null,
+                "hasMobileDevice": null,
+                "animations": null,
+                "componentInspiration": null
             }
         ]
     },
@@ -50,11 +74,15 @@
         "name": "Airtable API",
         "projects": [
             {
-                "sort": "SaaS site",
+                "projectType": "SaaS site",
                 "colors": ["white", "blue"],
+                "colorScheme": null,
+                "style": [],
                 "url": "https://www.airtable.com/",
+                "preview": null,
+                "hasMobileDevice": null,
                 "animations": "true",
-                "component inspiration": "Carousel"
+                "componentInspiration": "Carousel"
             }
         ]
     }
