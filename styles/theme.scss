@@ -13,6 +13,11 @@
   width: 100%;
 }
 
+.is-open {
+  background-color: $offblack;
+  z-index: 100;
+}
+
 .dutch {
   background: linear-gradient(90deg, rgb(177, 35, 47), white, rgb(37, 74, 143));
   background-size: 200% 100%;

@@ -1,5 +1,4 @@
 import { Inter as FontSans } from "next/font/google"
-
 import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
 import { cn } from "@/lib/utils"
@@ -8,8 +7,7 @@ import { Analytics } from "@/components/analytics"
 import { ThemeProvider } from "@/components/theme-provider"
 import "@/styles/globals.scss"
 import Trailer from "@/components/core/Cursor/MouseTrailer"
-import Header from "@/components/core/Header"
-
+import FancyHeader from '../fancy-hamburger-header/header';
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -67,9 +65,10 @@ return (
       >
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {/* <Trailer /> */}
+            {/* <Trailer /> */} 
+             <FancyHeader />
             <div className="page-wrapper cursor-hover">
-           <Header/>
+       
               <div className="page-wrapper__inner ">{children}</div>
             </div>
             <Analytics />

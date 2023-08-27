@@ -1,0 +1,129 @@
+@import '../../styles/utils/variables';
+
+.header{
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+
+
+    
+    .background{
+        background-color: rgba(0,0,0,1);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 100%;
+    }
+
+    .bar {
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    background-image: radial-gradient(hsla(0,0%,100%,.1) 1px,transparent 0);
+    background-position: 50% 50%;
+    background-size: 1.1rem 1.1rem;
+    padding: 8px;
+    border-radius: 1.25rem;
+    overflow: hidden;
+
+
+        p{
+            margin: 0px;
+        }
+
+        a{
+            text-decoration: none;
+            color: $offwhite;
+            position: absolute;
+            left: 0;
+        }
+
+        .shopContainer{
+            display: flex;
+            gap: 30px;
+            position: absolute;
+            right: 0;
+
+            .shop{
+                display: none;
+            }
+        }
+
+        .el{
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            gap: 8px;
+            cursor: pointer;
+
+            .label{
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            p{
+                &:nth-of-type(2){
+                    position: absolute;
+                    opacity: 0;
+                }
+            }
+
+            .burger{
+                width: 22.5px;
+                position: relative;
+                pointer-events: none;
+    
+                &::after, &::before{
+                    content: "";
+                    height: 1px;
+                    width: 100%;
+                    background-color: black;
+                    position: relative;
+                    display: block;
+                    transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);
+                }
+    
+                &::after{
+                    top: -4px;
+                }
+    
+                &::before{
+                    top: 4px;
+                }
+            }
+    
+            .burgerActive{
+                
+                &::after{
+                    transform: rotate(45deg);
+                    top: -1px;
+                }
+    
+                &::before{
+                    transform: rotate(-45deg);
+                    top: 1px;
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 600px) {
+    .header{
+        padding: 20px;
+
+        .bar{
+            font-size: 15px;
+        }
+
+        .shop{
+            display: block;
+            cursor: pointer;
+        }
+    }
+}
