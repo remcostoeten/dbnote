@@ -1,7 +1,7 @@
 "use client"
 
 import { Editor } from "@monaco-editor/react"
-import { CounterClockwiseClockIcon } from "@radix-ui/react-icons"
+import { CopyIcon, CounterClockwiseClockIcon } from "@radix-ui/react-icons"
 import { motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 
@@ -302,15 +302,7 @@ export default function PlaygroundPage() {
                           onClick={handleCopy}
                           className="absolute right-0 top-0 z-50 rounded-md border border-zinc-700 bg-zinc-900 p-2"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-white"
-                            fill="#fff"
-                            viewBox="0 0 256 256"
-                          >
-                            <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"></path>
-                          </svg>
-                          aa
+                    <CopyIcon/> 
                         </button>
                         <motion.div
                           initial={{ opacity: 0, scale: 0.9 }}

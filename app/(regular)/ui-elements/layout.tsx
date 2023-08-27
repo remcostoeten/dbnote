@@ -27,7 +27,7 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   return (
     <>
       <div className="container relative flex flex-col">
-        <PageHeader className="page-header pb-8">
+        <PageHeader>
           <MsgBar />
           <LayoutIntroHeaderDescription />
           <UiLinks />
