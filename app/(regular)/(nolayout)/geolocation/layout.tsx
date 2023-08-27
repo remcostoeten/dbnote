@@ -13,16 +13,12 @@ interface UiShowcaseLayoutProps {
 }
 
 export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
-  const badges = [
-    { title: "Beta", emoji: "rocket" },
-    { title: "Experiment", emoji: "fire" },
-  ]
+
 
   return (
     <div className="container relative flex-1 space-y-4 p-8 pt-6">
-       {badges.map((badge, index) => (
-      <CustomStatusBadge key={index} {...badge} index={index} />
-    ))}
+        <CustomStatusBadge title="beta" emojiKey="rocket" index={0} />
+      <CustomStatusBadge title="wip" emojiKey="fire" index={1} />
       <main className="flex items-center justify-between space-y-2">{children}</main>
     </div>
   )

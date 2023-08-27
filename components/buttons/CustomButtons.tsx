@@ -20,7 +20,6 @@ export const GlowButton = ({
   link,
   onClick,
   disabled,
-  type,
 }: ButtonProps) => {
   return (
     <button
