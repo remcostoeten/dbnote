@@ -21,7 +21,5 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
       <CustomStatusBadge title="wip" emojiKey="fire" index={1} />
       <main className="flex items-center justify-between space-y-2">{children}</main>
     </div>
-      <main className="fl2">{children}</main>
-    </>
   )
 }
