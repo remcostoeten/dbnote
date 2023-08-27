@@ -31,11 +31,7 @@ interface RootLayoutProps {
 export default function RootLayout({}: RootLayoutProps) {
   return (
     <>
-      <ThoughtProvider>
-        <div className="flex relative container  flex-col">
-          {/* < AllThoughts />  */}
-        </div>
-      </ThoughtProvider>
+
     </>
   )
 }

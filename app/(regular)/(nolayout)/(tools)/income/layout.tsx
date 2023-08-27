@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 interface UiShowcaseLayoutProps {
-  children: React.ReactNode
+  children: any
 }
 
 const badges = [

@@ -1,8 +1,45 @@
-import { Badge } from "@/components/ui/badge";
+import React from "react";
+import { Badge } from "../ui/badge";
+
+export const label = {
+  beta: "Beta",
+  wip: "WiP",
+  bugs: "Bugs",
+  abandoned: "Abandoned",
+  lowPriority: "Low priority",
+  new: "New",
+  tool: "Tool",
+  showcase: "Showcase",
+  ui: "UI",
+};
 
 export const emojis = {
   rocket: "🚀",
   fire: "🔥",
+  megaphone: "📣",
+  moneyBag: "💰",
+  graph: "📈",
+  trophy: "🏆",
+  lightBulb: "💡",
+  star: "⭐",
+  thunder: "⚡",
+  thumbsUp: "👍",
+  handshake: "🤝",
+  target: "🎯",
+  loudspeaker: "📢",
+  telephone: "☎️",
+  globe: "🌍",
+  email: "✉️",
+  mobilePhone: "📱",
+  construction: "🚧",
+  calendar: "📅",
+  clock: "⏰",
+  gift: "🎁",
+  shoppingCart: "🛒",
+  tag: "🏷️",
+  creditCard: "💳",
+  package: "📦",
+  percent: "💹",
   megaphone: "📣",
   moneyBag: "💰",
   graph: "📈",
@@ -32,16 +69,17 @@ export const emojis = {
 type EmojiType = keyof typeof emojis;
 
 type StatusBadgeProps = {
-  title?: string;
-  emoji?: any;
-  index?: number;
+  title? :string
+  emojiKey?: EmojiType;
+  index?: any;
   position?: "right" | "left" | "top" | "bottom";
   className?: string;
+  label?: string;
 };
 
 export default function CustomStatusBadge({
   title,
-  emoji,
+  emojiKey,
   index,
   position = "right",
   className,
@@ -66,21 +104,24 @@ export default function CustomStatusBadge({
       className={`absolute w-max ${className}`}
       style={style}
     >
-      {`${title} ${emojis[emoji as EmojiType]}`}
+      {`${label[title as keyof typeof label]} ${emojis[emojiKey as EmojiType]}`}
     </Badge>
   );
 }
 
 // USAGE
+// Example of how to use the CustomStatusBadge component
+
 // const badges = [
-//   { title: "Beta", emoji: "rocket" },
-//   { title: "Hot", emoji: "fire" },
+//   { title: "Beta", emojiKey: "rocket" },
+//   { title: "WiP", emojiKey: "fire" },
+//   // ... (other badges)
 // ];
 
 // return (
 //   <div>
 //     {badges.map((badge, index) => (
-//       <CustomStatusBadge key={badge.title} {...badge} index={index} />
+//       <CustomStatusBadge key={index} {...badge} index={index} />
 //     ))}
 //   </div>
 // );

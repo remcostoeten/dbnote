@@ -40,7 +40,7 @@ function PageHeaderDescription({
   return (
     <span
       className={cn(
-        "flex flex-col gap-4 max-w-[750px] lg:max-w-[1280px] text-lg text-muted-foreground sm:text-xl w-7/12",
+         "flex flex-col gap-4 max-w-[750px] lg:max-w-[1280px] text-lg text-muted-foreground sm:text-xl w-9/12 space-y-4 mb-4",
         className
       )}
       {...props}
