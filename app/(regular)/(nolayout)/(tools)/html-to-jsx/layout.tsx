@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import CustomStatusBadge from "@/components/core/StatusBadge"
 
 import {
   PageHeader,
@@ -9,11 +10,20 @@ import {
 
 import Typewriter from "./components/alternating-text"
 
+const badges = [
+  { title: "Beta", emoji: "rocket" },
+  { title: "Experiment", emoji: "fire" },
+]
+
 export default function ConverterLayout({ children }) {
   return (
     <>
       <div className="container relative flex flex-col">
-        <PageHeader className="page-header pb-8">
+w      {badges.map((badge, index) => (
+      <CustomStatusBadge key={index} {...badge} index={index} />
+    ))}</div>
+
+      <PageHeader className="page-header pb-8">
           <motion.span
             className="mb-2  inline-block font-heading text-4xl sm:mb-0 lg:text-5xl"
             initial={{ opacity: 0, y: -5 }}

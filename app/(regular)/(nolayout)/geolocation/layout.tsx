@@ -19,11 +19,14 @@ export default function UiShowcaseLayout({ children }: UiShowcaseLayoutProps) {
   ]
 
   return (
-    <div className="container relative flex-1 space-y-4 p-8 pt-6">
+    <>
+              <div className="flex gap-4">
+
        {badges.map((badge, index) => (
       <CustomStatusBadge key={index} {...badge} index={index} />
     ))}
-      <main className="flex items-center justify-between space-y-2">{children}</main>
     </div>
+      <main className="fl2">{children}</main>
+    </>
   )
 }

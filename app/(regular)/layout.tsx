@@ -67,7 +67,7 @@ return (
       >
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Trailer />
+            {/* <Trailer /> */}
             <div className="page-wrapper cursor-hover">
            <Header/>
               <div className="page-wrapper__inner ">{children}</div>

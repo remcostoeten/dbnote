@@ -3,7 +3,31 @@ import { Badge } from "@/components/ui/badge";
 export const emojis = {
   rocket: "🚀",
   fire: "🔥",
+  megaphone: "📣",
+  moneyBag: "💰",
+  graph: "📈",
+  trophy: "🏆",
+  lightBulb: "💡",
+  star: "⭐",
+  thumbsUp: "👍",
+  handshake: "🤝",
+  target: "🎯",
+  loudspeaker: "📢",
+  telephone: "☎️",
+  globe: "🌍",
+  email: "✉️",
+  mobilePhone: "📱",
+  billboard: "🚧",
+  calendar: "📅",
+  clock: "⏰",
+  gift: "🎁",
+  shoppingCart: "🛒",
+  tag: "🏷️",
+  creditCard: "💳",
+  package: "📦",
+  percent: "💹",
 };
+
 
 type EmojiType = keyof typeof emojis;
 

@@ -18,36 +18,36 @@ $dot-space: 22px;
 body {
   overflow-x: hidden;
   position: relative !important;
-  background: linear-gradient(
-        90deg,
-        $bg-color ($dot-space - $dot-size),
-        transparent 1%
-      )
-      center,
-    linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-    $dot-color;
-  animation: bg-scrolling-reverse 25s infinite;
+  // background: linear-gradient(
+  //       90deg,
+  //       $bg-color ($dot-space - $dot-size),
+  //       transparent 1%
+  //     )
+  //     center,
+  //   linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+  //   $dot-color;
+  // animation: bg-scrolling-reverse 25s infinite;
 
-  background-size: $dot-space $dot-space;
+  // background-size: $dot-space $dot-space;
   overflow-x: hidden;
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: linear-gradient(
-      129deg,
-      var(--offblack),
-      95%,
-      rgba(255, 255, 255, 0) 130%
-    );
-    height: 140%;
-    width: 100%;
-    z-index: -1;
-    animation: rotateShowGradient 5s infinite;
-    transform-origin: center;
-  }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   background: linear-gradient(
+  //     129deg,
+  //     var(--offblack),
+  //     95%,
+  //     rgba(255, 255, 255, 0) 130%
+  //   );
+  //   height: 140%;
+  //   width: 100%;
+  //   z-index: -1;
+  //   animation: rotateShowGradient 5s infinite;
+  //   transform-origin: center;
+  // }
 
   @keyframes rotateShowGradient {
     0% {
