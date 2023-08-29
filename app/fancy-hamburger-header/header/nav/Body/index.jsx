@@ -27,15 +27,15 @@ export default function Body({links, selectedLink, setSelectedLink}) {
         {
             links.map( (link, index) => {
                 const { title, href } = link;
-                return <Link key={`l_${index}`} href={href}>
-                <motion.p 
-                    onMouseOver={() => {setSelectedLink({isActive: true, index})}} 
-                    onMouseLeave={() => {setSelectedLink({isActive: false, index})}} 
-                    variants={blur} 
-                    animate={selectedLink.isActive && selectedLink.index != index ? "open" : "closed"}>
-                    {getChars(title)}
-                </motion.p>
-                </Link>
+                return <><Link key={`l_${index}`} href={href}>
+                    <motion.p
+                        onMouseOver={() => { setSelectedLink({ isActive: true, index }); } }
+                        onMouseLeave={() => { setSelectedLink({ isActive: false, index }); } }
+                        variants={blur}
+                        animate={selectedLink.isActive && selectedLink.index != index ? "open" : "closed"}>
+                        {getChars(title)}
+                    </motion.p>
+                </Link></>
             })
         }
         </div>

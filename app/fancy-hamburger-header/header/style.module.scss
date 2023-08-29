@@ -1,3 +1,5 @@
+@import '../../styles/utils/variables';
+        
 .header{
     background-color: #f4f0ea;
     position: fixed;
@@ -24,7 +26,7 @@
         position: relative;
 
         p{
-             color: $offwhite;
+             color: #f1f1ef;
             margin: 0px;
         }
 

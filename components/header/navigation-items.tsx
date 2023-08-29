@@ -13,7 +13,6 @@ import { Icons } from "@/components/icons"
 import { MobileNav } from "@/components/mobile-nav"
 
 import LogoIconOnly from "../LogoIconOnly"
-import Megamenu from "../Megamenu"
 import { WeakGlowButton } from "../buttons/CustomButtons"
 
 interface MainNavProps {
@@ -149,7 +148,6 @@ export function MainNav({ items, children }: MainNavProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 * (items.length + 1), duration: 0.5 }}
         >
-          <Megamenu />
         </motion.div>
 
         <span className="flex-end flex w-max flex-1 items-center justify-end">

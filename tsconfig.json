@@ -61,7 +61,9 @@
     "components/icons/TrashIcon.js",
     "components/core/Cursor/GreenTrailer",
     "app/thoughts/components/ThoughtCard.tsx"
-  ],
+,
+"app/(regular)/(nolayout)/geolocation/components/google-long-lat-map.tsx"
+],
   "exclude": [
     "node_modules"
   ],

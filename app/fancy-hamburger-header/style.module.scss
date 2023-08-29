@@ -1,5 +1,4 @@
-@import '../../styles/utils/variables';
-
+@forward '../../styles/utils/variables';
 .header{
     position: fixed;
     width: 100%;
@@ -36,7 +35,7 @@
 
         a{
             text-decoration: none;
-            color: $offwhite;
+            color: #f1f1ef;
             position: absolute;
             left: 0;
         }
