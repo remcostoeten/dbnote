@@ -1,17 +1,10 @@
-import { Inter as FontSans } from "next/font/google"
 import { siteConfig } from "@/config/site"
 import { CursorProvider } from "@/lib/CursorContext"
-import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
 import { ThemeProvider } from "@/components/theme-provider"
 import "@/styles/globals.scss"
-import Trailer from "@/components/core/Cursor/MouseTrailer"
 import FancyHeader from '../fancy-hamburger-header/header';
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -58,10 +51,6 @@ return (
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={cn(
-          " font-sans antialiased",
-          fontSans.variable,
-        )}
       >
         <CursorProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
